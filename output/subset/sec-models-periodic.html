@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-01T16:36:02-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Periodic Functions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="sec-models-exponential-2.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="ch-models.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="democracy.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="sec-models-exponential-2.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="ch-models.html" title="Up">Up</a><a class="next-button button toolbar-item" href="democracy.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="internal">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="internal">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="active">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="internal">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="internal">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="sec-models-periodic"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.4</span> <span class="title">Periodic Functions</span>
+</h2>
+<section class="subsection" id="subsection-132"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.4.1</span> <span class="title">Introduction to Periodic Functions</span>
+</h3>
+<p id="p-4313">A function is called <dfn class="terminology">periodic</dfn> if it repeats itself regularly. In this section, we will explore the basics of periodic functions by considering real-world examples.</p>
+<article class="exercise exercise-like" id="exercise-631"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-631"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.1</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-631"><article class="exercise exercise-like"><div id="webwork-25" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="25" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JHRpbWVUb0NoYXJnZT1SZWFsKDYpOwokYmVnaW5DaGFyZ2luZz1Qb3BVcCgKWyI/IiwiMTI6MDAgQS5NLiIsIjY6MDAgQS5NLiIsIjEyOjAwIFAuTS4iLCI2OjAwIFAuTS4iXSwiNjowMCBQLk0uIgopOwokcGVyaW9kPVJlYWwoMjQpOwoKQkVHSU5fUEdNTApUaGUgZm9sbG93aW5nIGdyYXBoIHNob3dzIHRoZSAlIGJhdHRlcnkgY2hhcmdlIG9uIGEgY2VsbCBwaG9uZSBhcyBhIGZ1bmN0aW9uIG9mIHRoZSBudW1iZXIgb2YgaG91cnMgYWZ0ZXIgbWlkbmlnaHQuIFRoZSBvd25lciBrZWVwcyB0aGUgcGhvbmUgY2hhcmdpbmcgd2hpbGUgc2hlIHNsZWVwcyBhdCBuaWdodC4KClxbQE1PREVTKEhUTUw9Pic8aWZyYW1lIHNjcm9sbGluZz0ibm8iIHNyYz0iaHR0cHM6Ly93d3cuZ2VvZ2VicmEub3JnL21hdGVyaWFsL2lmcmFtZS9pZC9QNmhDYjJzbi93aWR0aC80MjUvaGVpZ2h0LzM0My9ib3JkZXIvODg4ODg4L3NyaS90cnVlL3Nkei9mYWxzZS8iIHdpZHRoPSI0MjVweCIgaGVpZ2h0PSIzNDNweCIgc3R5bGU9ImJvcmRlcjowcHg7Ij4gPC9pZnJhbWU+JywgVGVYID0+IkEgR2VvR2VicmEgYXBwbGV0LiIsIFBUWCA9PiJBIEdlb0dlYnJhIGFwcGxldC4iKTtAXF1cKgoKYS4gIEhvdyBtYW55IGhvdXJzIGRvZXMgaXQgdGFrZSB0byBjaGFyZ2UgdGhlIHBob25lPwoKICAgIEFuc3dlcjogW19deyR0aW1lVG9DaGFyZ2V9ezEwfQoKCmEuICBXaGF0IHRpbWUgZG9lcyB0aGUgdXNlciBiZWdpbiByZWNoYXJnaW5nIHRoZSBwaG9uZSBlYWNoIGRheT8KCiAgICBBbnN3ZXI6IFtfXXskYmVnaW5DaGFyZ2luZ317NX0KCgphLiAgVGhpcyBmdW5jdGlvbiBpcyBfcGVyaW9kaWNfLCBtZWFuaW5nIHRoYXQgaXQgcmVwZWF0cyBpdHNlbGYgb3ZlciBhbmQgb3Zlci4KCiAgICBIb3cgbWFueSBob3VycyBkb2VzIGl0IHRha2UgdG8gcmVwZWF0IGl0c2VsZiBjb21wbGV0ZWx5PwoKICAgIEFuc3dlcjogW19deyRwZXJpb2R9ezEwfQoKCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgphLiAgSXQgdGFrZXMgW2A2YF0gaG91cnMgdG8gZnVsbHkgcmVjaGFnZSB0aGUgcGhvbmUuCgoKYS4gIFRoZSB1c2VyIGJlZ2lucyByZWNoYXJnaW5nIHRoZSBwaG9uZSBhdCBbYDY6MDBgXSBQLk0uIGVhY2ggZGF5LgoKCmEuICBJdCB0YWtlcyBbYDI0YF0gaG91cnMgZm9yIHRoaXMgZnVuY3Rpb24gdG8gcmVwZWF0IGl0c2VsZi4KCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-4314">The following graph shows the % battery charge on a cell phone as a function of the number of hours after midnight. The owner keeps the phone charging while she sleeps at night.</p>
+<p id="p-4315">[@MODES(HTML=&gt;’&lt;iframe scrolling=”no” src=”https://www.geogebra.org/material/iframe/id/P6hCb2sn/width/425/height/343/border/888888/sri/true/sdz/false/” width=”425px” height=”343px” style=”border:0px;”&gt; &lt;/iframe&gt;’, TeX =&gt;”A GeoGebra applet.”, PTX =&gt;”A GeoGebra applet.”);@]*</p>
+<ol id="p-4316" class="lower-alpha">
+<li id="li-1854">
+<p id="p-4317">How many hours does it take to charge the phone?</p>
+<p id="p-4318">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+</li>
+<li id="li-1855">
+<p id="p-4319">What time does the user begin recharging the phone each day?</p>
+<p id="p-4320">Answer: <ul style="list-style:circle;">
+<li id="li-1857"><p id="p-4322">12:00 A.M.</p></li>
+<li id="li-1858"><p id="p-4323">6:00 A.M.</p></li>
+<li id="li-1859"><p id="p-4324">12:00 P.M.</p></li>
+<li id="li-1860"><p id="p-4325">6:00 P.M.</p></li>
+</ul></p>
+</li>
+<li id="li-1861">
+<p id="p-4326">This function is <em class="emphasis">periodic</em>, meaning that it repeats itself over and over.</p>
+<p id="p-4327">How many hours does it take to repeat itself completely?</p>
+<p id="p-4328">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+</li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-86" id="answer-86"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-86"><div class="answer solution-like"><p id="p-4329"><span class="process-math">\(6\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-87" id="answer-87"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-87"><div class="answer solution-like"><p id="p-4330"><span class="process-math">\(\text{6:00 P.M.}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-88" id="answer-88"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-88"><div class="answer solution-like"><p id="p-4331"><span class="process-math">\(24\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-25')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-4336">In the last exercise, the function repeated itself every <span class="process-math">\(24\)</span> hours. This is called the <dfn class="terminology">period</dfn> of the function — the smallest value <span class="process-math">\(k\)</span> such that</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+f(x + k) = f(x)
+\end{equation*}
+</div>
+<p class="continuation">for all <span class="process-math">\(x\)</span> in the domain.</p>
+<p id="p-4337">Note that the cell phone function also repeats itself every <span class="process-math">\(48\)</span> hours, but that isn't the smallest number for which it repeats. The period is defined as the <em class="emphasis">smallest</em> such number.</p>
+<article class="exercise exercise-like" id="exercise-632"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-632"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.2</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-632"><article class="exercise exercise-like"><div id="webwork-26" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="26" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2dyYXBobWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7JHJlZnJlc2hDYWNoZWRJbWFnZXM9MTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRwZXI9UmVhbCg0KTsKJHBlcjE9UmVhbCg1KTsKJHBlcjI9UmVhbCgzKTsKCiRncj1pbml0X2dyYXBoKC0xLC01LDEyLDUsCmF4ZXM9PlswLDBdLApncmlkPT5bMTMsMTBdLApzaXplPT5bNDAwLDQwMF0KKTsKYWRkX2Z1bmN0aW9ucygkZ3IsICIyKmNvcyhwaSp4LzIpKzEgZm9yIHggaW4gPC0xLDEyPiB1c2luZyBjb2xvcjpyZWQgYW5kIHdlaWdodDoyIik7CgokZ3IxPWluaXRfZ3JhcGgoLTEsLTUsMTIsNSwKYXhlcz0+WzAsMF0sCmdyaWQ9PlsxMywxMF0sCnNpemU9Pls0MDAsNDAwXQopOwphZGRfZnVuY3Rpb25zKCRncjEsICItMnggZm9yIHggaW4gPC0xLDE+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKYWRkX2Z1bmN0aW9ucygkZ3IxLCAiLTYrNHggZm9yIHggaW4gPDEsMj4gdXNpbmcgY29sb3I6cmVkIGFuZCB3ZWlnaHQ6MiIpOwphZGRfZnVuY3Rpb25zKCRncjEsICI2LTJ4IGZvciB4IGluIDwyLDM+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKYWRkX2Z1bmN0aW9ucygkZ3IxLCAiLTYrMnggZm9yIHggaW4gPDMsND4gdXNpbmcgY29sb3I6cmVkIGFuZCB3ZWlnaHQ6MiIpOwphZGRfZnVuY3Rpb25zKCRncjEsICIxMC0yeCBmb3IgeCBpbiA8NCw2PiB1c2luZyBjb2xvcjpyZWQgYW5kIHdlaWdodDoyIik7CmFkZF9mdW5jdGlvbnMoJGdyMSwgIi0yNis0eCBmb3IgeCBpbiA8Niw3PiB1c2luZyBjb2xvcjpyZWQgYW5kIHdlaWdodDoyIik7CmFkZF9mdW5jdGlvbnMoJGdyMSwgIjE2LTJ4IGZvciB4IGluIDw3LDg+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKYWRkX2Z1bmN0aW9ucygkZ3IxLCAiLTE2KzJ4IGZvciB4IGluIDw4LDk+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKYWRkX2Z1bmN0aW9ucygkZ3IxLCAiMjAtMnggZm9yIHggaW4gPDksMTE+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKYWRkX2Z1bmN0aW9ucygkZ3IxLCAiLTQ2KzR4IGZvciB4IGluIDwxMSwxMj4gdXNpbmcgY29sb3I6cmVkIGFuZCB3ZWlnaHQ6MiIpOwphZGRfZnVuY3Rpb25zKCRncjEsICIyNi0yeCBmb3IgeCBpbiA8MTIsMTM+IHVzaW5nIGNvbG9yOnJlZCBhbmQgd2VpZ2h0OjIiKTsKCiRncjI9aW5pdF9ncmFwaCgtMiwtNiwxMiw2LApheGVzPT5bMCwwXSwKZ3JpZD0+WzE0LDEyXSwKc2l6ZT0+WzQwMCw0MDBdCik7CmFkZF9mdW5jdGlvbnMoJGdyMiwgIjIqc2luKDIqcGkvMyp4KS0yKmNvcygyKnBpLzEuNSp4KS0yIGZvciB4IGluIDwtMiwxMj4gdXNpbmcgY29sb3I6cmVkIGFuZCB3ZWlnaHQ6MiIpOwoKQkVHSU5fUEdNTApUaGUgcGVyaW9kIG9mIGVhY2ggZnVuY3Rpb24gYmVsb3cgaXMgYSB3aG9sZSBudW1iZXIuIEZpbmQgdGhlIHBlcmlvZCBvZiBlYWNoIGZ1bmN0aW9uLgoKPj4gW0BpbWFnZShpbnNlcnRHcmFwaCgkZ3IpLCB3aWR0aD0+NjAwKUBdKiAgPDwKClBlcmlvZCA9IFtfXXskcGVyfXsxMH0KCj4+IFtAaW1hZ2UoaW5zZXJ0R3JhcGgoJGdyMSksIHdpZHRoPT42MDApQF0qICA8PAoKUGVyaW9kID0gW19deyRwZXIxfXsxMH0KCj4+IFtAaW1hZ2UoaW5zZXJ0R3JhcGgoJGdyMiksIHdpZHRoPT42MDApQF0qICA8PAoKUGVyaW9kID0gW19deyRwZXIyfXsxMH0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgphLiAgVGhlIHBlcmlvZCBpcyBbJHBlcl0uCgoKYS4gIFRoZSBwZXJpb2QgaXMgWyRwZXIxXS4KCgphLiAgVGhlIHBlcmlvZCBpcyBbJHBlcjJdLgoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-4338">The period of each function below is a whole number. Find the period of each function.</p>
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/webwork%5Cimages%5Cwebwork-26-image-1.png" class="contained"></div>
+<p id="p-4339">Period = <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/webwork%5Cimages%5Cwebwork-26-image-2.png" class="contained"></div>
+<p id="p-4340">Period = <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/webwork%5Cimages%5Cwebwork-26-image-3.png" class="contained"></div>
+<p id="p-4341">Period = <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-89" id="answer-89"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-89"><div class="answer solution-like"><p id="p-4342"><span class="process-math">\(4\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-90" id="answer-90"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-90"><div class="answer solution-like"><p id="p-4343"><span class="process-math">\(5\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-91" id="answer-91"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-91"><div class="answer solution-like"><p id="p-4344"><span class="process-math">\(3\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-26')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-4349">The next exercise shows an important example of a periodic function — one we will return to many times. It involves a person riding a <a class="external" href="https://simple.wikipedia.org/wiki/Ferris_wheel" target="_blank">Ferris Wheel</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-65" id="fn-65"><sup> 65 </sup></a>.</p>
+<article class="exercise exercise-like" id="exercise-633"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-633"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.3</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-633"><article class="exercise exercise-like"><div id="webwork-27" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="27" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JHZlcnRTdHJldGNoPVBvcFVwKFsiPyIsIkNoYW5naW5nIHRoZSByYWRpdXMgb2YgdGhlIHdoZWVsIiwiQ2hhbmdpbmcgdGhlIHBsYXRmb3JtIGhlaWdodCIsIkNoYW5naW5nIHRoZSBwZXJpb2QiXSwiQ2hhbmdpbmcgdGhlIHJhZGl1cyBvZiB0aGUgd2hlZWwiKTsKJHZlcnRTaGlmdD1Qb3BVcChbIj8iLCJDaGFuZ2luZyB0aGUgcmFkaXVzIG9mIHRoZSB3aGVlbCIsIkNoYW5naW5nIHRoZSBwbGF0Zm9ybSBoZWlnaHQiLCJDaGFuZ2luZyB0aGUgcGVyaW9kIl0sIkNoYW5naW5nIHRoZSBwbGF0Zm9ybSBoZWlnaHQiKTsKJGhvcml6b250YWxTdHJldGNoPVBvcFVwKFsiPyIsIkNoYW5naW5nIHRoZSByYWRpdXMgb2YgdGhlIHdoZWVsIiwiQ2hhbmdpbmcgdGhlIHBsYXRmb3JtIGhlaWdodCIsIkNoYW5naW5nIHRoZSBwZXJpb2QiXSwiQ2hhbmdpbmcgdGhlIHBlcmlvZCIpOwoKQkVHSU5fUEdNTApTdXBwb3NlIGEgcGVyc29uIGJvYXJkcyBhdCB0aGUgYm90dG9tIG9mIGEgRmVycmlzIFdoZWVsIGFuZCByaWRlcyBhcm91bmQgZm9yIFtgMzVgXSBzZWNvbmRzLiBTZWUgdGhlIGdyYXBoIGJlbG93LgoKXFtATU9ERVMoSFRNTD0+JzxpZnJhbWUgc2Nyb2xsaW5nPSJubyIgc3JjPSJodHRwczovL3d3dy5nZW9nZWJyYS5vcmcvbWF0ZXJpYWwvaWZyYW1lL2lkL0NLQlhHOWdGL3dpZHRoLzQyNS9oZWlnaHQvNDI5L2JvcmRlci84ODg4ODgvc3JpL3RydWUvc2R6L2ZhbHNlLyIgd2lkdGg9IjQyNXB4IiBoZWlnaHQ9IjQyOXB4IiBzdHlsZT0iYm9yZGVyOjBweDsiPiA8L2lmcmFtZT4nLCBUZVggPT4iQSBHZW9HZWJyYSBhcHBsZXQuIiwgUFRYID0+IkEgR2VvR2VicmEgYXBwbGV0LiIpO0BcXVwqCgpBdCBib3R0b20gbGVmdCBpcyBhIGRpYWdyYW0gb2YgdGhlIEZlcnJpcyBXaGVlbCwgd2hlcmUgdGhlIHRyaWFuZ2xlIHNob3dzIHRoZSBwb3NpdGlvbiBvZiByaWRlci4gVXNpbmcgdGhlIHNsaWRlcnMgYXQgcmlnaHQsIHlvdSBjYW4gYWRqdXN0IHRoaW5ncyBsaWtlOgoqIHRoZSB3aGVlbCdzIF9yYWRpdXNfCgoKKiB0aGUgX2hlaWdodF8gb2YgdGhlIGxvYWRpbmcgcGxhdGZvcm0gKHdoaWNoIG1vdmVzIHRoZSB3aGVlbCB1cCBvciBkb3duKQoKCiogdGhlIF9wZXJpb2RfIG9mIHRoZSB3aGVlbC4KCgpUaGUgZ3JhcGggYWJvdmUgc2hvd3MgdGhlIHJpZGVyJ3MgaGVpZ2h0IGFib3ZlIHRoZSBncm91bmQgKGluIG1ldGVycykgYXMgdGhleSByaWRlIG9uIHRoZSB3aGVlbCBmb3IgW2AzNWBdIHNlY29uZHMuCgphLiAgRm9yIGEgcGVyc29uIHJpZGluZyBhIEZlcnJpcyBXaGVlbCwgd2hhdCBjYXVzZXMgYSB2ZXJ0aWNhbCBzdHJldGNoIGZvciB0aGUgZ3JhcGg/CgogICAgQW5zd2VyOiBbX117JHZlcnRTdHJldGNofXs1fQoKCmEuICBXaGF0IGNhdXNlcyBhIHZlcnRpY2FsIHNoaWZ0IGZvciB0aGUgZ3JhcGg/CgogICAgQW5zd2VyOiBbX117JHZlcnRTaGlmdH17NX0KCgphLiAgV2hhdCBjYXVzZXMgYSBob3Jpem9udGFsIHN0cmV0Y2ggZm9yIHRoZSBncmFwaD8KCiAgICBBbnN3ZXI6IFtfXXskaG9yaXpvbnRhbFN0cmV0Y2h9ezV9CgoKCkVORF9QR01MCgpCRUdJTl9QR01MX0hJTlQKVXNlIHRoZSBzbGlkZXIgdG8gaW5jcmVhc2UgdGhlIHRpbWUgY29tcGxldGVseS4gVGhlbiBjaGFuZ2UgdGhlIHNsaWRlcnMgZm9yIHRoZSBfcmFkaXVzXywgX3BsYXRmb3JtIGhlaWdodF8gYW5kIF9wZXJpb2RfIGFuZCBzZWUgd2hhdCBoYXBwZW5zIHRvIHRoZSBncmFwaC4KCgpFTkRfUEdNTF9ISU5UCgpCRUdJTl9QR01MX1NPTFVUSU9OCmEuICBBIHZlcnRpY2FsIHN0cmV0Y2ggb2NjdXJzIHdoZW4gdGhlIHJhZGl1cyBvZiB0aGUgd2hlZWwgY2hhbmdlcy4gVGhpcyBzaG91bGQgbWFrZSBzZW5zZSBiZWNhdXNlIGlmIHRoZSB3aGVlbCBpcyBsYXJnZXIsIHRoZSByaWRlciB3aWxsIHJlYWNoIGEgZGlmZmVyZW50IG1heGltdW0gaGVpZ2h0LgoKCmEuICBBIHZlcnRpY2FsIHNoaWZ0IG9jY3VycyB3aGVuIHRoZSBib2FyZGluZyBoZWlnaHQgaXMgaW5jcmVhc2VkLiBUaGUgd2hvbGUgd2hlZWwgbW92ZXMgX3VwXywgY2F1c2luZyB0aGUgZ3JhcGggdG8gc2hpZnQgdmVydGljYWxseS4KCgphLiAgQSBob3Jpem9udGFsIHN0cmV0Y2ggb2NjdXJzIHdoZW4gdGhlIHBlcmlvZCBvZiB0aGUgd2hlZWwgY2hhbmdlcy4gSWYgaXQgdGFrZXMgbG9uZ2VyIGZvciB0aGUgd2hlZWwgdG8gbWFrZSBhIGNvbXBsZXRlIHJvdGF0aW9uLCB0aGVuIHRoZSByaWRlcidzIGhlaWdodCBmdW5jdGlvbiB3aWxsIGJlIHN0cmV0Y2hlZCBob3Jpem9udGFsbHkuCgoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-4350">Suppose a person boards at the bottom of a Ferris Wheel and rides around for <span class="process-math">\(35\)</span> seconds. See the graph below.</p>
+<p id="p-4351">[@MODES(HTML=&gt;’&lt;iframe scrolling=”no” src=”https://www.geogebra.org/material/iframe/id/CKBXG9gF/width/425/height/429/border/888888/sri/true/sdz/false/” width=”425px” height=”429px” style=”border:0px;”&gt; &lt;/iframe&gt;’, TeX =&gt;”A GeoGebra applet.”, PTX =&gt;”A GeoGebra applet.”);@]*</p>
+<p id="p-4352">At bottom left is a diagram of the Ferris Wheel, where the triangle shows the position of rider. Using the sliders at right, you can adjust things like:</p>
+<ul class="disc">
+<li id="li-1868"><p id="p-4353">the wheel’s <em class="emphasis">radius</em></p></li>
+<li id="li-1869"><p id="p-4354">the <em class="emphasis">height</em> of the loading platform (which moves the wheel up or down)</p></li>
+<li id="li-1870"><p id="p-4355">the <em class="emphasis">period</em> of the wheel.</p></li>
+</ul>
+<p id="p-4356">The graph above shows the rider’s height above the ground (in meters) as they ride on the wheel for <span class="process-math">\(35\)</span> seconds.</p>
+<ol id="p-4357" class="lower-alpha">
+<li id="li-1871">
+<p id="p-4358">For a person riding a Ferris Wheel, what causes a vertical stretch for the graph?</p>
+<p id="p-4359">Answer: <ul style="list-style:circle;">
+<li id="li-1873"><p id="p-4361">Changing the radius of the wheel</p></li>
+<li id="li-1874"><p id="p-4362">Changing the platform height</p></li>
+<li id="li-1875"><p id="p-4363">Changing the period</p></li>
+</ul></p>
+</li>
+<li id="li-1876">
+<p id="p-4364">What causes a vertical shift for the graph?</p>
+<p id="p-4365">Answer: <ul style="list-style:circle;">
+<li id="li-1878"><p id="p-4367">Changing the radius of the wheel</p></li>
+<li id="li-1879"><p id="p-4368">Changing the platform height</p></li>
+<li id="li-1880"><p id="p-4369">Changing the period</p></li>
+</ul></p>
+</li>
+<li id="li-1881">
+<p id="p-4370">What causes a horizontal stretch for the graph?</p>
+<p id="p-4371">Answer: <ul style="list-style:circle;">
+<li id="li-1883"><p id="p-4373">Changing the radius of the wheel</p></li>
+<li id="li-1884"><p id="p-4374">Changing the platform height</p></li>
+<li id="li-1885"><p id="p-4375">Changing the period</p></li>
+</ul></p>
+</li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref hint-knowl original" data-refid="hk-hint-2" id="hint-2"><span class="type">Hint</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-hint-2"><div class="hint solution-like"><p id="p-4376">Use the slider to increase the time completely. Then change the sliders for the <em class="emphasis">radius</em>, <em class="emphasis">platform height</em> and <em class="emphasis">period</em> and see what happens to the graph.</p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-92" id="answer-92"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-92"><div class="answer solution-like"><p id="p-4377"><span class="process-math">\(\text{Changing the radius of the wheel}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-93" id="answer-93"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-93"><div class="answer solution-like"><p id="p-4378"><span class="process-math">\(\text{Changing the platform height}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-94" id="answer-94"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-94"><div class="answer solution-like"><p id="p-4379"><span class="process-math">\(\text{Changing the period}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-27')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-4384">In the Ferris Wheel problem, there are a few other things to notice.</p>
+<p id="p-4385">First, the height of the person as they go around the circle has nice symmetry — the graph on the way <em class="emphasis">up</em> is a reflection of the graph on the way down.</p>
+<p id="p-4386">Next, the graph oscillates up and down around a “middle height”. For periodic functions, this height is called the <dfn class="terminology">midline</dfn>. For example, when the radius was <span class="process-math">\(20\)</span> meters and the loading platform was <span class="process-math">\(10\)</span> meters, the <dfn class="terminology">midline</dfn> was the height <span class="process-math">\(y = 30\)</span> meters.</p>
+<p id="p-4387">In fact, the midline is usually given in equation form, such as: <span class="process-math">\(y = b\)</span></p>
+<p id="p-4388">Finally, the radius of the wheel is easily seen on the graph, as the distance between the midline and either the highest point, or the lowest point.</p>
+<p id="p-4389">Because not every periodic function involves movement around a circle, we give this distance a more general term: The <dfn class="terminology">Amplitude</dfn></p>
+<p id="p-4390">In general, the <dfn class="terminology">amplitude</dfn> of a periodic function is the difference (along the output axis) between the maximum output and <dfn class="terminology">midline</dfn> (or between the midline and the minimum output).</p>
+<article class="exercise exercise-like" id="exercise-634"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-634"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.4</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-634"><article class="exercise exercise-like"><div id="webwork-28" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="28" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2dyYXBobWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7JHJlZnJlc2hDYWNoZWRJbWFnZXM9MTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRwZXJpb2Q9UmVhbCg0KTsKJGFtcGxpdHVkZT1SZWFsKDEuNSk7CiRtaWRsaW5lPVJlYWwoLTMuNSk7CiRncj1pbml0X2dyYXBoKC0yLC02LDEyLDYsCmF4ZXM9PlswLDBdLApncmlkPT5bMTQsMTJdLApzaXplPT5bNDAwLDQwMF0KKTsKYWRkX2Z1bmN0aW9ucygkZ3IsICItMS41KmNvcygyKnBpLzQqeCktMy41IGZvciB4IGluIDwtMiwxMj4gdXNpbmcgY29sb3I6cmVkIGFuZCB3ZWlnaHQ6MiIpOwoKQkVHSU5fUEdNTAo+PiBbQGltYWdlKGluc2VydEdyYXBoKCRnciksIHdpZHRoPT42MDApQF0qICA8PAoKVGhlIGdyYXBoIGFib3ZlIHNob3dzIGEgcGVyaW9kaWMgZnVuY3Rpb24uIFVzZSBpdCB0byBkZXRlcm1pbmUgdGhlIHZhbHVlcyBiZWxvdy4KClBlcmlvZCA9IFtfXXskcGVyaW9kfXsxMH0KCkFtcGxpdHVkZSA9IFtfXXskYW1wbGl0dWRlfXsxMH0KCk1pZGxpbmU6IFtgeSA9IGBdW19deyRtaWRsaW5lfXsxMH0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgphLiAgUGVyaW9kID0gWyRwZXJpb2RdCgoKYS4gIEFtcGxpdHVkZSA9IFskYW1wbGl0dWRlXQoKCmEuICBNaWRsaW5lOiBbYHkgPSBgXVskbWlkbGluZV0KCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/webwork%5Cimages%5Cwebwork-28-image-1.png" class="contained"></div>
+<p id="p-4391">The graph above shows a periodic function. Use it to determine the values below.</p>
+<p id="p-4392">Period = <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<p id="p-4393">Amplitude = <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<p id="p-4394">Midline: <span class="process-math">\(y =\)</span><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-95" id="answer-95"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-95"><div class="answer solution-like"><p id="p-4395"><span class="process-math">\(4\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-96" id="answer-96"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-96"><div class="answer solution-like"><p id="p-4396"><span class="process-math">\(1.5\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-97" id="answer-97"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-97"><div class="answer solution-like"><p id="p-4397"><span class="process-math">\(-3.5\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-28')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-4402">In the next exercise, you'll plot points on the graph of a periodic function.</p>
+<p id="p-4403">As we see examples of periodic functions which describe motion around a circle (such as a Ferris Wheel), we often use the language of analog clocks to describe certain positions on the circle.</p>
+<p id="p-4404">For example, if a person begins at the bottom of the circle, we may refer to this as the <span class="process-math">\(6\)</span> <em class="emphasis">O'clock</em> position.</p>
+<p id="p-4405">For reference, our naming of points on a circle will be as follows:</p>
+<figure class="figure figure-like" id="figure-29"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/models/image-306.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.4.5<span class="period">.</span></span><span class="space"> </span></figcaption></figure><article class="example example-like" id="example-118"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.6</span><span class="period">.</span>
+</h4>
+<p id="p-4406">Imagine riding a Ferris wheel where you board at the <span class="process-math">\(6\)</span> <em class="emphasis">O'clock</em> position, and suppose it takes <span class="process-math">\(30\)</span> seconds to make one complete revolution.</p>
+<ol id="p-4407" class="lower-alpha">
+<li id="li-1892"><p id="p-4408">At what times do you reach your maximum height above the ground?</p></li>
+<li id="li-1893"><p id="p-4409">At what times will your height be the same as the center of the wheel?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-430" id="solution-430"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-430"><div class="solution solution-like"><ol id="p-4410" class="lower-alpha">
+<li id="li-1894">
+<p id="p-4411">Notice that this question is the same as asking “When will you be at the <span class="process-math">\(12\)</span> <em class="emphasis">O'clock</em> position?”</p>
+<p id="p-4412">This will occur at <span class="process-math">\(15\)</span> seconds, <span class="process-math">\(30 + 15 = 45\)</span> seconds, <span class="process-math">\(2(30) + 15 = 75\)</span> seconds, etc.</p>
+<p id="p-4413">In general, this is <span class="process-math">\(15\)</span> seconds after any multiple of the period (<span class="process-math">\(30\)</span> seconds), or: <span class="process-math">\(15 + 30k\text{,}\)</span> where <span class="process-math">\(k\)</span> is any whole number.</p>
+</li>
+<li id="li-1895">
+<p id="p-4414">This question is just like asking “When will you be at the <span class="process-math">\(3\)</span> <em class="emphasis">O'clock</em> or <span class="process-math">\(9\)</span> <em class="emphasis">O'clock</em> positions?”</p>
+<p id="p-4415">You will be at the same height as the center of the circle after <span class="process-math">\(7.5\)</span> seconds, <span class="process-math">\(15 + 7.5 = 22.5\)</span> seconds, <span class="process-math">\(30 + 7.5 = 37.5\)</span> seconds, etc.</p>
+<p id="p-4416">In general, this is <span class="process-math">\(7.5\)</span> seconds after any multiple of <em class="emphasis">half</em> the period (<span class="process-math">\(15\)</span> seconds), or: <span class="process-math">\(7.5 + 15k\text{,}\)</span> where <span class="process-math">\(k\)</span> is any whole number.</p>
+</li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-635"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-635"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.7</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-635"><article class="exercise exercise-like"><div id="webwork-29" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="29" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIm5pY2VUYWJsZXMucGwiLCJzY2FmZm9sZC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJBc3NpZ25tZW50LnBsIiwicGFyc2VyUG9wVXAucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKJGFtcGxpdHVkZT1SZWFsKDMwKTsKJHBlcmlvZD1SZWFsKDIwKTsKJGhbMF09UmVhbCgxMCk7CiRoWzFdPVJlYWwoNDApOwokaFsyXT1SZWFsKDcwKTsKJGhbM109UmVhbCg0MCk7CiRoWzRdPVJlYWwoMTApOwokZGlkaXRncmFwaD1Qb3BVcCgKWyI/IiwieWVzIiwibm8iXSwieWVzIgopOwpDb250ZXh0KCktPnZhcmlhYmxlcy0+YXJlKHk9PidSZWFsJyk7CnBhcnNlcjo6QXNzaWdubWVudC0+QWxsb3c7CiRtaWRsaW5lPUZvcm11bGEoInk9NDAiKTsKU2NhZmZvbGQ6OkJlZ2luKGlzX29wZW4gPT4gImNvcnJlY3Rfb3JfZmlyc3RfaW5jb3JyZWN0IiwgbnVtYmVyZWQgPT4gMSk7U2VjdGlvbjo6QmVnaW4oIiIpOwpCRUdJTl9QR01MCkEgcGVyc29uIHJpZGVzIGEgRmVycmlzIFdoZWVsLCBib2FyZGluZyBpdCBhdCBhIGhlaWdodCBvZiBbYDEwYF0gZmVldCBhdCB0aGUgW2A2YF0gX08nY2xvY2tfIHBvc2l0aW9uLiBUaGUgd2hlZWwgaGFzIGEgX2RpYW1ldGVyXyBvZiBbYDYwYF0gZmVldCwgYW5kIGl0IGNvbXBsZXRlcyBhIHJldm9sdXRpb24gZXZlcnkgMjAgbWludXRlcy4KCkxldCBbYGYodClgXSByZXByZXNlbnQgdGhlIHBlcnNvbidzIGhlaWdodCAoaW4gZmVldCkgYWJvdmUgdGhlIGdyb3VuZCwgYXMgYSBmdW5jdGlvbiBvZiBbYHRcdGV4dHssfWBdIHRoZSBudW1iZXIgb2YgbWludXRlcyB0aGV5J3ZlIGJlZW4gcmlkaW5nLgoKQ29tcGxldGUgdGhlIHRhYmxlIG9mIHZhbHVlcyBiZWxvdyBmb3IgdGhlIGZ1bmN0aW9uIFtgZlx0ZXh0ey59YF0KCj4+IFtARGF0YVRhYmxlKFtbW1BHTUwoJ1tgdGBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsY2VsbGNzcz0+J2JvcmRlci10b3A6M3B4IHNvbGlkOycsXSxbUEdNTCgnW2BmKHQpYF0nKSxjZWxsY3NzPT4nYm9yZGVyLXRvcDozcHggc29saWQ7JyxdLF0sW1tQR01MKCdbYDBgXScpLG1pZHJ1bGU9PicxJyxyb3djc3M9Pidib3JkZXItYm90dG9tOjJweCBzb2xpZDsnLF0sW1BHTUwoJ1tfXXskaFswXX17MTB9JyksXSxdLFtbUEdNTCgnW2A1YF0nKSxtaWRydWxlPT4nMScscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxdLFtQR01MKCdbX117JGhbMV19ezEwfScpLF0sXSxbW1BHTUwoJ1tgMTBgXScpLG1pZHJ1bGU9PicxJyxyb3djc3M9Pidib3JkZXItYm90dG9tOjJweCBzb2xpZDsnLF0sW1BHTUwoJ1tfXXskaFsyXX17MTB9JyksXSxdLFtbUEdNTCgnW2AxNWBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsXSxbUEdNTCgnW19deyRoWzNdfXsxMH0nKSxdLF0sW1tQR01MKCdbYDIwYF0nKSxyb3djc3M9Pidib3JkZXItYm90dG9tOjJweCBzb2xpZDsnLF0sW1BHTUwoJ1tfXXskaFs0XX17MTB9JyksXSxdLF0sYWxpZ249PidsYycsY2VudGVyPT4wLCk7QF0qIDw8CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KPj4gW0BEYXRhVGFibGUoW1tbUEdNTCgnW2B0YF0nKSxtaWRydWxlPT4nMScscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxjZWxsY3NzPT4nYm9yZGVyLXRvcDozcHggc29saWQ7JyxdLFtQR01MKCdbYGYodClgXScpLGNlbGxjc3M9Pidib3JkZXItdG9wOjNweCBzb2xpZDsnLF0sXSxbW1BHTUwoJ1tgMGBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsXSxbUEdNTCgnW2AxMGBdJyksXSxdLFtbUEdNTCgnW2A1YF0nKSxtaWRydWxlPT4nMScscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxdLFtQR01MKCdbYDQwYF0nKSxdLF0sW1tQR01MKCdbYDEwYF0nKSxtaWRydWxlPT4nMScscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxdLFtQR01MKCdbYDcwYF0nKSxdLF0sW1tQR01MKCdbYDE1YF0nKSxtaWRydWxlPT4nMScscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxdLFtQR01MKCdbYDQwYF0nKSxdLF0sW1tQR01MKCdbYDIwYF0nKSxyb3djc3M9Pidib3JkZXItYm90dG9tOjJweCBzb2xpZDsnLF0sW1BHTUwoJ1tgMTBgXScpLF0sXSxdLGFsaWduPT4nbGMnLGNlbnRlcj0+MCwpO0BdKiA8PAoKCkVORF9QR01MX1NPTFVUSU9OClNlY3Rpb246OkVuZCgpO1NlY3Rpb246OkJlZ2luKCIiKTsKQkVHSU5fUEdNTApZb3UgZm91bmQgdGhlIGhlaWdodHMgaW4gdGhlIGZvbGxvd2luZyB0YWJsZToKCj4+IFtARGF0YVRhYmxlKFtbW1BHTUwoJ1tgdGBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsY2VsbGNzcz0+J2JvcmRlci10b3A6M3B4IHNvbGlkOycsXSxbUEdNTCgnW2BmKHQpYF0nKSxjZWxsY3NzPT4nYm9yZGVyLXRvcDozcHggc29saWQ7JyxdLF0sW1tQR01MKCdbYDBgXScpLG1pZHJ1bGU9PicxJyxyb3djc3M9Pidib3JkZXItYm90dG9tOjJweCBzb2xpZDsnLF0sW1BHTUwoJ1tgMTBgXScpLF0sXSxbW1BHTUwoJ1tgNWBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsXSxbUEdNTCgnW2A0MGBdJyksXSxdLFtbUEdNTCgnW2AxMGBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsXSxbUEdNTCgnW2A3MGBdJyksXSxdLFtbUEdNTCgnW2AxNWBdJyksbWlkcnVsZT0+JzEnLHJvd2Nzcz0+J2JvcmRlci1ib3R0b206MnB4IHNvbGlkOycsXSxbUEdNTCgnW2A0MGBdJyksXSxdLFtbUEdNTCgnW2AyMGBdJykscm93Y3NzPT4nYm9yZGVyLWJvdHRvbToycHggc29saWQ7JyxdLFtQR01MKCdbYDEwYF0nKSxdLF0sXSxhbGlnbj0+J2xjJyxjZW50ZXI9PjAsKTtAXSogPDwKCkluIHRoZSBncmFwaCBiZWxvdywgbW92ZSB0aGUgcG9pbnRzIHRvIG1hdGNoIHRob3NlIGZyb20geW91ciB0YWJsZSBhYm92ZS4gSWYgdGhlIHBvaW50cyBhcmUgcGxhY2VkIGNvcnJlY3RseSwgdGhlIGdyYXBoIG9mIFtgeSA9IGYodClgXSB3aWxsIGFwcGVhci4KClxbQE1PREVTKEhUTUw9Pic8aWZyYW1lIHNjcm9sbGluZz0ibm8iIHNyYz0iaHR0cHM6Ly93d3cuZ2VvZ2VicmEub3JnL21hdGVyaWFsL2lmcmFtZS9pZC90bTlSbldDYy93aWR0aC80MjUvaGVpZ2h0LzM3My9ib3JkZXIvODg4ODg4L3NyaS90cnVlL3Nkei9mYWxzZS8iIHdpZHRoPSI0MjVweCIgaGVpZ2h0PSIzNzNweCIgc3R5bGU9ImJvcmRlcjowcHg7Ij4gPC9pZnJhbWU+JywgVGVYID0+IkEgR2VvR2VicmEgYXBwbGV0LiIsIFBUWCA9PiJBIEdlb0dlYnJhIGFwcGxldC4iKTtAXF1cKgoKRGlkIHRoZSBncmFwaCBhcHBlYXI/IFtfXXskZGlkaXRncmFwaH17NX0KCldoYXQgaXMgdGhlIGFtcGxpdHVkZSBvZiB0aGUgZnVuY3Rpb24/CgpBbnN3ZXI6IFtfXXskYW1wbGl0dWRlfXs1fSBmZWV0CgpXaGF0IGlzIHRoZSBwZXJpb2Qgb2YgdGhlIGZ1bmN0aW9uPwoKQW5zd2VyOiBbX117JHBlcmlvZH17NX0gbWludXRlcwoKV2hhdCBpcyB0aGUgZXF1YXRpb24gb2YgdGhlIG1pZGxpbmU/CgpBbnN3ZXI6IFtfXXskbWlkbGluZX17MTB9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KYS4gIFRoZSBhbXBsaXR1ZGUgaXMgW2AzMGBdIGZlZXQuCgoKYS4gIFRoZSBwZXJpb2QgaXMgW2AyMGBdIG1pbnV0ZXMuCgoKYS4gIFRoZSBtaWRsaW5lIGlzOiBbYHkgPSA0MGBdCgoKCkVORF9QR01MX1NPTFVUSU9OClNlY3Rpb246OkVuZCgpO1NjYWZmb2xkOjpFbmQoKTsKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<article class="task exercise-like" id="task-1"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<p id="p-4417">A person rides a Ferris Wheel, boarding it at a height of <span class="process-math">\(10\)</span> feet at the <span class="process-math">\(6\)</span> <em class="emphasis">O’clock</em> position. The wheel has a <em class="emphasis">diameter</em> of <span class="process-math">\(60\)</span> feet, and it completes a revolution every 20 minutes.</p>
+<p id="p-4418">Let <span class="process-math">\(f(t)\)</span> represent the person’s height (in feet) above the ground, as a function of <span class="process-math">\(t\text{,}\)</span> the number of minutes they’ve been riding.</p>
+<p id="p-4419">Complete the table of values below for the function <span class="process-math">\(f\text{.}\)</span></p>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(t\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(f(t)\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(5\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(10\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(15\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(20\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></td>
+</tr>
+</table></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-98" id="answer-98"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-98"><div class="answer solution-like"><p id="p-4420"><span class="process-math">\(10\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-99" id="answer-99"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-99"><div class="answer solution-like"><p id="p-4421"><span class="process-math">\(40\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-100" id="answer-100"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-100"><div class="answer solution-like"><p id="p-4422"><span class="process-math">\(70\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-101" id="answer-101"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">4</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-101"><div class="answer solution-like"><p id="p-4423"><span class="process-math">\(40\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-102" id="answer-102"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">5</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-102"><div class="answer solution-like"><p id="p-4424"><span class="process-math">\(10\)</span></p></div></div>
+</div></article> <article class="task exercise-like" id="task-2"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<p id="p-4425">You found the heights in the following table:</p>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(t\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(f(t)\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(10\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(5\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(40\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(10\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(70\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(15\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(40\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(20\)</span></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(10\)</span></td>
+</tr>
+</table></div>
+<p id="p-4426">In the graph below, move the points to match those from your table above. If the points are placed correctly, the graph of <span class="process-math">\(y = f(t)\)</span> will appear.</p>
+<p id="p-4427">[@MODES(HTML=&gt;’&lt;iframe scrolling=”no” src=”https://www.geogebra.org/material/iframe/id/tm9RnWCc/width/425/height/373/border/888888/sri/true/sdz/false/” width=”425px” height=”373px” style=”border:0px;”&gt; &lt;/iframe&gt;’, TeX =&gt;”A GeoGebra applet.”, PTX =&gt;”A GeoGebra applet.”);@]*</p>
+<p id="p-4428">Did the graph appear? <ul style="list-style:circle;">
+<li id="li-1897"><p id="p-4430">yes</p></li>
+<li id="li-1898"><p id="p-4431">no</p></li>
+</ul></p>
+<p id="p-4432">What is the amplitude of the function?</p>
+<p id="p-4433">Answer: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> feet</p>
+<p id="p-4434">What is the period of the function?</p>
+<p id="p-4435">Answer: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> minutes</p>
+<p id="p-4436">What is the equation of the midline?</p>
+<p id="p-4437">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-103" id="answer-103"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-103"><div class="answer solution-like"><p id="p-4438"><span class="process-math">\(\text{yes}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-104" id="answer-104"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-104"><div class="answer solution-like"><p id="p-4439"><span class="process-math">\(30\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-105" id="answer-105"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-105"><div class="answer solution-like"><p id="p-4440"><span class="process-math">\(20\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-106" id="answer-106"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">4</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-106"><div class="answer solution-like"><p id="p-4441"><span class="process-math">\(y = 40\)</span></p></div></div>
+</div></article>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-29')">Make Interactive</button></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-636"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-636"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.8</span><span class="period">.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-636"><article class="exercise exercise-like"><div id="webwork-30" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="30" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2dyYXBobWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7JHJlZnJlc2hDYWNoZWRJbWFnZXM9MTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRyYWRpdXM9UmVhbCg2MCk7CiRtaWRsaW5lPVJlYWwoODApOwokcGVyaW9kPVJlYWwoMTUpOwokZ3I9aW5pdF9ncmFwaCgtNSwtMjAsNDUsMjAwLApheGVzPT5bMCwwXSwKZ3JpZD0+WzEwLDExXSwKc2l6ZT0+WzQwMCw0MDBdCik7CmFkZF9mdW5jdGlvbnMoJGdyLCAiLTYwKmNvcygyKnBpLzE1KngpKzgwIGZvciB4IGluIDwwLDQ1PiB1c2luZyBjb2xvcjpyZWQgYW5kIHdlaWdodDoyIik7CgpCRUdJTl9QR01MCkEgcGVyc29uIGJvYXJkcyBhIEZlcnJpcyBXaGVlbCBhdCB0aGUgW2A2YF0gX08nY2xvY2tfIHBvc2l0aW9uLiBUaGUgZ3JhcGggc2hvd3MgdGhlIHBlcnNvbidzIGhlaWdodCBhYm92ZSB0aGUgZ3JvdW5kIChpbiBmZWV0KSBhcyB0aGV5IHJpZGUgdGhlIEZlcnJpcyBXaGVlbC4gSGVyZSwgdGhlIGhvcml6b250YWwgYXhpcyByZXByZXNlbnRzIHRpbWUgKGluIG1pbnV0ZXMpLgoKVXNlIHRoZSBncmFwaCB0byBoZWxwIGFuc3dlciB0aGUgcXVlc3Rpb25zIHRoYXQgZm9sbG93LgoKPj4gW0BpbWFnZShpbnNlcnRHcmFwaCgkZ3IpLCB3aWR0aD0+NjAwKUBdKiAgPDwKCmEuICBXaGF0IGlzIHRoZSByYWRpdXMgb2YgdGhlIHdoZWVsPwoKICAgIEFuc3dlcjogW19deyRyYWRpdXN9ezEwfSBmZWV0CgoKYS4gIEhvdyBoaWdoIGlzIHRoZSBjZW50ZXIgb2YgdGhlIHdoZWVsPwoKICAgIEFuc3dlcjogW19deyRtaWRsaW5lfXsxMH0gZmVldAoKCmEuICBIb3cgbG9uZyBkb2VzIGl0IHRha2UgdG8gbWFrZSBvbmUgY29tcGxldGUgcmV2b2x1dGlvbiBvbiB0aGUgd2hlZWw/CgogICAgQW5zd2VyOiBbX117JHBlcmlvZH17MTB9IG1pbnV0ZXMKCgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KYS4gIFRoZSByYWRpdXMgaXMgWyRyYWRpdXNdIGZlZXQuCgoKYS4gIFRoZSBjZW50ZXIgb2YgdGhlIHdoZWVsIGlzIFskbWlkbGluZV0gZmVldCBhYm92ZSB0aGUgZ3JvdW5kLgoKCmEuICBJdCB0YWtlcyBbJHBlcmlvZF0gbWludXRlcyB0byBtYWtlIGEgY29tcGxldGUgcmV2b2x1dGlvbi4KCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-4446">A person boards a Ferris Wheel at the <span class="process-math">\(6\)</span> <em class="emphasis">O’clock</em> position. The graph shows the person’s height above the ground (in feet) as they ride the Ferris Wheel. Here, the horizontal axis represents time (in minutes).</p>
+<p id="p-4447">Use the graph to help answer the questions that follow.</p>
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/webwork%5Cimages%5Cwebwork-30-image-1.png" class="contained"></div>
+<ol id="p-4448" class="lower-alpha">
+<li id="li-1902">
+<p id="p-4449">What is the radius of the wheel?</p>
+<p id="p-4450">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> feet</p>
+</li>
+<li id="li-1903">
+<p id="p-4451">How high is the center of the wheel?</p>
+<p id="p-4452">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> feet</p>
+</li>
+<li id="li-1904">
+<p id="p-4453">How long does it take to make one complete revolution on the wheel?</p>
+<p id="p-4454">Answer: <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> minutes</p>
+</li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-107" id="answer-107"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-107"><div class="answer solution-like"><p id="p-4455"><span class="process-math">\(60\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-108" id="answer-108"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-108"><div class="answer solution-like"><p id="p-4456"><span class="process-math">\(80\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-109" id="answer-109"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-109"><div class="answer solution-like"><p id="p-4457"><span class="process-math">\(15\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-30')">Make Interactive</button></div>
+</div></article></div></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-65"><div class="fn"><code class="code-inline tex2jax_ignore">https://simple.wikipedia.org/wiki/Ferris_wheel</code></div></div>
+</div></main>
+</div>
+</body>
+</html>

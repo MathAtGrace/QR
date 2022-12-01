@@ -1,4 +1,5 @@
-# My Great Book
+# Quantitative Wisdom
 
-TODO this should have some simple build information
-and/or a link to documentation
+A textbook for MAT 1185 at Grace College using materials from Quantway, Pierce College, and the Kuyers Insitute.
+
+You can view the textbook at https://mathatgrace.github.io/QR/output/html/quantitative-wisdom.html

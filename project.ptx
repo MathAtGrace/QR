@@ -31,7 +31,7 @@
       <output-dir>output/subset</output-dir>
       <stringparam key="debug.skip-knowls" value="yes"/>
       <!-- edit this to change the section/chapter/etc. to build -->
-      <xmlid-root>ch-first</xmlid-root>
+      <xmlid-root>sec-models-periodic</xmlid-root>
     </target>
   </targets>
   <executables>

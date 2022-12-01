@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-01T16:37:29-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Income Taxes</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="ws-finance-savings-loans.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="financial_math.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="sec-taxes.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="ws-finance-savings-loans.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="financial_math.html" title="Up">Up</a><a class="next-button button toolbar-item" href="sec-taxes.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="active">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="internal">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="internal">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="internal">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="chap_two_income_taxes"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">3.7</span> <span class="title">Income Taxes</span>
+</h2>
+<article class="objectives goal-like" id="objectives-14"><h3 class="heading">
+<span class="type">Objectives:</span><span class="space"> </span><span class="title">Income Taxes 3.7</span>
+</h3>
+<div class="introduction" id="introduction-58"><p id="p-1407">Students will be able to:</p></div>
+<ul class="disc">
+<li id="li-506"><p id="p-1408">Calculate gross income and adjusted gross income (AGI)</p></li>
+<li id="li-507"><p id="p-1409">Determine the standard deduction according to filing status</p></li>
+<li id="li-508"><p id="p-1410">Determine whether to use the standard or itemized deductions and calculate taxable income</p></li>
+<li id="li-509"><p id="p-1411">Calculate income tax from tables</p></li>
+<li id="li-510"><p id="p-1412">Compare taxes owed to withholdings to determine whether a refund is due or a payment is required</p></li>
+</ul></article><section class="introduction" id="introduction-59"></section><section class="subsection" id="subsection-34"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.1</span> <span class="title">A Very Brief History of Taxes</span>
+</h3>
+<p id="p-1413">Although Benjamin Franklin famously claimed in 1789 that “in this world nothing can be said to be certain, except death and taxes”, it wasn’t until 1913 that the 16th amendment was ratified, and income tax was legalized. Prior to this, taxes were primarily collected through tariffs on imported goods, poll taxes, and property taxes. A <em class="alert">poll tax</em>, also referred to as a head tax, was a fixed amount every liable individual had to pay. Payment of the poll tax was often required before a person could register to vote or be issued a hunting or fishing license.</p>
+<p id="p-1414">Tax policy in the United States is a politically divisive issue. There is even debate as to the current length of the tax code! Some claim that the code is over 70,000 pages while others insist it is just over 2,000. Nevertheless, there is at least one thing everyone can agree with - you don't want to be on the wrong side of the Internal Revenue Service (IRS)!</p></section><section class="subsection" id="subsection-35"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.2</span> <span class="title">Types of Income Tax</span>
+</h3>
+<p id="p-1415"><em class="alert">Income tax</em> is a tax that is levied on earned income or profit. Income taxes are collected by the federal government, states, and even some municipalities. Income taxes are an important source of funding, and are used to finance social programs, maintain and expand infrastructure, and provide foreign aid, among other things.</p></section><section class="subsection" id="subsection-36"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.3</span> <span class="title">Federal Income Tax</span>
+</h3>
+<p id="p-1416">Anyone who earns income over a certain amount (approximately $10,000 for an individual) must file a federal tax return and have taxes collected on their behalf. The amount of federal tax owed is determined by your <em class="alert">filing status</em> and <em class="alert">taxable income</em>.</p></section><section class="subsection" id="subsection-37"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.4</span> <span class="title">State Income Tax</span>
+</h3>
+<p id="p-1417">Forty-one states and the District of Columbia collect taxes on income from wages and investment. Seven states - Washington, Nevada, South Dakota, Wyoming, Alaska, Texas, and Florida – do not collect tax on wage or investment income, and two states – New Hampshire and Tennessee – only collect tax on investment income. The amount of tax collected varies by state, with each state averaging between $500 and $3000 per person.</p></section><section class="subsection" id="subsection-38"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.5</span> <span class="title">Municipal Income Tax</span>
+</h3>
+<p id="p-1418">Some municipalities (urban districts) also collect income taxes. For example, business owners in Multnomah County pay a municipal tax on their business income, and workers in the Tri-met district (area served by Tri-met) have their wages taxed at 0.7537%.</p></section><section class="subsection" id="subsection-39"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.6</span> <span class="title">Calculating Federal Income Tax</span>
+</h3>
+<p id="p-1419">Not all income is taxed, and not all income that gets taxed is taxed at the same rate. The general process of calculating the amount of federal income tax you owe is outlined in the chart below.</p>
+<figure class="figure figure-like" id="figure-2"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/financial_math/2_5/calculating_federal.png" class="contained" alt="Five rectangles showing the steps: 1. Calculate gross income by adding all income; 2. Calculate adjusted gross income (AGI) by subtracting any pre-tax adjustments; 3. Calculate taxable income by subtracting deductions (itemized or standard); 4. Calculate tax using tax table for your filing status; 5. Calculate refund or amount owed by subtracting credits and withholdings. If the amount is negative you get a refund; if the amount is positive you owe money."></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.7.1<span class="period">.</span></span><span class="space"> </span>Steps to Calculate Federal Income Tax</figcaption></figure></section><section class="subsection" id="subsection-40"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.7</span> <span class="title">Gross Income</span>
+</h3>
+<p id="p-1420"><em class="alert">Gross income</em> includes all wages, tips, earned interest, dividends, rents and royalties, alimony, property gains, income tax refunds, etc. Keep in mind that ALL income means ALL income. Even income earned from a crime must be reported!</p></section><section class="subsection" id="subsection-41"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.8</span> <span class="title">Adjusted Gross Income</span>
+</h3>
+<p id="p-1421"><em class="alert">Adjustments</em> are eligible expenses used to reduce your gross income. Adjustments are tax-exempt and thus reduce the amount owed in taxes. Eligible expenses include contributions to tax deferred savings plans (401k, Individual Retirement Plan (IRA)), school tuition, student loan interest, moving expenses, business expenses, flexible spending accounts and health savings account contributions.</p></section><section class="subsection" id="subsection-42"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.9</span> <span class="title">Taxable Income</span>
+</h3>
+<p id="p-1422"><em class="alert">Taxable income</em> is determined by subtracting your <em class="alert">deductions</em> from your adjusted gross income. You may choose to take <em class="emphasis">either</em> a <em class="alert">standard deduction</em>, which is determined by your filing status, or you may choose to <em class="alert">itemize</em> your deductions. Itemized deductions may include state and local income taxes, property taxes, medical expenses, mortgage interest, and charitable donations.</p>
+<p id="p-1423">Prior to the 2018 tax year, you could also claim <em class="alert">personal exemptions</em>. Exemptions of $4,050 for each member of the household were subtracted from the adjusted gross income along with either the standard or itemized deduction to determine taxable income. Starting in 2018, however, the standard deduction was doubled, and personal exemptions were eliminated.</p>
+<p id="p-1424">Let’s look at an example of how to calculate gross income and adjusted gross income (AGI).</p>
+<article class="example example-like" id="example-38"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.2</span><span class="period">.</span>
+</h4>
+<p id="p-1425">Sasha received $45,000 in wages and earned $1,300 in interest from his savings plan. He paid $1,400 in student loan interest, and put $4,000 into his Individual Retirement Account (IRA). Determine Sasha’s adjusted gross income.</p>
+<p id="p-1426">To calculate Sasha’s adjusted gross income, we need to first determine his gross income. His gross income includes his wages and earned interest:</p>
+<p id="p-1427">Gross Income <span class="process-math">\(=\$45,000+\$1,300=\$46,300\)</span></p>
+<p id="p-1428">To find his adjusted gross income, we need to subtract eligible adjustments from his gross income. His eligible adjustments include the interest paid on his student loans, and his contributions to his IRA:</p>
+<p id="p-1429">Adjusted Gross Income <span class="process-math">\(=\$46,300-\$1,400-\$4,000=\$40,900\)</span></p></article></section><section class="subsection" id="subsection-43"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.10</span> <span class="title">Filing Status</span>
+</h3>
+<p id="p-1430">Your <em class="alert">filing status</em> is determined by your family situation. Are you married, widowed, divorced, caring for a family member? It is possible to fall into more than one category, but you may choose the one that is most beneficial for you.</p>
+<ul class="disc">
+<li id="li-511"><p id="p-1431"><em class="alert">Single:</em> If you are unmarried, legally separated from your spouse, or divorced on the last day of the year.</p></li>
+<li id="li-512"><p id="p-1432"><em class="alert">Married Filing Jointly:</em> If you are married and both you and your spouse agree to file a joint return. (On a joint return, you report your combined income and deduct your combined allowable expenses.)</p></li>
+<li id="li-513"><p id="p-1433"><em class="alert">Married Filing Separately:</em> If you are married and you want to be responsible only for your own tax, or if this status results in less tax than a joint return.</p></li>
+<li id="li-514"><p id="p-1434"><em class="alert">Head of Household (with qualifying person):</em> If you are 1) unmarried or considered unmarried on the last day of the year, 2) paid more than half the cost of keeping up a home for the year, and 3) have a qualifying dependent living with you for more than half the year (except temporary absences, such as school).</p></li>
+<li id="li-515"><p id="p-1435"><em class="alert">Qualifying Widow/Widower (with dependent child):</em> This status is available for the two years following the death of your spouse.</p></li>
+</ul>
+<p id="p-1436">Your filing status determines your standard deduction and tax liability. The standard deduction for each filing status for the tax year 2022 is given in the table below.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">Filing Status</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">Standard Deduction for Tax Year 2022</th>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">Single</td>
+<td class="c m b1 r1 l0 t0 lines">$12,950.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">Married Filing Jointly</td>
+<td class="c m b1 r1 l0 t0 lines">$25,900</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">Married Filing Separately</td>
+<td class="c m b1 r1 l0 t0 lines">$12,950</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">Head of Household</td>
+<td class="c m b1 r1 l0 t0 lines">$19,400</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">Qualifying Widow</td>
+<td class="c m b1 r1 l0 t0 lines">$25,900</td>
+</tr>
+</table></div></div></div>
+<p id="p-1437">Here is an example where we calculate adjusted gross income and taxable income.</p>
+<article class="example example-like" id="example-39"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.3</span><span class="period">.</span>
+</h4>
+<p id="p-1438">Maria earned wages of $32,400 from her job as a server. She also earned $8,300 in tips, and received $95 in interest from a savings account. In trying to save for retirement, Maria has put $3,500 into a 401K tax deferred savings plan. She is unmarried and lives with her six year old daughter. Determine Maria’s gross income, adjusted gross income, and taxable income.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-159" id="solution-159"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-159"><div class="solution solution-like">
+<p id="p-1439">Maria’s gross income includes her wages, tips, and earned interest.</p>
+<p id="p-1440">Gross Income = $32,400 + $8,300 + $95 = $40,795</p>
+<p id="p-1441">Maria can use her 401k contribution as an adjustment.</p>
+<p id="p-1442">Adjusted Gross Income = $40,795 - $3,500 = $37,295</p>
+<p id="p-1443">Since Maria is unmarried and is the primary caregiver for her daughter, she can file as the head of household and take the standard deduction of $19,400.</p>
+<p id="p-1444">Taxable Income = $37,295 - $19,400 = $17,895</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-44"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.11</span> <span class="title">Tax Tables</span>
+</h3>
+<p id="p-1445">The United States has a <em class="alert">progressive</em> federal income tax system which means the more income you have, the more you generally pay in taxes. There are <em class="alert">marginal tax rates</em> that go up according to our income, but we don’t pay the same rate on all of our income. The ranges of income are called <em class="alert">tax brackets</em> and the buckets in the illustration below can help us visualize the brackets.</p>
+<p id="p-1446">The cutoff values in the figure are for a married couple filing jointly, but the percentages are the same for everyone as you’ll see in the table on the next page. We pay 10% of any taxable income in the first bucket. If the first bucket is full, we move to the second bucket and we pay 12% of that income. This couple is in the 22% tax bracket because the 3rd bucket is partially filled. They will pay 22% of the income in that bucket, but they are not paying 22% of their entire income.</p>
+<figure class="figure figure-like" id="tax_buckets"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;"><img src="external/financial_math/2_5/tax_tables.png" class="contained" alt="A drawing that shows the tax brackets as buckets being filled from a hose labeled taxable income; the first bucket for the 10% tax bracket is full and has the range of $0-19,050; the second bucket for the 12% tax bracket is also full and has the range of $19051-77,400; the third bucket for the 22% bracket is partially full and has the range of $77,401-165,000; there are buckets for the 24%, 32%, 35% and 37% tax brackets which are empty. The cutoff values for all of these brackets are given in the next table."></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.7.4<span class="period">.</span></span><span class="space"> </span>Tax Buckets by John Chesbrough, licensed under <a class="external" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC-BY-ND-NC 4.0</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-17" id="fn-17"><sup> 17 </sup></a>.</figcaption></figure><p id="p-1447">Here is a table with cutoff values for each filing status. Everyone pays a tax of 10% on any income in the first tax bracket. Then we all pay 12% of the next bracket of income, 22% of the next bracket, and so on. This keeps going up to the 37% tax bracket.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-20"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.7.5<span class="period">.</span></span><span class="space"> </span>2022 Tax Year Marginal Tax Rates</figcaption><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">Marginal Tax Rate<br>On Taxable Income</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">Filing Single</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">Filing as Head<br>of Household</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">Married filing<br>Jointly</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">Married filing<br>Separately</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">10%</td>
+<td class="l m b1 r1 l0 t0 lines">First $10,275</td>
+<td class="l m b1 r1 l0 t0 lines">First $14,650</td>
+<td class="l m b1 r1 l0 t0 lines">First $20,550</td>
+<td class="l m b1 r1 l0 t0 lines">First $10,275</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">12%</td>
+<td class="l m b1 r1 l0 t0 lines">$10,276 to $41,775</td>
+<td class="l m b1 r1 l0 t0 lines">$14,651 to $55,900</td>
+<td class="l m b1 r1 l0 t0 lines">$20,551 to $83,550</td>
+<td class="l m b1 r1 l0 t0 lines">$10,276 to $41,775</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">22%</td>
+<td class="l m b1 r1 l0 t0 lines">$41,776 to $89,075</td>
+<td class="l m b1 r1 l0 t0 lines">$55,901 to $89,050.</td>
+<td class="l m b1 r1 l0 t0 lines">$83,551 to $178,150.</td>
+<td class="l m b1 r1 l0 t0 lines">$41,776 to $89,075</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">24%</td>
+<td class="l m b1 r1 l0 t0 lines">$89,076 to $170,050.</td>
+<td class="l m b1 r1 l0 t0 lines">$89,051 to $170,050</td>
+<td class="l m b1 r1 l0 t0 lines">$178,151 to $340,100.</td>
+<td class="l m b1 r1 l0 t0 lines">$89,076 to $170,050.</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">32%</td>
+<td class="l m b1 r1 l0 t0 lines">$170,051 to $215,950</td>
+<td class="l m b1 r1 l0 t0 lines">$170,051 to $215,950</td>
+<td class="l m b1 r1 l0 t0 lines">$340,101 to $431,900</td>
+<td class="l m b1 r1 l0 t0 lines">$170,051 to $215,950</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">35%</td>
+<td class="l m b1 r1 l0 t0 lines">$215,951 to $539,900</td>
+<td class="l m b1 r1 l0 t0 lines">$215,951 to $539,900</td>
+<td class="l m b1 r1 l0 t0 lines">$431,901 to $647,850</td>
+<td class="l m b1 r1 l0 t0 lines">$215,951 to $323,925</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">37%</td>
+<td class="l m b1 r1 l0 t0 lines">$539,901 or more</td>
+<td class="l m b1 r1 l0 t0 lines">$539,901 or more</td>
+<td class="l m b1 r1 l0 t0 lines">$647,851 or more</td>
+<td class="l m b1 r1 l0 t0 lines">$323,926 or more</td>
+</tr>
+</table></figure></div></div></div>
+<p id="p-1448">Let’s see how to use this table to calculate taxes in an example.</p>
+<article class="example example-like" id="example-40"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.6</span><span class="period">.</span>
+</h4>
+<p id="p-1449">If Avery is filing single and has $55,100 in taxable income, calculate their tax.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-160" id="solution-160"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-160"><div class="solution solution-like">
+<p id="p-1450">We begin with the lowest tax bracket and take 10% of $9,525. Since their income is higher than that, we add 12% of the next amount, found by subtracting the values in that bracket. Avery’s taxable income is in the 22% tax bracket, so we find the amount over $38,700 by subtracting. Here is the full calculation:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-71">
+\begin{align*}
+0.10(\$10,275)+0.12(\$41,775-\$10,275)+0.22(\$55,100-\$41,775)\\
+\amp=0.10(\$10,275)+0.12(\$31,500)+0.22(\$13,325)\\
+\amp=\$1,027.50+\$3,780+\$2,931.50\\
+\amp=\$7,739
+\end{align*}
+</div>
+<p id="p-1452">Avery would owe $7,739 in taxes. Note that their overall tax rate is somewhere between 10% and 22%. We can calculate the actual rate by dividing their tax owed by their taxable income:</p>
+<p id="p-1453"><span class="process-math">\(\frac{\$7,739}{\$55,100}=0.1405\)</span> or about 14%</p>
+</div></div>
+</div></article><p id="p-1454">We could calculate all taxes this way, but you might notice that the first few terms will be the same if the buckets are full. For this reason, we can simplify these tax tables. The tax tables below give the value for all of the lower tax buckets that are full. There is a tax table for each filing status and the cutoffs are regularly adjusted for inflation, so they usually vary from year to year.</p>
+<p id="p-1455">The next four tables give the tax calculations for 2022 federal income taxes by filing status.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-21"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.7.7<span class="period">.</span></span><span class="space"> </span>Filing as Single (Tax Year 2022)</figcaption><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">If taxable income is:</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">The tax is:</th>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$0 to $10,275</td>
+<td class="l m b1 r1 l0 t0 lines">10% of the taxable income</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$10,276 to $41,775</td>
+<td class="l m b1 r1 l0 t0 lines">$1,027.50 plus 12% of the amount over $10,275.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$41,776 to $89,075</td>
+<td class="l m b1 r1 l0 t0 lines">$4,807.50 plus 22% of the amount over $41,775.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$89,076 to $170,050</td>
+<td class="l m b1 r1 l0 t0 lines">$15,213.50 plus 24% of the amount over $89,075.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$170,051 to $215,950</td>
+<td class="l m b1 r1 l0 t0 lines">$34,647.50 plus 32% of the amount over $170,050.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$215,951 to $539,900</td>
+<td class="l m b1 r1 l0 t0 lines">$49,335.50 plus 35% of the amount over $215,950.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$539,901 or more</td>
+<td class="l m b1 r1 l0 t0 lines">$162,718 plus 37% of the amount over $539,900.</td>
+</tr>
+</table></figure></div></div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-22"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.7.8<span class="period">.</span></span><span class="space"> </span>Filing as Head of Household (Tax Year 2022)</figcaption><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">If taxable income is:</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">The tax is:</th>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$0 to $14,650.</td>
+<td class="l m b1 r1 l0 t0 lines">10% of taxable income.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$14,651 to $55,900.</td>
+<td class="l m b1 r1 l0 t0 lines">$1,465 plus 12% of the amount over $14,650.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$55,901 to $89,050.</td>
+<td class="l m b1 r1 l0 t0 lines">$6,415 plus 22% of the amount over $55,900.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$89,051 to $170,050.</td>
+<td class="l m b1 r1 l0 t0 lines">$13,708 plus 24% of the amount over $89,050.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$170,051 to $215,950.</td>
+<td class="l m b1 r1 l0 t0 lines">$33,148 plus 32% of the amount over $170,050.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$215,951 to $539,900.</td>
+<td class="l m b1 r1 l0 t0 lines">$47,836 plus 35% of the amount over $215,950.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$539,901 or more.</td>
+<td class="l m b1 r1 l0 t0 lines">$161,218.50 plus 37% of the amount over $539,900.</td>
+</tr>
+</table></figure></div></div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-23"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.7.9<span class="period">.</span></span><span class="space"> </span>Married Filing Jointly (Tax Year 2022)</figcaption><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">If taxable income is:</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">The tax is:</th>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$0 to $20,550.</td>
+<td class="l m b1 r1 l0 t0 lines">10% of taxable income.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$20,551 to $83,550.</td>
+<td class="l m b1 r1 l0 t0 lines">$2,055 plus 12% of the amount over $20,550.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$83,551 to $178,150.</td>
+<td class="l m b1 r1 l0 t0 lines">$9,615 plus 22% of the amount over $83,550.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$178,151 to $340,100.</td>
+<td class="l m b1 r1 l0 t0 lines">$30,427 plus 24% of the amount over $178,150.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$340,101 to $431,900.</td>
+<td class="l m b1 r1 l0 t0 lines">$69,295 plus 32% of the amount over $340,100.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$431,901 to $647,850.</td>
+<td class="l m b1 r1 l0 t0 lines">$98,671 plus 35% of the amount over $431,900.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$647,851 or more.</td>
+<td class="l m b1 r1 l0 t0 lines">$174,253.50 plus 37% of the amount over $647,850.</td>
+</tr>
+</table></figure></div></div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-24"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.7.10<span class="period">.</span></span><span class="space"> </span>Married Filing Separately (Tax Year 2022)</figcaption><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b1 r1 l1 t1 lines">If taxable income is:</th>
+<th scope="col" class="l m b1 r1 l0 t1 lines">The tax is:</th>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$0 to $10,275.</td>
+<td class="l m b1 r1 l0 t0 lines">10% of taxable income.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$10,276 to $41,775.</td>
+<td class="l m b1 r1 l0 t0 lines">$1,027.50 plus 12% of the amount over $10,275.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$41,776 to $89,075.</td>
+<td class="l m b1 r1 l0 t0 lines">$4,807.50 plus 22% of the amount over $41,775.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$89,076 to $170,050.</td>
+<td class="l m b1 r1 l0 t0 lines">$15,213.50 plus 24% of the amount over $89,075.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$170,051 to $215,950.</td>
+<td class="l m b1 r1 l0 t0 lines">$34,647.50 plus 32% of the amount over $170,050.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$215,951 to $323,925.</td>
+<td class="l m b1 r1 l0 t0 lines">$49,335.50 plus 35% of the amount over $215,950.</td>
+</tr>
+<tr>
+<td class="l m b1 r1 l1 t0 lines">$323,926 or more.</td>
+<td class="l m b1 r1 l0 t0 lines">$87,126.75 plus 37% of the amount over $323,925.</td>
+</tr>
+</table></figure></div></div></div>
+<article class="example example-like" id="example-41"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.11</span><span class="period">.</span>
+</h4>
+<p id="p-1456">Suppose Adira is filing as head of household and has a taxable income of $96,450. Calculate her taxes using the individual tax brackets and with the simplified table.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-161" id="solution-161"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-161"><div class="solution solution-like">
+<p id="p-1457">Using the simplified tax table for single filing status, we see that Adira’s taxable income puts her in the 24% tax bracket. The simplified table tells us that her taxes will be equal to $15,213.50 plus 24% of the amount over $89,075. To find the excess over $89,075, we subtract $89,075 from her taxable income. Thus, her taxes are:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-72">
+\begin{align*}
+\$15,213.50+0.24(\$96,450-\$89,075)\amp=\$15,213.50+0.24(\$7,375)\\
+\amp=\$15,213.50+\$1770\\
+\amp=\$16,983.50
+\end{align*}
+</div>
+</div></div>
+</div></article><article class="example example-like" id="phyllis_gladys"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.12</span><span class="period">.</span>
+</h4>
+<p id="p-1459">Phyl and Gladys are married and filing jointly. Together their taxable income is $112,000. Use the simplified 2022 tax tables from this section to determine how much they owe in taxes.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-162" id="solution-162"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-162"><div class="solution solution-like">
+<p id="p-1460">Since Phyl and Gladys are married and filing jointly, their taxable income puts them in the 22% tax bracket. Using the simplified 2022 tax table, their taxes are $9,615 plus 22% of the amount over $83,550:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-73">
+\begin{align*}
+\$9,615+0.22(\$112,000-\$83,550)\amp=\$8,907+0.22(\$28,450)\\
+\amp=\$9,615+\$6,259\\
+\amp=\$15,874
+\end{align*}
+</div>
+<p id="p-1462">Phyl and Gladys owe $15,874 in taxes.</p>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-45"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.12</span> <span class="title">Tax Credits</span>
+</h3>
+<p id="p-1463"><em class="alert">Tax credits</em> are different from deductions in that they reduce the amount of tax you owe by the full amount of the credit, not just a percentage. This makes credits much more valuable than deductions.</p>
+<p id="p-1464">Common tax credits include child tax credits, earned income credits, child and dependent care credits, American opportunity tax credits, lifetime learning credits, and various federal energy credits.</p>
+<article class="example example-like" id="example-43"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.13</span><span class="period">.</span>
+</h4>
+<p id="p-1465">Sean is in the 22% tax bracket and itemizes his deductions. How much will his tax bill be reduced if he makes a $1,000 contribution to charity? How much will his bill be reduced if he gets a $1,000 tax credit?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-163" id="solution-163"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-163"><div class="solution solution-like"><p id="p-1466">The tax credit will reduce his tax bill by the full amount of the credit, so the $1,000 tax credit will reduce his tax bill by $1,000. As a deduction, however, his contribution to charity will only reduce his tax bill by 22% of the $1,000, or 0.22($1,000) = $220. Tax credits are always better than deductions.</p></div></div>
+</div></article></section><section class="subsection" id="subsection-46"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.7.13</span> <span class="title">Calculating a Refund or Payment Due</span>
+</h3>
+<p id="p-1467">Employers are required to take out an estimated amount for taxes from each of our paychecks. These withholdings are taken out, so we don’t all have huge tax bills at the end of the year, and so the government has the income it needs to run. When you file your taxes, you compare the amount of tax you actually owe, with the withholdings from your paycheck. If you had more withheld during the year than you owe, you will file for a refund. If your withholdings were less, though, you must pay the difference. Let’s look at a couple of examples with tax credits and withholdings.</p>
+<article class="example example-like" id="example-44"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.14</span><span class="period">.</span>
+</h4>
+<p id="p-1468">John’s taxes are $4,342.50. He can claim an American opportunity tax credit of $2,300 and he had $4,135 withheld from his paychecks. Determine if John will owe money or get a refund.</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-164" id="solution-164"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-164"><div class="solution solution-like">
+<p id="p-1469">The first step is to reduce John’s taxes by the full amount of the tax credit.</p>
+<p id="p-1470"><span class="process-math">\(\$4,342.50-\$2,300=\$3,042.50\)</span></p>
+<p id="p-1471">Next we subtract the amount withheld from his paychecks by his employer. Since his withholdings are greater than the amount he owes after applying the tax credit, he will receive a refund equal to the difference.</p>
+<p id="p-1472"><span class="process-math">\(\$3,042.50-\$4,135=-\$1,092.50\)</span></p>
+<p id="p-1473">John will receive a refund of $1,092.50. Notice that having a negative amount after subtracting credits and withholdings means you will receive a refund, while having a positive amount means you still owe money.</p>
+</div></div>
+</div></article><article class="example example-like" id="example-45"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.7.15</span><span class="period">.</span>
+</h4>
+<p id="p-1474">As we discovered in <a href="" class="xref" data-knowl="./knowl/phyllis_gladys.html" title="Example 3.7.12">Example 3.7.12</a>, Phyl and Gladys owe $15,874 in taxes. Their employers withheld $8,980 and they received a $7,500 credit for their purchase of an electric car. Will they receive a refund, or will they need to make a payment?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-165" id="solution-165"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-165"><div class="solution solution-like">
+<p id="p-1475">To determine whether they will receive a refund or if they will still owe money, we will first subtract the full amount of the electric car credit.</p>
+<p id="p-1476"><span class="process-math">\(\$15,874-\$7,500=\$8,374\)</span></p>
+<p id="p-1477">We now subtract their withholdings:</p>
+<p id="p-1478"><span class="process-math">\(\$8,374-\$8,980=-\$606\)</span></p>
+<p id="p-1479">Since the value is negative, Phyl and Gladys will receive a tax refund of $606.</p>
+</div></div>
+</div></article></section><section class="exercises" id="exercises-5"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">3.7.14</span> <span class="title">Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-264"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
+<p id="p-1480">Which decreases your tax bill more, a credit or a deduction?</p></article><article class="exercise exercise-like" id="exercise-265"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-1482">You are in the 12% tax bracket and get a credit of $500. How has the amount of taxes owed changed?</p></article><article class="exercise exercise-like" id="exercise-266"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-1484">You are in the 12% tax bracket and get a deduction of $500. How has the amount of taxes owed changed?</p></article><article class="exercise exercise-like" id="exercise-267"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
+<p id="p-1486">Can you take the standard deduction and itemize your deductions?</p></article><article class="exercise exercise-like" id="exercise-268"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
+<p id="p-1488">Can you make adjustments to your income and take the standard deduction?</p></article><article class="exercise exercise-like" id="exercise-269"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
+<p id="p-1490">If you decide to take the standard deduction what have you considered?</p></article><article class="exercise exercise-like" id="exercise-270"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>
+<p id="p-1492">Selah has paid $11,500 in mortgage interest which she can take as a deduction and has $1,500 in other deductions that she can take this year. She is filing as single. Should she itemize her deductions or take the standard deduction?</p></article><article class="exercise exercise-like" id="exercise-271"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>
+<p id="p-1494">If you are married do you have to file your taxes together?</p></article><article class="exercise exercise-like" id="exercise-272"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
+<p id="p-1496">Fredrick is concerned about the effect of a raise on his taxes. He’s getting a raise of $3,000, putting him into a higher tax bracket by $1,000 dollars. He’s concerned about his entire income being taxed at 22% instead of 12%. Should he be concerned? Why or why not?</p></article><article class="exercise exercise-like" id="exercise-273"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
+<p id="p-1498">A single person with taxable income of $95,000 will have the first $10,275. of that income taxed at what rate? Determine the taxes owed on just the first $10,275..</p></article><article class="exercise exercise-like" id="exercise-274"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>
+<p id="p-1500">A single person with taxable income of $185,000 will have the first $10,275 of that income taxed at a different rate than the income between $10,275 and $41,775. Determine the taxes owed on just the second bracket.</p></article><article class="exercise exercise-like" id="exercise-275"><h4 class="heading"><span class="codenumber">12<span class="period">.</span></span></h4>
+<p id="p-1502">Determine the income tax owed for a single person who has $80,000 of taxable income.</p></article><article class="exercise exercise-like" id="exercise-276"><h4 class="heading"><span class="codenumber">13<span class="period">.</span></span></h4>
+<p id="p-1505">Doug and Christina are filing jointly. They owe $16,589 in taxes. Throughout the year they had $13,456 withheld from their paychecks, and they can claim an energy credit of $2,500 for purchasing a hybrid vehicle. Determine the amount they will need to pay or will get refunded.</p></article><article class="exercise exercise-like" id="exercise-277"><h4 class="heading"><span class="codenumber">14<span class="period">.</span></span></h4>
+<p id="p-1507">Heather owes $7,589 in taxes. Throughout the year she had $6,456 withheld from her paychecks and she can claim an education credit of $1,980. Determine the amount she will need to pay or will get refunded.</p></article><article class="exercise exercise-like" id="exercise-278"><h4 class="heading"><span class="codenumber">15<span class="period">.</span></span></h4>
+<p id="p-1509">Determine the amount of taxes owed or the refund that would result in this situation:</p>
+<ul id="p-1510" class="disc">
+<li id="li-516"><p id="p-1511">Filing Status: Married filing jointly</p></li>
+<li id="li-517"><p id="p-1512">Gross Income: $125,000</p></li>
+<li id="li-518"><p id="p-1513">Adjustments: $5,600</p></li>
+<li id="li-519"><p id="p-1514">Itemized Deductions: $11,400</p></li>
+<li id="li-520">
+<p id="p-1515">Credits: $15,000</p>
+<ol id="p-1516" class="lower-alpha">
+<li id="li-521"><p id="p-1517">What is their adjusted gross income (AGI)?</p></li>
+<li id="li-522"><p id="p-1518">Should they itemize or take the standard deduction?</p></li>
+<li id="li-523"><p id="p-1519">Use the simplified 2022 tax tables to determine their taxes.</p></li>
+<li id="li-524"><p id="p-1520">What is their final tax refund or amount still owed?</p></li>
+</ol>
+</li>
+</ul></article><article class="exercise exercise-like" id="exercise-279"><h4 class="heading"><span class="codenumber">16<span class="period">.</span></span></h4>
+<p id="p-1528">Francis and Edward are planning to get married and they want to determine whether there is an advantage or disadvantage to marrying before the end of the year and filing their taxes jointly. Use the information below to calculate the amount they would owe or receive if they each filed as single, and the amount they would owe or receive if they filed jointly as a married couple. Which is the better choice?</p>
+<ul id="p-1529" class="disc">
+<li id="li-529"><p id="p-1530">Filing Status: TBD</p></li>
+<li id="li-530"><p id="p-1531">Francis' Gross Income: $35,000</p></li>
+<li id="li-531"><p id="p-1532">Edward's Gross Income: $40,000</p></li>
+<li id="li-532"><p id="p-1533">Francis' Adjustments: $7000</p></li>
+<li id="li-533"><p id="p-1534">Edward's Adjustments: $3000</p></li>
+<li id="li-534"><p id="p-1535">Francis' Withholdings: $14000</p></li>
+<li id="li-535"><p id="p-1536">Edward's Withholdings: $5500</p></li>
+<li id="li-536"><p id="p-1537">Francis' Credits: $4000</p></li>
+<li id="li-537"><p id="p-1538">Edward's Credits: $5000</p></li>
+</ul></article><article class="exercise exercise-like" id="exercise-280"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
+<p id="p-1552">Janice is unmarried and has two kids. She earned $76,000 in wages last year, received $750 in interest from a savings account, and contributed $25,000 to a tax deferred savings account. Her itemized deductions are $20,600.</p>
+<ol id="p-1553" class="lower-alpha">
+<li id="li-547"><p id="p-1554">Determine Janice’s gross income.</p></li>
+<li id="li-548"><p id="p-1555">Determine Janice’s adjusted gross income.</p></li>
+<li id="li-549"><p id="p-1556">Should Janice take the standard deduction or itemize? Explain.</p></li>
+<li id="li-550"><p id="p-1557">Determine Janice’s taxable income.</p></li>
+<li id="li-551"><p id="p-1558">If Janice has $4,200 in child tax credits and had $6,300 withheld for taxes from her wages, will Janice owe money, or will she receive a refund? Calculate the amount.</p></li>
+</ol></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-17"><div class="fn"><code class="code-inline tex2jax_ignore">https://creativecommons.org/licenses/by-nc-nd/4.0/</code></div></div>
+</div></main>
+</div>
+</body>
+</html>

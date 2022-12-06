@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-06T15:09:45-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Linear Functions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="sec-models-slope.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="ch-models.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="sec-models-linear.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="sec-models-slope.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="ch-models.html" title="Up">Up</a><a class="next-button button toolbar-item" href="sec-models-linear.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="internal">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="internal">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-slope.html" data-scroll="sec-models-slope" class="internal">Slope and Rate of Change</a></li>
+<li><a href="sec-models-lin-fun.html" data-scroll="sec-models-lin-fun" class="active">Linear Functions</a></li>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="internal">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="internal">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section class="section" id="sec-models-lin-fun"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.2</span> <span class="title">Linear Functions</span>
+</h2>
+<section class="subsection" id="subsection-123"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.1</span> <span class="title">Slope-Intercept Form</span>
+</h3>
+<p id="p-3856"> Many linear models <span class="process-math">\(y = f (x)\)</span> have equations of the form</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\blert{f(x) = (\text{starting value}) + (\text{rate of change}) \cdot x}
+\end{equation*}
+</div>
+<p class="continuation">The starting value, or the value of <span class="process-math">\(y\)</span> at <span class="process-math">\(x = 0\text{,}\)</span> is the <span class="process-math">\(y\)</span>-intercept of the graph, and the rate of change is the slope of the graph. Thus, we can write the equation of a line as</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\blert{f (x) = b + mx}
+\end{equation*}
+</div>
+<p class="continuation">where the constant term, <span class="process-math">\(b\text{,}\)</span> is the <span class="process-math">\(y\)</span>-intercept of the line, and <span class="process-math">\(m\text{,}\)</span> the coefficient of <span class="process-math">\(x\text{,}\)</span> is the slope of the line. This form for the equation of a line is called the <dfn class="terminology">slope-intercept form</dfn>.</p>
+<article class="assemblage assemblage-like" id="assemblage-35"><h4 class="heading"><span class="title">Slope-Intercept Form.</span></h4>
+<p id="p-3857">If we write the equation of a linear function in the form,</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+f (x) = b + mx
+\end{equation*}
+</div>
+<p class="continuation">then <span class="process-math">\(m\)</span> is the <dfn class="terminology">slope</dfn> of the line, and <span class="process-math">\(b\)</span> is the <dfn class="terminology"><span class="process-math">\(y\)</span>-intercept</dfn>.</p></article><p id="p-3858">(You may have encountered the slope-intercept equation in the equivalent form <span class="process-math">\(y = mx + b\text{.}\)</span>)</p>
+<p id="p-3859">For example, consider the two linear functions and their graphs shown below.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:2%;margin-right:2%;">
+<div class="sbspanel top" style="width:17.7083333333333%;">
+<p id="p-3860"><span class="process-math">\(f (x) = 10 - 3x\)</span></p>
+<p id="p-3861"></p>
+<table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines"><span class="process-math">\(\hphantom{00}x\hphantom{00}\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(\hphantom{0}f(x)\hphantom{0}\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(10\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(4\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(-2\)</span></td>
+</tr>
+</table>
+</div>
+<div class="sbspanel middle" style="width:26.0416666666667%;"><img src="external/models/fig-decreasing-line.svg" role="img" class="contained" alt="deceasing line"></div>
+<div class="sbspanel top" style="width:17.7083333333333%;">
+<p id="p-3862"><span class="process-math">\(g(x) = -3+2x\)</span></p>
+<p id="p-3863"></p>
+<table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines"><span class="process-math">\(\hphantom{00}x\hphantom{00}\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(\hphantom{0}f(x)\hphantom{0}\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(-3\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(-1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(3\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(4\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5\)</span></td>
+</tr>
+</table>
+</div>
+<div class="sbspanel middle" style="width:26.0416666666667%;"><img src="external/models/fig-increasing-line.svg" role="img" class="contained" alt="inceasing line"></div>
+</div></div>
+<p id="p-3864">Some observations:</p>
+<ul class="disc">
+<li id="li-1574"><p id="p-derived-li-1574">We can see that the <span class="process-math">\(y\)</span>-intercept of each line is given by the constant term, <span class="process-math">\(b\text{.}\)</span></p></li>
+<li id="li-1575"><p id="p-derived-li-1575">By examining the table of values, we can also see why the coefficient of <span class="process-math">\(x\)</span>gives the slope of the line:</p></li>
+<li id="li-1576"><p id="p-derived-li-1576">For <span class="process-math">\(f (x)\text{,}\)</span> each time <span class="process-math">\(x\)</span> increases by <span class="process-math">\(1\)</span> unit, <span class="process-math">\(y\)</span> decreases by <span class="process-math">\(3\)</span> units.</p></li>
+<li id="li-1577"><p id="p-derived-li-1577">For <span class="process-math">\(g(x)\text{,}\)</span> each time <span class="process-math">\(x\)</span> increases by <span class="process-math">\(1\)</span> unit, <span class="process-math">\(y\)</span> increases by <span class="process-math">\(2\)</span> units.</p></li>
+</ul>
+<p class="continuation">For each graph, the coefficient of <span class="process-math">\(x\)</span> is a scale factor that tells us how many units <span class="process-math">\(y\)</span> changes for <span class="process-math">\(1\)</span> unit increase in <span class="process-math">\(x\text{.}\)</span> But that is exactly what the slope tells us about a line.</p>
+<article class="example example-like" id="example-internet-providers"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.1</span><span class="period">.</span>
+</h4>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:3.75%;margin-right:3.75%;">
+<div class="sbspanel top" style="width:54.0540540540541%;">
+<p id="p-3865">Francine is choosing an Internet service provider. She paid $30 for a modem, and she is considering three companies for service:</p>
+<ul class="disc">
+<li id="li-1578"><p id="p-derived-li-1578">Juno charges $14.95 per month,</p></li>
+<li id="li-1579"><p id="p-derived-li-1579">ISP.com charges $12.95 per month,</p></li>
+<li id="li-1580"><p id="p-derived-li-1580">and peoplepc charges $15.95 per month.</p></li>
+</ul>
+<p class="continuation">Match the graphs in the figure to Francine’s Internet cost with each company.</p>
+</div>
+<div class="sbspanel top" style="width:37.8378378378378%;"><img src="external/models/fig-internet-providers.svg" role="img" class="contained" alt="internet provider costs"></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-403" id="solution-403"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-403"><div class="solution solution-like">
+<p id="p-3866">Francine pays the same initial amount, $30 for the modem, under each plan. The monthly fee is the rate of change of her total cost, in dollars per month. We can write a formula for her cost under each plan.</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\text{Juno:   } f(x) = 30 + 14.95x
+\end{equation*}
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\text{ISP.com:   } g(x) = 30 + 12.95x
+\end{equation*}
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\text{peoplepc:   } h(x) = 30 + 15.95x
+\end{equation*}
+</div>
+<p class="continuation">The graphs of these three functions all have the same <span class="process-math">\(y\)</span>-intercept, but their slopes are determined by the monthly fees. The steepest graph, III, is the one with the largest monthly fee, peoplepc, and ISP.com, which has the lowest monthly fee, has the least steep graph, I.</p>
+</div></div>
+</div></article><article class="exercise exercise-like" id="exercise-552"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-552"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.2</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 1.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-552"><article class="exercise exercise-like"><div class="introduction" id="introduction-97">
+<p id="p-3867">Delbert decides to use DSL for his Internet service. Earthlink charges a $99 activation fee and $39.95 per month, DigitalRain charges $50 for activation and $34.95 per month, and FreeAmerica charges $149 for activation and $34.95 per month.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-dsl-price.svg" role="img" class="contained" alt="dsl costs"></div></div></div>
+</div>
+<div id="webwork-16" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="16" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JERlbGJlcnQgPSAyNTgvMTI7CiRGcmFuY2luZSA9IDE4Mi84OwokQW5zd2VyID0gUG9wVXAoCiAgWyI/IiwiRGVsYmVydCIsIkZyYW5jaW5lIl0sCiAgMiwgIyBpbmRleCBvZiBjb3JyZWN0IGFuc3dlcjsgY291bGQgYWxzbyBqdXN0IGJlIHRoZSBjb3JyZWN0IGFuc3dlcgopOwoKQkVHSU5fUEdNTApEZWxiZXJ0IHRyYXZlbGVkIFtgMjU4YF0gbWlsZXMgb24gW2AxMmBdIGdhbGxvbnMgb2YgZ2FzLCBhbmQgRnJhbmNpbmUgdHJhdmVsZWQgW2AxODJgXSBtaWxlcyBvbiBbYDhgXSBnYWxsb25zIG9mIGdhcy4gQ29tcHV0ZSB0aGUgcmF0aW8gW2BcZGZyYWN7XHRleHR7bWlsZXN9fXtcdGV4dHtnYWxsb259fWBdIGZvciBlYWNoIGNhci4KCkRlbGJlcnQ6IFtfXXskRGVsYmVydH17NX0gW2BcZGZyYWN7XHRleHR7bWlsZXN9fXtcdGV4dHtnYWxsb259fWBdCgpGcmFuY2luZTogW19deyRGcmFuY2luZX17NX0gW2BcZGZyYWN7XHRleHR7bWlsZXN9fXtcdGV4dHtnYWxsb259fWBdCgpXaG9zZSBjYXIgZ2V0cyB0aGUgYmV0dGVyIGdhcyBtaWxlYWdlPyBbX117JEFuc3dlcn17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpEZWxiZXJ0OiBbYFxkZnJhY3syNTh9ezEyfT0gWyREZWxiZXJ0XWBdIG1wZywgRnJhbmNpbmU6IFtgXGRmcmFjezE4Mn17OH09WyRGcmFuY2luZV1gXSBtcGcuIEZyYW5jaW5lIGdldHMgYmV0dGVyIG1pbGVhZ2UuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3868">Delbert traveled <span class="process-math">\(258\)</span> miles on <span class="process-math">\(12\)</span> gallons of gas, and Francine traveled <span class="process-math">\(182\)</span> miles on <span class="process-math">\(8\)</span> gallons of gas. Compute the ratio <span class="process-math">\(\dfrac{\text{miles}}{\text{gallon}}\)</span> for each car.</p>
+<p id="p-3869">Delbert: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> <span class="process-math">\(\dfrac{\text{miles}}{\text{gallon}}\)</span></p>
+<p id="p-3870">Francine: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> <span class="process-math">\(\dfrac{\text{miles}}{\text{gallon}}\)</span></p>
+<p id="p-3871">Whose car gets the better gas mileage? <ul style="list-style:circle;">
+<li id="li-1582"><p id="p-3873">Delbert</p></li>
+<li id="li-1583"><p id="p-3874">Francine</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-57" id="answer-57"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-57"><div class="answer solution-like"><p id="p-3875"><span class="process-math">\(21.5\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-58" id="answer-58"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-58"><div class="answer solution-like"><p id="p-3876"><span class="process-math">\(22.75\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-59" id="answer-59"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-59"><div class="answer solution-like"><p id="p-3877"><span class="process-math">\(\text{Francine}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-16')">Make Interactive</button></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-553"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-553"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.3</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 1.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-553"><article class="exercise exercise-like"><div id="webwork-17" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="17" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JGdhcyA9IDY3LjUvMTI7CiR3YXRlciA9IDQxLjYvNTsKJEFuc3dlciA9IFBvcFVwKAogIFsiPyIsImdhc29saW5lIiwid2F0ZXIiXSwKICAyLCAjIGluZGV4IG9mIGNvcnJlY3QgYW5zd2VyOyBjb3VsZCBhbHNvIGp1c3QgYmUgdGhlIGNvcnJlY3QgYW5zd2VyCik7CgpCRUdJTl9QR01MClRoZSB3ZWlnaHQgb2YgW2AxMmBdIGdhbGxvbnMgb2YgZ2Fzb2xpbmUgaXMgW2A2Ny41YF0gcG91bmRzLCBhbmQgdGhlIHdlaWdodCBvZiBbYDVgXSBnYWxsb25zIG9mIHdhdGVyIGlzIFtgNDEuNmBdIHBvdW5kcy4gQ29tcHV0ZSB0aGUgcmF0aW8gW2BcZGZyYWN7XHRleHR7cG91bmRzfX17XHRleHR7Z2FsbG9ufX1gXSBmb3IgZWFjaCBsaXF1aWQuCgpnYXNvbGluZTogW19deyRnYXN9ezV9IFtgXGRmcmFje1x0ZXh0e3BvdW5kc319e1x0ZXh0e2dhbGxvbn19YF0KCndhdGVyOiBbX117JHdhdGVyfXs1fSBbYFxkZnJhY3tcdGV4dHtwb3VuZHN9fXtcdGV4dHtnYWxsb259fWBdCgpXaGljaCBsaXF1aWQgd2VpZ2hzIG1vcmUgcGVyIGdhbGxvbltfXXskQW5zd2VyfXs1fQoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCmdhc29saW5lOiBbYFxkZnJhY3s2Ny41fXsxMn09IFskZ2FzXWBdIHBvdW5kcyBwZXIgZ2FsbG9uLCB3YXRlcjogW2BcZGZyYWN7NDEuNn17NX09WyR3YXRlcl1gXSBwb3VuZHMgcGVyIGdhbGxvbi4gV2F0ZXIgd2VpZ2hzIG1vcmUgcGVyIGdhbGxvbi4KCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3879">The weight of <span class="process-math">\(12\)</span> gallons of gasoline is <span class="process-math">\(67.5\)</span> pounds, and the weight of <span class="process-math">\(5\)</span> gallons of water is <span class="process-math">\(41.6\)</span> pounds. Compute the ratio <span class="process-math">\(\dfrac{\text{pounds}}{\text{gallon}}\)</span> for each liquid.</p>
+<p id="p-3880">gasoline: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> <span class="process-math">\(\dfrac{\text{pounds}}{\text{gallon}}\)</span></p>
+<p id="p-3881">water: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> <span class="process-math">\(\dfrac{\text{pounds}}{\text{gallon}}\)</span></p>
+<p id="p-3882">Which liquid weighs more per gallon<ul style="list-style:circle;">
+<li id="li-1585"><p id="p-3884">gasoline</p></li>
+<li id="li-1586"><p id="p-3885">water</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-60" id="answer-60"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-60"><div class="answer solution-like"><p id="p-3886"><span class="process-math">\(5.625\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-61" id="answer-61"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-61"><div class="answer solution-like"><p id="p-3887"><span class="process-math">\(8.32\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-62" id="answer-62"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-62"><div class="answer solution-like"><p id="p-3888"><span class="process-math">\(\text{water}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-17')">Make Interactive</button></div>
+</div></article></div>
+<article class="note remark-like" id="note-3"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">5.2.4</span><span class="period">.</span>
+</h4>
+<p id="p-3890">In the equation <span class="process-math">\(f (x) = b + mx\text{,}\)</span> we call <span class="process-math">\(m\)</span> and <span class="process-math">\(b\)</span> <dfn class="terminology">parameters</dfn>. Their values are fixed for any particular linear equation; for example, in the equation <span class="process-math">\(y = 3+2x\text{,}\)</span> <span class="process-math">\(b=3\)</span> and <span class="process-math">\(m=2\text{,}\)</span> and the variables are <span class="process-math">\(x\)</span> and <span class="process-math">\(y\text{.}\)</span> By changing the values of <span class="process-math">\(m\)</span> and <span class="process-math">\(b\text{,}\)</span> we can write the equation for any line except a vertical line. The collection of all linear functions <span class="process-math">\(f(x) = b + mx\)</span> is called a <dfn class="terminology">two-parameter</dfn> family of functions.</p></article><div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-slope-vs-intercept.svg" role="img" class="contained" alt="lines"></div></div></div>
+<article class="exercise exercise-like" id="exercise-554"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-554"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Pause and Reflect.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-554"><article class="exercise exercise-like"><div id="webwork-18" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="18" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JHN0YWlyY2FzZSA9IDEwLzQ7CiRzdGVwcyA9IDIwLzEyOwokQW5zd2VyID0gUG9wVXAoCiAgWyI/Iiwic3RhaXJjYXNlIiwic3RlcHMgaW4gc3RhZGl1bSJdLAogIDEsICMgaW5kZXggb2YgY29ycmVjdCBhbnN3ZXI7IGNvdWxkIGFsc28ganVzdCBiZSB0aGUgY29ycmVjdCBhbnN3ZXIKKTsKCkJFR0lOX1BHTUwKV2hpY2ggaXMgc3RlZXBlciwgYSBzdGFpcmNhc2UgdGhhdCByaXNlcyBbYDEwYF0gZmVldCBvdmVyIGEgaG9yaXpvbnRhbCBkaXN0YW5jZSBvZiBbYDRgXSBmZWV0LCBvciB0aGUgc3RlcHMgaW4gdGhlIGZvb3RiYWxsIHN0YWRpdW0sIHdoaWNoIHJpc2UgW2AyMGBdIHlhcmRzIG92ZXIgYSBob3Jpem9udGFsIGRpc3RhbmNlIG9mIFtgMTJgXSB5YXJkcz8KCkFuc3dlcjogW19deyRBbnN3ZXJ9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KU3RhaXJjYXNlOiBbYFxkZnJhY3sxMH17NH09IFskc3RhaXJjYXNlXVx0ZXh0eyx9YF0gU3RlcHM6IFtgXGRmcmFjezIwfXsxMn1cYXBwcm94IFskc3RlcHNdXHRleHR7Ln1gXSBUaGUgc3RhaXJjYXNlIGlzIHN0ZWVwZXIuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3891">Which is steeper, a staircase that rises <span class="process-math">\(10\)</span> feet over a horizontal distance of <span class="process-math">\(4\)</span> feet, or the steps in the football stadium, which rise <span class="process-math">\(20\)</span> yards over a horizontal distance of <span class="process-math">\(12\)</span> yards?</p>
+<p id="p-3892">Answer: <ul style="list-style:circle;">
+<li id="li-1588"><p id="p-3894">staircase</p></li>
+<li id="li-1589"><p id="p-3895">steps in stadium</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-63" id="answer-63"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-63"><div class="answer solution-like"><p id="p-3896"><span class="process-math">\(\text{staircase}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-18')">Make Interactive</button></div>
+</div></article></div></section><section class="subsection" id="subsection-124"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.2</span> <span class="title">Slope-Intercept Method of Graphing</span>
+</h3>
+<p id="p-3898">Look again at the lines in the previous figure: There is only one line that has a given slope and passes through a particular point. That is, the values of <span class="process-math">\(m\)</span> and <span class="process-math">\(b\)</span> determine the particular line. The value of <span class="process-math">\(b\)</span> gives us a starting point, and the value of <span class="process-math">\(m\)</span> tells us which direction to go to plot a second point. Thus, we can graph a line given in slope-intercept form without having to make a table of values.</p>
+<article class="example example-like" id="example-slope-intercept"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.6</span><span class="period">.</span>
+</h4>
+<ol id="p-3899" class="decimal">
+<li id="li-1590"><p id="p-derived-li-1590">Write the equation <span class="process-math">\(4x - 3y = 6\)</span> in slope-intercept form.</p></li>
+<li id="li-1591"><p id="p-derived-li-1591">Graph the line by hand.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-407" id="solution-407"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-407"><div class="solution solution-like">
+<ol id="p-3900" class="decimal">
+<li id="li-1592"><p id="p-derived-li-1592">We solve the equation for <span class="process-math">\(y\)</span> in terms of <span class="process-math">\(x\text{.}\)</span><div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\begin{aligned}[t]
+-3y \amp =6 - 4x \amp \amp \blert{\text{Divide both sides by } -3}\\
+y \amp = \frac{6 - 4x}{-3}=\frac{6}{-3}+\frac{-4x}{-3}\\
+y \amp = -2+\frac{4}{3}x
+\end{aligned}
+\end{equation*}
+</div></p></li>
+<li id="li-1593"><p id="p-derived-li-1593">We see that the slope of the line is <span class="process-math">\(m = \dfrac{4}{3}\)</span> and its <span class="process-math">\(y\)</span>-intercept is <span class="process-math">\(b = -2\text{.}\)</span> We begin by plotting the <span class="process-math">\(y\)</span>-intercept, <span class="process-math">\((0, -2)\text{.}\)</span> We then use the slope to find another point on the line. We have<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m = \frac{\Delta y}{\Delta x}=\frac{4}{3}
+\end{equation*}
+</div>so starting at <span class="process-math">\((0, -2)\text{,}\)</span> we move <span class="process-math">\(4\)</span> units in the <span class="process-math">\(y\)</span>-direction and <span class="process-math">\(3\)</span> units in the <span class="process-math">\(x\)</span>-direction, to arrive at the point <span class="process-math">\((3, 2)\text{.}\)</span> Finally, we draw the line through these two points.</p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:32.5%;margin-right:32.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-slope-intercept.svg" role="img" class="contained" alt="slope-intercept method"></div></div></div>
+</div></div>
+</div></article><article class="note remark-like" id="note-4"><h4 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">5.2.7</span><span class="period">.</span>
+</h4>
+<p id="p-3901">The slope of a line is a ratio and can be written in many equivalent ways. In <a href="sec-models-lin-fun.html#example-slope-intercept" class="internal" title="Example 5.2.6">Example 5.2.6</a>, the slope is equal to <span class="process-math">\(\dfrac{8}{6}\text{,}\)</span> <span class="process-math">\(\dfrac{12}{9}\text{,}\)</span> and <span class="process-math">\(\dfrac{-4}{-3}\text{.}\)</span> We can use any of these fractions to locate a third point on the line as a check. If we use <span class="process-math">\(m = \dfrac{\Delta y}{\Delta x}= \dfrac{-4}{-3}\text{,}\)</span> we move down <span class="process-math">\(4\)</span> units and left <span class="process-math">\(3\)</span> units from the <span class="process-math">\(y\)</span>-intercept to find the point <span class="process-math">\((-3, -6)\)</span> on the line.</p></article><article class="assemblage assemblage-like" id="assemblage-36"><h4 class="heading"><span class="title">Slope-Intercept Method for Graphing a Line.</span></h4>
+<ol id="p-3902" class="decimal">
+<li id="li-1594"><p id="p-3903">Plot the <span class="process-math">\(y\)</span>-intercept <span class="process-math">\((0, b)\text{.}\)</span></p></li>
+<li id="li-1595"><p id="p-3904">Use the definition of slope to find a second point on the line: Starting at the <span class="process-math">\(y\)</span>-intercept, move <span class="process-math">\(\Delta y\)</span> units in the <span class="process-math">\(y\)</span>-direction and <span class="process-math">\(\Delta x\)</span> units in the <span class="process-math">\(x\)</span>-direction. Plot a second point at this location.</p></li>
+<li id="li-1596"><p id="p-3905">Use an equivalent form of the slope to find a third point, and draw a line through the points.</p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-slope-intercept0.svg" role="img" class="contained" alt="slope-intercept method"></div></div></div></article><article class="exercise exercise-like" id="exercise-555"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-555"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 2.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-555"><article class="exercise exercise-like"><div id="webwork-19" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="19" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJjb250ZXh0RnJhY3Rpb24ucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgiRnJhY3Rpb24iKTsKJHNsb3BlID0gQ29tcHV0ZSgiMi84Iik7CgpCRUdJTl9QR01MCkNvbXB1dGUgdGhlIHNsb3BlIG9mIHRoZSBsaW5lIHRocm91Z2ggdGhlIGluZGljYXRlZCBwb2ludHMgb24gdGhlIGdyYXBoIGFib3ZlLiBPbiBib3RoIGF4ZXMsIG9uZSBzcXVhcmUgcmVwcmVzZW50cyBvbmUgdW5pdC4KCltgXGRmcmFje1x0ZXh0e2NoYW5nZSBpbiB9eVx0ZXh0ey1jb29yZGluYXRlfX17XHRleHR7Y2hhbmdlIGluIH14XHRleHR7LWNvb3JkaW5hdGV9fT0gYF1bX117JHNsb3BlfXszfQoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCltgXGRmcmFjezJ9ezh9PVxkZnJhY3sxfXs0fSBgXQoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3906">Compute the slope of the line through the indicated points on the graph above. On both axes, one square represents one unit.</p>
+<p id="p-3907"><span class="process-math">\(\dfrac{\text{change in }y\text{-coordinate}}{\text{change in }x\text{-coordinate}}=\)</span><span class="fillin" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-64" id="answer-64"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-64"><div class="answer solution-like"><p id="p-3908"><span class="process-math">\({\frac{1}{4}}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-19')">Make Interactive</button></div>
+</div>
+<div class="conclusion" id="conclusion-5">
+<p id="p-3910">A graph for part (b):</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:70%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-in-ex-ans-1-5-2.svg" role="img" class="contained" alt="line"></div></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-556"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-556"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 2.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-556"><article class="exercise exercise-like"><div id="webwork-20" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="20" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRyZWEgPSBSYWRpb0J1dHRvbnMoCiAgWyJUaGUgc2xvcGUgaXMgXChcZGZyYWN7MTB9ezd9XCkuIiwKICAiNyBpcyBub3QgYW4gaW50ZXJjZXB0LiIsCiAgIldlIG5lZWQgdHdvIHBvaW50cyB0byBjb21wdXRlIHRoZSBzbG9wZS4iLAogICJUaGUgbGluZSBpcyBkZWNyZWFzaW5nLiJdLAogIDIsIAopOwoKQkVHSU5fUEdNTApXaGF0IGlzIHdyb25nIHdpdGggdGhlIGZvbGxvd2luZyByZWFzb25pbmc/IFRoZSBwb2ludCBbYCgxMCw3KWBdIGxpZXMgb24gdGhlIGdyYXBoIG9mIGEgbGluZSwgc28gdGhlIHNsb3BlIG9mIHRoZSBsaW5lIGlzIFtgXGRmcmFjezd9ezEwfVx0ZXh0ey59YF0KCiAgICBbX117JHJlYX17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpXZSBuZWVkIHR3byBwb2ludHMgdG8gY29tcHV0ZSB0aGUgc2xvcGUuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3911">What is wrong with the following reasoning? The point <span class="process-math">\((10,7)\)</span> lies on the graph of a line, so the slope of the line is <span class="process-math">\(\dfrac{7}{10}\text{.}\)</span></p>
+<p id="p-3912"><ul style="list-style:circle;">
+<li id="li-1597"><p id="p-3913">The slope is <span class="process-math">\(\dfrac{10}{7}\text{.}\)</span></p></li>
+<li id="li-1598"><p id="p-3914">7 is not an intercept.</p></li>
+<li id="li-1599"><p id="p-3915">We need two points to compute the slope.</p></li>
+<li id="li-1600"><p id="p-3916">The line is decreasing.</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-65" id="answer-65"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-65"><div class="answer solution-like"><p id="p-3917"><span class="process-math">\(\text{Choice 3}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-20')">Make Interactive</button></div>
+</div></article></div></section><section class="subsection" id="subsection-125"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.3</span> <span class="title">Finding a Linear Equation from a Graph</span>
+</h3>
+<p id="p-3919">We can also use the slope-intercept form to find the equation of a line from its graph. First, we note the value of the <span class="process-math">\(y\)</span>-intercept from the graph, and then we calculate the slope using two convenient points.</p>
+<article class="example example-like" id="example-lin-equation-from-graph"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.10</span><span class="period">.</span>
+</h4>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
+<div class="sbspanel top" style="width:63.1578947368421%;"><p id="p-3920">Find an equation for the line shown at right.</p></div>
+<div class="sbspanel top" style="width:31.5789473684211%;"><img src="external/models/fig-lin-equation-from-graph.svg" role="img" class="contained" alt="graph of line"></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-410" id="solution-410"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-410"><div class="solution solution-like">
+<p id="p-3921">The line crosses the <span class="process-math">\(y\)</span>-axis at the point <span class="process-math">\((0, 3200)\text{,}\)</span> so the <span class="process-math">\(y\)</span>-intercept is <span class="process-math">\(3200\text{.}\)</span> To calculate the slope of the line, we locate another point, say <span class="process-math">\((20, 6000)\text{,}\)</span> and compute:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="p-3922">
+\begin{equation*}
+\begin{aligned}[t]m \amp = \frac{\Delta y}{\Delta x}
+= \frac{6000 - 3200}{20 - 0}\\
+\amp =\frac{2800}{20}= 140
+\end{aligned}
+\end{equation*}
+</div>
+<p class="continuation">The slope-intercept form of the equation, with <span class="process-math">\(m = 140\)</span> and <span class="process-math">\(b = 3200\text{,}\)</span> is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+y = 3200 + 140x
+\end{equation*}
+</div>
+</div></div>
+</div></article><article class="exercise exercise-like" id="exercise-557"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-557"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 3.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-557"><article class="exercise exercise-like"><div class="introduction" id="introduction-98"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:9%;">
+<div class="sbspanel middle" style="width:65.9340659340659%;"><p id="p-3923">Find an equation for the line shown at right.</p></div>
+<div class="sbspanel middle" style="width:32.967032967033%;"><img src="external/models/fig-lin-equation-from-graph2.svg" role="img" class="contained" alt="graph of line"></div>
+</div></div></div>
+<div id="webwork-21" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="21" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJQb3BVcC5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JERlbHggPSAoNTUtMTkuNSkvMjsKJG0gPSBDb21wdXRlKCIyNC8kRGVseCIpOwokQW5zd2VyID0gUG9wVXAoCiAgWyI/IiwiS3VrdWxjYW4iLCJHcmVhdCBQeXJhbWlkIl0sCiAgMSwgIyBpbmRleCBvZiBjb3JyZWN0IGFuc3dlcjsgY291bGQgYWxzbyBqdXN0IGJlIHRoZSBjb3JyZWN0IGFuc3dlcgopOwoKQkVHSU5fUEdNTApUaGUgc3F1YXJlIGJhc2UgaXMgNTUgbWV0ZXJzIG9uIGVhY2ggc2lkZSwgYW5kIHRoZSB0b3AgcGxhdGZvcm0gaXMgMTkuNSBtZXRlcnMgb24gZWFjaCBzaWRlLiBDYWxjdWxhdGUgdGhlIHNsb3BlIG9mIHRoZSBzaWRlcyBvZiB0aGUgcHlyYW1pZC4gV2hpY2ggcHlyYW1pZCBpcyBzdGVlcGVyLCBLdWt1bGNhbiBvciB0aGUgR3JlYXQgUHlyYW1pZCAod2hvc2Ugc2xvcGUsIHJvdW5kZWQgdG8gdHdvIGRlY2ltYWxzLCBpcyAxLjI4KT8KCkFuc3dlcjogW19deyRBbnN3ZXJ9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfSElOVApUaGUgaG9yaXpvbnRhbCBjaGFuZ2UgW2BcRGVsdGEgeGBdIGlzIGhhbGYgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgc2lkZXMgb2YgdGhlIGJhc2UgYW5kIG9mIHRoZSB0b3AgcGxhdGZvcm0uCgoKRU5EX1BHTUxfSElOVAoKQkVHSU5fUEdNTF9TT0xVVElPTgpUaGUgaG9yaXpvbnRhbCBjaGFuZ2UgW2BcRGVsdGEgeGBdIGlzIGhhbGYgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgc2lkZXMgb2YgdGhlIGJhc2UgYW5kIG9mIHRoZSB0b3AgcGxhdGZvcm06IFtgXERlbHRhIHg9XGZyYWN7MX17Mn0oNTUtMTkuNSk9IFskRGVseF1cdGV4dHssfWBdIHNvIHRoZSBzbG9wZSBpcyBbYG09XGRmcmFje1xEZWx0YSB5fXtcRGVsdGEgeH09IFxkZnJhY3syNH17WyREZWx4XX0gXGFwcHJveCBbJG1dXHRleHR7LH1gXSB3aGljaCBpcyBncmVhdGVyIHRoYW4gMS4yOC4gS3VrdWxjYW4gaXMgc3RlZXBlci4KCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3924">The square base is 55 meters on each side, and the top platform is 19.5 meters on each side. Calculate the slope of the sides of the pyramid. Which pyramid is steeper, Kukulcan or the Great Pyramid (whose slope, rounded to two decimals, is 1.28)?</p>
+<p id="p-3925">Answer: <ul style="list-style:circle;">
+<li id="li-1602"><p id="p-3927">Kukulcan</p></li>
+<li id="li-1603"><p id="p-3928">Great Pyramid</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref hint-knowl original" data-refid="hk-hint-3" id="hint-3"><span class="type">Hint</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-hint-3"><div class="hint solution-like"><p id="p-3929">The horizontal change <span class="process-math">\(\Delta x\)</span> is half the difference between the sides of the base and of the top platform.</p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-66" id="answer-66"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-66"><div class="answer solution-like"><p id="p-3930"><span class="process-math">\(\text{Kukulcan}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-21')">Make Interactive</button></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-558"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-558"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Pause and Reflect.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-558"><article class="exercise exercise-like"><div id="webwork-22" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="22" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKU3VwcG9zZSBbYHhgXSByZXByZXNlbnRzIHlvdXIgZGlzdGFuY2UgZnJvbSBob21lLCBpbiBtaWxlcy4gIENvbXBhcmUgdGhlIG1lYW5pbmdzIG9mIHRoZSB0d28gc3RhdGVtZW50cyBbYHg9MzBgXSBhbmQgW2BcRGVsdGEgeD0zMFx0ZXh0ey59YF0KCltAQU5TKGVzc2F5X2NtcCgpKTtlc3NheV9ib3goNiw3NilAXSogW0Blc3NheV9oZWxwKClAXSoKCgpFTkRfUEdNTAoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents"><p id="p-3932">Suppose <span class="process-math">\(x\)</span> represents your distance from home, in miles.  Compare the meanings of the two statements <span class="process-math">\(x=30\)</span> and <span class="process-math">\(\Delta x=30\text{.}\)</span></p></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-22')">Make Interactive</button></div>
+</div></article></div></section><section class="subsection" id="subsection-126"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.4</span> <span class="title">Point-Slope Form</span>
+</h3>
+<p id="p-3933">We can find the equation for a line if we know its slope and <span class="process-math">\(y\)</span>-intercept. What if we do not know the <span class="process-math">\(y\)</span>-intercept, but instead know some other point on the line? There is only one line that passes through a given point and has a given slope, so we should be able to find its equation.</p>
+<p id="p-3934">For example, we can graph the line of slope <span class="process-math">\(\dfrac{-3}{4}\)</span> that passes through the point <span class="process-math">\((1, -4)\text{.}\)</span> We first plot the given point, <span class="process-math">\((1, -4)\text{,}\)</span> as shown in the figure below.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.25%;margin-right:1.25%;">
+<div class="sbspanel top" style="width:61.5384615384615%;">
+<p id="p-3935">Then we use the slope to find another point on the line. The slope is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m =\frac{-3}{4}= \frac{\Delta y}{\Delta x}
+\end{equation*}
+</div>
+<p class="continuation">so we move down <span class="process-math">\(3\)</span> units and then <span class="process-math">\(4\)</span> units to the right, starting from <span class="process-math">\((1, -4)\text{.}\)</span> This brings us to the point <span class="process-math">\((5, -7)\text{.}\)</span> We can then draw the line through these two points.</p>
+</div>
+<div class="sbspanel top" style="width:35.8974358974359%;"><img src="external/models/fig-point-slope.svg" role="img" class="contained" alt="point slope"></div>
+</div></div>
+<p id="p-3936">We can also find an equation for the line, as shown in <a href="sec-models-lin-fun.html#example-point-slope" class="internal" title="Example 5.2.13">Example 5.2.13</a>.</p>
+<article class="example example-like" id="example-point-slope"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.13</span><span class="period">.</span>
+</h4>
+<p id="p-3937">Find an equation for the line that passes through <span class="process-math">\((1, -4)\)</span> and has slope <span class="process-math">\(\dfrac{-3}{4}\text{.}\)</span></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-412" id="solution-412"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-412"><div class="solution solution-like">
+<p id="p-3938">We will use the formula for slope,</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m = \frac{y_2 - y_1}{x_2 - x_1}
+\end{equation*}
+</div>
+<p class="continuation">We substitute <span class="process-math">\(\dfrac{-3}{4}\)</span> for the slope, <span class="process-math">\(m\text{,}\)</span> and <span class="process-math">\((1, -4)\)</span> for <span class="process-math">\((x_1, y_1)\text{.}\)</span> For the second point, <span class="process-math">\((x_2, y_2)\text{,}\)</span> we use the variable point <span class="process-math">\((x, y)\text{.}\)</span> Substituting these values into the slope formula gives us</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\frac{-3}{4}= \frac{y - (-4)}{x - 1}=\frac{y + 4}{x - 1}
+\end{equation*}
+</div>
+<p class="continuation">To solve for <span class="process-math">\(y\)</span> we first multiply both sides by <span class="process-math">\(x - 1\text{.}\)</span></p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\begin{aligned}[t]
+\alert{(x-1)}\frac{-3}{4}\amp
+=\frac{y +4}{x - 1}\alert{(x-1)} \amp\amp\\
+\frac{-3}{4}(x-1)\amp=y+4  \amp\amp\blert{\text{Apply the distributive law.}}\\
+\frac{-3}{4}x+\frac{3}{4}\amp=y+4   \amp\amp \blert{\text{Subtract 4 from both sides.}}\\
+\frac{-3}{4}x-\frac{13}{4}\amp=y \amp\amp \blert{\frac{3}{4}-4=\frac{3}{4}-\frac{16}{4}=\frac{-13}{4}}\\
+\end{aligned}
+\end{equation*}
+</div>
+<p class="continuation">The equation of the line is  <span class="process-math">\(y=\dfrac{-13}{4}-\dfrac{3}{4}x\)</span></p>
+</div></div>
+</div></article><article class="exercise exercise-like" id="exercise-559"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-559"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 3.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-559"><article class="exercise exercise-like"><div id="webwork-23" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="23" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgiUG9pbnQiKTsKJHggPSAyOwokeSA9IC00OwokeGk9UG9pbnQoIigkeCwwKSIpOwokeWk9UG9pbnQoIigwLCR5KSIpOwokbSA9IC0keS8keDsKCkJFR0lOX1BHTUwKYS4gIEdyYXBoIHRoZSBsaW5lIFtgNHggLSAyeSA9IDhgXSBieSBmaW5kaW5nIHRoZSBbYHhgXVwtIGFuZCBbYHlgXS1pbnRlcmNlcHRzCgogICAgW2B4YF0taW50ZXJjZXB0OiBbX117JHhpfXs1fQoKICAgIFtgeWBdLWludGVyY2VwdDogW19deyR5aX17NX0KCiAgICBOb3RlOiBFbnRlciBlYWNoIGludGVyY2VwdCBhcyBhbiBvcmRlcmVkIHBhaXIuCgoKYS4gIENvbXB1dGUgdGhlIHNsb3BlIG9mIHRoZSBsaW5lIHVzaW5nIHRoZSBbYHhgXS1pbnRlcmNlcHQgYW5kIFtgeWBdLWludGVyY2VwdC4KCiAgICBbYG09YF1bX117JG19ezJ9CgoKYS4gIENvbXB1dGUgdGhlIHNsb3BlIG9mIHRoZSBsaW5lIHVzaW5nIHRoZSBwb2ludHMgW2AoNCwgNClgXSBhbmQgW2AoMSwgLTIpXHRleHR7Ln1gXQoKICAgIFtgbT1gXVtfXXskbX17Mn0KCgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KYS4gIEEgZ3JhcGggb2YgdGhlIGxpbmUgaXMgc2hvd24gYmVsb3cgdGhpcyBleGVyY2lzZS4KCgphLiAgVGhlIFtgeGBdLWludGVyY2VwdCBpcyBbYFskeGldYF0gYW5kIHRoZSBbYHlgXS1pbnRlcmNlcHQgaXMgW2BbJHlpXVx0ZXh0ey59YF0KCiAgICBUaGUgc2xvcGUgaXMgW2BtPVxkZnJhY3tcRGVsdGEgeX17XERlbHRhIHh9PSBcZGZyYWN7LVskeV19e1skeF19ID0gWyRtXWBdCgoKYS4gIFRoZSBzbG9wZSBpcyBbYG09XGRmcmFje1xEZWx0YSB5fXtcRGVsdGEgeH09IFxkZnJhY3stMi00fXsxLTR9PVxkZnJhY3stNn17LTN9ID0gWyRtXWBdCgoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<ol id="p-3939" class="lower-alpha">
+<li id="li-1604">
+<p id="p-3940">Graph the line <span class="process-math">\(4x - 2y = 8\)</span> by finding the <span class="process-math">\(x\)</span>- and <span class="process-math">\(y\)</span>-intercepts</p>
+<p id="p-3941"><span class="process-math">\(x\)</span>-intercept: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span></p>
+<p id="p-3942"><span class="process-math">\(y\)</span>-intercept: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span></p>
+<p id="p-3943">Note: Enter each intercept as an ordered pair.</p>
+</li>
+<li id="li-1605">
+<p id="p-3944">Compute the slope of the line using the <span class="process-math">\(x\)</span>-intercept and <span class="process-math">\(y\)</span>-intercept.</p>
+<p id="p-3945"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="2-character blank" style="width: 0.909090909090909em;"></span></p>
+</li>
+<li id="li-1606">
+<p id="p-3946">Compute the slope of the line using the points <span class="process-math">\((4, 4)\)</span> and <span class="process-math">\((1, -2)\text{.}\)</span></p>
+<p id="p-3947"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="2-character blank" style="width: 0.909090909090909em;"></span></p>
+</li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-67" id="answer-67"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-67"><div class="answer solution-like"><p id="p-3948"><span class="process-math">\(\left(2,0\right)\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-68" id="answer-68"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-68"><div class="answer solution-like"><p id="p-3949"><span class="process-math">\(\left(0,-4\right)\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-69" id="answer-69"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-69"><div class="answer solution-like"><p id="p-3950"><span class="process-math">\(2\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-70" id="answer-70"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">4</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-70"><div class="answer solution-like"><p id="p-3951"><span class="process-math">\(2\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-23')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-3957">When we use the slope formula in this way to find the equation of a line, we substitute a variable point <span class="process-math">\((x, y)\)</span> for the second point. This version of the formula,</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m = \frac{y - y_1}{x - x_1}
+\end{equation*}
+</div>
+<p class="continuation">is called the <dfn class="terminology">point-slope form</dfn> for a linear equation. It is sometimes stated in another form obtained by clearing the fraction to get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\begin{aligned}[t]
+\alert{(x-x_1)}m\amp
+=\frac{y -y_1}{x - x_1}\alert{(x-x_1)} \amp\amp
+\blert{\text{Multiply both sides by }(x - x_1)}\\
+(x - x_1) m\amp=y-y_1  \amp\amp\blert{\text{Clear fractions and solve for }y\text{.}}\\
+y\amp=y_1+m(x-x_1)
+\end{aligned}
+\end{equation*}
+</div>
+<article class="assemblage assemblage-like" id="assemblage-37"><h4 class="heading"><span class="title">Point-Slope Form.</span></h4>
+<p id="p-3958">The equation of the line that passes through the point <span class="process-math">\((x_1, y_1)\)</span> and has slope <span class="process-math">\(m\)</span> is</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+y= y_1 + m(x- x_1)
+\end{equation*}
+</div></article><article class="exercise exercise-like" id="exercise-560"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-560"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.15</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 4.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-560"><article class="exercise exercise-like"><div id="webwork-24" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="24" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRwbiA9IFJhZGlvQnV0dG9ucygKICBbIkl0cyBzbG9wZSBpcyBwb3NpdGl2ZS4iLAogICJJdHMgXCh4XCktaW50ZXJjZXB0IGlzIHBvc2l0aXZlLiIsCiAgIkl0cyBzbG9wZSBpcyBuZWdhdGl2ZS4iLAogICJJdHMgXCh4XCktaW50ZXJjZXB0IGlzIG5lZ2F0aXZlLiJdLAogIDIsIAopOwoKQkVHSU5fUEdNTApIb3cgY2FuIHlvdSB0ZWxsIGZyb20gdGhlIGVxdWF0aW9uIG9mIGEgbGluZSB3aGV0aGVyIGl0cyBncmFwaCBpcyBkZWNyZWFzaW5nPwoKICAgIFtfXXskcG59ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KVGhlIGdyYXBoIGlzIGRlY3JlYXNpbmcgd2hlbiBpdHMgc2xvcGUgaXMgbmVnYXRpdmUuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<p id="p-3959">How can you tell from the equation of a line whether its graph is decreasing?</p>
+<p id="p-3960"><ul style="list-style:circle;">
+<li id="li-1610"><p id="p-3961">Its slope is positive.</p></li>
+<li id="li-1611"><p id="p-3962">Its <span class="process-math">\(x\)</span>-intercept is positive.</p></li>
+<li id="li-1612"><p id="p-3963">Its slope is negative.</p></li>
+<li id="li-1613"><p id="p-3964">Its <span class="process-math">\(x\)</span>-intercept is negative.</p></li>
+</ul></p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-71" id="answer-71"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-71"><div class="answer solution-like"><p id="p-3965"><span class="process-math">\(\text{Choice 3}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-24')">Make Interactive</button></div>
+</div></article></div>
+<p id="p-3967">The point-slope form is useful for modeling linear functions when we don't know the initial value but do know some other point on the line.</p>
+<article class="example example-like" id="example-income-tax"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.16</span><span class="period">.</span>
+</h4>
+<p id="p-3968">Under a proposed graduated income tax system, single taxpayers would owe $1500 plus 20% of the amount of their income over $13,000. (For example, if your income is $18,000, you would pay $1500 plus 20% of $5000.)</p>
+<ol class="decimal">
+<li id="li-1614">
+<p id="p-3969">Complete the table of values for the tax, <span class="process-math">\(T\text{,}\)</span> on various incomes, <span class="process-math">\(I\text{.}\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines"><span class="process-math">\(I\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(15,000\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(20,000\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(22,000\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(T\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-1615"><p id="p-derived-li-1615">Write a linear equation in point-slope form for the tax, <span class="process-math">\(T\text{,}\)</span> on an income <span class="process-math">\(I\text{.}\)</span></p></li>
+<li id="li-1616"><p id="p-derived-li-1616">Write the equation in slope-intercept form.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-415" id="solution-415"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-415"><div class="solution solution-like"><ol id="p-3970" class="decimal">
+<li id="li-1617">
+<p id="p-3971">On an income of $15,000, the amount of income over $13,000 is $15,000 - $13,000 = $2000, so you would pay $1500 plus 20% of $2000, or</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+T = 1500 + 0.20(2000) = 1900
+\end{equation*}
+</div>
+<p class="continuation">You can compute the other function values in the same way.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines"><span class="process-math">\(I\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(15,000\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(20,000\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(22,000\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines"><span class="process-math">\(T\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(1900\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(2900\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3300\)</span></td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-1618">
+<p id="p-3972">On an income of <span class="process-math">\(I\text{,}\)</span> the amount of income over $13,000 is <span class="process-math">\(I - \$13,000\text{,}\)</span> so you would pay $1500 plus 20% of <span class="process-math">\(I - 13,000\text{,}\)</span> or</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+T = 1500 + 0.20 (I - 13,000)
+\end{equation*}
+</div>
+</li>
+<li id="li-1619">
+<p id="p-3973">Simplify the right side of the equation to get</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+\begin{aligned}[t]
+T \amp = 1500 + 0.20I - 2600\\
+T \amp = -1100 + 0.20I
+\end{aligned}
+\end{equation*}
+</div>
+</li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-561"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-561"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.17</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 5.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-561"><article class="exercise exercise-like"><div id="webwork-25" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="25" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJOdW1iZXJXaXRoVW5pdHMucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyR4MCA9IDA7CiR5MCA9IDEwMDsKJHgxID0gNDsKJHkxID0gNzAwOwokbSA9IE51bWJlcldpdGhVbml0cygKIigkeTEtJHkwKS8oJHgxLSR4MCkgZnQvbWluIik7CiRtZWFuaW5nID0gUmFkaW9CdXR0b25zKAogICAgWyJBKSBUaGUgc3RlZXBuZXNzIG9mIHRoZSBza2kgbGlmdC4iLAogICAgIkIpIFRoZSBpbmNyZWFzZSBpbiBhbHRpdHVkZSBwZXIgbWludXRlLiIsCiAgICAiQykgVGhlIHRpbWUgdG8gcmlzZSBhIGZvb3QgaW4gYWx0aXR1ZGUuIiwKICAgICJEKSBUaGUgY29zdCBvZiB1c2luZyB0aGUgc2tpIGxpZnQuIl0sCiAgICAxCik7CgpCRUdJTl9QR01MCmEuICBDaG9vc2UgdHdvIHBvaW50cyBhbmQgY29tcHV0ZSB0aGUgc2xvcGUgKGluY2x1ZGluZyB1bml0cykuIChOb3RlOiBVc2UgImZ0IiBmb3IgZmVldCBhbmQgdXNlICJtaW4iIGZvciBtaW51dGVzLikKCiAgICBbYG09YF1bX117JG19ezEyfQoKCmEuICBXaGF0IGRvZXMgdGhlIHNsb3BlIHRlbGwgdXMgYWJvdXQgdGhlIHByb2JsZW0/CgogICAgW19deyRtZWFuaW5nfXs1fQoKCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgphLiAgW2BtPVxkZnJhY3tcRGVsdGEgeX17XERlbHRhIHh9PSBcZGZyYWN7WyR5MV0gXHRleHR7IGZ0fS1bJHkwXVx0ZXh0eyBmdH19e1skeDFdXHRleHR7IG1pbn0tWyR4MF1cdGV4dHsgbWlufX09IFskbV1gXQoKCmEuICBUaGUgc2tpZXIncyBhbHRpdHVkZSBpbmNyZWFzZXMgYnkgW2AxNTBgXSBmZWV0IHBlciBtaW51dGUuCgoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<ol id="p-3974" class="lower-alpha">
+<li id="li-1620">
+<p id="p-3975">Choose two points and compute the slope (including units). (Note: Use “ft” for feet and use “min” for minutes.)</p>
+<p id="p-3976"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="12-character blank" style="width: 5.454545454545454em;"></span></p>
+</li>
+<li id="li-1621">
+<p id="p-3977">What does the slope tell us about the problem?</p>
+<p id="p-3978"><ul style="list-style:circle;">
+<li id="li-1622"><p id="p-3979">A) The steepness of the ski lift.</p></li>
+<li id="li-1623"><p id="p-3980">B) The increase in altitude per minute.</p></li>
+<li id="li-1624"><p id="p-3981">C) The time to rise a foot in altitude.</p></li>
+<li id="li-1625"><p id="p-3982">D) The cost of using the ski lift.</p></li>
+</ul></p>
+</li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-72" id="answer-72"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-72"><div class="answer solution-like"><p id="p-3983"><span class="process-math">\(150\ {\textstyle\frac{\rm\mathstrut ft}{\rm\mathstrut min}}\)</span></p></div></div>
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-73" id="answer-73"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-73"><div class="answer solution-like"><p id="p-3984"><span class="process-math">\(\text{B) The ... per minute.}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-25')">Make Interactive</button></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-562"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-562"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.18</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 4.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-562"><article class="exercise exercise-like"><div id="webwork-26" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="26" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKSG93IGRvZXMgc2xvcGUgbWVhc3VyZSByYXRlIG9mIGNoYW5nZT8KCltAQU5TKGVzc2F5X2NtcCgpKTtlc3NheV9ib3goNiw3NilAXSogW0Blc3NheV9oZWxwKClAXSoKCgpFTkRfUEdNTAoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents"><p id="p-3988">How does slope measure rate of change?</p></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-26')">Make Interactive</button></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-563"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-563"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.19</span><span class="period">.</span><span class="space"> </span><span class="title">Pause and Reflect.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-563"><article class="exercise exercise-like"><div id="webwork-27" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="27" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJjb250ZXh0RnJhY3Rpb24ucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgiRnJhY3Rpb24iKTsKJHgwID0gMjsKJHkwID0gLTM7CiR4MSA9IC0yOwokeTEgPSAtMTsgICAgICAgICAgIAokbSA9IEZyYWN0aW9uKCIoJHkxLSR5MCkvKCR4MS0keDApIik7CgpCRUdJTl9QR01MCmEuICBGaW5kIHRoZSBzbG9wZSBvZiB0aGUgbGluZSBwYXNzaW5nIHRocm91Z2ggdGhlIHBvaW50cyBbYCgyLCAtMylgXSBhbmQgW2AoIC0yLCAtMSlcdGV4dHsufWBdCgogICAgW2BtPWBdW19deyRtfXszfQoKCmEuICBTa2V0Y2ggYSBncmFwaCBvZiB0aGUgbGluZSBieSBoYW5kLgoKCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgphLiAgW2BtPVxkZnJhY3tcRGVsdGEgeX17XERlbHRhIHh9PSBcZGZyYWN7WyR5MV0gLVskeTBdfXtbJHgxXS1bJHgwXX09IFskbV1gXQoKCmEuICBBIGdyYXBoIGlzIHNob3duIGJlbG93LgoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+<div class="problem-contents">
+<ol id="p-3989" class="lower-alpha">
+<li id="li-1628">
+<p id="p-3990">Find the slope of the line passing through the points <span class="process-math">\((2, -3)\)</span> and <span class="process-math">\(( -2, -1)\text{.}\)</span></p>
+<p id="p-3991"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
+</li>
+<li id="li-1629"><p id="p-3992">Sketch a graph of the line by hand.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-74" id="answer-74"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-74"><div class="answer solution-like"><p id="p-3993"><span class="process-math">\(-{\frac{1}{2}}\)</span></p></div></div>
+</div>
+</div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-27')">Make Interactive</button></div>
+</div></article></div></section><section class="exercises" id="section-1-5-exercises"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">5.2.5</span> <span class="title">Homework 5.2</span>
+</h3>
+<div class="exercisegroup" id="exercisegroup-62">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-99">
+<p id="p-3997">In Problems 1–10,</p>
+<ol class="lower-alpha">
+<li id="li-1632"><p id="p-3998">Write each equation in slope-intercept form.</p></li>
+<li id="li-1633"><p id="p-3999">State the slope and <span class="process-math">\(y\)</span>-intercept of the line.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-564"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
+<p id="p-4000"><span class="process-math">\(3x + 2y = 1\)</span></p></article><article class="exercise exercise-like" id="exercise-565"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
+<p id="p-4004"><span class="process-math">\(5x - 4y = 0\)</span></p></article><article class="exercise exercise-like" id="exercise-566"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
+<p id="p-4005"><span class="process-math">\(\dfrac{1}{4}x + \dfrac{3}{2}y = \dfrac{1}{6}\)</span></p></article><article class="exercise exercise-like" id="exercise-567"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
+<p id="p-4009"><span class="process-math">\(\dfrac{7}{6}x - \dfrac{2}{9}y = 3\)</span></p></article><article class="exercise exercise-like" id="exercise-568"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
+<p id="p-4010"><span class="process-math">\(4.2x - 0.3y = 6.6\)</span></p></article><article class="exercise exercise-like" id="exercise-569"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
+<p id="p-4014"><span class="process-math">\(0.8x + 0.004y = 0.24\)</span></p></article><article class="exercise exercise-like" id="exercise-570"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
+<p id="p-4015"><span class="process-math">\(y + 29 = 0\)</span></p></article><article class="exercise exercise-like" id="exercise-571"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
+<p id="p-4019"><span class="process-math">\(y - 37 = 0\)</span></p></article><article class="exercise exercise-like" id="exercise-572"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
+<p id="p-4020"><span class="process-math">\(250x + 150y = 2450\)</span></p></article><article class="exercise exercise-like" id="exercise-573"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
+<p id="p-4024"><span class="process-math">\(80x - 360y = 6120\)</span></p></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-63">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-100">
+<p id="p-4025">In Problems 11–14,</p>
+<ol class="lower-alpha">
+<li id="li-1644"><p id="p-4026">Sketch by hand the graph of the line with the given slope and <span class="process-math">\(y\)</span>-intercept.</p></li>
+<li id="li-1645"><p id="p-4027">Write an equation for the line.</p></li>
+<li id="li-1646"><p id="p-4028">Find the <span class="process-math">\(x\)</span>-intercept of the line.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-574"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<p id="p-4029"><span class="process-math">\(m = 3\)</span> and <span class="process-math">\(b = -2\)</span></p></article><article class="exercise exercise-like" id="exercise-575"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<p id="p-4033"><span class="process-math">\(m = -4\)</span> and <span class="process-math">\(b = 1\)</span></p></article><article class="exercise exercise-like" id="exercise-576"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<p id="p-4034"><span class="process-math">\(m =-\dfrac{5}{3} \)</span> and <span class="process-math">\(b = -6\)</span></p></article><article class="exercise exercise-like" id="exercise-577"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<p id="p-4038"><span class="process-math">\(m = \dfrac{3}{4}\)</span> and <span class="process-math">\(b = -2\)</span></p></article>
+</div>
+</div>
+<article class="exercise exercise-like" id="exercise-578"><h4 class="heading"><span class="codenumber">15<span class="period">.</span></span></h4>
+<p id="p-4039">The point <span class="process-math">\((2, -1)\)</span> lies on the graph of <span class="process-math">\(f (x) = -3x + b\text{.}\)</span> Find <span class="process-math">\(b\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-579"><h4 class="heading"><span class="codenumber">16<span class="period">.</span></span></h4>
+<p id="p-4041">The point <span class="process-math">\((-3, -8)\)</span> lies on the graph of <span class="process-math">\(f (x) =\dfrac{2}{3} x + b\text{.}\)</span> Find <span class="process-math">\(b\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-580"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
+<p id="p-4042">The point <span class="process-math">\((8, -5)\)</span> lies on the graph of <span class="process-math">\(f(x) = mx - 3\text{.}\)</span> Find <span class="process-math">\(m\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-581"><h4 class="heading"><span class="codenumber">18<span class="period">.</span></span></h4>
+<p id="p-4044">The point <span class="process-math">\((-5, -6)\)</span> lies on the graph of <span class="process-math">\(f(x) = mx +2\text{.}\)</span> Find <span class="process-math">\(m\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-582"><h4 class="heading"><span class="codenumber">19<span class="period">.</span></span></h4>
+<p id="p-4045">Find the slope and intercepts of the line <span class="process-math">\(Ax + By = C\)</span></p></article><article class="exercise exercise-like" id="exercise-583"><h4 class="heading"><span class="codenumber">20<span class="period">.</span></span></h4>
+<p id="p-4047">Find the slope and intercepts of the line <span class="process-math">\(\dfrac{x}{a}+\dfrac{y}{b}=1 \)</span></p></article><div class="exercisegroup" id="exercisegroup-64">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-101">
+<p id="p-4048">In Problems 21–26,</p>
+<ol class="lower-alpha">
+<li id="li-1653"><p id="p-4049">Find a formula for the function whose graph is shown.</p></li>
+<li id="li-1654"><p id="p-4050">Say what the slope and the vertical intercept tell us about the problem.</p></li>
+</ol>
+<p id="p-4051"></p>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-584"><h5 class="heading"><span class="codenumber">21<span class="period">.</span></span></h5>
+<p id="p-4052">The graph shows the altitude, <span class="process-math">\(a\)</span> (in feet), of a skier <span class="process-math">\(t\)</span> minutes after getting on a ski lift.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-21.svg" role="img" class="contained" alt="altitude of skier on lift"></div></div></div></article><article class="exercise exercise-like" id="exercise-585"><h5 class="heading"><span class="codenumber">22<span class="period">.</span></span></h5>
+<p id="p-4056">The graph shows the distance, <span class="process-math">\(d\)</span> (in meters), traveled by a train <span class="process-math">\(t\)</span> seconds after it passes an observer.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-22.svg" role="img" class="contained" alt="distance vs time"></div></div></div></article><article class="exercise exercise-like" id="exercise-586"><h5 class="heading"><span class="codenumber">23<span class="period">.</span></span></h5>
+<p id="p-4057">The graph shows the amount of garbage, <span class="process-math">\(G\)</span> (in tons), that has been deposited at a dump site <span class="process-math">\(t\)</span> years after new regulations go into effect.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-23.svg" role="img" class="contained" alt="garbage vs time"></div></div></div></article><article class="exercise exercise-like" id="exercise-587"><h5 class="heading"><span class="codenumber">24<span class="period">.</span></span></h5>
+<p id="p-4061">The graph shows the number of barrels of oil, <span class="process-math">\(B\text{,}\)</span> that has been pumped at a drill site <span class="process-math">\(t\)</span> days after a new drill is installed.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:12.5%;margin-right:12.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-24.svg" role="img" class="contained" alt="oil vs time"></div></div></div></article><article class="exercise exercise-like" id="exercise-588"><h5 class="heading"><span class="codenumber">25<span class="period">.</span></span></h5>
+<p id="p-4062">The graph shows the amount of money, <span class="process-math">\(M\)</span> (in dollars), in Tammy’s bank account <span class="process-math">\(w\)</span> weeks after she loses all sources of income.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-25.svg" role="img" class="contained" alt="dollars vs time"></div></div></div></article><article class="exercise exercise-like" id="exercise-589"><h5 class="heading"><span class="codenumber">26<span class="period">.</span></span></h5>
+<p id="p-4066">The graph shows the amount of emergency water, <span class="process-math">\(W\)</span> (in liters), remaining in a southern California household <span class="process-math">\(t\)</span> days after an earthquake.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-26.svg" role="img" class="contained" alt="liters vs time"></div></div></div></article>
+</div>
+</div>
+<article class="exercise exercise-like" id="exercise-590"><h4 class="heading"><span class="codenumber">27<span class="period">.</span></span></h4>
+<p id="p-4067">The formula <span class="process-math">\(F = \dfrac{9}{5}C + 32\)</span> defines a function that converts the temperature in degrees Celsius to degrees Fahrenheit.</p>
+<ol class="lower-alpha">
+<li id="li-1661"><p id="p-4068">What is the Fahrenheit temperature when it is <span class="process-math">\(10\degree\)</span> Celsius?</p></li>
+<li id="li-1662"><p id="p-4069">What is the Celsius temperature when it is <span class="process-math">\(-4\degree\)</span> Fahrenheit?</p></li>
+<li id="li-1663"><p id="p-4070">Choose appropriate <kbd class="kbdkey">WINDOW</kbd> settings and graph the equation <span class="process-math">\(y = \dfrac{9}{5}x + 32\text{.}\)</span></p></li>
+<li id="li-1664"><p id="p-4071">Find the slope and explain its meaning for this problem.</p></li>
+<li id="li-1665"><p id="p-4072">Find the intercepts and explain their meanings for this problem.</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-591"><h4 class="heading"><span class="codenumber">28<span class="period">.</span></span></h4>
+<p id="p-4078">If the temperature on the ground is <span class="process-math">\(70\degree\)</span> Fahrenheit, the formula <span class="process-math">\(T = 70 - \dfrac{3}{820}h\)</span> defines a function that gives the temperature at an altitude of <span class="process-math">\(h\)</span> feet.</p>
+<ol class="lower-alpha">
+<li id="li-1671"><p id="p-4079">What is the temperature at an altitude of <span class="process-math">\(4100\)</span> feet?</p></li>
+<li id="li-1672"><p id="p-4080">At what altitude is the temperature <span class="process-math">\(34\degree\)</span> Fahrenheit?</p></li>
+<li id="li-1673"><p id="p-4081">Choose appropriate <kbd class="kbdkey">WINDOW</kbd> settings and graph the equation <span class="process-math">\(y = 70- \dfrac{3}{820}x\text{.}\)</span></p></li>
+<li id="li-1674"><p id="p-4082">Find the slope and explain its meaning for this problem.</p></li>
+<li id="li-1675"><p id="p-4083">Find the intercepts and explain their meanings for this problem.</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-592"><h4 class="heading"><span class="codenumber">29<span class="period">.</span></span></h4>
+<p id="p-4084">In England, oven cooking temperatures are often given as Gas Marks rather than degrees Fahrenheit. The table shows the equivalent oven temperatures for various Gas Marks.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines">Gas Mark</td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(3\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(5\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(7\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(9\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Degrees (F)</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(325\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(375\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(425\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(475\)</span></td>
+</tr>
+</table></div></div></div>
+<ol id="p-4085" class="lower-alpha">
+<li id="li-1676"><p id="p-4086">Plot the data and draw a line through the data points.</p></li>
+<li id="li-1677"><p id="p-4087">Calculate the slope of your line. Estimate the <span class="process-math">\(y\)</span>-intercept from the graph.</p></li>
+<li id="li-1678"><p id="p-4088">Find an equation that gives the temperature in degrees Fahrenheit in terms of the Gas Mark.</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-593"><h4 class="heading"><span class="codenumber">30<span class="period">.</span></span></h4>
+<p id="p-4092">European shoe sizes are scaled differently than American shoe sizes. The table shows the European equivalents for various American shoe sizes.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines">American shoe size</td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(5.5\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(6.5\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(7.5\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(8.5\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">European shoe size</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(37\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(38\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(39\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(40\)</span></td>
+</tr>
+</table></div></div></div>
+<ol id="p-4093" class="lower-alpha">
+<li id="li-1682"><p id="p-4094">Plot the data and draw a line through the data points.</p></li>
+<li id="li-1683"><p id="p-4095">Calculate the slope of your line. Estimate the <span class="process-math">\(y\)</span>-intercept from the graph.</p></li>
+<li id="li-1684"><p id="p-4096">Find an equation that gives the European shoe size in terms of American shoe size.</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-594"><h4 class="heading"><span class="codenumber">31<span class="period">.</span></span></h4>
+<p id="p-4097">A spring is suspended from the ceiling. The table shows the length of the spring in centimeters as it is stretched by hanging various weights from it.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines">Weight, kg</td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(3\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(4\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(8\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(10\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(12\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(15\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(22\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Length, cm</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(25.76\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(25.88\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(26.36\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(26.6\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(26.84\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(27.2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(28.04\)</span></td>
+</tr>
+</table></div></div></div>
+<ol id="p-4098" class="lower-alpha">
+<li id="li-1685"><p id="p-4099">Plot the data on graph paper and draw a straight line through the points. Estimate the <span class="process-math">\(y\)</span>-intercept of your graph.</p></li>
+<li id="li-1686"><p id="p-4100">Find an equation for the line.</p></li>
+<li id="li-1687"><p id="p-4101">If the spring is stretched to <span class="process-math">\(27.56\)</span> cm, how heavy is the attached weight?</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-595"><h4 class="heading"><span class="codenumber">32<span class="period">.</span></span></h4>
+<p id="p-4105">The table shows the amount of ammonium chloride salt, in grams, that can be dissolved in <span class="process-math">\(100\)</span> grams of water at different temperatures.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="c m b1 r1 l1 t3 lines">Temperature, <span class="process-math">\(\degree\)</span>C</td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(10\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(12\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(15\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(21\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(25\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(40\)</span></td>
+<td class="c m b1 r1 l0 t3 lines"><span class="process-math">\(52\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Grams of salt</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(33\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(34\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(35.5\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(38.5\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(40.5\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(48\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(54\)</span></td>
+</tr>
+</table></div></div></div>
+<ol id="p-4106" class="lower-alpha">
+<li id="li-1691"><p id="p-4107">Plot the data on graph paper and draw a straight line through the points. Estimate the <span class="process-math">\(y\)</span>-intercept of your graph.</p></li>
+<li id="li-1692"><p id="p-4108">Find an equation for the line.</p></li>
+<li id="li-1693"><p id="p-4109">At what temperature will <span class="process-math">\(46\)</span> grams of salt dissolve?</p></li>
+</ol></article><div class="exercisegroup" id="exercisegroup-65">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-102">
+<p id="p-4110">In Problems 33–36,</p>
+<ol class="lower-alpha">
+<li id="li-1694"><p id="p-4111">Sketch by hand the graph of the line that passes through the given point and has the given slope.</p></li>
+<li id="li-1695"><p id="p-4112">Write an equation for the line in point-slope form.</p></li>
+<li id="li-1696"><p id="p-4113">Put your equation from part (b) into slope-intercept form.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-596"><h5 class="heading"><span class="codenumber">33<span class="period">.</span></span></h5>
+<p id="p-4114"><span class="process-math">\((2, -5)\text{;}\)</span> <span class="process-math">\(m = -3\)</span></p></article><article class="exercise exercise-like" id="exercise-597"><h5 class="heading"><span class="codenumber">34<span class="period">.</span></span></h5>
+<p id="p-4118"><span class="process-math">\((-6, -1)\text{;}\)</span> <span class="process-math">\(m = 4\)</span></p></article><article class="exercise exercise-like" id="exercise-598"><h5 class="heading"><span class="codenumber">35<span class="period">.</span></span></h5>
+<p id="p-4119"><span class="process-math">\((2, -1)\text{;}\)</span> <span class="process-math">\(m =\dfrac{5}{3} \)</span></p></article><article class="exercise exercise-like" id="exercise-599"><h5 class="heading"><span class="codenumber">36<span class="period">.</span></span></h5>
+<p id="p-4123"><span class="process-math">\((-1, 2)\text{;}\)</span> <span class="process-math">\(m =-\dfrac{3}{2} \)</span></p></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-66">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-103">
+<p id="p-4124">For Problems 37–40,</p>
+<ol class="lower-alpha">
+<li id="li-1703"><p id="p-4125">Write an equation in point-slope form for the line that passes through the given point and has the given slope.</p></li>
+<li id="li-1704"><p id="p-4126">Put your equation from part (a) into slope-intercept form.</p></li>
+<li id="li-1705"><p id="p-4127">Use your graphing calculator to graph the line.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-600"><h5 class="heading"><span class="codenumber">37<span class="period">.</span></span></h5>
+<p id="p-4128"><span class="process-math">\((-6.4, -3.5)\text{,}\)</span> <span class="process-math">\(m =-0.25 \)</span></p></article><article class="exercise exercise-like" id="exercise-601"><h5 class="heading"><span class="codenumber">38<span class="period">.</span></span></h5>
+<p id="p-4132"><span class="process-math">\((7.2, -5.6)\text{,}\)</span> <span class="process-math">\(m =1.6 \)</span></p></article><article class="exercise exercise-like" id="exercise-602"><h5 class="heading"><span class="codenumber">39<span class="period">.</span></span></h5>
+<p id="p-4133"><span class="process-math">\((80, -250)\text{,}\)</span> <span class="process-math">\(m =2.4 \)</span></p></article><article class="exercise exercise-like" id="exercise-603"><h5 class="heading"><span class="codenumber">40<span class="period">.</span></span></h5>
+<p id="p-4137"><span class="process-math">\((-150, 1800)\text{,}\)</span> <span class="process-math">\(m =-24 \)</span></p></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-67">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-104">
+<p id="p-4138">For Problems 41 and 42,</p>
+<ol class="lower-alpha">
+<li id="li-1712"><p id="p-4139">Find the slope of the line. (Note that not all the labeled points lie on the line.)</p></li>
+<li id="li-1713"><p id="p-4140">Find an equation for the line.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-604"><h5 class="heading"><span class="codenumber">41<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-41.svg" role="img" class="contained" alt="line with labeled points"></div></div></div></article><article class="exercise exercise-like" id="exercise-605"><h5 class="heading"><span class="codenumber">42<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:12.5%;margin-right:12.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-42.svg" role="img" class="contained" alt="line with labeled points"></div></div></div></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-68">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-105">
+<p id="p-4144">For Problems 43 and 44, the equation of line <span class="process-math">\(l_1\)</span> is <span class="process-math">\(y = q + px\text{,}\)</span> and the equation of line <span class="process-math">\(l_2\)</span> is <span class="process-math">\(y = v + tx\text{.}\)</span></p>
+<ol class="lower-alpha">
+<li id="li-1716">
+<p id="p-4145">Decide whether the coordinates of each labeled point are</p>
+<ol class="lower-roman">
+<li id="li-1717"><p id="p-4146">a solution of <span class="process-math">\(y = q + px\text{,}\)</span></p></li>
+<li id="li-1718"><p id="p-4147">a solution of <span class="process-math">\(y = v + tx\text{,}\)</span></p></li>
+<li id="li-1719"><p id="p-4148">a solution of both equations, or</p></li>
+<li id="li-1720"><p id="p-4149">a solution of neither equation.</p></li>
+</ol>
+</li>
+<li id="li-1721"><p id="p-4150">Find <span class="process-math">\(p\text{,}\)</span> <span class="process-math">\(q\text{,}\)</span> <span class="process-math">\(t\text{,}\)</span> and <span class="process-math">\(v\text{.}\)</span></p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-606"><h5 class="heading"><span class="codenumber">43<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:12.5%;margin-right:12.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-43.svg" role="img" class="contained" alt="two lines with labeled points"></div></div></div></article><article class="exercise exercise-like" id="exercise-607"><h5 class="heading"><span class="codenumber">44<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:12.5%;margin-right:12.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-44.svg" role="img" class="contained" alt="two lines with labeled points"></div></div></div></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-69">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-106">
+<p id="p-4154">For Problems 45–50,</p>
+<ol class="lower-alpha">
+<li id="li-1724"><p id="p-4155">Estimate the slope and vertical intercept of each line. (Hint: To calculate the slope, find two points on the graph that lie on the intersection of grid lines.)</p></li>
+<li id="li-1725"><p id="p-4156">Using your estimates from (a), write an equation for the line.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-608"><h5 class="heading"><span class="codenumber">45<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-45.svg" role="img" class="contained" alt="line on grid"></div></div></div></article><article class="exercise exercise-like" id="exercise-609"><h5 class="heading"><span class="codenumber">46<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:17.5%;margin-right:17.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-46.svg" role="img" class="contained" alt="line on grid"></div></div></div></article><article class="exercise exercise-like" id="exercise-610"><h5 class="heading"><span class="codenumber">47<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-47.svg" role="img" class="contained" alt="line on grid"></div></div></div></article><article class="exercise exercise-like" id="exercise-611"><h5 class="heading"><span class="codenumber">48<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:17.5%;margin-right:17.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-48.svg" role="img" class="contained" alt="line on grid"></div></div></div></article><article class="exercise exercise-like" id="exercise-612"><h5 class="heading"><span class="codenumber">49<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-49.svg" role="img" class="contained" alt="line on grid"></div></div></div></article><article class="exercise exercise-like" id="exercise-613"><h5 class="heading"><span class="codenumber">50<span class="period">.</span></span></h5>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-50.svg" role="img" class="contained" alt="line on grid"></div></div></div></article>
+</div>
+</div>
+<article class="exercise exercise-like" id="exercise-614"><h4 class="heading"><span class="codenumber">51<span class="period">.</span></span></h4>
+<ol id="p-4166" class="lower-alpha">
+<li id="li-1732"><p id="p-4167">Write equations for three lines with slope <span class="process-math">\(m = \dfrac{3}{4}\text{.}\)</span> (Many answers are possible.)</p></li>
+<li id="li-1733"><p id="p-4168">Graph all three lines in the same window. What do you notice about the lines?</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-615"><h4 class="heading"><span class="codenumber">52<span class="period">.</span></span></h4>
+<ol id="p-4172" class="lower-alpha">
+<li id="li-1736"><p id="p-4173">Write equations for three lines with slope <span class="process-math">\(m =0\text{.}\)</span> (Many answers are possible.)</p></li>
+<li id="li-1737"><p id="p-4174">Graph all three lines in the same window. What do you notice about the lines?</p></li>
+</ol></article><div class="exercisegroup" id="exercisegroup-70">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-107"><p id="p-4175">In Problems 53–56, choose the correct graph for each equation. The scales on both axes are the same.</p></div>
+<div class="exercisegroup-exercises">
+<article class="exercise exercise-like" id="exercise-616"><h5 class="heading"><span class="codenumber">53<span class="period">.</span></span></h5>
+<ol id="p-4176" class="lower-alpha cols2">
+<li id="li-1738"><p id="p-4177"><span class="process-math">\(\displaystyle y = \dfrac{3}{4}x + 2\)</span></p></li>
+<li id="li-1739"><p id="p-4178"><span class="process-math">\(\displaystyle y = \dfrac{-3}{4}x + 2\)</span></p></li>
+<li id="li-1740"><p id="p-4179"><span class="process-math">\(\displaystyle y = \dfrac{3}{4}x - 2 \)</span></p></li>
+<li id="li-1741"><p id="p-4180"><span class="process-math">\(\displaystyle y =\dfrac{-3}{4}x - 2\)</span></p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-53.svg" role="img" class="contained" alt="four lines"></div></div></div></article><article class="exercise exercise-like" id="exercise-617"><h5 class="heading"><span class="codenumber">54<span class="period">.</span></span></h5>
+<ol id="p-4186" class="lower-alpha cols2">
+<li id="li-1746"><p id="p-4187"><span class="process-math">\(m\lt 0\text{,}\)</span> <span class="process-math">\(b\gt 0\)</span></p></li>
+<li id="li-1747"><p id="p-4188"><span class="process-math">\(m\gt 1\text{,}\)</span> <span class="process-math">\(b\lt 0\)</span></p></li>
+<li id="li-1748"><p id="p-4189"><span class="process-math">\(0\lt m\lt 1\text{,}\)</span> <span class="process-math">\(b\lt 0\)</span></p></li>
+<li id="li-1749"><p id="p-4190"><span class="process-math">\(m\lt -1\text{,}\)</span> <span class="process-math">\(b\lt 0 \)</span></p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-54.svg" role="img" class="contained" alt="four lines"></div></div></div></article><article class="exercise exercise-like" id="exercise-618"><h5 class="heading"><span class="codenumber">55<span class="period">.</span></span></h5>
+<ol id="p-4191" class="lower-alpha cols2">
+<li id="li-1750"><p id="p-4192"><span class="process-math">\(\displaystyle y = 1 + 2(x+3) \)</span></p></li>
+<li id="li-1751"><p id="p-4193"><span class="process-math">\(\displaystyle y = -1 + 2(x-3)\)</span></p></li>
+<li id="li-1752"><p id="p-4194"><span class="process-math">\(\displaystyle y = -1 + 2(x+3) \)</span></p></li>
+<li id="li-1753"><p id="p-4195"><span class="process-math">\(\displaystyle y = 1 + 2(x-3) \)</span></p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-55.svg" role="img" class="contained" alt="four lines"></div></div></div></article><article class="exercise exercise-like" id="exercise-619"><h5 class="heading"><span class="codenumber">56<span class="period">.</span></span></h5>
+<ol id="p-4201" class="lower-alpha cols2">
+<li id="li-1758"><p id="p-4202"><span class="process-math">\(\displaystyle y = 2 - \dfrac{2}{3}(x - 3) \)</span></p></li>
+<li id="li-1759"><p id="p-4203"><span class="process-math">\(\displaystyle y = 2 - \dfrac{3}{2}(x + 3) \)</span></p></li>
+<li id="li-1760"><p id="p-4204"><span class="process-math">\(\displaystyle y = 2 + \dfrac{3}{2}(x - 3) \)</span></p></li>
+<li id="li-1761"><p id="p-4205"><span class="process-math">\(\displaystyle y = 2 + \dfrac{2}{3}(x + 3) \)</span></p></li>
+</ol>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-ex-1-5-56.svg" role="img" class="contained" alt="four lines"></div></div></div></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-71">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-108"><p id="p-4206">In Problems 57–60, find the slope of each line and the coordinates of one point on the line. (No calculation is necessary!)</p></div>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="exercise-620"><h5 class="heading"><span class="codenumber">57<span class="period">.</span></span></h5>
+<p id="p-4207"><span class="process-math">\(y + 1 = 2(x - 6)\)</span></p></article><article class="exercise exercise-like" id="exercise-621"><h5 class="heading"><span class="codenumber">58<span class="period">.</span></span></h5>
+<p id="p-4209"><span class="process-math">\(2(y - 8) = 5(x + 2)\)</span></p></article><article class="exercise exercise-like" id="exercise-622"><h5 class="heading"><span class="codenumber">59<span class="period">.</span></span></h5>
+<p id="p-4210"><span class="process-math">\(y = 3 - \dfrac{4}{3}(x + 5)\)</span></p></article><article class="exercise exercise-like" id="exercise-623"><h5 class="heading"><span class="codenumber">60<span class="period">.</span></span></h5>
+<p id="p-4212"><span class="process-math">\(7x = -3y\)</span></p></article>
+</div>
+</div>
+<article class="exercise exercise-like" id="exercise-624"><h4 class="heading"><span class="codenumber">61<span class="period">.</span></span></h4>
+<ol id="p-4213" class="lower-alpha">
+<li id="li-1762">
+<p id="p-4214">Draw a set of coordinate axes with a square grid (i.e., with units the same size in both directions). Sketch four lines through the point (0, 4) with the following slopes:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m = 3, ~~~ m = -3,~~~ m = \frac{1}{3}, ~~~ m =\frac{-1}{3}
+\end{equation*}
+</div>
+</li>
+<li id="li-1763"><p id="p-4215">What do you notice about these lines?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref hint-knowl original" data-refid="hk-hint-4" id="hint-4"><span class="type">Hint</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-hint-4"><div class="hint solution-like"><p id="p-4216">Look for perpendicular lines.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-625"><h4 class="heading"><span class="codenumber">62<span class="period">.</span></span></h4>
+<ol id="p-4219" class="lower-alpha">
+<li id="li-1766">
+<p id="p-4220">Draw a set of coordinate axes with a square grid (see Problem 61). Sketch four lines through the point (0, -3) with the following slopes:</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+m = \frac{2}{5}, ~~~ m = \frac{-2}{5},~~~ m = \frac{5}{2}, ~~~ m =\frac{-5}{2}
+\end{equation*}
+</div>
+</li>
+<li id="li-1767"><p id="p-4221">What do you notice about these lines?</p></li>
+</ol></article><article class="exercise exercise-like" id="exercise-626"><h4 class="heading"><span class="codenumber">63<span class="period">.</span></span></h4>
+<p id="p-4222">The boiling point of water changes with altitude and is approximated by the formula</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+B = f (h) = 212 - 0.0018h
+\end{equation*}
+</div>
+<p class="continuation">where <span class="process-math">\(B\)</span> is in degrees and <span class="process-math">\(h\)</span> is in feet. State the slope and vertical intercept of the graph, including units, and explain their meaning in this context.</p></article><article class="exercise exercise-like" id="exercise-627"><h4 class="heading"><span class="codenumber">64<span class="period">.</span></span></h4>
+<p id="p-4224">The height of a woman in centimeters is related to the length of her femur (in centimeters) by the formula</p>
+<div class="displaymath process-math" data-contains-math-knowls="">
+\begin{equation*}
+H = f (x) = 2.47x + 54.10
+\end{equation*}
+</div>
+<p class="continuation">State the slope and the vertical intercept of the graph, including units, and explain their meaning in this context.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

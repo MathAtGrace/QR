@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-01T17:04:21-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Federal Budget, Deficit and National Debt</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chap_five_review.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="democracy.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chap_five_review.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="democracy.html" title="Up">Up</a><a class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="internal">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="internal">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="internal">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="active">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="chap_five_budget_deficit_debt"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.6</span> <span class="title">Federal Budget, Deficit and National Debt</span>
+</h2>
+<article class="objectives goal-like" id="objectives-27"><h3 class="heading">
+<span class="type">Objectives:</span><span class="space"> </span><span class="title">Section 6.6</span>
+</h3>
+<div class="introduction" id="introduction-125"><p id="p-5529">Students will be able to:</p></div>
+<ul class="disc">
+<li id="li-2392"><p id="p-5530">Explain the federal budget process</p></li>
+<li id="li-2393"><p id="p-5531">Explain the difference between the federal deficit and national debt</p></li>
+<li id="li-2394"><p id="p-5532">Convert large numbers from expanded form to a decimal of millions, billions, trillions, etc. and back to expanded form</p></li>
+<li id="li-2395"><p id="p-5533">Convert large numbers between decimals of millions to billions or trillions, etc.</p></li>
+<li id="li-2396"><p id="p-5534">Calculate the debt to GDP ratio for a country or state</p></li>
+<li id="li-2397"><p id="p-5535">Calculate the debt per person for a country or state</p></li>
+<li id="li-2398"><p id="p-5536">Read and use pie charts to do calculations</p></li>
+</ul></article><section class="introduction" id="introduction-126"><p id="p-5537">Another important part of democracy is how to fund the government. We studied how to calculate federal income taxes in <a href="chap_two_income_taxes.html" class="internal" title="Section 3.7: Income Taxes">Section 3.7</a>. In this section we will study where that money goes and what happens when the government spends more than it earns in taxes.</p>
+<figure class="figure figure-like" id="figure-38"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-15" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLsFUxEAXGFKRmCX04vGaBiUlRQ8dGRUnb&amp;modestbranding=1&amp;rel=0"></iframe></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.6.1<span class="period">.</span></span><span class="space"> </span>Alternative Video Lessons</figcaption></figure></section><section class="subsection" id="subsection-161"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.1</span> <span class="title">Federal Income and Spending</span>
+</h3>
+<p id="p-5538">Federal income comes from our individual income taxes and business income taxes. Income is also borrowed by selling savings bonds, notes and Treasury bills (United States Government, 2019). The government has to pay interest on the national debt. After that, there are two types of spending, mandatory and discretionary. <em class="alert">Mandatory spending</em> includes Social Security payments, Medicare and other items required by law. <em class="alert">Discretionary spending</em> is the amount that Congress budgets annually to fund programs and agencies. Here is a pie chart showing the percentage of spending for each type in 2019. The data comes from the Congressional Budget Office (Congressional Budget Office, 2020).</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/fed_income_spending.png" class="contained" alt="Pie chart showing mandatory spending (62%), discretionary spending (30%) and net interest (8%) portions of federal spending in fiscal year 2019."></div></div></div></section><section class="subsection" id="subsection-162"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.2</span> <span class="title">The Federal Budget Process</span>
+</h3>
+<p id="p-5539">The <em class="alert">Federal Budget</em> is like a home budget, with income and expenses. The U.S. Government’s fiscal year goes from October 1st of one year to September 30th of the next year. Work on the budget begins about a year and a half before the budget is finalized.</p>
+<p id="p-5540">First, departments and agencies submit their proposals to the White House. Then the President submits their budget plan to Congress. Each chamber of Congress analyzes the proposal and makes their own budget resolution. Then a conference committee of House and Senate members resolves the differences between the two plans and makes a final version that each chamber votes on.</p>
+<p id="p-5541">After the budget is passed, the Senate and House Appropriations committees distribute the discretionary part of the funding among 12 subcommittees that oversee different groups of agencies. As before, conference committees meet to merge the two versions of the appropriations bills. All 12 bills must be passed by both the Senate and the House and then signed by the President to enact the new budget.</p>
+<p id="p-5542">If any appropriations bill is not signed by September 30th, there is no budget for the new fiscal year. In this case, Congress must pass a <em class="alert">continuing resolution</em> to temporarily fund the government. If they do not, or if the president does not sign it, the governement will shut down. The last <em class="alert">government shutdown</em> went from December 22, 2018 to January 25, 2019. This was the longest shudown in U.S. history and left over 800,000 federal workers either working without pay or being furloughed at home (Robert, 2020).</p></section><section class="subsection" id="subsection-163"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.3</span> <span class="title">The Federal Surplus or Deficit</span>
+</h3>
+<p id="p-5543">If the government spends less than it collects in income, there will be a budget <em class="alert">surplus</em> for that year. If it spends more than it collects, there will be a <em class="alert">deficit</em> for that year. It is also possible to have a <em class="alert">balanced budget</em> where the spending equals the income. The federal deficit refers to the budget shortfall in a single time period, like a quarter or a year. For example, in the Fiscal Year 2018, the U.S. deficit was $779 billion. The graph below shows the federal deficit or surplus each year since 1974 using data from the Congressional Budget Office (Congressional Budget Office, 2014).</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/fed_surplus_deficit.png" class="contained" alt="A bar chart showing the historical and projected federal devicits from 1974 to 2021; The deficits ran from 0 to 500 billion dollars from 1974 to 1996, then there was a budget surplus from 1996 to 2000, then defecits again; The deficits increased to about 1500 billion from 2008 to 2014 and are predected to be less after that."></div></div></div>
+<p id="p-5544">It is hard to find graphs with a vertical axis in dollars becase the value of the dollar changes over time. One dollar in 1974 could buy a lot more than it can today. In the graph above, each dollar amount is converted to the equivalent of 2013 dollars to account for that. The vertical scale is in billions of 2013 dollars. The largest deficits in 2009 to 2012 were from spending and corporate bailouts to recover from the Great Recession of 2008.</p>
+<p id="p-5545">On the graph above, $1 on the vertical scale represents one billion dollars or $1,000,000,000. The highest deficits go down to about -$1,500 billion, which we would write as -$1,500,000,000,000. Here is a chart that shows large numbers and how many zeros they have.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">Number</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">Name</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000</td>
+<td class="c m b1 r1 l0 t0 lines">One thousand</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000,000</td>
+<td class="c m b1 r1 l0 t0 lines">One million</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000,000,000</td>
+<td class="c m b1 r1 l0 t0 lines">One billion</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000,000,000,000</td>
+<td class="c m b1 r1 l0 t0 lines">One trillion</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000,000,000,000,000</td>
+<td class="c m b1 r1 l0 t0 lines">One quadrillion</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">$1,000,000,000,000,000,000</td>
+<td class="c m b1 r1 l0 t0 lines">One quintillion</td>
+</tr>
+</table></div></div></div>
+<p id="p-5546">Instead of writing all the zeros, we can abreviate large numbers using decimals. For example, 1,200,000 can be written as 1.2 million. We can write 900,000 as 0.9 million. We can also translate the other way and write 4.567 trillion as 4,567,000,000,000. Note there can be more than one way to write a number. We could write 400,000,000 as either 400 million or 0.4 billion. It is convenient that we put the decimal where the comma goes and vice versa.</p>
+<article class="example example-like" id="example-146"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.2</span><span class="period">.</span>
+</h4>
+<p id="p-5547">Write each number using a decimal abreviation.</p>
+<ol class="lower-alpha">
+<li id="li-2399"><p id="p-5548">4,873,000</p></li>
+<li id="li-2400"><p id="p-5549">1,500,000,000</p></li>
+<li id="li-2401"><p id="p-5550">500,000,000,000</p></li>
+<li id="li-2402"><p id="p-5551">8,300,000</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-543" id="solution-543"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-543"><div class="solution solution-like">
+<p id="p-5552">Our method is to find the millions place which is the 7th digit from the right. If the number starts there, use millions. If the number is larger, count 3 more places for billions and 3 more places for trillions.</p>
+<ol class="lower-alpha">
+<li id="li-2403"><p id="p-5553">4,873,000 = 4.873 million</p></li>
+<li id="li-2404"><p id="p-5554">1,500,000,000 = 1.5 billion</p></li>
+<li id="li-2405"><p id="p-5555">500,000,000,000 = 500 billion or 0.5 trillion</p></li>
+<li id="li-2406"><p id="p-5556">8,300,000 = 8.3 million</p></li>
+</ol>
+</div></div>
+</div></article><article class="example example-like" id="example-147"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.3</span><span class="period">.</span>
+</h4>
+<p id="p-5557">Write each number in expanded form.</p>
+<ol class="lower-alpha">
+<li id="li-2407"><p id="p-5558">5.7 million</p></li>
+<li id="li-2408"><p id="p-5559">9.22 trillion</p></li>
+<li id="li-2409"><p id="p-5560">100.2 billion</p></li>
+<li id="li-2410"><p id="p-5561">0.25 trillion</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-544" id="solution-544"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-544"><div class="solution solution-like">
+<p id="p-5562">Our method is to put a comma where the decimal is and then add zeros to get to the right place value. If the decimal is less than one, we move down to the next lower grouping as shown in part d.</p>
+<ol class="lower-alpha">
+<li id="li-2411"><p id="p-5563">5.7 million = 5,700,000</p></li>
+<li id="li-2412"><p id="p-5564">9.22 trillion = 9,220,000,000,000</p></li>
+<li id="li-2413"><p id="p-5565">100.2 billion = 100,200,000,000</p></li>
+<li id="li-2414"><p id="p-5566">0.25 trillion = 250 billion = 250,000,000,000</p></li>
+</ol>
+</div></div>
+</div></article></section><section class="subsection" id="subsection-164"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.4</span> <span class="title">Debt to GDP Ratio</span>
+</h3>
+<p id="p-5567">A more common way to measure the deficit is as a percentage of the gross domestic product. The <em class="alert">gross domestic product</em>, or <em class="alert">GDP</em>, is the total value of all the finished goods and services produced within a county’s borders in a specific period of time. The GDP is a measure of the size of an economy. The growth rate of the GDP is one measure of a nation’s economic health (Bureau of Economic Analysis, 2019). The GDP of the United States in 2019 was $21.73 trillion but due to the COVID-19 pandemic, there was a drop in the second quarter of 2020 to $19.74 trillion. (Bureau of Economic Analysis, 2020).</p>
+<p id="p-5568">Now we can look at more graphs that are written in terms of the percent of GDP. Here is a graph of federal spending and revenues as a percentage of the GDP<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-105" id="fn-105"><sup> 105 </sup></a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/debt_to_gdp1.jpg" class="contained" alt="Title: The growing debt is caused by a structural mismatch between spending and revenues; There is a line showing the spending from 1984 to 2049 (predicted) and a line showing the revenue in the same years. Most of the time the spending is higher than the revenue, except in the years there was a budget suplus, from 1996 to 2000."></div></div></div>
+<p id="p-5569">For each year, if we take the revenue and subtract the spending, we get the budget surplus or deficit. If the result is negative it is a deficit. And here is a graph of the deficits in terms of percentage of GDP<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-109" id="fn-109"><sup> 109 </sup></a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/debt_to_gdp2.png" class="contained" alt="Total Deficits and Surpluses; A bar chart that shows the budget deficit or surplus each year as a percentage of GDP."></div></div></div></section><section class="subsection" id="subsection-165"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.5</span> <span class="title">National Debt</span>
+</h3>
+<p id="p-5570">The words deficit and debt are easily confused because they have similar meanings. The <em class="alert">deficit</em> is the yearly shortfall, and the national <em class="alert">debt</em> is the total cumulative amount of debt held by the government.</p>
+<p id="p-5571">As you can see from the previous graphs, most years had a budget deficit. If we add all of those up over time, this is what the national debt looks like<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-113" id="fn-113"><sup> 113 </sup></a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/national_debt1.png" class="contained" alt="Title: Debt rises and falls with wars and changes in the economy. Debt is currently higher than it has been at any point since 1948. A bar chart that shows the total national debt from 1794 to 2019; Total debt was highest during the civil war, world war 1 and 2, the great depression and in 2019."></div></div></div>
+<p id="p-5572">Just like we pay interest on our personal debt, the U.S. pays interest on the national debt. The interest on the debt is expected to keep increasing as shown in this graph<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-117" id="fn-117"><sup> 117 </sup></a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/national_debt2.jpg" class="contained" alt="A graph showing the amount of interest paid on the national debt from 2009 to 2028 (projected after 2017). The amount of interest paid was around 180 billion dollars in 2009 and stayed pretty level until 2017, then was projected to increase steeply to about 900 billion dollars per year in 2028"></div></div></div></section><section class="subsection" id="subsection-166"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.6</span> <span class="title">National Debt Clocks</span>
+</h3>
+<p id="p-5573">There are several websites that keep a running total of the national debt. One of them is <a class="external" href="https://www.usdebtclock.org/" target="_blank">USDebtClock.org</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-121" id="fn-121"><sup> 121 </sup></a>. This one also shows the population, debt per citizen and debt per taxpayer. It shows the spending and deficit with counters that are constantly moving. At the bottom you can also see the debt to GDP ratio compared with previous ratios. The rest of the website shows statistics like the GDP, income tax revenue, median income, unemployment and much more. You can also see statistics for other states and countries.</p>
+<p id="p-5574">Now let’s do some calculations with these large numbers in the next example.</p>
+<article class="example example-like" id="example-148"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.4</span><span class="period">.</span>
+</h4>
+<p id="p-5575">Here are some approximate values for the U.S. from the Fiscal Year 2018: October 1, 2018 to September 30, 2019.</p>
+<ul class="disc">
+<li id="li-2415"><p id="p-5576">Federal Budget (Spending): $4.407 trillion</p></li>
+<li id="li-2416"><p id="p-5577">Federal Revenue Estimate: $3.422 trillion</p></li>
+<li id="li-2417"><p id="p-5578">National Debt:  $21.803 trillion</p></li>
+<li id="li-2418"><p id="p-5579">Interest on the National Debt for 2018: $332.637 billion</p></li>
+<li id="li-2419"><p id="p-5580">Gross Domestic Product: $20.656 trillion</p></li>
+<li id="li-2420"><p id="p-5581">Population: 329 million people</p></li>
+</ul>
+<ol id="p-5582" class="lower-alpha">
+<li id="li-2421"><p id="p-5583">Calculate the budget surplus or deficit for this fiscal year.</p></li>
+<li id="li-2422"><p id="p-5584">Calculate the debt to GDP ratio as a percentage.</p></li>
+<li id="li-2423"><p id="p-5585">How much debt does the U.S. have per person (per capita)?</p></li>
+<li id="li-2424"><p id="p-5586">How much interest is due on the national debt per person?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-545" id="solution-545"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-545"><div class="solution solution-like"><ol id="p-5587" class="lower-alpha">
+<li id="li-2425">
+<p id="p-5588">To calculate the budget surplus or deficit, we subtract the spending from the revenue, and we get:</p>
+<div class="displaymath process-math" data-contains-math-knowls="" id="md-159">
+\begin{align*}
+\text{Revenue } - \text{ Spending}\amp=\$3.422 \text{ trillion }-\$4.407 \text{ trillion }\\
+\amp=-\$0.985 \text{ trillion or }-\$985 \text{ billion}
+\end{align*}
+</div>
+<p id="p-5590">The result is negative, so there is a deficit of $985 billion. The word deficit indicates that the number is negative. If we wrote a deficit of -$985 billion that would be incorrect because it would be a double negative.</p>
+</li>
+<li id="li-2426">
+<p id="p-5591">To calculate the debt to GDP ratio, we divide using the order of the wording. For example, the ratio of a to b would be <span class="process-math">\(a:b\)</span> or <span class="process-math">\(a÷b\text{.}\)</span> So we will take the total amount of national debt and divide it by the GDP:</p>
+<p id="p-5592"><span class="process-math">\(\frac{\text{national debt}}{\text{GDP}}= \frac{\$21.803\text{ trillion}}{\$20.656 \text{ trillion}}=1.06 \text{ or } 106\%.\)</span></p>
+<p id="p-5593">The debt to GDP ratio is 106%.</p>
+</li>
+<li id="li-2427">
+<p id="p-5594">“Per” is another key word for division, so to calculate the debt per capita or per person, we divide the national debt by the population.</p>
+<p id="p-5595"><span class="process-math">\(\frac{\text{national debt}}{\text{population}} =\frac{\$21.803\text{ trillion}}{329\text{ million people}}\)</span></p>
+<p id="p-5596">Notice that the debt is written in trillions and the population is in millions, so we can’t divide these numbers yet. We need to put them into the same units. We can either write both of them in expanded form like this:</p>
+<p id="p-5597"><span class="process-math">\(\frac{\$21,803,000,000,000}{\$329,000,000}=\$66,271\text{ per person.}\)</span></p>
+<p id="p-5598">Or instead of writing out all the zeros, we can convert one of the numbers to match the other. In this situation it seems easier to convert $21.803 trillion to 21,803,000 million and then divide.</p>
+<p id="p-5599"><span class="process-math">\(\frac{\$21.803 \text{ trillion}}{329\text{ million people}}=\frac{\$21,803,000 \text{ million}}{329 \text{ million people}}=\$66,271\text{ per person.}\)</span></p>
+</li>
+<li id="li-2428">
+<p id="p-5600">To find out how much interest is due on the national debt per person, we will divide the interest by the population.</p>
+<p id="p-5601"><span class="process-math">\(\frac{\text{interest}}{\text{population}}=\frac{\$332.637}{329\text{ million people}}\)</span></p>
+<p id="p-5602">Again, the units do not match. This time we will convert the other way and change 329 million people into 0.329 billion people, and we have:</p>
+<p id="p-5603"><span class="process-math">\(=\frac{\$332.637\text{ billion}}{0.329\text{ billion}}=\$1,011.05 \text{ per person.}\)</span></p>
+<p id="p-5604">Or you can always write out all the zeros like this and get the same answer.</p>
+<p id="p-5605"><span class="process-math">\(\frac{\$332,637,000,000}{329,000,000}=\$1,011.05\text{ per person.}\)</span></p>
+</li>
+</ol></div></div>
+</div></article><article class="example example-like" id="example-149"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.5</span><span class="period">.</span>
+</h4>
+<p id="p-5606">One advantage of the Debt to GDP ratio is you can compare different countries with economies of different sizes. Let’s look at South Korea for comparison. Here are some approximate values, from 2020 (Commodity.com, 2020).</p>
+<ul class="disc">
+<li id="li-2429"><p id="p-5607">Population: 50.617 million people</p></li>
+<li id="li-2430"><p id="p-5608">National Debt: ₩754.835 trillion</p></li>
+<li id="li-2431"><p id="p-5609">Gross Domestic Product: ₩1.731 quadrillion</p></li>
+<li id="li-2432"><p id="p-5610">Interest Payments per year: ₩30.055 trillion</p></li>
+</ul>
+<ol id="p-5611" class="lower-alpha">
+<li id="li-2433"><p id="p-5612">Calculate the debt to GDP ratio as a percentage.</p></li>
+<li id="li-2434"><p id="p-5613">Calculate the amount of debt per person.</p></li>
+<li id="li-2435"><p id="p-5614">Calculate the amount of interest paid per year per person.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-546" id="solution-546"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-546"><div class="solution solution-like"><ol id="p-5615" class="lower-alpha">
+<li id="li-2436">
+<p id="p-5616">First, we divide the amount of debt by the GDP.</p>
+<p id="p-5617"><span class="process-math">\(\frac{\text{national debt}}{\text{GDP}} = \frac{\text{₩} 754.835\text{ trillion}}{\text{₩} 1.71\text{ quadrillion}}\)</span></p>
+<p id="p-5618">Since one of the numbers is in trillions and the other in quadrillions, we have to make them match before we can divide. We will change the GDP into trillions:</p>
+<p id="p-5619"><span class="process-math">\(\frac{\text{₩} 754.835\text{ trillion}}{\text{₩} 1.71\text{ quadrillion}}=0.44 \text{ or } 44\%.\)</span></p>
+</li>
+<li id="li-2437">
+<p id="p-5620">To find the amount of debt per person, we divde the debt by the number of people.</p>
+<p id="p-5621"><span class="process-math">\(\frac{\text{national debt}}{\text{population}} = \frac{\text{₩} 754.835\text{ trillion}}{50.617\text{ million people}}\)</span></p>
+<p id="p-5622">Again the units don’t match so we must either write all the zeros or make sure they are in the same units. In this case we will change the debt into millions but there are many ways you could do it.</p>
+<p id="p-5623"><span class="process-math">\(\frac{\text{₩} 754.835\text{ trillion}}{50.617\text{ million people}}=\text{₩}14,912,677.56 \text{ per person.}\)</span></p>
+</li>
+<li id="li-2438">
+<p id="p-5624">To find the amount of interest paid per year per person, we divde the amount of interest by the number of people.</p>
+<p id="p-5625"><span class="process-math">\(\frac{\text{interest}}{\text{population}} = \frac{\text{₩} 30.055 \text{ trillion}}{50.617\text{ million people}}\)</span></p>
+<p id="p-5626">We will change the interest to millions and divide.</p>
+<p id="p-5627"><span class="process-math">\(\frac{\text{₩} 30.055 \text{ trillion}}{50.617\text{ million people}}= \text{₩}593,772.84\text{ per person.}\)</span></p>
+</li>
+</ol></div></div>
+</div></article><p id="p-5628">For more comparisons, here is a graph showing the debt to GDP ratios around the world in 2020<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-122" id="fn-122"><sup> 122 </sup></a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/gdp_ratio_map.png" class="contained" alt="World map showing debt to GDP ratios in each country"></div></div></div></section><section class="subsection" id="subsection-167"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.6.7</span> <span class="title">Pie Charts and Percentages</span>
+</h3>
+<p id="p-5629">We can also do calculations with large numbers that involve percentages. We will look at some pie charts related to government income and spending.</p>
+<article class="example example-like" id="example-150"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.6</span><span class="period">.</span>
+</h4>
+<p id="p-5630">In a previous example, we saw that the federal revenue estimate for 2019 was $3.422 trillion. Use the pie chart to calculate the dollar value of each revenue source shown in the graph.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie.png" class="contained" alt="A pie chart showing federal revenue for the United States in the fiscal year 2019; The categories are Income taxes 56%, Social Security taxes 36%, Ad valorem taxes 6% and Business and other taxes 2%."></div></div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-547" id="solution-547"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-547"><div class="solution solution-like">
+<p id="p-5631">There are 4 segments in the pie chart, showing 4 different types of revenue. For each type, we will multiply the decimal form of the percentage by the total revenue:</p>
+<p id="p-5632">Individual Income Taxes: (0.56)($3.422 trillion) = $1.916 trillion</p>
+<p id="p-5633">Social Security Taxes (Payroll Taxes): (0.36)($3.422 trillion) = $1.232 trillion</p>
+<p id="p-5634">Corporate Taxes and Other: (.02)($3.422 trillion) = $0.0684 trillion or $68.4 billion</p>
+<p id="p-5635">Ad Valorum (Excise Taxes and other): (.06)($3.422 trillion) = $205.3 billion</p>
+</div></div>
+</div></article><article class="example example-like" id="example-151"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.7</span><span class="period">.</span>
+</h4>
+<p id="p-5636">In a previous example we also saw that the total amount of the federal budget in 2019 was $4.407 trillion. Use the pie chart of federal spending to calculate the dollar amounts of each of the following types of spending.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie2.png" class="contained" alt="A pie chart showing Federal Spending for the United States in fiscal year 2019; The categories are pensions 25%, defense 22%, education 3%, health care 28%, interest 8%, wellfare 8%, transportation 2%, protection 1%, general government 1% and other spending 2%"></div></div></div>
+<ol id="p-5637" class="lower-alpha">
+<li id="li-2439"><p id="p-5638">Defense</p></li>
+<li id="li-2440"><p id="p-5639">Social Security Payments</p></li>
+<li id="li-2441"><p id="p-5640">Healthcare</p></li>
+<li id="li-2442"><p id="p-5641">Education</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-548" id="solution-548"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-548"><div class="solution solution-like">
+<p id="p-5642">We will take the decimal form of the percentage of each type of spending and multiply it by the total budget amount of $4.407 trillion.</p>
+<ol class="lower-alpha">
+<li id="li-2443"><p id="p-5643">Defense: (0.22)($4.407 trillion) = $0.9695 trillion or $969.5 billion</p></li>
+<li id="li-2444"><p id="p-5644">Social Security: (0.25)($4.407 trillion) = $1.102 trillion</p></li>
+<li id="li-2445"><p id="p-5645">Healthcare: (0.28)($4.407 trillion) = $1.233 trillion</p></li>
+<li id="li-2446"><p id="p-5646">Education: (0.03)($4.407 trillion) = $0.1322 trillion or $132.2 billion</p></li>
+</ol>
+</div></div>
+</div></article><p id="p-5647">In this chapter, we have looked at many important quantitative aspects of government: apportionment, voting methods, how the president is chosen, gerrymandering and the federal budget. Filling out the census, being informed and voting are extremely important for the U.S. democracy. Please make up your own mind and vote if you are eligible.</p></section><section class="exercises" id="exercises-20"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">6.6.8</span> <span class="title">Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-737"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
+<p id="p-5648">Where does the U.S. federal income come from?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-549" id="solution-549"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-549"><div class="solution solution-like"><p id="p-5649">Federal income comes from individual income taxes and business income taxes.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-738"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-5650">What are the two types of federal spending?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-550" id="solution-550"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-550"><div class="solution solution-like"><p id="p-5651">The two types of federal spending are mandatory and discretional spending.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-739"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-5652">How many appropriations bills must be passed to approve the new federal budget?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-551" id="solution-551"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-551"><div class="solution solution-like"><p id="p-5653">Twelve appropriations bills must be passed to approve the new federal budget.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-740"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
+<p id="p-5654">When is the deadline for the new budget to be approved?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-552" id="solution-552"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-552"><div class="solution solution-like"><p id="p-5655">The deadline for the new budget is September 30th each year.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-741"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
+<p id="p-5656">What is the difference between federal deficit and debt?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-553" id="solution-553"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-553"><div class="solution solution-like"><p id="p-5657">A deficit is a shortfall in a single year and debt is the total of all the money owed.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-742"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
+<p id="p-5658">What is the Gross Domestic Product?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-554" id="solution-554"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-554"><div class="solution solution-like"><p id="p-5659">The Gross Domestic Product is the total of all the finished goods and services produced by a country in a specific period of time.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-743"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>
+<p id="p-5660">Write each number using a decimal abreviation.</p>
+<ol class="lower-alpha">
+<li id="li-2447"><p id="p-5661">4,300,000,000</p></li>
+<li id="li-2448"><p id="p-5662">12,567,000,000,000</p></li>
+<li id="li-2449"><p id="p-5663">500,000,000</p></li>
+<li id="li-2450"><p id="p-5664">6,040,000</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-555" id="solution-555"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-555"><div class="solution solution-like"><ol id="p-5665" class="lower-alpha">
+<li id="li-2451"><p id="p-5666">4.3 billion</p></li>
+<li id="li-2452"><p id="p-5667">12.567 trillion</p></li>
+<li id="li-2453"><p id="p-5668">500 million or 0.5 billion</p></li>
+<li id="li-2454"><p id="p-5669">6.04 million</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-744"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>
+<p id="p-5670">Write each number using a decimal abreviation.</p>
+<ol class="lower-alpha">
+<li id="li-2455"><p id="p-5671">63,651,000,000,000</p></li>
+<li id="li-2456"><p id="p-5672">93,600,000</p></li>
+<li id="li-2457"><p id="p-5673">119,930,000,000</p></li>
+<li id="li-2458"><p id="p-5674">6,001,000,000</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-556" id="solution-556"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-556"><div class="solution solution-like"><ol id="p-5675" class="lower-alpha">
+<li id="li-2459"><p id="p-5676">63.651 trillion</p></li>
+<li id="li-2460"><p id="p-5677">93.6 million</p></li>
+<li id="li-2461"><p id="p-5678">119.93 billion or 0.11993 trillion</p></li>
+<li id="li-2462"><p id="p-5679">6.001 billion</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-745"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
+<p id="p-5680">Write each number in expanded form.</p>
+<ol class="lower-alpha">
+<li id="li-2463"><p id="p-5681">5.7 million</p></li>
+<li id="li-2464"><p id="p-5682">9.22 trillion</p></li>
+<li id="li-2465"><p id="p-5683">100.2 billion</p></li>
+<li id="li-2466"><p id="p-5684">0.25 trillion</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-557" id="solution-557"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-557"><div class="solution solution-like"><ol id="p-5685" class="lower-alpha">
+<li id="li-2467"><p id="p-5686">5,700,000</p></li>
+<li id="li-2468"><p id="p-5687">9,220,000,000,000</p></li>
+<li id="li-2469"><p id="p-5688">100,200,000,000</p></li>
+<li id="li-2470"><p id="p-5689">250,000,000,000</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-746"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
+<p id="p-5690">Write each number in expanded form.</p>
+<ol class="lower-alpha">
+<li id="li-2471"><p id="p-5691">0.52 quadrillion</p></li>
+<li id="li-2472"><p id="p-5692">1.49 billion</p></li>
+<li id="li-2473"><p id="p-5693">9.07 trillion</p></li>
+<li id="li-2474"><p id="p-5694">800 million</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-558" id="solution-558"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-558"><div class="solution solution-like"><ol id="p-5695" class="lower-alpha">
+<li id="li-2475"><p id="p-5696">520,000,000,000,000</p></li>
+<li id="li-2476"><p id="p-5697">1,490,000,000</p></li>
+<li id="li-2477"><p id="p-5698">9,070,000,000,000</p></li>
+<li id="li-2478"><p id="p-5699">800,000,000</p></li>
+</ol></div></div>
+</div></article><div class="exercisegroup" id="exercisegroup-78">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-127">
+<p id="p-5700">For each country in problems 11-16, find the following. Data from Commodity.com (Commodity.com, 2020).</p>
+<ol class="lower-alpha">
+<li id="li-2479"><p id="p-5701">The debt to GDP ratio as a percentage.</p></li>
+<li id="li-2480"><p id="p-5702">The amount of debt per person.</p></li>
+<li id="li-2481"><p id="p-5703">The amount of interest paid per year per person.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises">
+<article class="exercise exercise-like" id="exercise-747"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<p id="p-5704">In Columbia, the unit of currency is the Columbian peso, abbreviated as COP$ or C$.</p>
+<ul class="disc">
+<li id="li-2482"><p id="p-5705">Population: 48.9 million people</p></li>
+<li id="li-2483"><p id="p-5706">National Debt: C$ 270.978 trillion</p></li>
+<li id="li-2484"><p id="p-5707">Gross Domestic Product: C$ 491.504 trillion</p></li>
+<li id="li-2485"><p id="p-5708">Interest Payments per year: C$ 16.628 trillion</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-559" id="solution-559"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-559"><div class="solution solution-like"><ol id="p-5709" class="lower-alpha">
+<li id="li-2486"><p id="p-5710">The debt to GDP ratio for Columbia is approximately 55.13%.</p></li>
+<li id="li-2487"><p id="p-5711">The amount of debt owed per person in Columbia is approximately C$ 5.541 million.</p></li>
+<li id="li-2488"><p id="p-5712">The amount of interest paid per year per person in Columbia is approximately C$ 0.34 million or C$ 340,040.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-748"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<p id="p-5713">In Pakistan, the unit of currency is the Pakistani rupee or Rs.</p>
+<ul class="disc">
+<li id="li-2489"><p id="p-5714">Population: 209.7 million people</p></li>
+<li id="li-2490"><p id="p-5715">National Debt: Rs 24.255 trillion</p></li>
+<li id="li-2491"><p id="p-5716">Gross Domestic Product: Rs 27.354 trillion</p></li>
+<li id="li-2492"><p id="p-5717">Interest Payments per year: Rs 2.033 trillion</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-560" id="solution-560"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-560"><div class="solution solution-like"><ol id="p-5718" class="lower-alpha">
+<li id="li-2493"><p id="p-5719">The debt to GDP ratio for Pakistan is approximately 88.67%.</p></li>
+<li id="li-2494"><p id="p-5720">The amount of debt owed per person in Pakistan is approximately Rs 0.115 million or Rs 115,655.</p></li>
+<li id="li-2495"><p id="p-5721">The amount of interest paid per year per person in Pakistan is approximately Rs 9,695.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-749"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<p id="p-5722">In Poland, the unit of currency is the złoty, or zł.</p>
+<ul class="disc">
+<li id="li-2496"><p id="p-5723">Population: 38,492,299 people</p></li>
+<li id="li-2497"><p id="p-5724">National Debt: 1.223 trillion zł</p></li>
+<li id="li-2498"><p id="p-5725">Gross Domestic Product: 1.981 trillion zł</p></li>
+<li id="li-2499"><p id="p-5726">Interest Payments per year: 52.500 million zł</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-561" id="solution-561"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-561"><div class="solution solution-like"><ol id="p-5727" class="lower-alpha">
+<li id="li-2500"><p id="p-5728">The debt to GDP ratio for Poland is approximately 61.74%.</p></li>
+<li id="li-2501"><p id="p-5729">The amount of debt owed per person in Poland is approximately 31,773 zł.</p></li>
+<li id="li-2502"><p id="p-5730">The amount of interest paid per year per person in Pakistan is approximately 1.36 zł.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-750"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<p id="p-5731">In Australia, the unit of currency is the Australian dollar, AUD or A$.</p>
+<ul class="disc">
+<li id="li-2503"><p id="p-5732">Population: 24.711 million people</p></li>
+<li id="li-2504"><p id="p-5733">National Debt: A$ 645.316 billion</p></li>
+<li id="li-2505"><p id="p-5734">Gross Domestic Product: A$ 1.927 trillion</p></li>
+<li id="li-2506"><p id="p-5735">Interest Payments per year: A$ 19.73 billion</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-562" id="solution-562"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-562"><div class="solution solution-like"><ol id="p-5736" class="lower-alpha">
+<li id="li-2507"><p id="p-5737">The debt to GDP ratio for Australia is approximately 33.49%.</p></li>
+<li id="li-2508"><p id="p-5738">The amount of debt owed per person in Australia is approximately A$ 26,115.</p></li>
+<li id="li-2509"><p id="p-5739">The amount of interest paid per year per person in Australia is approximately A$ 798.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-751"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
+<p id="p-5740">In South Africa, the unit of currency is the South African rand or R.</p>
+<ul class="disc">
+<li id="li-2510"><p id="p-5741">Population: 54.5 million people</p></li>
+<li id="li-2511"><p id="p-5742">National Debt: R. 3.736 trillion</p></li>
+<li id="li-2512"><p id="p-5743">Gross Domestic Product: R. 6.186 trillion</p></li>
+<li id="li-2513"><p id="p-5744">Interest Payments per year: R. 196.843 billion</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-563" id="solution-563"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-563"><div class="solution solution-like"><ol id="p-5745" class="lower-alpha">
+<li id="li-2514"><p id="p-5746">The debt to GDP ratio for South Africa is approximately 60.39%.</p></li>
+<li id="li-2515"><p id="p-5747">The amount of debt owed per person in South Africa is approximately R. 68,550.</p></li>
+<li id="li-2516"><p id="p-5748">The amount of interest paid per year per person in South Africa is approximately R. 3,612.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-752"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
+<p id="p-5749">In Malaysia, the unit of currency is the Malaysian ringgit or RM.</p>
+<ul class="disc">
+<li id="li-2517"><p id="p-5750">Population: 54.5 million people</p></li>
+<li id="li-2518"><p id="p-5751">National Debt: RM. 792.474 billion</p></li>
+<li id="li-2519"><p id="p-5752">Gross Domestic Product: RM. 1.444 trillion</p></li>
+<li id="li-2520"><p id="p-5753">Interest Payments per year: RM. 27.682 billion</p></li>
+</ul>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-564" id="solution-564"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-564"><div class="solution solution-like"><ol id="p-5754" class="lower-alpha">
+<li id="li-2521"><p id="p-5755">The debt to GDP ratio for Malaysia is approximately 54.88%.</p></li>
+<li id="li-2522"><p id="p-5756">The amount of debt owed per person in Malaysia is approximately RM 14,541.</p></li>
+<li id="li-2523"><p id="p-5757">The amount of interest paid per year per person in Malaysia is approximately RM 508.</p></li>
+</ol></div></div>
+</div></article>
+</div>
+</div>
+<article class="exercise exercise-like" id="exercise-753"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
+<p id="p-5758">The total state budget for the state of Virginia in 2018-2019 is approximately $63.9 billion and their population is about 8.5 million people. Use the pie chart (Virginia Department of Planning and Budget, 2018) to calculate how much is budgeted for:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Virginia_State_Budget.png" class="contained" alt="A pie chart showing the Virginia state budget in 2018-2021; The categories are education 34%, health and human resources 30%, transportation 12%, administration 7%, public safety 6% and other 11%."></div></div></div>
+<ol id="p-5759" class="lower-alpha">
+<li id="li-2524"><p id="p-5760">Transportation in total</p></li>
+<li id="li-2525"><p id="p-5761">Health and human resources per person</p></li>
+<li id="li-2526"><p id="p-5762">Public safety in total</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-565" id="solution-565"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-565"><div class="solution solution-like"><ol id="p-5763" class="lower-alpha">
+<li id="li-2527"><p id="p-5764">Approximately $7.668 billion is budgeted for transportation.</p></li>
+<li id="li-2528"><p id="p-5765">Approximately $2,255 is budgeted for health and human resources per person.</p></li>
+<li id="li-2529"><p id="p-5766">Approximately $3.834 billion is budgeted for public safety in total.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-754"><h4 class="heading"><span class="codenumber">18<span class="period">.</span></span></h4>
+<p id="p-5767">The Wisconsin state budget for 2018 was $8.9 billion and their population is about 5.8 million. Use the pie chart (Wisconsin Budget Project, 2020) to calculate how much was budgeted for:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Wisconsin_State_Budget.png" class="contained" alt="A pie chart showing the Wisconsin state budget in 2018; The categories are K-12 education 35%, Higher education 6%, property tax credits 7%, medical assistance 18%, local governments 5%, corrections 7% and other 22%."></div></div></div>
+<ol id="p-5768" class="lower-alpha">
+<li id="li-2530"><p id="p-5769">K-12 education in total</p></li>
+<li id="li-2531"><p id="p-5770">Local governments per person</p></li>
+<li id="li-2532"><p id="p-5771">Corrections in total</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-566" id="solution-566"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-566"><div class="solution solution-like"><ol id="p-5772" class="lower-alpha">
+<li id="li-2533"><p id="p-5773">Approximately $3.115 billion was budgeted for K-12 education.</p></li>
+<li id="li-2534"><p id="p-5774">Approximately $77 was budgeted for local governements per person.</p></li>
+<li id="li-2535"><p id="p-5775">Approximately $623 million was budgeted for corrections in total.</p></li>
+</ol></div></div>
+</div></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-105"><div class="fn">
+<a class="external" href="https://www.pgpf.org/chart-archive/0173_revenues_spending" target="_blank">"Federal Revenue and Spending, 1985-2050"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-106" id="fn-106"><sup> 106 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-107" id="fn-107"><sup> 107 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-108" id="fn-108"><sup> 108 </sup></a> for educational use.</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-106"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/chart-archive/0173_revenues_spending</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-107"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-108"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-109"><div class="fn">
+<a class="external" href="https://www.cbo.gov/publication/55151" target="_blank">"Updated Budget Projections: 2019 to 2029"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-110" id="fn-110"><sup> 110 </sup></a> by <a class="external" href="https://www.cbo.gov/" target="_blank">Congressional Budget Office</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-111" id="fn-111"><sup> 111 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-112" id="fn-112"><sup> 112 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-110"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.cbo.gov/publication/55151</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-111"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.cbo.gov/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-112"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-113"><div class="fn">
+<a class="external" href="https://www.pgpf.org/chart-archive/0025_federal-debt-hist" target="_blank">"Federal Debt: 1791-2019"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-114" id="fn-114"><sup> 114 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-115" id="fn-115"><sup> 115 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-116" id="fn-116"><sup> 116 </sup></a> for educational use.</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-114"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/chart-archive/0025_federal-debt-hist</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-115"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-116"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-117"><div class="fn">
+<a class="external" href="https://www.pgpf.org/analysis/2018/12/higher-interest-rates-will-raise-interest-costs-on-the-national-debt" target="_blank">"Net Interest Cost"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-118" id="fn-118"><sup> 118 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-119" id="fn-119"><sup> 119 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-120" id="fn-120"><sup> 120 </sup></a> for educational use.</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-118"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/analysis/2018/12/higher-interest-rates-will-raise-interest-costs-on-the-national-debt</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-119"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-120"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-121"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.usdebtclock.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-122"><div class="fn">
+<a class="external" href="https://commons.wikimedia.org/wiki/File:Public_debt_percent_gdp_world_map_(2010).svg" target="_blank">"Public Debt Percent GDP World Map"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-123" id="fn-123"><sup> 123 </sup></a> by <a class="external" href="" target="_blank">Wikimedia Commons Contributors</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-124" id="fn-124"><sup> 124 </sup></a>, <a class="external" href="" target="_blank">Wikimedia Commons, the free media repository.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-125" id="fn-125"><sup> 125 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-123"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/wiki/File:Public_debt_percent_gdp_world_map_(2010).svg</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-124"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-125"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+</div></main>
+</div>
+</body>
+</html>

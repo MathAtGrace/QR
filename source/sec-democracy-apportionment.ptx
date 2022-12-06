@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<section xml:id="chap_five_apportionment">
+<section xml:id="sec-democracy-apportionment">
 <title>Apportionment</title>
 
 <objectives>
-<title><xref ref="chap_five_apportionment"></xref></title>
+<title><xref ref="sec-democracy-apportionment"></xref></title>
   <introduction>
     <p>
       Students will be able to:
     </p>
   </introduction>
     <ul>
-      <li>
-        <p>
-          Explain the historical context of the formation of the U.S Government, including colonization, slavery and the Three-fifths Compromise, and how they relate to systemic inequality today
-        </p>
-      </li>
       <li>
         <p>
           Apportion representatives using Hamilton’s method
@@ -38,50 +33,31 @@
     </ul>
 </objectives>
 
+<!--
 <introduction>
   <figure>
       <caption>Alternative Video Lessons</caption>
       <video youtubeplaylist="PLsFUxEAXGFKR-ar3aATU7YvH9m36XhWFh" />
     </figure>
 </introduction>
-
+-->
 
 <subsection>
 <title>Historical Context for This Chapter</title>
   <p>
-    In this chapter we are going to study some of the math used in the United States government today. In doing this, it is very important to acknowledge the Native American genocide and race-based chattel slavery which are often left out of math textbooks.
-  </p>
-  <p>
-    We are including this history to show how racist policies, laws and practices like segregation, racial profiling, police brutality, mass incarceration, redlining and voter suppression continue to this day to limit the freedoms, rights and economic prospects of African Americans. With the COVID-19 pandemic and the death of George Floyd by a police officer, there is greater awareness of systemic racism than ever before.
-  </p>
-</subsection>
-
-<subsection>
-<title>Formation of the United States</title>
-  <p>
-    Scholars estimate that people have lived in the Americas for over 20,000 years (Worrall, 2018). By the time Columbus arrived, more than 50 million people were living in the Americas and around 10 million Indegenous people were living in the area that would become the United States (History.com Editors, 2018).
-  </p>
-  <p>
-    The first colonists arrived in America in 1607 and African people who had been violently separated from their families and homeland were brought to Jamestown in 1619 as slaves. Slave labor was used on tobacco and cotton plantations, for domestic work and even as part of the labor for building the White House. The system of slavery was an integral part of the United States economic and political system (How Slavery Helped Build a World Economy, 2003).
-  <p>
-  </p>
-    At the same time, white settlements kept encroaching on the homeland of Native Americans. Many treaties were signed and then violated. For example, in 1785, the <alert>Treaty of Hopewell</alert> was signed with the Cherokees in Georgia, which set a boundary on white settlement, but there were already colonists past that border.
-  </p>
-  <p>
-    The U.S. government was officially formed in 1787. During the <alert>Constitutional Convention</alert>, the framers were tasked with making decisions on the three branches of government and how people (or those considered to be people) would be represented. At that time only white men with property were allowed to vote. Women were also considered to be property of their husband at the time.
+    The U.S. government was officially formed in 1787. During the <alert>Constitutional Convention</alert>, the framers were tasked with making decisions on the three branches of government and how people (or those considered to be people) would be represented. At that time only white men with property were allowed to vote.
   </p>
   <p>
     In creating the Legislative Branch of government, it was decided that Congress would be made up of the Senate and the House of Representatives. Representation for the <alert>Senate</alert> would be <alert>equal</alert> with two senators per state. To account for the different sizes of the states, the representation in the <alert>House of Representatives</alert> would be <alert>proportional</alert> to the state’s population, but there was a controversy over how to count the population.
   </p>
-  <p>
-    During the Constitutional Convention, the northern and southern states were at odds on whom to count. The South wanted more representation in Congress which would also increase their power, so they argued to count slaves as part of their population. The southern states did not want to count slaves for taxation, however, because that would result in them paying more taxes.
-  </p>
-  <p>
-    Slaves were considered property, not humans, and they were not citizens. Therefore, they did not have the right to vote or participate in government. The anti-slavery North wanted to count only free people, which included free Blacks. This led to the <alert>Three-Fifths Compromise</alert> that determined three out of every five slaves would be counted toward a state’s population and taxation (Clayton, 2015).
-  </p>
-  <p>
-    It is also important to note that there are about 4 million U.S. Citizens who live in the territories of Guam, the Virgin Islands, the Northern Mariana Islands and Puerto Rico who do not have representatives or senators. They pay federal taxes like Social Security and Medicare but not Federal Income tax.
-  </p>
+  <blockquote>
+    <p>
+      Representatives and direct Taxes shall be apportioned among the several States which may be included within this Union, according to their respective Numbers, which shall be determined by adding to the whole Number of free Persons, including those bound to Service for a Term of Years, and excluding Indians not taxed, three fifths of all other Persons.1 The actual Enumeration shall be made within three Years after the first Meeting of the Congress of the United States, and within every subsequent Term of ten Years, in such Manner as they shall by Law direct. The Number of Representatives shall not exceed one for every thirty Thousand, but each State shall have at Least one Representative; and until such enumeration shall be made, the State of New Hampshire shall be entitled to chuse three, Massachusetts eight, Rhode Island and Providence Plantations one, Connecticut five, New-York six, New Jersey four, Pennsylvania eight, Delaware one, Maryland six, Virginia ten, North Carolina five, South Carolina five, and Georgia three.
+    </p>
+    <p>
+      <attribution>United States Constitution, Article I, Section 2, Clause 3</attribution>
+    </p>
+  </blockquote>
 </subsection>
 
 <subsection>
@@ -546,12 +522,6 @@
 
 <subsection>
 <title>Jefferson's Method</title>
-  <p>
-    <q>All men are created equal,</q> are words penned by our third president and Founding Father, Thomas Jefferson (1743 - 1826), in the preamble to the Constitution. However, over the course of his life, Jefferson owned around 600 slaves. Among these hundreds of slaves, Jefferson fathered at least six children with one of his slaves, Sally Hennings.
-  </p>
-  <p>
-    Over his lifetime and his writings, Jefferson wrestled with his conscience regarding slavery, which can be seen in documents such as drafts of the Constitution before its final version. In the end, his personal and monetary gain surpassed that of his concern for the enslaved.
-  </p>
   <p>
     Thomas Jefferson proposed a different method for apportionment. After Washington vetoed Hamilton’s method, Jefferson’s method was adopted, and used in Congress from 1791 through 1842. Jefferson, of course, had political reasons for wanting his method to be used rather than Hamilton’s. Primarily, his method favors larger states, and his own home state of Virginia was the largest at the time. He would also argue that it’s the ratio of people to representatives that is the critical thing, and apportionment methods should be based on that.
   </p>

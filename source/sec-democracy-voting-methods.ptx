@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<section xml:id="chap_five_voting_methods">
+<section xml:id="sec-democracy-voting">
 <title>Voting Methods</title>
 
 <objectives>
-<title><xref ref="chap_five_voting_methods"></xref></title>
+<title><xref ref="sec-democracy-voting"></xref></title>
   <introduction>
     <p>
       Students will be able to:
@@ -43,13 +43,14 @@
       </ul>
 </objectives>
 
+<!--
 <introduction>
   <figure>
       <caption>Alternative Video Lessons</caption>
       <video youtubeplaylist="PLsFUxEAXGFKSBkYzrj3N1zEiKPxhi_qTm" />
     </figure>
 </introduction>
-
+-->
 
 <subsection>
 <title>Voting Rights</title>

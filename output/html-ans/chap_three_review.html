@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-01T17:02:37-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Chapter 3 Review</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="ws-data-summary-stats.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="statistics.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chap_three_normal_model.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="ws-data-summary-stats.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="statistics.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chap_three_normal_model.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="internal">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="active">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="internal">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="internal">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="chap_three_review"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.7</span> <span class="title">Chapter 3 Review</span>
+</h2>
+<section class="exercises" id="exercises-10"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber"></span> <span class="title">Review Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-423"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
+<p id="p-2966">Portland Community College serves nearly 73,000 full-time and part-time students in the greater Portland area at four main campuses (SE, Cascade, Sylvania, and RC). Student Affairs would like to know how students get to campus. They randomly select 250 students from each of the four main campus and ask them how they got to classes on campus. The following are the results of their survey:</p>
+<ul class="disc">
+<li id="li-1073"><p id="p-2967">Public Transportation: 435</p></li>
+<li id="li-1074"><p id="p-2968">Driving: 475</p></li>
+<li id="li-1075"><p id="p-2969">Biking: 65</p></li>
+<li id="li-1076"><p id="p-2970">Walking: 30</p></li>
+</ul>
+<ol id="p-2971" class="lower-alpha">
+<li id="li-1077"><p id="p-2972">Identify the population and state its size.</p></li>
+<li id="li-1078"><p id="p-2973">Identify the sample and state its size.</p></li>
+<li id="li-1079"><p id="p-2974">What sampling method was used?</p></li>
+<li id="li-1080"><p id="p-2975">What type of data was collected?</p></li>
+<li id="li-1081"><p id="p-2976">Give the statistic for the percentage of students who use public transportation.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-331" id="solution-331"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-331"><div class="solution solution-like"><ol id="p-2977" class="lower-alpha">
+<li id="li-1082"><p id="p-2978">The population is PCC students and 73,000 is the sample size.</p></li>
+<li id="li-1083"><p id="p-2979">The sample is 250 students from the 4 main campuses.</p></li>
+<li id="li-1084"><p id="p-2980">Stratified Sample</p></li>
+<li id="li-1085"><p id="p-2981">Categorical or Qualitative</p></li>
+<li id="li-1086"><p id="p-2982"><span class="process-math">\(\displaystyle 435/1000 = 0.435 = 43.5\%\)</span></p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-424"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-2983">CNN conducted a survey of 500 American adults. 62% of those surveyed answered yes to the question, “Do you favor a law to ban the sale of assault weapons and semiautomatic rifles?” The reported margin of error was <span class="process-math">\(\pm 4\%\text{.}\)</span></p>
+<ol id="p-2984" class="lower-alpha">
+<li id="li-1087"><p id="p-2985">What population is being studied?</p></li>
+<li id="li-1088"><p id="p-2986">What is the sample?</p></li>
+<li id="li-1089"><p id="p-2987">What type of data is this?</p></li>
+<li id="li-1090"><p id="p-2988">Is the 62% reported in the problem an example of a statistic or a parameter?</p></li>
+<li id="li-1091"><p id="p-2989">What is the confidence interval? Is the confidence interval about the statistic or the parameter?</p></li>
+<li id="li-1092"><p id="p-2990">Explain what the confidence interval tells you.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-332" id="solution-332"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-332"><div class="solution solution-like"><ol id="p-2991" class="lower-alpha">
+<li id="li-1093"><p id="p-2992">The population being studied is American adults.</p></li>
+<li id="li-1094"><p id="p-2993">The sample is 500 American adults.</p></li>
+<li id="li-1095"><p id="p-2994">Categorical or Qualitative</p></li>
+<li id="li-1096"><p id="p-2995">The 62% reported in the problem an example of a statistic because it comes from a sample.</p></li>
+<li id="li-1097"><p id="p-2996"><span class="process-math">\(62\% - 4\% = 58\%\)</span> and <span class="process-math">\(62\% + 4\% = 66\%\text{.}\)</span> The confidence interval is <span class="process-math">\((58\%, 66\%)\)</span> and it is in relation to the parameter.</p></li>
+<li id="li-1098"><p id="p-2997">We are confident that the true proportion of all adult Americans who favor a law to ban the sale of assault weapons and semi automatic rifles is between 58% and 66%.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-425"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-2998">A survey of 265 PCC students found that 23%, plus or minus 4% prefer to study at the library.</p>
+<ol id="p-2999" class="lower-alpha">
+<li id="li-1099"><p id="p-3000">What population is being studied?</p></li>
+<li id="li-1100"><p id="p-3001">What type of data was collected?</p></li>
+<li id="li-1101"><p id="p-3002">Is the reported 23% a statistic or a parameter?</p></li>
+<li id="li-1102"><p id="p-3003">What is the margin of error?</p></li>
+<li id="li-1103"><p id="p-3004">What is the confidence interval?</p></li>
+<li id="li-1104"><p id="p-3005">Explain what the confidence interval tells you.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-333" id="solution-333"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-333"><div class="solution solution-like"><ol id="p-3006" class="lower-alpha">
+<li id="li-1105"><p id="p-3007">The population being studied is PCC Students.</p></li>
+<li id="li-1106"><p id="p-3008">Categorical or Qualitative</p></li>
+<li id="li-1107"><p id="p-3009">23% is a statistic because it is from a sample.</p></li>
+<li id="li-1108"><p id="p-3010">The margin of error is 4%.</p></li>
+<li id="li-1109"><p id="p-3011"><span class="process-math">\(23\% - 4\% = 19\%\)</span> and <span class="process-math">\(23\% + 4\% = 27\%\text{.}\)</span> The confidence interval is <span class="process-math">\((19\%, 27\%)\text{.}\)</span></p></li>
+<li id="li-1110"><p id="p-3012">We are confident that the true proportion of all PCC students who prefer to study at the library is between 19% and 27%</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-426"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
+<p id="p-3013">Identify the sampling method. Just the name will suffice.</p>
+<ol id="p-3014" class="lower-alpha">
+<li id="li-1111"><p id="p-3015">Researchers select every 5th customer who walks into the store to take a survey.</p></li>
+<li id="li-1112"><p id="p-3016">Raffle tickets are distributed and collected in a bag, where they are mixed and ten are drawn for prizes.</p></li>
+<li id="li-1113"><p id="p-3017">I asked the shoppers near me in the shoe department what size they wear.</p></li>
+<li id="li-1114"><p id="p-3018">An IRS auditor randomly selects 25 taxpayers in each filing status (single, head of household, married filing jointly, and married filing separately).</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-334" id="solution-334"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-334"><div class="solution solution-like"><ol id="p-3019" class="lower-alpha">
+<li id="li-1115"><p id="p-3020">Systematic</p></li>
+<li id="li-1116"><p id="p-3021">Simple Random Sample</p></li>
+<li id="li-1117"><p id="p-3022">Convenience</p></li>
+<li id="li-1118"><p id="p-3023">Systematic</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-427"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
+<p id="p-3024">Identify the most relevant source of bias in each situation.</p>
+<ol id="p-3025" class="lower-alpha">
+<li id="li-1119"><p id="p-3026">An opinion poll is posted on Facebook and Twitter asking how you are most likely to vote for in the next election.</p></li>
+<li id="li-1120"><p id="p-3027">Keller Auditorium ask all the people in the front three rows if they enjoyed the Broadway play.</p></li>
+<li id="li-1121"><p id="p-3028">To determine opinions on voter support for a downtown farmers market, a surveyor randomly questions people working close to the park where the farmers market would be.</p></li>
+<li id="li-1122"><p id="p-3029">A survey asks people to report the number of hours they work out each week.</p></li>
+<li id="li-1123"><p id="p-3030">A survey randomly calls people on their landlines and ask them if they would support a school bond measure in the next election.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-335" id="solution-335"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-335"><div class="solution solution-like"><ol id="p-3031" class="lower-alpha">
+<li id="li-1124"><p id="p-3032">Voluntary Response Bias</p></li>
+<li id="li-1125"><p id="p-3033">Sampling Bias</p></li>
+<li id="li-1126"><p id="p-3034">Sampling Bias</p></li>
+<li id="li-1127"><p id="p-3035">Response bias</p></li>
+<li id="li-1128"><p id="p-3036">Perceived lack of anonymity</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-428"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
+<p id="p-3037">Identify whether each situation describes an observational study or an experiment. If it is an experiment.</p>
+<ol id="p-3038" class="lower-alpha">
+<li id="li-1129"><p id="p-3039">Subjects are asked to run a mile and record their time.</p></li>
+<li id="li-1130"><p id="p-3040">Fifty students were asked to go to a quiet space in the library to memorize a poem. Fifty students were asked to go to a noisy location in the cafeteria to memorize the poem.  Each student recorded how much time it took to memorize the poem.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-336" id="solution-336"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-336"><div class="solution solution-like"><ol id="p-3041" class="lower-alpha">
+<li id="li-1131"><p id="p-3042">Observational</p></li>
+<li id="li-1132"><p id="p-3043">Experiment</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-429"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>
+<p id="p-3044">For the clinical trial of a migraine drug, subjects were randomly divided into two groups. The first received an inert pill, while the second received the test medicine. Patients were not aware of which group they were in. After one month, patients reported how many migraines they experienced.</p>
+<ol id="p-3045" class="lower-alpha">
+<li id="li-1133"><p id="p-3046">Which is the treatment group?</p></li>
+<li id="li-1134"><p id="p-3047">Which is the control group (if there is one)?</p></li>
+<li id="li-1135"><p id="p-3048">Is this study blind, double-blind, or neither?</p></li>
+<li id="li-1136"><p id="p-3049">Is this best described as an experiment, a controlled experiment, or a placebo-controlled experiment?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-337" id="solution-337"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-337"><div class="solution solution-like"><ol id="p-3050" class="lower-alpha">
+<li id="li-1137"><p id="p-3051">The treatment group is the group receiving the test medicine for migraines.</p></li>
+<li id="li-1138"><p id="p-3052">The control group is the group receiving the inert pill.</p></li>
+<li id="li-1139"><p id="p-3053">This is a blind study.</p></li>
+<li id="li-1140"><p id="p-3054">This is a placebo-controlled experiment.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-430"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>
+<p id="p-3055">In a recent study<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-57" id="fn-57"><sup> 57 </sup></a>, 380 high risk adolescents involved in the juvenile justice system were recruited to test an app designed to increase mindfulness and reduce substance use. Participants were randomly and equally assigned to use the app (Rewire) or receive services as usual from the Department of Youth Services. Participants were assessed to determine a baseline for substance use at the beginning of the study, and were asked to complete follow up assessments after 1 and 3 months. Assessments consisted of online surveys asking about substance use, emotion regulation, family demographics, and mindfulness practices. Urine samples were collected at each interview to verify self-reported substance use.</p>
+<ol id="p-3056" class="lower-alpha">
+<li id="li-1141"><p id="p-3057">Describe the treatment group.</p></li>
+<li id="li-1142"><p id="p-3058">Describe the control group (if there is one).</p></li>
+<li id="li-1143"><p id="p-3059">Is this study blind, double-blind, or neither? Explain</p></li>
+<li id="li-1144"><p id="p-3060">Is this best described as an experiment, a controlled experiment, or a placebo-controlled experiment?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-338" id="solution-338"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-338"><div class="solution solution-like"><ol id="p-3061" class="lower-alpha">
+<li id="li-1145"><p id="p-3062">The treatment group is the group assigned to use the Rewire app.</p></li>
+<li id="li-1146"><p id="p-3063">The control group is the group that receives the usual services from the Department of Youth Services.</p></li>
+<li id="li-1147"><p id="p-3064">This study is neither blind nor double-blind because the researchers and the youth know whether they are using the Rewire app of receiving the usual services from the Department of Youth Services.</p></li>
+<li id="li-1148"><p id="p-3065">This is a controlled experiment.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-431"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
+<p id="p-3066">In a 2010 survey, US teens aged 12-18 were asked what their favorite movie genre was. The results are shown below.</p>
+<ul class="disc">
+<li id="li-1149"><p id="p-3067">Action: 351</p></li>
+<li id="li-1150"><p id="p-3068">Adventure: 171</p></li>
+<li id="li-1151"><p id="p-3069">Comedy: 651</p></li>
+<li id="li-1152"><p id="p-3070">Drama: 389</p></li>
+<li id="li-1153"><p id="p-3071">Horror: 287</p></li>
+<li id="li-1154"><p id="p-3072">Romance: 107</p></li>
+<li id="li-1155"><p id="p-3073">Undecided: 51</p></li>
+</ul>
+<ol id="p-3074" class="lower-alpha">
+<li id="li-1156"><p id="p-3075">What is the implied population?</p></li>
+<li id="li-1157"><p id="p-3076">How many people were sampled?</p></li>
+<li id="li-1158"><p id="p-3077">What type of data is this?</p></li>
+<li id="li-1159"><p id="p-3078">Create a relative frequency bar chart of the results.</p></li>
+<li id="li-1160"><p id="p-3079">Create a pie chart of the results.</p></li>
+<li id="li-1161"><p id="p-3080">Explain the advantages/disadvantages of the two charts.</p></li>
+<li id="li-1162"><p id="p-3081">What is the statistic for the percentage of teens whose favorite movie genre is horror?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-339" id="solution-339"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-339"><div class="solution solution-like"><ol id="p-3082" class="lower-alpha">
+<li id="li-1163"><p id="p-3083">The implied population is United States teenagers.</p></li>
+<li id="li-1164"><p id="p-3084">There were 2007 teens surveyed.</p></li>
+<li id="li-1165"><p id="p-3085">Qualitative or Categorical</p></li>
+<li id="li-1166"><div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_movie_solution1.png" class="contained"></div></div></div></li>
+<li id="li-1167"><div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_movie_solution2.png" class="contained"></div></div></div></li>
+<li id="li-1168"><p id="p-3086">Answers will vary</p></li>
+<li id="li-1169"><p id="p-3087">About 14.3% of teens chose horror as their favorite movie genre.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-432"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
+<p id="p-3088">A survey of 5325 Portland residents was conducted to determine the primary purpose of using TriMet. The results are shown below.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_trimet.png" class="contained" alt="A bar graph with the following categories and percentages: recreation 45%, work 17%, personal business 8%, shopping 7%, school 6%, medical 3%, visit 3% and other 1%"></div></div></div>
+<ol id="p-3089" class="lower-alpha">
+<li id="li-1170"><p id="p-3090">How many people use TriMet for personal business?</p></li>
+<li id="li-1171"><p id="p-3091">How many people use TriMet to get to the airport?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-340" id="solution-340"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-340"><div class="solution solution-like"><ol id="p-3092" class="lower-alpha">
+<li id="li-1172"><p id="p-3093">426 people use TriMet for personal business. </p></li>
+<li id="li-1173"><p id="p-3094">479 people people use TriMet to get to the airport. </p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-433"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>
+<p id="p-3095">A group of college students were asked what the price of gas would need to be before they would start using public transportation to get to school instead of driving. Their responses in $/gallon are listed below:</p>
+<p id="p-3096">5.25, 5.00, 4.25, 3.75, 5.00, 4.50, 3.95, 3.75, 5.75, 4.75, 3.25, 3.75, 4.75, 5.00, 8.95</p>
+<ol id="p-3097" class="lower-alpha">
+<li id="li-1174"><p id="p-3098">Find the mean and median. Round to two decimal places and include units.</p></li>
+<li id="li-1175"><p id="p-3099">Based on the mean and median, would you expect the distribution to be symmetric, skewed left, or skewed right? Explain.</p></li>
+<li id="li-1176"><p id="p-3100">Find the standard deviation. Round to two decimal places and include units.</p></li>
+<li id="li-1177"><p id="p-3101">Calculate the z-scores for the responses of $3.25 and $8.95. Are either of these values unusual?</p></li>
+<li id="li-1178"><p id="p-3102">Determine the 5-number summary for the data.</p></li>
+<li id="li-1179"><p id="p-3103">What is the range and IQR of the data set? Round to two decimal places and include units.</p></li>
+<li id="li-1180"><p id="p-3104">Use the 5-number summary to construct a box plot.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-341" id="solution-341"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-341"><div class="solution solution-like"><ol id="p-3105" class="lower-alpha">
+<li id="li-1181"><p id="p-3106">The mean is $4.78. The median is $4.75.</p></li>
+<li id="li-1182"><p id="p-3107">The mean and median is about the same value therefore the data is symmetric.</p></li>
+<li id="li-1183"><p id="p-3108">The standard deviation is $1.34.</p></li>
+<li id="li-1184">
+<p id="p-3109"><span class="process-math">\(z_{\$3.25}=\frac{\$3.25-\$4.78}{\$1.34}=\frac{-\$1.53}{\$1.34}=-1.14\)</span></p>
+<p id="p-3110"><span class="process-math">\(z_{\$8.95}=\frac{\$8.95-\$4.78}{\$1.34}=\frac{\$4.17}{\$1.34}=3.11\)</span></p>
+</li>
+<li id="li-1185"><div class="sidebyside"><div class="sbsrow" style="margin-left:32.5%;margin-right:32.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_summary.png" class="contained"></div></div></div></li>
+<li id="li-1186">
+<p id="p-3111"><span class="process-math">\(\text{Range}=\$8.95-\$3.25=\$5.70\)</span></p>
+<p id="p-3112"><span class="process-math">\(\text{IQR}=\$5-\$3.75=\$1.25\)</span></p>
+</li>
+<li id="li-1187"><div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_box.png" class="contained"></div></div></div></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-434"><h4 class="heading"><span class="codenumber">12<span class="period">.</span></span></h4>
+<p id="p-3113">The following is a sample of scores from a recent Math 105 exam:</p>
+<p id="p-3114">32, 71, 72, 73, 73, 73, 76, 77, 78, 78, 79, 86, 88, 88, 88, 94, 94, 99</p>
+<ol id="p-3115" class="lower-alpha">
+<li id="li-1188"><p id="p-3116">Find the mean of the data. Round to one decimal place if necessary.</p></li>
+<li id="li-1189"><p id="p-3117">Find the median of the data. Round to one decimal place if necessary.</p></li>
+<li id="li-1190"><p id="p-3118">Just comparing the mean and the median, do you expect the distribution to be skewed left, skewed right, or symmetric. Explain.</p></li>
+<li id="li-1191"><p id="p-3119">Find the standard deviation of the data. Round to one decimal place if needed.</p></li>
+<li id="li-1192"><p id="p-3120">Explain what the mean and standard deviation tell you about the sampled test scores.</p></li>
+<li id="li-1193"><p id="p-3121">Is the score of 99 unusual? Use z-scores to support your claim.</p></li>
+<li id="li-1194"><p id="p-3122">Find the 5-number summary.</p></li>
+<li id="li-1195"><p id="p-3123">Use the 5-number summary to create a box plot.</p></li>
+<li id="li-1196"><p id="p-3124">Create a histogram of the data. Start your scale at 0, and use a bin size of 10.</p></li>
+<li id="li-1197"><p id="p-3125">Describe the shape of the distribution. Be sure to address all three characteristics (modality, symmetry, and outliers).</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-342" id="solution-342"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-342"><div class="solution solution-like"><ol id="p-3126" class="lower-alpha">
+<li id="li-1198"><p id="p-3127">The mean is about 78.9.</p></li>
+<li id="li-1199"><p id="p-3128">The median is 78.</p></li>
+<li id="li-1200"><p id="p-3129">The mean is greater than the median therefore the data is left skewed.</p></li>
+<li id="li-1201"><p id="p-3130">The standard deviation is about 14.5.</p></li>
+<li id="li-1202"><p id="p-3131">The majority of values are between 64.4 and 93.4.</p></li>
+<li id="li-1203"><p id="p-3132"><span class="process-math">\(z=\frac{(99-78.9)}{14.5}=1.39\text{.}\)</span> This 99 is only 1.39 standard deviations above the mean. This is not unusual. Generally, a value should be more than three deviations  above or below the mean to be considered unusual.</p></li>
+<li id="li-1204"><div class="sidebyside"><div class="sbsrow" style="margin-left:32.5%;margin-right:32.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_summary2.png" class="contained"></div></div></div></li>
+<li id="li-1205"><div class="sidebyside"><div class="sbsrow" style="margin-left:32.5%;margin-right:32.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_box2.png" class="contained"></div></div></div></li>
+<li id="li-1206"><div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_boxplot_summary2.png" class="contained"></div></div></div></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-435"><h4 class="heading"><span class="codenumber">13<span class="period">.</span></span></h4>
+<p id="p-3133">The following table shows the cost of purchasing a car at a local dealership. Some of the cars sold were new and some were used.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">Cost (Thousands<br>of dollars)</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">Frequency</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">12</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">15</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">12</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">22</td>
+<td class="c m b1 r1 l0 t0 lines">10</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">30</td>
+<td class="c m b1 r1 l0 t0 lines">12</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">32</td>
+<td class="c m b1 r1 l0 t0 lines">11</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">40</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">45</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+</tr>
+</table></div></div></div>
+<ol id="p-3134" class="lower-alpha">
+<li id="li-1207"><p id="p-3135">Find the mean and standard deviation of the data. Round to two decimal places and include units.</p></li>
+<li id="li-1208"><p id="p-3136">Explain what standard deviation tell you about how much cars are selling for at this dealership.</p></li>
+<li id="li-1209"><p id="p-3137">Determine the five-number summary.</p></li>
+<li id="li-1210"><p id="p-3138">What is the range and IQR?</p></li>
+<li id="li-1211"><p id="p-3139">Use the five-number summary to construct a boxplot of the data.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-343" id="solution-343"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-343"><div class="solution solution-like"><ol id="p-3140" class="lower-alpha">
+<li id="li-1212"><p id="p-3141">The mean is about $26,200 and the standard deviation is about $10,000.</p></li>
+<li id="li-1213"><p id="p-3142">The majority of cars sell for between $16,200 and $36,200.</p></li>
+<li id="li-1214"><div class="sidebyside"><div class="sbsrow" style="margin-left:32.5%;margin-right:32.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_summary3.png" class="contained"></div></div></div></li>
+<li id="li-1215">
+<p id="p-3143"><span class="process-math">\(\text{Range} = 45 - 12 = 33\)</span></p>
+<p id="p-3144"><span class="process-math">\(\text{IQR}= 32 - 18 = 14\)</span></p>
+</li>
+<li id="li-1216"><div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_five_num_box3.png" class="contained"></div></div></div></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-436"><h4 class="heading"><span class="codenumber">14<span class="period">.</span></span></h4>
+<p id="p-3145">The double box-and-whisker plot<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-59" id="fn-59"><sup> 59 </sup></a> shows the goals scored per game by two soccer teams during a 25 game season.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:25%;margin-right:25%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_5/review_teama_teamb.png" class="contained" alt="The boxplot for Team A shows a 5-number summary of 0, 2, 4, 5, 8 goals. The boxplot for Team B shows a 5-number summary of 0, 6, 8, 9, 10 goals."></div></div></div>
+<ol id="p-3146" class="lower-alpha">
+<li id="li-1217"><p id="p-3147">Estimate the 25th, 50th and 75th percentiles for Team A and Team B goals.</p></li>
+<li id="li-1218"><p id="p-3148">What is the median number of goals for Team A? Team B?</p></li>
+<li id="li-1219"><p id="p-3149">What percentage of the goals for Team B is more than the maximum number of Team A?</p></li>
+<li id="li-1220"><p id="p-3150">What Team data is more symmetric?</p></li>
+<li id="li-1221"><p id="p-3151">What is the shape of the distribution for Team B?</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-344" id="solution-344"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-344"><div class="solution solution-like"><ol id="p-3152" class="lower-alpha">
+<li id="li-1222">
+<p id="p-3153">The 25th, 50th, and 75th percentile for Team A  goals are 2, 4, and 5, respectively.</p>
+<p id="p-3154">The 25th, 50th, and 75th percentile for Team B  goals are 6, 8, and 9, respectively.</p>
+</li>
+<li id="li-1223">
+<p id="p-3155">The Median for Team A is 4.</p>
+<p id="p-3156">The Median for Team B is 8.</p>
+</li>
+<li id="li-1224"><p id="p-3157">Fifty percent of the goals for Team B exceed the maximum number for goals for Team A.</p></li>
+<li id="li-1225"><p id="p-3158">The data for Team A is more symmetric than for Team B.</p></li>
+<li id="li-1226"><p id="p-3159">The data for Team B is skewed left.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-437"><h4 class="heading"><span class="codenumber">15<span class="period">.</span></span></h4>
+<p id="p-3160">Suppose you buy a new car whose advertised gas mileage is 35 mpg (miles per gallon). After driving the car for several months, you find that you are getting only 30.4 mpg. You phone the manufacturer and learn that the standard deviation for that model is 1.35 mpg.</p>
+<ol id="p-3161" class="lower-alpha">
+<li id="li-1227"><p id="p-3162">Find the z-score for the gas mileage of your car.</p></li>
+<li id="li-1228"><p id="p-3163">Does it appear that your car is getting unusually low gas mileage? Explain your answer using your z-score.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-345" id="solution-345"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-345"><div class="solution solution-like"><ol id="p-3164" class="lower-alpha">
+<li id="li-1229"><p id="p-3165"><span class="process-math">\(\displaystyle z=\frac{(30.4-35)}{1.35}=\frac{-4.6}{1.35} \approx -3.41\)</span></p></li>
+<li id="li-1230"><p id="p-3166">30.4 mpg is 3.41 standard deviations below the mean so the car is getting unusually low gas mileage.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-438"><h4 class="heading"><span class="codenumber">16<span class="period">.</span></span></h4>
+<p id="p-3167">This data is a sample of the average number of minutes per week that a driver is delayed by road congestion in 13 cities:</p>
+<p id="p-3168">66, 55, 53, 50, 36, 45, 34, 43, 52, 40, 76, 45, 63</p>
+<ol id="p-3169" class="lower-alpha">
+<li id="li-1231"><p id="p-3170">Find the mean and the standard deviation, including units.</p></li>
+<li id="li-1232"><p id="p-3171">What is the z-score for the city with an average delay time of 42 hours per week?</p></li>
+<li id="li-1233"><p id="p-3172">Is an average delay time of 42 hours per week unusual? Explain using the calculated z-score.</p></li>
+</ol>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-346" id="solution-346"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-346"><div class="solution solution-like"><ol id="p-3173" class="lower-alpha">
+<li id="li-1234"><p id="p-3174">The mean is approximately 50.6 minutes per week. The standard deviation approximately 12.2 minutes per week.</p></li>
+<li id="li-1235"><p id="p-3175"><span class="process-math">\(\displaystyle z=\frac{(42-50.6)}{12.2} \approx -0.70\)</span></p></li>
+<li id="li-1236"><p id="p-3176">42 minutes per week is 0.70 standard deviations below the mean, so it is not unusual.</p></li>
+</ol></div></div>
+</div></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-57"><div class="fn">
+<a class="external" href="https://clinicaltrials.gov/ct2/show/NCT04027075?map_cntry=US&amp;map_state=US%3AOR&amp;rank=1" target="_blank">https://clinicaltrials.gov/ct2/show/NCT04027075?map_cntry=US&amp;map_state=US%3AOR&amp;rank=1</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-58" id="fn-58"><sup> 58 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-58"><div class="fn"><code class="code-inline tex2jax_ignore">https://clinicaltrials.gov/ct2/show/NCT04027075?map_cntry=US&amp;map_state=US%3AOR&amp;rank=1</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-59"><div class="fn">
+<a class="external" href="https://brainly.com/question/11978942" target="_blank">Source: https://brainly.com/question/11978942</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-60" id="fn-60"><sup> 60 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-60"><div class="fn"><code class="code-inline tex2jax_ignore">https://brainly.com/question/11978942</code></div></div>
+</div></main>
+</div>
+</body>
+</html>

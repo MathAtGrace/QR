@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2022-12-01T17:04:04-05:00       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Gerrymandering and How to Measure It</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Quantitative Wisdom">
+<meta property="book:author" content="Dr. Ryan Johnson">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+    renderActions: {
+        findScript: [10, function (doc) {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+                var display = !!node.type.match(/; *mode=display/);
+                var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                var text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = {node: text, delim: '', n: 0};
+                math.end = {node: text, delim: '', n: 0};
+                doc.math.push(math);
+            });
+        }, '']
+    },
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext-book ignore-math has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\degree}[0]{^{\circ}}
+\newcommand{\Ccancel}[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\alert}[1]{\boldsymbol{\color{magenta}{#1}}}
+\newcommand{\blert}[1]{\boldsymbol{\color{blue}{#1}}}
+\newcommand{\bluetext}[1]{\color{blue}{#1}} 
+\delimitershortfall-1sp
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</span></div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
+<p class="byline">Dr. Ryan Johnson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button><div id="calculator-container" class="calculator-container" style="display: none; z-index:100;"><div id="geogebra-calculator"></div></div>
+<script>
+var ggbApp = new GGBApplet({"appName": "graphing",
+    "width": 330,
+    "height": 600,
+    "showToolBar": true,
+    "showAlgebraInput": true,
+    "perspective": "G/A",
+    "algebraInputPosition": "bottom",
+    "scaleContainerClass": "calculator-container",
+    "allowUpscale": true,
+    "autoHeight": true,
+    "disableAutoScale": false},
+true);
+</script><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chap_five_popular_vote.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="democracy.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chap_five_review.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chap_five_popular_vote.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="democracy.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chap_five_review.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="frontmatter" class="internal"><span class="title">Front Matter</span></a><ul>
+<li><a href="colophon-1.html" data-scroll="colophon-1" class="internal">Colophon</a></li>
+<li><a href="dedication-1.html" data-scroll="dedication-1" class="internal">Dedication</a></li>
+<li><a href="acknowledgement-1.html" data-scroll="acknowledgement-1" class="internal">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface" class="internal">Preface</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-introduction.html" data-scroll="ch-introduction" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a><ul>
+<li><a href="time.html" data-scroll="time" class="internal">Time Management Lab</a></li>
+<li><a href="mindset.html" data-scroll="mindset" class="internal">Mindset Lab</a></li>
+<li><a href="sec-math-theology.html" data-scroll="sec-math-theology" class="internal">God and Math</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-numbers.html" data-scroll="ch-numbers" class="internal"><span class="codenumber">2</span> <span class="title">Numbers</span></a><ul>
+<li><a href="sec-problem-solving.html" data-scroll="sec-problem-solving" class="internal">Problem Solving</a></li>
+<li><a href="sec_orders_of_mag.html" data-scroll="sec_orders_of_mag" class="internal">Orders of Magnitude</a></li>
+<li><a href="sec_water_footprint.html" data-scroll="sec_water_footprint" class="internal">Proportional Reasoning</a></li>
+<li><a href="unit-conversion.html" data-scroll="unit-conversion" class="internal">Unit Conversion</a></li>
+<li><a href="cost-of-driving.html" data-scroll="cost-of-driving" class="internal">Cost of Driving</a></li>
+<li><a href="home-improvements.html" data-scroll="home-improvements" class="internal">Home Improvements</a></li>
+<li><a href="sec_numbers_percentages.html" data-scroll="sec_numbers_percentages" class="internal">Percentages</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="financial_math.html" data-scroll="financial_math" class="internal"><span class="codenumber">3</span> <span class="title">Finance</span></a><ul>
+<li><a href="sec-finance-intro-spreadsheet.html" data-scroll="sec-finance-intro-spreadsheet" class="internal">Introduction to Spreadsheets</a></li>
+<li><a href="sec-finance-simple-compound.html" data-scroll="sec-finance-simple-compound" class="internal">Simple and Compound Interest</a></li>
+<li><a href="ws-finance-spreadsheets-and-interest.html" data-scroll="ws-finance-spreadsheets-and-interest" class="internal">Worksheets for Spreadsheets and Interest</a></li>
+<li><a href="sec-finance-savings-plan.html" data-scroll="sec-finance-savings-plan" class="internal">Savings Plans</a></li>
+<li><a href="sec-finance-loans.html" data-scroll="sec-finance-loans" class="internal">Loan Payments</a></li>
+<li><a href="ws-finance-savings-loans.html" data-scroll="ws-finance-savings-loans" class="internal">Worksheets Savings and Loans</a></li>
+<li><a href="chap_two_income_taxes.html" data-scroll="chap_two_income_taxes" class="internal">Income Taxes</a></li>
+<li><a href="sec-taxes.html" data-scroll="sec-taxes" class="internal">Income Tax Worksheet</a></li>
+<li><a href="finance-final-project.html" data-scroll="finance-final-project" class="internal">Planning and Budget Project</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="statistics.html" data-scroll="statistics" class="internal"><span class="codenumber">4</span> <span class="title">Data</span></a><ul>
+<li><a href="sec-data-statistical-process.html" data-scroll="sec-data-statistical-process" class="internal">Overview of the Statistical Process</a></li>
+<li><a href="sec-data-describing-data.html" data-scroll="sec-data-describing-data" class="internal">Describing Data</a></li>
+<li><a href="ws-data-overview-describing.html" data-scroll="ws-data-overview-describing" class="internal">Worksheets Statistical Process and Describing Data</a></li>
+<li><a href="sec-data-measure-of-center.html" data-scroll="sec-data-measure-of-center" class="internal">Summary Statistics: Measures of Center</a></li>
+<li><a href="sec-data-measure-of-variation.html" data-scroll="sec-data-measure-of-variation" class="internal">Summary Statistics: Measures of Variation</a></li>
+<li><a href="ws-data-summary-stats.html" data-scroll="ws-data-summary-stats" class="internal">Worksheet Measures of Central Tendancy and Variation</a></li>
+<li><a href="chap_three_review.html" data-scroll="chap_three_review" class="internal">Chapter 3 Review</a></li>
+<li><a href="chap_three_normal_model.html" data-scroll="chap_three_normal_model" class="internal">The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
+<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
+<li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
+<li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
+<li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="democracy.html" data-scroll="democracy" class="internal"><span class="codenumber">6</span> <span class="title">Democracy</span></a><ul>
+<li><a href="chap_five_apportionment.html" data-scroll="chap_five_apportionment" class="internal">Apportionment</a></li>
+<li><a href="chap_five_voting_methods.html" data-scroll="chap_five_voting_methods" class="internal">Voting Methods</a></li>
+<li><a href="chap_five_popular_vote.html" data-scroll="chap_five_popular_vote" class="internal">The Popular Vote, Electoral College and Electoral Power</a></li>
+<li><a href="chap_five_gerrymandering.html" data-scroll="chap_five_gerrymandering" class="active">Gerrymandering and How to Measure It</a></li>
+<li><a href="chap_five_review.html" data-scroll="chap_five_review" class="internal">Chapter 5 Review</a></li>
+<li><a href="chap_five_budget_deficit_debt.html" data-scroll="chap_five_budget_deficit_debt" class="internal">Federal Budget, Deficit and National Debt</a></li>
+</ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="backmatter" class="internal"><span class="title">Backmatter</span></a></li>
+<li class="link"><a href="solutions-1.html" data-scroll="solutions-1" class="internal"><span class="codenumber">A</span> <span class="title">Selected Hints</span></a></li>
+<li class="link"><a href="solutions-2.html" data-scroll="solutions-2" class="internal"><span class="codenumber">B</span> <span class="title">Selected Solutions</span></a></li>
+<li class="link"><a href="appendix-1.html" data-scroll="appendix-1" class="internal"><span class="codenumber">C</span> <span class="title">List of Symbols</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1" class="internal"><span class="title">Index</span></a></li>
+<li class="link"><a href="colophon-2.html" data-scroll="colophon-2" class="internal"><span class="title">Colophon</span></a></li>
+</ul></nav><div class="extras"><nav><a class="pretext-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content">
+<section class="section" id="chap_five_gerrymandering"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.4</span> <span class="title">Gerrymandering and How to Measure It</span>
+</h2>
+<article class="objectives goal-like" id="objectives-26"><h3 class="heading">
+<span class="type">Objectives:</span><span class="space"> </span><span class="title">Section 6.4</span>
+</h3>
+<div class="introduction" id="introduction-115"><p id="p-5184">Students will be able to:</p></div>
+<ul class="disc">
+<li id="li-2218"><p id="p-5185">Determine fair representation based on the proportion of each party in a state</p></li>
+<li id="li-2219"><p id="p-5186">Explain what gerrymandering is and how packing and cracking work</p></li>
+<li id="li-2220"><p id="p-5187">Calculate the efficiency gap for a given map</p></li>
+<li id="li-2221"><p id="p-5188">Calculate the percentage of the population that each seat represents</p></li>
+<li id="li-2222"><p id="p-5189">Determine the number of seats that the efficiency gap represents and whether a map is fair</p></li>
+<li id="li-2223"><p id="p-5190">Draw district boundaries to form a gerrymandered map and a fair map</p></li>
+</ul></article><section class="introduction" id="introduction-116"><figure class="figure figure-like" id="figure-33"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-14" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLsFUxEAXGFKSI1H8puyGAAH1kH-FB_zCB&amp;modestbranding=1&amp;rel=0"></iframe></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.1<span class="period">.</span></span><span class="space"> </span>Alternative Video Lessons</figcaption></figure></section><section class="subsection" id="subsection-157"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.1</span> <span class="title">Forming State Legislative Districts</span>
+</h3>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel middle" style="width:30%;"><p id="p-5191">As we saw in <a href="chap_five_apportionment.html" class="internal" title="Section 6.1: Apportionment">Section 6.1</a> the U.S. House of Representatives has 435 seats that are re-apportioned among the states every 10 years after the census. For example, in Oregon we currently have 5 legislative districts as shown in this map<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-83" id="fn-83"><sup> 83 </sup></a>. After the 2020 census is finished, that number could change. It has been projected that Oregon may get a 6th representative due to population growth from 2010 to 2020.</p></div>
+<div class="sbspanel middle" style="width:64%;"><img src="external/democracy/5_4/district_pic.png" class="contained" alt="A map of oregon showing the five legislative districts. District 1 is the Northern Coast and West side of Portland, District 2 is the East side of the state, District 3 is the East side of Portland, District 4 is the Southern Coast and West side of the state, District 5 is the central coast over to Salem and surrounding areas."></div>
+</div></div>
+<p id="p-5192">After a reapportionment, it is up to each state government to divide their population into equal districts which each elect their representative to the U.S. House. Each representative should represent approximately the same number of people, but their areas may not be the same. Due to different population densities in urban and rural areas, you can see in the map of Oregon that the districts are not geographically equal.</p>
+<p id="p-5193">Currently in most states, the state legislature draws the district boundaries. That means the party in power is in charge of drawing the new districts and they could redraw the lines to help their own party. This is called gerrymandering. <em class="alert">Gerrymandering</em>, pronounced, “Jerrymandering,” is when districts are drawn to the political advantage of those drawing the boundaries.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel middle" style="width:48.4536082474227%;"><p id="p-5194">Gerrymandering got its name from Elbridge Gerry, the governor of Massachusetts who signed a bill in 1812 that created the unusual district pictured here that looked like a salamander<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-87" id="fn-87"><sup> 87 </sup></a>. It gave then Democrat-Republicans a bigger state Senate majority, even though the Federalist party got more votes statewide.</p></div>
+<div class="sbspanel middle" style="width:48.4536082474227%;"><img src="external/democracy/5_4/district_pic2.jpg" class="contained" alt="A map of Massachusetts in 1812 showing the unusual district shape with a salamander drawn over it."></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel middle" style="width:30.9278350515464%;"><p id="p-5195">Here are some current well-known gerrymanders. This one is called Pennsylvania’s “Goofy Kicking Donald Duck”<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-92" id="fn-92"><sup> 92 </sup></a></p></div>
+<div class="sbspanel middle" style="width:65.979381443299%;"><img src="external/democracy/5_4/pennsylvania.png" class="contained" alt="A map of Pennsylvania with the district shaded in that looks like Goofy kicking Donald Duck."></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel middle" style="width:30.9278350515464%;"><p id="p-5196">This one is called Ohio's “Lake Erie Monster”<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-97" id="fn-97"><sup> 97 </sup></a>.</p></div>
+<div class="sbspanel middle" style="width:65.979381443299%;"><img src="external/democracy/5_4/ohio.png" class="contained" alt="A map of Ohio with the district shaded in that is long and thin along Lake Erie that looks like a sea monster."></div>
+</div></div>
+<p id="p-5197">Gerrymandering has occurred by both parties. Gerrymandering by race is illegal due to the Voting Rights Act of 1965, so people of color cannot be spread out to dilute their vote. Groups with similar interests may want to be put together to form voting blocks, but that is controversial. Gerrymandering by political party has been the subject of many lawsuits and Supreme Court cases. One of the challenges is how to measure gerrymandering to prove that it has occurred. The measurement must be easy to explain and understand in court.</p>
+<p id="p-5198">Several ways to measure gerrymandering have been proposed. Some of the first methods used geometry to measure how compact a district is, rather than the sprawling salamander. But it has been shown that being compact does not equate with fairness. More recent methods use computer simulations to determine whether a certain map is an extreme outlier compared to other possible maps, or measure something called partisan bias<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-102" id="fn-102"><sup> 102 </sup></a>.</p>
+<p id="p-5199">In this book we will focus on the efficiency gap, proposed in 2015 by Nicholas Stephanopoulos and Eric McGhee. The <em class="alert">efficiency gap</em> is a measure of the advantage one party has over the other party due to the partisanship of the voters in each district.</p>
+<p id="p-5200">Later in this section we will learn how to calculate and interpret the efficiency gap. First, let’s look at how we can tell whether a map is fair or not.</p></section><section class="subsection" id="subsection-158"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.2</span> <span class="title">Proportionality and Fairness</span>
+</h3>
+<p id="p-5201">For a map to be fair, we would expect the portion of seats that a political party wins in an election to be about the same as the portion of that party in the state. This is called <em class="alert">proportionality</em>. For example, if a state is 50:50 Democrat to Republican, they should each get about half of the seats. There is nothing in the constitution that guarantees proportionality, but this is a basic measure of fairness. Let's look at a couple of examples using fractions and decimals.</p>
+<article class="example example-like" id="example-141"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.2</span><span class="period">.</span>
+</h4>
+<p id="p-5202">If a state with 6 seats is <span class="process-math">\(\frac{1}{3}\)</span> Republican and <span class="process-math">\(\frac{2}{3}\)</span> Democrat, how many seats would each party have if the representation was proportional?</p>
+<p id="p-5203">We will multiply the total number of seats by fraction that each party represents.</p>
+<p id="p-5204">Republicans: <span class="process-math">\(6\cdot\frac{1}{3}=\frac{6}{1}\cdot\frac{1}{3}=\frac{6}{3}=2\)</span> seats.</p>
+<p id="p-5205">Democrats: <span class="process-math">\(6\cdot\frac{2}{3}=\frac{6}{1}\cdot\frac{2}{3}=\frac{12}{3}=4\)</span> seats.</p>
+<p id="p-5206">In this case the Republicans should have 2 seats and the Democrats should have 4 seats. The numbers won't usually work out so nicely so let's look at another example.</p></article><article class="example example-like" id="example-142"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.3</span><span class="period">.</span>
+</h4>
+<p id="p-5207">If a state with 8 seats is <span class="process-math">\(55\%\)</span> Republican and <span class="process-math">\(45\%\)</span> Democrat, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-502" id="solution-502"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-502"><div class="solution solution-like">
+<p id="p-5208">We will multiply the total number of seats by the decimal portion that each party represents.</p>
+<p id="p-5209">Republicans: <span class="process-math">\(8(0.55)=4.4\approx 4\)</span> seats.</p>
+<p id="p-5210">Democrats: <span class="process-math">\(8(0.045)=3.6\approx 4\)</span> seats.</p>
+<p id="p-5211">By rounding, the most fair combination would be Democrats with 4 seats and Republicans with 4 seats. This is not completely proportional, though, because we can't assign fractions of seats.</p>
+</div></div>
+</div></article><p id="p-5212">Now that we can tell whether a map is fair, let's see how gerrymandering works.</p></section><section class="subsection" id="subsection-159"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.3</span> <span class="title">How to Gerrymander</span>
+</h3>
+<p id="p-5213">There are two main ways to gerrymander a map, by packing and cracking. <em class="alert">Packing</em> is when all the people of one political party are packed into a district. Since a party only needs a plurality or majority to win, all those extra votes would be surplus. <em class="alert">Cracking</em> dilutes a party’s votes by spreading out the voters so they can’t win as many districts.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel middle" style="width:59%;"><p id="p-5214">Here is a small sample map to see how this works. In this fictitious state, we have 35 people and 5 districts. So we will need 7 people in each district. You can see how they are spread out in the map, with Republicans denoted by R’s and Democrats marked with D’s. To keep it simple, we are only looking at two parties and they will need a majority to win an election. We are also assuming that all voters will vote and that they vote according to their party which may not always be the case.</p></div>
+<div class="sbspanel middle" style="width:35%;"><figure class="figure figure-like" id="figure-34"><img src="external/democracy/5_4/simplified_state_map1.png" class="contained" alt="A rectangular map with D's and R's spread out to indicate Democrats and Republicans. There are more Democrats concentrated toward the center like a city with more Republicans spread out toward the edges like rural areas."><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.4<span class="period">.</span></span><span class="space"> </span>A simplified state map</figcaption></figure></div>
+</div></div>
+<p id="p-5215">Before we draw a fair map, let’s try gerrymandering it for Democrats and then for the Republicans.</p>
+<article class="example example-like" id="example-143"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.5</span><span class="period">.</span>
+</h4>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel middle" style="width:59%;">
+<p id="p-5216">We will first try to advantage the Democrats. There are 7 people in each district, so a party needs 4 votes to win the election. We will draw the lines to put 4 Democrats in each district along with 3 Republicans to spread them out by cracking. Here is our map.</p>
+<p id="p-5217">We were able to get 4 Democrats and 3 Republicans in districts 1, 2, 3 and 5. The Republicans will win in district 4 because it will be 5-2, but if the 5th Republican had been in another district, the map would have been more fair. As it is drawn, the population is 17:18 but the seats are 1:4, which does not seem fair.</p>
+</div>
+<div class="sbspanel middle" style="width:35%;"><figure class="figure figure-like" id="figure-35"><img src="external/democracy/5_4/simplified_state_map2.png" class="contained" alt="The previous map with district lines drawn. Districts 1, 2, 3 and 5 have 4 Democrats and 3 Republians each. District 4 has 2 Democrats and 5 Rupublicans."><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.6<span class="period">.</span></span><span class="space"> </span>The map gerrymandered in favor of Democrats</figcaption></figure></div>
+</div></div></article></section><section class="subsection" id="subsection-160"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.4.4</span> <span class="title">The Efficiency Gap</span>
+</h3>
+<p id="p-5218">To try to measure how unfair the map is, let’s learn how to calculate the efficiency gap. First, we will tally the votes in the table below, and note how the election results would turn out by using bold numbers for the party with more voters in each district. For example, there are 4 D’s and 3 R’s in district 1, so the Democrats would theoretically win that district.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">5</em></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+<td class="c m b1 r1 l0 t0 lines"></td>
+</tr>
+</table></div></div></div>
+<p id="p-5219">Election Results:</p>
+<ul class="disc">
+<li id="li-2224"><p id="p-5220">Democrats win 4 seats</p></li>
+<li id="li-2225"><p id="p-5221">Republicans win 1 seat</p></li>
+</ul>
+<p id="p-5222">Next, we will calculate how many votes would be extra over the amount needed to win the election. These are the <em class="alert">surplus votes</em>. In this example, with 7 voters, the majority of a district is 4 votes, so we will subtract 4 from each winning side. From each losing side, all of the votes are considered surplus because they did not go toward electing a candidate of their party. Then we add all the surplus votes for each party.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">5</em></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">13</td>
+</tr>
+</table></div></div></div>
+<p id="p-5223">The difference between the surplus votes as a percentage of the population is the efficiency gap. As a formula it is written:</p>
+<p id="p-5224"><span class="process-math">\(\frac{\text{Party A Surplus Votes } - \text{ Party B Surplus Votes}}{\text{Total Votes}}\)</span></p>
+<p id="p-5225">To get a positive result, we put the larger number first and we have</p>
+<p id="p-5226"><span class="process-math">\(\frac{13-2}{35}=\frac{11}{35} \approx 0.314\)</span> or 31.4%.</p>
+<p id="p-5227">The efficiency gap is 31.4%. To understand what this percentage means, we compare it with the percentage that each district represents in the state. Since our state has 5 districts, each one is 20% of the population. Here’s how we got that by dividing or as a fraction of the state.</p>
+<p id="p-5228"><span class="process-math">\(100\% \div 5\)</span> districts <span class="process-math">\(=20\%\text{,}\)</span> or, <span class="process-math">\(\frac{1}{5}=0.20\)</span> or <span class="process-math">\(20\%\)</span></p>
+<p id="p-5229">In this case, the efficiency gap is worth more than one full seat, which suggests that the Democratic party has at least one extra seat than they would with proportional representation.</p>
+<article class="example example-like" id="example-144"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.7</span><span class="period">.</span>
+</h4>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel middle" style="width:59%;"><p id="p-5230">For another example, we will take the same map and gerrymander it for the Republicans. This time we will pack as many Democrats as we can into the middle, and then use cracking to form the rest of the districts, trying to get 4 R’s in as many as we can. Here is the map.</p></div>
+<div class="sbspanel middle" style="width:35%;"><figure class="figure figure-like" id="figure-36"><img src="external/democracy/5_4/simplified_state_map3.png" class="contained" alt="The previous map with new district lines drawn. This time Districts 1, 3, 4 and 5 have 4 Republicans and 3 Democrats each. District 2 has 7 Democrats packed in and District 4 has 2 Democrats and 5 Rupublicans."><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.8<span class="period">.</span></span><span class="space"> </span>The map gerrymandered in favor of Republicans</figcaption></figure></div>
+</div></div>
+<p id="p-5231">Now, let's fill in our table:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">7</em></td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-4=3\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">5</em></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines">14</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+</tr>
+</table></div></div></div>
+<p id="p-5232">Election Results:</p>
+<ul class="disc">
+<li id="li-2226"><p id="p-5233">Democrats win 1 seat</p></li>
+<li id="li-2227"><p id="p-5234">Republicans win 4 seats</p></li>
+</ul>
+<p id="p-5235">To calculate our efficiency gap,</p>
+<p id="p-5236"><span class="process-math">\(\frac{\text{Party A Surplus Votes } - \text{ Party B Surplus Votes}}{\text{Total Votes}} = \frac{14-1}{35}=\frac{13}{35} \approx 0.371\)</span> or 37.1%.</p>
+<p id="p-5237">This shows the opposite unfairness where the population is 17:18 but the seats are 4:1. We can calculate the number of seats that the efficiency gap is worth by dividing 37.1% by 20%.</p>
+<p id="p-5238"><span class="process-math">\(37.1\% \div 20\% = 1.855\)</span></p>
+<p id="p-5239">The efficiency gap is worth approximately 1.9 seats.</p>
+<p id="p-5240">Stephanopoulos and McGhee gave a guideline of around 8% or less for the efficiency gap and this one is 37.1%. The Republicans have at least one extra seat than they would if the seats were proportional to the population.</p></article><article class="example example-like" id="example-145"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.9</span><span class="period">.</span>
+</h4>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel middle" style="width:59%;">
+<p id="p-5241">Now we will try to create a fair map and see what the efficiency gap is. There is an odd number of districts and the population is 17:18 so it might be challenging to make it fair.</p>
+<p id="p-5242">With this map, we tried to have two districts that favored Democrats, two that favored Republicans, and one that might go either way. Since there is one extra Democrat, the population is 17:18 and the seats are 2:3</p>
+</div>
+<div class="sbspanel middle" style="width:35%;"><figure class="figure figure-like" id="figure-37"><img src="external/democracy/5_4/simplified_state_map4.png" class="contained" alt="The previous map with new district lines drawn. Districts 2, 3 and 5 have 4 Democrats and 3 Republians each. Districts 1 and 4 have 3 Democrats and 4 Rupublicans each."><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.10<span class="period">.</span></span><span class="space"> </span>A more fair map</figcaption></figure></div>
+</div></div>
+<p id="p-5243">Let’s see how the efficiency gap comes out in this situation:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><em class="alert">4</em></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+</tr>
+</table></div></div></div>
+<p id="p-5244">Election Results:</p>
+<ul class="disc">
+<li id="li-2228"><p id="p-5245">Democrats win 3 seats</p></li>
+<li id="li-2229"><p id="p-5246">Republicans win 2 seats</p></li>
+</ul>
+<p id="p-5247">The efficiency gap is</p>
+<p id="p-5248"><span class="process-math">\(\frac{\text{Party A Surplus Votes } - \text{ Party B Surplus Votes}}{\text{Total Votes}} = \frac{9-6}{35}=\frac{3}{35} \approx 0.0857\)</span> or 8.57%.</p>
+<p id="p-5249">This gap is much smaller than in our gerrymandered examples and near the 8% guideline. Due to the odd number of seats and even distribution of the parties, this is as small as we can get the efficiency gap in this situation. It is much less than 20%, which is one seat.</p>
+<p id="p-5250"><span class="process-math">\(8.57\% \div 20\% = 0.4285\)</span></p>
+<p id="p-5251">The efficiency gap is worth less than half a seat or about 0.43 seats.</p></article><p id="p-5252">There are still many court cases in progress alleging gerrymandered maps so it seems like a new solution is needed. Some alternatives are appointing independent commissions to draw the lines, or changing the system altogether with proportional representation <a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-103" id="fn-103"><sup> 103 </sup></a>. The statisticians at FiveThirtyEight used a web application to draw new lines in all of the states according to six different measures. You can read about it in this article <a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-104" id="fn-104"><sup> 104 </sup></a>.</p></section><section class="exercises" id="exercises-18"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">6.4.5</span> <span class="title">Exercises</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-697"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
+<p id="p-5253">When does redistricting of state districts happen?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-503" id="solution-503"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-503"><div class="solution solution-like"><p id="p-5254">Redistricting happens every 10 years after the census is completed. A state might not change its districts unless the number of seats in the U.S. House of Representatives has changed.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-698"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-5255">Who determines where the district lines are drawn?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-504" id="solution-504"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-504"><div class="solution solution-like"><p id="p-5256">Each state government is in charge of drawing the lines.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-699"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-5257">What are the two rules for drawing district lines?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-505" id="solution-505"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-505"><div class="solution solution-like"><p id="p-5258">The rules are districts must be contiguous and you can’t gerrymander by race.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-700"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
+<p id="p-5259">What are the two ways to gerrymander?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-506" id="solution-506"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-506"><div class="solution solution-like"><p id="p-5260">The two ways to gerrymander are by packing, putting all of one party in a district, or by cracking, splitting up a party into many districts, so their votes are ineffective.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-701"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
+<p id="p-5261">If a state with 7 seats is 62% Republican and 38% Democrat, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-507" id="solution-507"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-507"><div class="solution solution-like"><p id="p-5262">The most proportional representation would be 4 Republican seats and 3 Democratic seats.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-702"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
+<p id="p-5263">If a state with 12 seats is 43% Republican and 57% Democrat, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-508" id="solution-508"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-508"><div class="solution solution-like"><p id="p-5264">The most proportional representation would be 5 Republican seats and 7 Democratic seats.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-703"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>
+<p id="p-5265">If a state with 3 seats is 4/5 Republican and 1/5 Democrat, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-509" id="solution-509"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-509"><div class="solution solution-like"><p id="p-5266">The most proportional representation would be 2 Republican seats and 1 Democratic seat.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-704"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>
+<p id="p-5267">If a state with 9 seats is 3/8 Republican and 5/8 Democrat, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-510" id="solution-510"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-510"><div class="solution solution-like"><p id="p-5268">The most proportional representation would be 3 Republican seats and 6 Democratic seats.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-705"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
+<p id="p-5269">If a state with 11 seats is 52% Republican, 40% Democrat and 8% Green Party, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-511" id="solution-511"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-511"><div class="solution solution-like"><p id="p-5270">The most proportional representation would be 6 Republican seats, 4 Democratic seats and 1 Green Party seat.</p></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-706"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
+<p id="p-5271">If a state with 18 seats is 31% Republican, 58% Democrat and 11% Progressive Party, how many seats would each party have if the representation was proportional?</p>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-512" id="solution-512"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-512"><div class="solution solution-like"><p id="p-5272">The most proportional representation would be 6 Republican seats, 10 Democratic seats and 2 Progressive Party seats.</p></div></div>
+</div></article><div class="exercisegroup" id="exercisegroup-70">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-117">
+<p id="p-5273">For each map in problems 11-20, complete the following:</p>
+<ol id="p-5274" class="lower-alpha">
+<li id="li-2230"><p id="p-5275">How many votes are needed for a majority?</p></li>
+<li id="li-2231"><p id="p-5276">How many seats are won by each party?</p></li>
+<li id="li-2232"><p id="p-5277">Calculate the efficiency gap.</p></li>
+<li id="li-2233"><p id="p-5278">Calculate the percentage of the state that each district represents.</p></li>
+<li id="li-2234"><p id="p-5279">Calculate how many district seats the efficiency gap is worth.</p></li>
+<li id="li-2235"><p id="p-5280">Explain whether you think the map is fair and why or why not.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises">
+<article class="exercise exercise-like" id="exercise-707"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<p id="p-5281">This state has 4 districts with 7 people in each district.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_11.png" class="contained" alt="A map with 4 districts drawn; Districts 1 has 1 D and 6 R's; District 2 has 3 D's and 4 R's; District 3 has 6 D's and 1 R; District 4 has 7 D's and 0 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5282"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-513" id="solution-513"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-513"><div class="solution solution-like"><ol id="p-5283" class="lower-alpha">
+<li id="li-2236"><p id="p-5284">A majority is 4 votes.</p></li>
+<li id="li-2237"><p id="p-5285">The Democrats won 2 seats and the Republicans won 2 seats.</p></li>
+<li id="li-2238">
+<p id="p-5286">The efficiency gap is <span class="process-math">\(6/28= 21.43\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-4=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-4=2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-4=3\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines">11</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2239"><p id="p-5287">Each seat is worth 25% of the voters.</p></li>
+<li id="li-2240"><p id="p-5288">The efficiency gap is worth less than one seat (0.86 seats).</p></li>
+<li id="li-2241"><p id="p-5289">This map is ok because the efficiency gap is less than one seat. It should either be D3, R1 or D2, R2.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-708"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<p id="p-5290">This state has 4 districts with 9 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_12.png" class="contained" alt="A map with 4 districts drawn; Districts 1, 2 and 4 have 5 D's and 4 R's; District 3 has 6 D's and 3 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5291"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-514" id="solution-514"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-514"><div class="solution solution-like"><ol id="p-5292" class="lower-alpha">
+<li id="li-2242"><p id="p-5293">A majority is 5 votes.</p></li>
+<li id="li-2243"><p id="p-5294">The Democrats won all 4 seats.</p></li>
+<li id="li-2244">
+<p id="p-5295">The efficiency gap is <span class="process-math">\(14/36= 38.89\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-5=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">21</td>
+<td class="c m b1 r1 l0 t0 lines">15</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">15</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2245"><p id="p-5296">Each seat is worth 25% of the voters.</p></li>
+<li id="li-2246"><p id="p-5297">The efficiency gap is worth 1.56 seats.</p></li>
+<li id="li-2247"><p id="p-5298">This map is not fair because the efficiency gap is more than one seat. A more fair map would be D3, R1.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-709"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<p id="p-5299">This state has 5 districts with 5 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_13.png" class="contained" alt="A map with 5 districts drawn; Districts 1, 2, 3 and 5 have 2 D's and 3 R's; District 4 has 4 D's and 1 R."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5300"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-515" id="solution-515"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-515"><div class="solution solution-like"><ol id="p-5301" class="lower-alpha">
+<li id="li-2248"><p id="p-5302">A majority is 3 votes.</p></li>
+<li id="li-2249"><p id="p-5303">The Democrats won 1 seat and the Republicans won 4 seats.</p></li>
+<li id="li-2250">
+<p id="p-5304">The efficiency gap is <span class="process-math">\(8/25= 32\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-3=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">12</td>
+<td class="c m b1 r1 l0 t0 lines">13</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2251"><p id="p-5305">Each seat is worth 20% of the voters.</p></li>
+<li id="li-2252"><p id="p-5306">The efficiency gap is worth 1.6 seats.</p></li>
+<li id="li-2253"><p id="p-5307">This map is not fair because the efficiency gap is more than one seat. A fairer map would be D3, R2 or D2, R3.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-710"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<p id="p-5308">This state has 5 districts with 7 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_14.png" class="contained" alt="A map with 5 districts drawn; Districts 1 and 3 have 3 D's and 4 R's each; Districts 2, 4 and 5 have 5 D's and 2 R's each."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5309"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-516" id="solution-516"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-516"><div class="solution solution-like"><ol id="p-5310" class="lower-alpha">
+<li id="li-2254"><p id="p-5311">A majority is 4 votes.</p></li>
+<li id="li-2255"><p id="p-5312">The Democrats won 3 seats and the Republicans won 2 seats.</p></li>
+<li id="li-2256">
+<p id="p-5313">The efficiency gap is <span class="process-math">\(3/35= 8.57\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">21</td>
+<td class="c m b1 r1 l0 t0 lines">14</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2257"><p id="p-5314">Each seat is worth 20% of the voters.</p></li>
+<li id="li-2258"><p id="p-5315">The efficiency gap is worth less than one seat (0.43).</p></li>
+<li id="li-2259"><p id="p-5316">This map is fair because the efficiency gap is around 8% and the representation is exactly proportional to the population.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-711"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
+<p id="p-5317">This state has 5 districts with 9 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_15.png" class="contained" alt="A map with 5 districts drawn; Districts 1 and 3 have 2 D's and 7 R's each; Districts 2 and 4 have 5 D's and 4 R's each; District 5 has 4 D's and 5 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5318"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-517" id="solution-517"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-517"><div class="solution solution-like"><ol id="p-5319" class="lower-alpha">
+<li id="li-2260"><p id="p-5320">A majority is 5 votes.</p></li>
+<li id="li-2261"><p id="p-5321">The Democrats won 2 seats and the Republicans won 3 seats.</p></li>
+<li id="li-2262">
+<p id="p-5322">The efficiency gap is <span class="process-math">\(4/45= 8.89\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-5=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-5=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">18</td>
+<td class="c m b1 r1 l0 t0 lines">27</td>
+<td class="c m b1 r1 l0 t0 lines">8</td>
+<td class="c m b1 r1 l0 t0 lines">12</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2263"><p id="p-5323">Each seat is worth 20% of the voters.</p></li>
+<li id="li-2264"><p id="p-5324">The efficiency gap is worth less than one seat (0.44).</p></li>
+<li id="li-2265"><p id="p-5325">This map is fair because the efficiency gap is around 8% and the representation is exactly proportional to the population.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-712"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
+<p id="p-5326">This state has 5 districts with 11 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_16.png" class="contained" alt="A map with 5 districts drawn; Districts 1, 2, 4 and 5 have 5 D's and 6 R's each; District 3 has 7 D's and 4 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5327"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-518" id="solution-518"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-518"><div class="solution solution-like"><ol id="p-5328" class="lower-alpha">
+<li id="li-2266"><p id="p-5329">A majority is 6 votes.</p></li>
+<li id="li-2267"><p id="p-5330">The Democrats won 1 seats and the Republicans won 4 seats.</p></li>
+<li id="li-2268">
+<p id="p-5331">The efficiency gap is <span class="process-math">\(17/55= 30.91\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-6=1\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">27</td>
+<td class="c m b1 r1 l0 t0 lines">28</td>
+<td class="c m b1 r1 l0 t0 lines">21</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2269"><p id="p-5332">Each seat is worth 20% of the voters.</p></li>
+<li id="li-2270"><p id="p-5333">The efficiency gap is worth 1.55 seats.</p></li>
+<li id="li-2271"><p id="p-5334">This map is not fair because the efficiency gap is more than one seat. A more fair map would be D2, R3.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-713"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
+<p id="p-5335">This state has 6 districts with 5 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_17.png" class="contained" alt="A map with 6 districts drawn; Districts 1 through 5 have 3 D's and 2 R's each; District 6 has 0 D's and 5 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5336"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-519" id="solution-519"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-519"><div class="solution solution-like"><ol id="p-5337" class="lower-alpha">
+<li id="li-2272"><p id="p-5338">A majority is 3 votes.</p></li>
+<li id="li-2273"><p id="p-5339">The Democrats won 5 seats and the Republicans won 1 seat.</p></li>
+<li id="li-2274">
+<p id="p-5340">The efficiency gap is <span class="process-math">\(12/30= 40\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(3-3=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-3=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">15</td>
+<td class="c m b1 r1 l0 t0 lines">15</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines">12</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2275"><p id="p-5341">Each seat is worth 16.67% of the voters.</p></li>
+<li id="li-2276"><p id="p-5342">The efficiency gap is worth 2.4 seats.</p></li>
+<li id="li-2277"><p id="p-5343">This map is not fair because the efficiency gap is more than one seat. A more fair map would be D3, R3 because the population is evenly split.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-714"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
+<p id="p-5344">This state has 6 districts with 7 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_18.png" class="contained" alt="A map with 6 districts drawn; Districts 1, 3, 4 and 6 have 3 D's and 4 R's each; District 2 has 2 D's and 5 R's; District 5 has 7 D's and 0 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5345"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-520" id="solution-520"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-520"><div class="solution solution-like"><ol id="p-5346" class="lower-alpha">
+<li id="li-2278"><p id="p-5347">A majority is 4 votes.</p></li>
+<li id="li-2279"><p id="p-5348">The Democrats won 1 seat and the Republicans won 5 seats.</p></li>
+<li id="li-2280">
+<p id="p-5349">The efficiency gap is <span class="process-math">\(16/42= 38.10\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-4=1\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-4=3\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(4-4=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">21</td>
+<td class="c m b1 r1 l0 t0 lines">21</td>
+<td class="c m b1 r1 l0 t0 lines">17</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2281"><p id="p-5350">Each seat is worth 16.67% of the voters.</p></li>
+<li id="li-2282"><p id="p-5351">The efficiency gap is worth 2.3 seats.</p></li>
+<li id="li-2283"><p id="p-5352">This map is not fair because the efficiency gap is more than one seat. A more fair map would be D3, R3 because the population is evenly split.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-715"><h5 class="heading"><span class="codenumber">19<span class="period">.</span></span></h5>
+<p id="p-5353">This state has 6 districts with 9 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_19.png" class="contained" alt="A map with 6 districts drawn; Districts 1, 2 and 4 have 2 D's and 7 R's each; District 3 has 9 D's and 0 R's; District 5 has 1 D and 8 R's; District 6 has 4 D's and 5 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5354"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-521" id="solution-521"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-521"><div class="solution solution-like"><ol id="p-5355" class="lower-alpha">
+<li id="li-2284"><p id="p-5356">A majority is 5 votes.</p></li>
+<li id="li-2285"><p id="p-5357">The Democrats won 1 seat and the Republicans won 5 seats.</p></li>
+<li id="li-2286">
+<p id="p-5358">The efficiency gap is <span class="process-math">\(6/54= 11.11\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-5=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-5=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(9-5=4\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">7</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(7-5=2\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">8</td>
+<td class="c m b1 r1 l0 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(8-5=3\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(5-5=0\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">20</td>
+<td class="c m b1 r1 l0 t0 lines">34</td>
+<td class="c m b1 r1 l0 t0 lines">15</td>
+<td class="c m b1 r1 l0 t0 lines">9</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2287"><p id="p-5359">Each seat is worth 16.67% of the voters.</p></li>
+<li id="li-2288"><p id="p-5360">The efficiency gap is worth less than 1 seat. (0.67)</p></li>
+<li id="li-2289"><p id="p-5361">This map is not fair because even though the efficiency gap is less than one seat, The Democrats should have at least 2 seats. A more fair map would be D2, R4.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-716"><h5 class="heading"><span class="codenumber">20<span class="period">.</span></span></h5>
+<p id="p-5362">This state has 6 districts with 11 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_20.png" class="contained" alt="A map with 6 districts drawn; Districts 1 and 3 have 0 D's and 11 R's each; District 2 has 8 D's and 3 R's; Districts 4, 5 and 6 have 6 D's and 5 R's each."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5363"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-522" id="solution-522"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-522"><div class="solution solution-like"><ol id="p-5364" class="lower-alpha">
+<li id="li-2290"><p id="p-5365">A majority is 6 votes.</p></li>
+<li id="li-2291"><p id="p-5366">The Democrats won 4 seats and the Republicans won 2 seats.</p></li>
+<li id="li-2292">
+<p id="p-5367">The efficiency gap is <span class="process-math">\(26/66= 39.39\%\)</span></p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b1 r1 l1 t1 lines">District</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">D Surplus Votes</th>
+<th scope="col" class="c m b1 r1 l0 t1 lines">R Surplus Vote</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">1</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines">11</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(11-6=5\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">8</td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(8-6=2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">3</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">3</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines">11</td>
+<td class="c m b1 r1 l0 t0 lines">0</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(11-6=5\)</span></td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">4</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">6</td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(6-6=0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines">5</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l1 t0 lines">Total</td>
+<td class="c m b1 r1 l0 t0 lines">26</td>
+<td class="c m b1 r1 l0 t0 lines">40</td>
+<td class="c m b1 r1 l0 t0 lines">2</td>
+<td class="c m b1 r1 l0 t0 lines">28</td>
+</tr>
+</table></div></div></div>
+</li>
+<li id="li-2293"><p id="p-5368">Each seat is worth 16.67% of the voters.</p></li>
+<li id="li-2294"><p id="p-5369">The efficiency gap is worth 2.36 seats.</p></li>
+<li id="li-2295"><p id="p-5370">This map is not fair because the efficiency gap is worth more than one seat. The Republicans should have at least 3 seats. A more fair map would be D3, R3 or D2, R4.</p></li>
+</ol></div></div>
+</div></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-71">
+<h4 class="heading"><span class="title">Exercise Group.</span></h4>
+<div class="introduction" id="introduction-118">
+<p id="p-5371">For each map in problems 21-24, draw your own districts to find</p>
+<ol id="p-5372" class="lower-alpha">
+<li id="li-2296"><p id="p-5373">The most seats you can win for the Democrats.</p></li>
+<li id="li-2297"><p id="p-5374">The most seats you can win for the Republicans.</p></li>
+</ol>
+</div>
+<div class="exercisegroup-exercises">
+<article class="exercise exercise-like" id="exercise-717"><h5 class="heading"><span class="codenumber">21<span class="period">.</span></span></h5>
+<p id="p-5375">This state has 5 districts with 7 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_21.png" class="contained" alt="This map has 17 D's and 18 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5376"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-523" id="solution-523"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-523"><div class="solution solution-like"><ol id="p-5377" class="lower-alpha">
+<li id="li-2298"><p id="p-5378">The most seats that can be won by the Democrats is 4 seats.</p></li>
+<li id="li-2299"><p id="p-5379">The most seats that can be won by the Republicans is 4 seats.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-718"><h5 class="heading"><span class="codenumber">22<span class="period">.</span></span></h5>
+<p id="p-5380">This state has 5 districts with 9 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_22.png" class="contained" alt="This map has 23 D's and 22 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5381"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-524" id="solution-524"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-524"><div class="solution solution-like"><ol id="p-5382" class="lower-alpha">
+<li id="li-2300"><p id="p-5383">The most seats that can be won by the Democrats is 4 seats.</p></li>
+<li id="li-2301"><p id="p-5384">The most seats that can be won by the Republicans is 4 seats.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-719"><h5 class="heading"><span class="codenumber">23<span class="period">.</span></span></h5>
+<p id="p-5385">This state has 6 districts with 7 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_23.png" class="contained" alt="This map has 19 D's and 23 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5386"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-525" id="solution-525"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-525"><div class="solution solution-like"><ol id="p-5387" class="lower-alpha">
+<li id="li-2302"><p id="p-5388">The most seats that can be won by the Democrats is 4 seats.</p></li>
+<li id="li-2303"><p id="p-5389">The most seats that can be won by the Republicans is 5 seats.</p></li>
+</ol></div></div>
+</div></article><article class="exercise exercise-like" id="exercise-720"><h5 class="heading"><span class="codenumber">24<span class="period">.</span></span></h5>
+<p id="p-5390">This state has 6 districts with 9 people in each.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_4/exercise_24.png" class="contained" alt="This map has 31 D's and 23 R's."></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-5391"></p></div>
+</div></div>
+<div class="solutions">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-526" id="solution-526"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-526"><div class="solution solution-like"><ol id="p-5392" class="lower-alpha">
+<li id="li-2304"><p id="p-5393">The most seats that can be won by the Democrats is 6 seats.</p></li>
+<li id="li-2305"><p id="p-5394">The most seats that can be won by the Republicans is 4 seats.</p></li>
+</ol></div></div>
+</div></article>
+</div>
+</div></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-83"><div class="fn">
+<a class="external" href="https://web.archive.org/web/20140223235920/http://nationalatlas.gov/printable/images/preview/congdist/pagecgd113_or.gif" target="_blank">"Oregon congressional districts"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-84" id="fn-84"><sup> 84 </sup></a> by <a class="external" href="" target="_blank">National Atlas of the United States of America</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-85" id="fn-85"><sup> 85 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-86" id="fn-86"><sup> 86 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-84"><div class="fn"><code class="code-inline tex2jax_ignore">https://web.archive.org/web/20140223235920/http://nationalatlas.gov/printable/images/preview/congdist/pagecgd113_or.gif</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-85"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-86"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-87"><div class="fn">
+<a class="external" href="https://commons.wikimedia.org/w/index.php?curid=6030613" target="_blank">"The Gerry-Mander"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-88" id="fn-88"><sup> 88 </sup></a> by <a class="external" href="" target="_blank">Elkanah Tisdale (1771-1835)</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-89" id="fn-89"><sup> 89 </sup></a>, <a class="external" href="" target="_blank">Originally published in the Boston Centinel, 1812</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-90" id="fn-90"><sup> 90 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-91" id="fn-91"><sup> 91 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-88"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/w/index.php?curid=6030613</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-89"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-90"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-91"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-92"><div class="fn">
+<a class="external" href="https://commons.wikimedia.org/w/index.php?title=File:Pennsylvania_US_Congressional_District_7_(since_2013).tif&amp;oldid=223423398" target="_blank">"Pennsylvania US Congressional District 7 (since 2013).tif"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-93" id="fn-93"><sup> 93 </sup></a> by <a class="external" href="" target="_blank">Wikimedia Commons contributors</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-94" id="fn-94"><sup> 94 </sup></a>, <a class="external" href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons, the free media repository.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-95" id="fn-95"><sup> 95 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-96" id="fn-96"><sup> 96 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-93"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/w/index.php?title=File:Pennsylvania_US_Congressional_District_7_(since_2013).tif&amp;oldid=223423398</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-94"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-95"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/wiki/Main_Page</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-96"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-97"><div class="fn">
+<a class="external" href="https://en.wikipedia.org/wiki/Ohio%27s_9th_congressional_district#/media/File:Ohio_US_Congressional_District_9_(since_2013).tif" target="_blank">"Ohio US Congressional District 9 (since 2013).tif"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-98" id="fn-98"><sup> 98 </sup></a> by <a class="external" href="" target="_blank">Wikimedia Commons contributors</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-99" id="fn-99"><sup> 99 </sup></a>, <a class="external" href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons, the free media repository.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-100" id="fn-100"><sup> 100 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-101" id="fn-101"><sup> 101 </sup></a>
+</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-98"><div class="fn"><code class="code-inline tex2jax_ignore">https://en.wikipedia.org/wiki/Ohio%27s_9th_congressional_district#/media/File:Ohio_US_Congressional_District_9_(since_2013).tif</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-99"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-100"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/wiki/Main_Page</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-101"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-102"><div class="fn"><a class="external" href="https://projects.fivethirtyeight.com/partisan-gerrymandering-north-carolina/" target="_blank"><code class="code-inline tex2jax_ignore">https://projects.fivethirtyeight.com/partisan-gerrymandering-north-carolina/</code></a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-103"><div class="fn"><a class="external" href="https://www.fairvote.org/fair_representation#what_is_fair_voting" target="_blank"><code class="code-inline tex2jax_ignore">https://www.fairvote.org/fair_representation#what_is_fair_voting</code></a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-104"><div class="fn"><a class="external" href="https://fivethirtyeight.com/features/hating-gerrymandering-is-easy-fixing-it-is-harder/" target="_blank"><code class="code-inline tex2jax_ignore">https://fivethirtyeight.com/features/hating-gerrymandering-is-easy-fixing-it-is-harder/</code></a></div></div>
+</div></main>
+</div>
+</body>
+</html>

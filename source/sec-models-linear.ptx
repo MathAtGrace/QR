@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- <mathbook><book> -->
 
-<section xml:id="LinMod"   xmlns:xi="http://www.w3.org/2001/XInclude"><title>Linear Models</title><introduction>
+<section xml:id="LinMod"   xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Linear Models (Old-2022)</title><introduction>
     
 <investigation xml:id="investigation-commission"><title>Sales on Commission</title>
 <statement> <p>Delbert is offered a part-time job selling restaurant equipment. He will be paid $1000 per month plus a 6% commission on his sales. The sales manager tells Delbert he can expect to sell about $8000 worth of equipment per month. To help him decide whether to accept the job, Delbert does a few calculations.</p> 

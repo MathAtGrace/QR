@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<section xml:id="chap_five_gerrymandering">
+<section xml:id="sec-democracy-gerrymandering">
 <title>Gerrymandering and How to Measure It</title>
 
 <objectives>
-<title><xref ref="chap_five_gerrymandering"></xref></title>
+<title><xref ref="sec-democracy-gerrymandering"></xref></title>
   <introduction>
     <p>
       Students will be able to:
@@ -43,22 +43,23 @@
       </ul>
 </objectives>
 
+<!--
 <introduction>
   <figure>
       <caption>Alternative Video Lessons</caption>
       <video youtubeplaylist="PLsFUxEAXGFKSI1H8puyGAAH1kH-FB_zCB" />
     </figure>
 </introduction>
-
+-->
 
 <subsection>
 <title>Forming State Legislative Districts</title>
   <sidebyside valign="middle" widths="30% 64%" margins="0%">
   <p>
-    As we saw in <xref ref="chap_five_apportionment"></xref> the U.S. House of Representatives has 435 seats that are re-apportioned among the states every 10 years after the census. For example, in Oregon we currently have 5 legislative districts as shown in this map<fn><url href="https://web.archive.org/web/20140223235920/http://nationalatlas.gov/printable/images/preview/congdist/pagecgd113_or.gif" target="_blank">"Oregon congressional districts"</url> by <url>National Atlas of the United States of America</url> is in the <url href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</url></fn>. After the 2020 census is finished, that number could change. It has been projected that Oregon may get a 6th representative due to population growth from 2010 to 2020.
+    As we saw in <xref ref="sec-democracy-apportionment"></xref> the U.S. House of Representatives has 435 seats that are re-apportioned among the states every 10 years after the census. For example, in Indiana we currently have 9 legislative districts as shown in this map<fn><url href="https://en.wikipedia.org/wiki/File:Indiana%27s_congressional_districts_(since_2023).png" target="_blank">"Indiana's congressional districts (since 2023)"</url> by <url>National Atlas of the United States of America</url> is in the <url href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain</url></fn>.
   </p>
     <image source="democracy/5_4/district_pic.png">
-    <description>A map of oregon showing the five legislative districts. District 1 is the Northern Coast and West side of Portland, District 2 is the East side of the state, District 3 is the East side of Portland, District 4 is the Southern Coast and West side of the state, District 5 is the central coast over to Salem and surrounding areas.</description>
+    <description>A map of Indiana showing the nine legislative districts. </description>
     </image>
   </sidebyside>
   <p>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:30-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet a4">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -227,10 +216,8 @@ true);
 </div>
 </h3>
 <section class="onepage" id="page-55"><div class="introduction" id="introduction-56">
-<p id="p-1370">Group Activity</p>
-<p id="p-1371">Use a spreadsheet to work on these problems. Write down the syntax to show your work. Answer each question in a complete sentence.</p>
-</div>
-<article class="exercise exercise-like" id="exercise-242"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Jackie is 34 years old. She would like to have one million dollars in her retirement account when she is 65 years old.  How much would she need to deposit every month into an account with an APR of 7.25%, compounded monthly, to achieve her goal?<div class="workspace" data-space="0.9in"></div></article><article class="exercise exercise-like" id="exercise-243"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>If Jackie had started the account at age 21 (same APR), how much would she need to deposit every month to achieve her goal?<div class="workspace" data-space="0.9in"></div></article><article class="exercise exercise-like" id="exercise-244"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>If Jackie had started the account at age 21 (same APR) and deposited the amount calculated in Exercise 1 every month, what would the balance be when she retired at age 65?<div class="workspace" data-space="0.9in"></div></article><article class="exercise exercise-like" id="exercise-245"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>How much would Jackie need to deposit as a lump sum at age 21 with the same APR (without making another payment) to have a million dollars at age 65?<div class="workspace" data-space="0.9in"></div></article></section><section class="onepage" id="page-56"><article class="exercise exercise-like" id="exercise-246"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>Sam has a student loan of $30,000 at a fixed APR of 4.45%. If he wants to pay it off in 15 years, how much would he pay per month?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-247"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>How much would Sam pay in total?<div class="workspace" data-space="1.5in"></div></article><article class="exercise exercise-like" id="exercise-248"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>What percentage of the total was paid toward the loan amount of $30,000 and what percentage was paid toward interest?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-249"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>You want to buy a $350,000 home. You plan to put 10% down and take out a 30-year fixed mortgage on the rest. What will the loan amount be?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-250"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>What will your monthly payment be on your home mortgage if the interest rate is 4.5%?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="page-57"><article class="exercise exercise-like" id="exercise-251"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>If you make all the payments on your home mortgage for 30 years, how much would you have paid for the house in total?<div class="workspace" data-space="2in"></div></article><article class="exercise exercise-like" id="exercise-252"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>In Exercise 9 above, what number would you get if you switch the 0 and the 315,000? Why are the answers so different? Explain the difference between these two scenarios.<div class="workspace" data-space="4in"></div></article></section></section></div></main>
+<p id="p-1370">Group Activity</p> <p id="p-1371">Use a spreadsheet to work on these problems. Write down the syntax to show your work. Answer each question in a complete sentence.</p>
+</div> <article class="exercise exercise-like" id="exercise-242"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Jackie is 34 years old. She would like to have one million dollars in her retirement account when she is 65 years old.  How much would she need to deposit every month into an account with an APR of 7.25%, compounded monthly, to achieve her goal?<div class="workspace" data-space="0.9in"></div></article> <article class="exercise exercise-like" id="exercise-243"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>If Jackie had started the account at age 21 (same APR), how much would she need to deposit every month to achieve her goal?<div class="workspace" data-space="0.9in"></div></article> <article class="exercise exercise-like" id="exercise-244"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>If Jackie had started the account at age 21 (same APR) and deposited the amount calculated in Exercise 1 every month, what would the balance be when she retired at age 65?<div class="workspace" data-space="0.9in"></div></article> <article class="exercise exercise-like" id="exercise-245"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>How much would Jackie need to deposit as a lump sum at age 21 with the same APR (without making another payment) to have a million dollars at age 65?<div class="workspace" data-space="0.9in"></div></article></section><section class="onepage" id="page-56"><article class="exercise exercise-like" id="exercise-246"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>Sam has a student loan of $30,000 at a fixed APR of 4.45%. If he wants to pay it off in 15 years, how much would he pay per month?<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-247"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>How much would Sam pay in total?<div class="workspace" data-space="1.5in"></div></article> <article class="exercise exercise-like" id="exercise-248"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>What percentage of the total was paid toward the loan amount of $30,000 and what percentage was paid toward interest?<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-249"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>You want to buy a $350,000 home. You plan to put 10% down and take out a 30-year fixed mortgage on the rest. What will the loan amount be?<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-250"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>What will your monthly payment be on your home mortgage if the interest rate is 4.5%?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="page-57"><article class="exercise exercise-like" id="exercise-251"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>If you make all the payments on your home mortgage for 30 years, how much would you have paid for the house in total?<div class="workspace" data-space="2in"></div></article> <article class="exercise exercise-like" id="exercise-252"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>In Exercise 9 above, what number would you get if you switch the 0 and the 315,000? Why are the answers so different? Explain the difference between these two scenarios.<div class="workspace" data-space="4in"></div></article></section></section></div></main>
 </div>
 </body>
 </html>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:43-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -236,9 +225,7 @@ true);
 <li id="li-585"><p id="p-1618">Distinguish between experimental and observational studies</p></li>
 <li id="li-586"><p id="p-1619">Explain margin of error and confidence intervals</p></li>
 </ul></article><section class="introduction" id="introduction-64"><h3 class="heading">Introduction to Statistics.<span></span>
-</h3>
-<p id="p-1620">We are bombarded by information and statistics every day. But if we cannot distinguish credible information from misleading information, then we are vulnerable to manipulation and making decisions that are not in our best interest. Statistics provides tools for us to evaluate information critically. In this sense, statistics is one of the most important things to know about.</p>
-<p id="p-1621">Statistics are often presented to add credibility to an argument. To give some examples, here are some claims that we have heard on several occasions. (We are not saying that each one of these claims is true!)</p>
+</h3> <p id="p-1620">We are bombarded by information and statistics every day. But if we cannot distinguish credible information from misleading information, then we are vulnerable to manipulation and making decisions that are not in our best interest. Statistics provides tools for us to evaluate information critically. In this sense, statistics is one of the most important things to know about.</p> <p id="p-1621">Statistics are often presented to add credibility to an argument. To give some examples, here are some claims that we have heard on several occasions. (We are not saying that each one of these claims is true!)</p>
 <ul class="disc">
 <li id="li-587"><p id="p-1622">4 out of 5 dentists recommend Dentyne.</p></li>
 <li id="li-588"><p id="p-1623">Almost 85% of lung cancers in men and 45% in women are tobacco-related.</p></li>
@@ -249,9 +236,7 @@ true);
 <li id="li-593"><p id="p-1628">People predict that it is very unlikely there will ever be another baseball player with a batting average over 400.</p></li>
 <li id="li-594"><p id="p-1629">There is an 80% chance that in a room full of 30 people that at least two people will share the same birthday.</p></li>
 <li id="li-595"><p id="p-1630">79.48% of all statistics are made up on the spot.</p></li>
-</ul>
-<p id="p-1631">All these claims are statistical in character. We suspect that some of them sound familiar; if not, you have probably heard other claims like them. Notice how diverse the examples are; they come from psychology, health, law, sports, business, etc. Data and data-interpretation show up in virtually every facet of contemporary life.</p>
-<p id="p-1632">Many of these numbers do not represent careful statistical analysis. They can be misleading and push you into decisions that you might regret. This chapter will help you learn the skills to be a critical consumer of statistical claims.</p></section><section class="subsection" id="subsection-50"><h3 class="heading hide-type">
+</ul> <p id="p-1631">All these claims are statistical in character. We suspect that some of them sound familiar; if not, you have probably heard other claims like them. Notice how diverse the examples are; they come from psychology, health, law, sports, business, etc. Data and data-interpretation show up in virtually every facet of contemporary life.</p> <p id="p-1632">Many of these numbers do not represent careful statistical analysis. They can be misleading and push you into decisions that you might regret. This chapter will help you learn the skills to be a critical consumer of statistical claims.</p></section><section class="subsection" id="subsection-50"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.1.1</span> <span class="title">Statistical Process</span>
 </h3>
 <p id="p-1633">To give you an overview, here is a diagram of the steps taken in a poll or other statistical study, and the elements in each step that we will discuss in this chapter. We will use many examples to illustrate the whole process.</p>
@@ -290,10 +275,7 @@ true);
 <p id="p-1647">A researcher wants to know how the citizens of Portland feel about a voter initiative. To study this, they go downtown to the Pioneer Place Mall and survey 500 shoppers. Sixty percent indicate they are supportive of the initiative. Identify the population, parameter, sample and statistic.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-193" id="solution-193"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-193"><div class="solution solution-like">
-<p id="p-1648"><em class="emphasis">Population</em>: While the intended population of this survey is Portland citizens, the effective population is Pioneer Place Mall shoppers. There is no reason to assume that shoppers at this mall would be representative of all Portland citizens.</p>
-<p id="p-1649"><em class="emphasis">Parameter</em>: The parameter is what we want to know about the population, the percentage of Portland citizens that support the initiative.</p>
-<p id="p-1650"><em class="emphasis">Sample</em>: The sample is the subgroup of the population selected. The 500 shoppers questioned make up the sample, which, again, is probably not representative of the population.</p>
-<p id="p-1651"><em class="emphasis">Statistic</em>: The statistic is calculated using the data from the sample. The percentage of people sampled who support the initiative is 60%.</p>
+<p id="p-1648"><em class="emphasis">Population</em>: While the intended population of this survey is Portland citizens, the effective population is Pioneer Place Mall shoppers. There is no reason to assume that shoppers at this mall would be representative of all Portland citizens.</p> <p id="p-1649"><em class="emphasis">Parameter</em>: The parameter is what we want to know about the population, the percentage of Portland citizens that support the initiative.</p> <p id="p-1650"><em class="emphasis">Sample</em>: The sample is the subgroup of the population selected. The 500 shoppers questioned make up the sample, which, again, is probably not representative of the population.</p> <p id="p-1651"><em class="emphasis">Statistic</em>: The statistic is calculated using the data from the sample. The percentage of people sampled who support the initiative is 60%.</p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-55"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.1.6</span> <span class="title">Sampling</span>
@@ -308,8 +290,7 @@ true);
 <li id="li-601"><p id="p-1655">Ventura was running on a third-party ticket and most polling methods are better suited to a two-candidate race.</p></li>
 <li id="li-602"><p id="p-1656">Many respondents to polls may have been embarrassed to tell pollsters that they were planning to vote for a professional wrestler.</p></li>
 <li id="li-603"><p id="p-1657">The mere fact that the polls showed Ventura had little chance of winning might have prompted some people to vote for him in protest to send a message to the major-party candidates.</p></li>
-</ul>
-<p id="p-1658">But one of the major contributing factors was that Ventura recruited a substantial amount of support from young people, particularly college students, who had never voted before and who registered specifically to vote in that election. The polls did not deem these young people likely voters (since in most cases young people have a lower rate of voter registration and a lower turnout rate for elections) so the polling samples were subject to <em class="alert">sampling bias</em>: they omitted a portion of the electorate that was weighted in favor of the winning candidate.</p></article><p id="p-1659">So, identifying the population can be a difficult job, but once we have identified the population, how do we choose a good sample? We want our statistic to estimate the parameter we are interested in, so we need to have a representative sample. Returning to our hypothetical job as a political pollster, we would not anticipate very accurate results if we drew all of our samples from customers at a Starbucks, or your list of TikTok followers. How do we get a sample that resembles our population?</p></section><section class="subsection" id="subsection-56"><h3 class="heading hide-type">
+</ul> <p id="p-1658">But one of the major contributing factors was that Ventura recruited a substantial amount of support from young people, particularly college students, who had never voted before and who registered specifically to vote in that election. The polls did not deem these young people likely voters (since in most cases young people have a lower rate of voter registration and a lower turnout rate for elections) so the polling samples were subject to <em class="alert">sampling bias</em>: they omitted a portion of the electorate that was weighted in favor of the winning candidate.</p></article><p id="p-1659">So, identifying the population can be a difficult job, but once we have identified the population, how do we choose a good sample? We want our statistic to estimate the parameter we are interested in, so we need to have a representative sample. Returning to our hypothetical job as a political pollster, we would not anticipate very accurate results if we drew all of our samples from customers at a Starbucks, or your list of TikTok followers. How do we get a sample that resembles our population?</p></section><section class="subsection" id="subsection-56"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">4.1.7</span> <span class="title">Sampling Methods</span>
 </h3>
 <p id="p-1660">One way to get a representative sample is to use randomness. We will look at three types of sampling that use <em class="emphasis">randomness</em> and one that does not.</p></section><section class="subsection" id="subsection-57"><h3 class="heading hide-type">
@@ -444,10 +425,7 @@ true);
 <p id="p-1722">Let’s say we asked a random sample of 100 students at Portland Community College and found that they spent an average of $451.32 on books their first year, plus or minus $85.63. Write this as a confidence interval, assuming a 95% confidence level.</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-194" id="solution-194"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-194"><div class="solution solution-like">
-<p id="p-1723">If the margin of error was calculated to be plus or minus $85.63, then with a confidence level of 95% we could say that the average amount spent by the population is somewhere between $365.69 and $536.95.</p>
-<p id="p-1724">These values are found by computing <span class="process-math">\(\$451.32 - \$85.63 = \$365.69\)</span> and <span class="process-math">\(\$451.32 + \$85.63 = \$536.95\)</span></p>
-<p id="p-1725">We could also write this as a <em class="alert">confidence interval</em>: ($365.69, $536.95).</p>
-<p id="p-1726">Now we have come full circle and seen how we can use data from a sample to estimate the parameter we were interested in for our population.</p>
+<p id="p-1723">If the margin of error was calculated to be plus or minus $85.63, then with a confidence level of 95% we could say that the average amount spent by the population is somewhere between $365.69 and $536.95.</p> <p id="p-1724">These values are found by computing <span class="process-math">\(\$451.32 - \$85.63 = \$365.69\)</span> and <span class="process-math">\(\$451.32 + \$85.63 = \$536.95\)</span></p> <p id="p-1725">We could also write this as a <em class="alert">confidence interval</em>: ($365.69, $536.95).</p> <p id="p-1726">Now we have come full circle and seen how we can use data from a sample to estimate the parameter we were interested in for our population.</p>
 </div></div>
 </div></article></section><section class="exercises" id="exercises-6"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber">4.1.22</span> <span class="title">Exercises</span>
@@ -467,16 +445,14 @@ true);
 <li id="li-628"><p id="p-1741">What is the sample?</p></li>
 <li id="li-629"><p id="p-1742">Is the collected data representative of the intended population? Why or why not?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-294"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
-<p id="p-1747">A political scientist surveys 28 of the current 106 representatives in a state's congress. Of them, 14 said they were supporting a new education bill, 12 said there were not supporting the bill, and 2 were undecided.</p>
-<ol id="p-1748" class="lower-alpha">
+<p id="p-1747">A political scientist surveys 28 of the current 106 representatives in a state's congress. Of them, 14 said they were supporting a new education bill, 12 said there were not supporting the bill, and 2 were undecided.</p> <ol id="p-1748" class="lower-alpha">
 <li id="li-633"><p id="p-1749">Who is the population of this survey?</p></li>
 <li id="li-634"><p id="p-1750">What is the size of the population?</p></li>
 <li id="li-635"><p id="p-1751">What is the size of the sample?</p></li>
 <li id="li-636"><p id="p-1752">Give the statistic for the percentage of representatives surveyed who said they were supporting the education bill.</p></li>
 <li id="li-637"><p id="p-1753">If the margin of error was 5%, give the confidence interval for the percentage of representatives we might we expect to support the education bill and explain what the confidence interval tells us.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-295"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
-<p id="p-1760">The city of Raleigh has 9,500 registered voters. There are two candidates for city council in an upcoming election: Brown and Feliz. The day before the election, a telephone poll of 350 randomly selected registered voters was conducted. 112 said they'd vote for Brown, 207 said they'd vote for Feliz, and 31 were undecided.</p>
-<ol id="p-1761" class="lower-alpha">
+<p id="p-1760">The city of Raleigh has 9,500 registered voters. There are two candidates for city council in an upcoming election: Brown and Feliz. The day before the election, a telephone poll of 350 randomly selected registered voters was conducted. 112 said they'd vote for Brown, 207 said they'd vote for Feliz, and 31 were undecided.</p> <ol id="p-1761" class="lower-alpha">
 <li id="li-643"><p id="p-1762">Who is the population of this survey?</p></li>
 <li id="li-644"><p id="p-1763">What is the size of the population?</p></li>
 <li id="li-645"><p id="p-1764">What is the size of the sample?</p></li>
@@ -488,20 +464,17 @@ true);
 <p id="p-1777">A college reports that the average age of their students is 28 years old. Is this a parameter or a statistic?</p></article><article class="exercise exercise-like" id="exercise-299"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
 <p id="p-1779">A local newspaper reports that among a sample of 250 subscribers, 45% are over the age of 50. Is this a parameter or a statistic?</p></article><article class="exercise exercise-like" id="exercise-300"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>
 <p id="p-1781">A recent survey reported that 64% of respondents were in favor of expanding the Winona Lake greenway trail.  Is this a parameter or a statistic?</p></article><article class="exercise exercise-like" id="exercise-301"><h4 class="heading"><span class="codenumber">12<span class="period">.</span></span></h4>
-<p id="p-1783">Which sampling method is being described?</p>
-<ol id="p-1784" class="lower-alpha">
+<p id="p-1783">Which sampling method is being described?</p> <ol id="p-1784" class="lower-alpha">
 <li id="li-653"><p id="p-1785">In a study, the sample is chosen by separating all cars by size and selecting 10 of each size grouping.</p></li>
 <li id="li-654"><p id="p-1786">In a study, the sample is chosen by writing everyone’s name on a playing card, shuffling the deck, then choosing the top 20 cards.</p></li>
 <li id="li-655"><p id="p-1787">Every 4th person on the class roster was selected.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-302"><h4 class="heading"><span class="codenumber">13<span class="period">.</span></span></h4>
-<p id="p-1792">Which sampling method is being described?</p>
-<ol id="p-1793" class="lower-alpha">
+<p id="p-1792">Which sampling method is being described?</p> <ol id="p-1793" class="lower-alpha">
 <li id="li-659"><p id="p-1794">A sample was selected to contain 25 people aged 18-34 and 30 people aged 35-70.</p></li>
 <li id="li-660"><p id="p-1795">Viewers of a new show are asked to respond to a poll on the show’s website.</p></li>
 <li id="li-661"><p id="p-1796">To survey voters in a town, a polling company randomly selects 100 addresses from a database and interviews those residents.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-303"><h4 class="heading"><span class="codenumber">14<span class="period">.</span></span></h4>
-<p id="p-1801">Identify the most relevant source of bias in each situation.</p>
-<ol id="p-1802" class="lower-alpha">
+<p id="p-1801">Identify the most relevant source of bias in each situation.</p> <ol id="p-1802" class="lower-alpha">
 <li id="li-665"><p id="p-1803">A survey asks the following: Should the mall prohibit loud and annoying rock music in clothing stores catering to teenagers?</p></li>
 <li id="li-666"><p id="p-1804">To determine opinions on voter support for a downtown renovation project, a surveyor randomly questions people working in downtown businesses.</p></li>
 <li id="li-667"><p id="p-1805">A survey asks people to report their actual income and the income they reported on their IRS tax form.</p></li>
@@ -509,8 +482,7 @@ true);
 <li id="li-669"><p id="p-1807">The Beef Council releases a study stating that consuming red meat poses little cardiovascular risk.</p></li>
 <li id="li-670"><p id="p-1808">A poll asks, “Do you support a new transportation tax, or would you prefer to see our public transportation system fall apart?”</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-304"><h4 class="heading"><span class="codenumber">15<span class="period">.</span></span></h4>
-<p id="p-1816">Identify the most relevant source of bias in each situation.</p>
-<ol id="p-1817" class="lower-alpha">
+<p id="p-1816">Identify the most relevant source of bias in each situation.</p> <ol id="p-1817" class="lower-alpha">
 <li id="li-677"><p id="p-1818">A survey asks the following: Should the death penalty be permitted if innocent people might die?</p></li>
 <li id="li-678"><p id="p-1819">A study seeks to investigate whether a new pain medication is safe to market to the public. They test by randomly selecting 300 people who identify as men from a set of volunteers.</p></li>
 <li id="li-679"><p id="p-1820">A survey asks how many sexual partners a person has had in the last year.</p></li>
@@ -518,54 +490,46 @@ true);
 <li id="li-681"><p id="p-1822">A substitute teacher wants to know how students in the class did on their last test. The teacher asks the 10 students sitting in the front row to state their latest test score.</p></li>
 <li id="li-682"><p id="p-1823">High school students are asked if they have consumed alcohol in the last two weeks.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-305"><h4 class="heading"><span class="codenumber">16<span class="period">.</span></span></h4>
-<p id="p-1831">Identify whether each situation describes an observational study or an experiment.</p>
-<ol id="p-1832" class="lower-alpha">
+<p id="p-1831">Identify whether each situation describes an observational study or an experiment.</p> <ol id="p-1832" class="lower-alpha">
 <li id="li-689"><p id="p-1833">The temperature on randomly selected days throughout the year was measured.</p></li>
 <li id="li-690"><p id="p-1834">One group of students listened to music and another group did not while they took a test and their scores were recorded.</p></li>
 <li id="li-691"><p id="p-1835">The weights of 30 randomly selected people are measured.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-306"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
-<p id="p-1840">Identify whether each situation describes an observational study or an experiment.</p>
-<ol id="p-1841" class="lower-alpha">
+<p id="p-1840">Identify whether each situation describes an observational study or an experiment.</p> <ol id="p-1841" class="lower-alpha">
 <li id="li-695"><p id="p-1842">Subjects are asked to do 20 jumping jacks, and then their heart rates are measured.</p></li>
 <li id="li-696"><p id="p-1843">Twenty coffee drinkers and twenty tea drinkers are given a concentration test.</p></li>
 <li id="li-697"><p id="p-1844">The weights of potato chip bags are weighed on the production line before they are put into boxes.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-307"><h4 class="heading"><span class="codenumber">18<span class="period">.</span></span></h4>
-<p id="p-1849">A team of researchers is testing the effectiveness of a new vaccine for human papilloma virus (HPV). They randomly divide the subjects into two groups. Group 1 receives new HPV vaccine, and Group 2 receives the existing HPV vaccine. The patients in the study do not know which group they are in.</p>
-<ol id="p-1850" class="lower-alpha">
+<p id="p-1849">A team of researchers is testing the effectiveness of a new vaccine for human papilloma virus (HPV). They randomly divide the subjects into two groups. Group 1 receives new HPV vaccine, and Group 2 receives the existing HPV vaccine. The patients in the study do not know which group they are in.</p> <ol id="p-1850" class="lower-alpha">
 <li id="li-701"><p id="p-1851">Which is the treatment group?</p></li>
 <li id="li-702"><p id="p-1852">Which is the control group (if there is one)?</p></li>
 <li id="li-703"><p id="p-1853">Is this study blind, double-blind, or neither?</p></li>
 <li id="li-704"><p id="p-1854">Is this best described as an experiment, a controlled experiment, or a placebo-controlled experiment?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-308"><h4 class="heading"><span class="codenumber">19<span class="period">.</span></span></h4>
-<p id="p-1860">Studies are often done by pharmaceutical companies to determine the effectiveness of a treatment. Suppose that a new cancer treatment is under study. Of interest is the average length of time in months patients live once starting the treatment. Two researchers each follow a different set of 40 cancer patients throughout this new treatment.</p>
-<ol id="p-1861" class="lower-alpha">
+<p id="p-1860">Studies are often done by pharmaceutical companies to determine the effectiveness of a treatment. Suppose that a new cancer treatment is under study. Of interest is the average length of time in months patients live once starting the treatment. Two researchers each follow a different set of 40 cancer patients throughout this new treatment.</p> <ol id="p-1861" class="lower-alpha">
 <li id="li-709"><p id="p-1862">What is the population of this study?</p></li>
 <li id="li-710"><p id="p-1863">Would you expect the data from the two researchers to be identical? Why or why not?</p></li>
 <li id="li-711"><p id="p-1864">If the first researcher collected their data by randomly selecting 10 nearby ZIP codes, then selecting 4 people from each, which sampling method did they use?</p></li>
 <li id="li-712"><p id="p-1865">If the second researcher collected their data by choosing 40 patients they knew, what sampling method did they use? What concerns would you have about this data set, based upon the data collection method?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-309"><h4 class="heading"><span class="codenumber">20<span class="period">.</span></span></h4>
-<p id="p-1871">For the clinical trials of a weight loss drug containing <em class="emphasis">Garcinia Cambogia</em> the subjects were randomly divided into two groups. The first received an inert pill along with an exercise and diet plan, while the second received the test medicine along with the same exercise and diet plan. The patients do not know which group they are in, nor do the fitness and nutrition advisors.</p>
-<ol id="p-1872" class="lower-alpha">
+<p id="p-1871">For the clinical trials of a weight loss drug containing <em class="emphasis">Garcinia Cambogia</em> the subjects were randomly divided into two groups. The first received an inert pill along with an exercise and diet plan, while the second received the test medicine along with the same exercise and diet plan. The patients do not know which group they are in, nor do the fitness and nutrition advisors.</p> <ol id="p-1872" class="lower-alpha">
 <li id="li-717"><p id="p-1873">Which is the treatment group?</p></li>
 <li id="li-718"><p id="p-1874">Which is the control group (if there is one)?</p></li>
 <li id="li-719"><p id="p-1875">Is this study blind, double-blind, or neither?</p></li>
 <li id="li-720"><p id="p-1876">Is this best described as an experiment, a controlled experiment, or a placebo-controlled experiment?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-310"><h4 class="heading"><span class="codenumber">21<span class="period">.</span></span></h4>
-<p id="p-1882">A study is conducted to determine whether people learn better with routine or crammed studying. Subjects volunteer from an introductory psychology class. At the beginning of the semester 12 subjects volunteer and are assigned to the routine studying group. At the end of the semester 12 subjects volunteer and are assigned to the crammed studying group.</p>
-<ol id="p-1883" class="lower-alpha">
+<p id="p-1882">A study is conducted to determine whether people learn better with routine or crammed studying. Subjects volunteer from an introductory psychology class. At the beginning of the semester 12 subjects volunteer and are assigned to the routine studying group. At the end of the semester 12 subjects volunteer and are assigned to the crammed studying group.</p> <ol id="p-1883" class="lower-alpha">
 <li id="li-725"><p id="p-1884">Identify the target population and the sample.</p></li>
 <li id="li-726"><p id="p-1885">Is this an observational study or an experiment?</p></li>
 <li id="li-727"><p id="p-1886">This study involves two kinds of non-random sampling: 1. Subjects are not randomly sampled from a specified population and 2. Subjects are not randomly assigned to groups. Which problem is more serious? What effect on the results does each have?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-311"><h4 class="heading"><span class="codenumber">22<span class="period">.</span></span></h4>
 <p id="p-1891">To test a new lie detector, two groups of subjects are given the new test. One group is asked to answer all the questions truthfully. The second group is asked to tell the truth on the first half of the questions and lie on the second half. The person administering the lie detector test does not know what group each subject is in. Does this experiment have a control group? Is it blind, double-blind, or neither? Explain.</p></article><article class="exercise exercise-like" id="exercise-312"><h4 class="heading"><span class="codenumber">23<span class="period">.</span></span></h4>
-<p id="p-1893">A poll found that 30%, plus or minus 5% of college freshmen prefer morning classes to afternoon classes.</p>
-<ol id="p-1894" class="lower-alpha">
+<p id="p-1893">A poll found that 30%, plus or minus 5% of college freshmen prefer morning classes to afternoon classes.</p> <ol id="p-1894" class="lower-alpha">
 <li id="li-731"><p id="p-1895">What is the margin of error?</p></li>
 <li id="li-732"><p id="p-1896">Write the survey results as a confidence interval.</p></li>
 <li id="li-733"><p id="p-1897">Explain what the confidence interval tells us about the percentage of college freshmen who prefer morning classes?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-313"><h4 class="heading"><span class="codenumber">24<span class="period">.</span></span></h4>
-<p id="p-1902">A poll found that 38% of U.S. employees are engaged at work, plus or minus 3.5%.</p>
-<ol id="p-1903" class="lower-alpha">
+<p id="p-1902">A poll found that 38% of U.S. employees are engaged at work, plus or minus 3.5%.</p> <ol id="p-1903" class="lower-alpha">
 <li id="li-737"><p id="p-1904">What is the margin of error?</p></li>
 <li id="li-738"><p id="p-1905">Write the survey results as a confidence interval.</p></li>
 <li id="li-739"><p id="p-1906">Explain what the confidence interval tells us about the percentage of U.S. employees who are engaged at work?</p></li>
@@ -584,12 +548,12 @@ true);
 <p id="p-1925">A sports psychologist believes that people are more likely to be extroverted as an adult if they played team sports as a child. Describe two possible studies to test this theory. Design one as an observational study and the other as an experiment. Which is more practical?</p></article><article class="exercise exercise-like" id="exercise-318"><h4 class="heading"><span class="codenumber">29<span class="period">.</span></span></h4>
 <p id="p-1930">Find a newspaper or magazine article, or the online equivalent, describing the results of a recent study (not a simple poll). Give a summary of the study’s findings, then analyze whether the article provided enough information to determine the validity of the conclusions. If not, produce a list of things that are missing from the article that would help you determine the validity of the study. Look for the things discussed in the text: population, sample, randomness, blind, control, margin of error, etc.</p></article><article class="exercise exercise-like" id="exercise-319"><h4 class="heading"><span class="codenumber">30<span class="period">.</span></span></h4>
 <p id="p-1932">Use a polling website such as <a class="external" href="http://www.pewresearch.com/" target="_blank">www.pewresearch.com</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-31" id="fn-31"><sup> 31 </sup></a> or <a class="external" href="http://www.gallup.com/" target="_blank">www.gallup.com</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-32" id="fn-32"><sup> 32 </sup></a> and search for a poll that interests you. Find the result, the margin of error and confidence level for the poll and write the confidence interval.</p></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-26"><div class="fn">Reuters. <a class="external" href="http://news.yahoo.com/s/nm/20090423/od_uk_nm/oukoe_uk_gum_learning" target="_blank">http://news.yahoo.com/s/nm/20090423/od_uk_nm/oukoe_uk_gum_learning</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-27" id="fn-27"><sup> 27 </sup></a>. Retrieved 4/27/09</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-27"><div class="fn"><code class="code-inline tex2jax_ignore">http://news.yahoo.com/s/nm/20090423/od_uk_nm/oukoe_uk_gum_learning</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-27"><div class="fn"><code class="code-inline tex2jax_ignore">news.yahoo.com/s/nm/20090423/od_uk_nm/oukoe_uk_gum_learning</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-28"><div class="fn">Swartz, Norbert. <a class="external" href="http://www.umich.edu/~newsinfo/MT/01/Fal01/mt6f01.html" target="_blank">http://www.umich.edu/~newsinfo/MT/01/Fal01/mt6f01.html</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-29" id="fn-29"><sup> 29 </sup></a> Retrieved 3/31/2009</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-29"><div class="fn"><code class="code-inline tex2jax_ignore">http://www.umich.edu/~newsinfo/MT/01/Fal01/mt6f01.html</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-29"><div class="fn"><code class="code-inline tex2jax_ignore">www.umich.edu/~newsinfo/MT/01/Fal01/mt6f01.html</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-30"><div class="fn">Levine JD, Gordon NC, Smith R, Fields HL. (1981) Analgesic responses to morphine and placebo in individuals with postoperative pain. Pain. 10:379-89.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-31"><div class="fn"><code class="code-inline tex2jax_ignore">http://www.pewresearch.com/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-32"><div class="fn"><code class="code-inline tex2jax_ignore">http://www.gallup.com/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-31"><div class="fn"><code class="code-inline tex2jax_ignore">www.pewresearch.com/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-32"><div class="fn"><code class="code-inline tex2jax_ignore">www.gallup.com/</code></div></div>
 </div></main>
 </div>
 </body>

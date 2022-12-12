@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:43-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -237,8 +226,7 @@ true);
 <li id="li-2809"><p id="p-6290">Calculate the debt to GDP ratio for a country or state</p></li>
 <li id="li-2810"><p id="p-6291">Calculate the debt per person for a country or state</p></li>
 <li id="li-2811"><p id="p-6292">Read and use pie charts to do calculations</p></li>
-</ul></article><section class="introduction" id="introduction-149"><p id="p-6293">Another important part of democracy is how to fund the government. We studied how to calculate federal income taxes in <a href="chap_two_income_taxes.html" class="internal" title="Section 3.7: Income Taxes">Section 3.7</a>. In this section we will study where that money goes and what happens when the government spends more than it earns in taxes.</p>
-<figure class="figure figure-like" id="figure-34"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-11" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLsFUxEAXGFKRmCX04vGaBiUlRQ8dGRUnb&amp;modestbranding=1&amp;rel=0"></iframe></div>
+</ul></article><section class="introduction" id="introduction-149"><p id="p-6293">Another important part of democracy is how to fund the government. We studied how to calculate federal income taxes in <a href="chap_two_income_taxes.html" class="internal" title="Section 3.7: Income Taxes">Section 3.7</a>. In this section we will study where that money goes and what happens when the government spends more than it earns in taxes.</p> <figure class="figure figure-like" id="figure-34"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-11" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLsFUxEAXGFKRmCX04vGaBiUlRQ8dGRUnb&amp;modestbranding=1&amp;rel=0"></iframe></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.6.1<span class="period">.</span></span><span class="space"> </span>Alternative Video Lessons</figcaption></figure></section><section class="subsection" id="subsection-171"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.6.1</span> <span class="title">Federal Income and Spending</span>
 </h3>
@@ -357,8 +345,7 @@ true);
 <li id="li-2831"><p id="p-6335">Interest on the National Debt for 2018: $332.637 billion</p></li>
 <li id="li-2832"><p id="p-6336">Gross Domestic Product: $20.656 trillion</p></li>
 <li id="li-2833"><p id="p-6337">Population: 329 million people</p></li>
-</ul>
-<ol id="p-6338" class="lower-alpha">
+</ul> <ol id="p-6338" class="lower-alpha">
 <li id="li-2834"><p id="p-6339">Calculate the budget surplus or deficit for this fiscal year.</p></li>
 <li id="li-2835"><p id="p-6340">Calculate the debt to GDP ratio as a percentage.</p></li>
 <li id="li-2836"><p id="p-6341">How much debt does the U.S. have per person (per capita)?</p></li>
@@ -407,8 +394,7 @@ true);
 <li id="li-2843"><p id="p-6364">National Debt: ₩754.835 trillion</p></li>
 <li id="li-2844"><p id="p-6365">Gross Domestic Product: ₩1.731 quadrillion</p></li>
 <li id="li-2845"><p id="p-6366">Interest Payments per year: ₩30.055 trillion</p></li>
-</ul>
-<ol id="p-6367" class="lower-alpha">
+</ul> <ol id="p-6367" class="lower-alpha">
 <li id="li-2846"><p id="p-6368">Calculate the debt to GDP ratio as a percentage.</p></li>
 <li id="li-2847"><p id="p-6369">Calculate the amount of debt per person.</p></li>
 <li id="li-2848"><p id="p-6370">Calculate the amount of interest paid per year per person.</p></li>
@@ -442,22 +428,15 @@ true);
 <article class="example example-like" id="example-163"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.6</span><span class="period">.</span>
 </h4>
-<p id="p-6386">In a previous example, we saw that the federal revenue estimate for 2019 was $3.422 trillion. Use the pie chart to calculate the dollar value of each revenue source shown in the graph.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie.png" class="contained" alt="A pie chart showing federal revenue for the United States in the fiscal year 2019; The categories are Income taxes 56%, Social Security taxes 36%, Ad valorem taxes 6% and Business and other taxes 2%."></div></div></div>
+<p id="p-6386">In a previous example, we saw that the federal revenue estimate for 2019 was $3.422 trillion. Use the pie chart to calculate the dollar value of each revenue source shown in the graph.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie.png" class="contained" alt="A pie chart showing federal revenue for the United States in the fiscal year 2019; The categories are Income taxes 56%, Social Security taxes 36%, Ad valorem taxes 6% and Business and other taxes 2%."></div></div></div>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-580" id="solution-580"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-580"><div class="solution solution-like">
-<p id="p-6387">There are 4 segments in the pie chart, showing 4 different types of revenue. For each type, we will multiply the decimal form of the percentage by the total revenue:</p>
-<p id="p-6388">Individual Income Taxes: (0.56)($3.422 trillion) = $1.916 trillion</p>
-<p id="p-6389">Social Security Taxes (Payroll Taxes): (0.36)($3.422 trillion) = $1.232 trillion</p>
-<p id="p-6390">Corporate Taxes and Other: (.02)($3.422 trillion) = $0.0684 trillion or $68.4 billion</p>
-<p id="p-6391">Ad Valorum (Excise Taxes and other): (.06)($3.422 trillion) = $205.3 billion</p>
+<p id="p-6387">There are 4 segments in the pie chart, showing 4 different types of revenue. For each type, we will multiply the decimal form of the percentage by the total revenue:</p> <p id="p-6388">Individual Income Taxes: (0.56)($3.422 trillion) = $1.916 trillion</p> <p id="p-6389">Social Security Taxes (Payroll Taxes): (0.36)($3.422 trillion) = $1.232 trillion</p> <p id="p-6390">Corporate Taxes and Other: (.02)($3.422 trillion) = $0.0684 trillion or $68.4 billion</p> <p id="p-6391">Ad Valorum (Excise Taxes and other): (.06)($3.422 trillion) = $205.3 billion</p>
 </div></div>
 </div></article><article class="example example-like" id="example-164"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.6.7</span><span class="period">.</span>
 </h4>
-<p id="p-6392">In a previous example we also saw that the total amount of the federal budget in 2019 was $4.407 trillion. Use the pie chart of federal spending to calculate the dollar amounts of each of the following types of spending.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie2.png" class="contained" alt="A pie chart showing Federal Spending for the United States in fiscal year 2019; The categories are pensions 25%, defense 22%, education 3%, health care 28%, interest 8%, wellfare 8%, transportation 2%, protection 1%, general government 1% and other spending 2%"></div></div></div>
-<ol id="p-6393" class="lower-alpha">
+<p id="p-6392">In a previous example we also saw that the total amount of the federal budget in 2019 was $4.407 trillion. Use the pie chart of federal spending to calculate the dollar amounts of each of the following types of spending.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/federal_pie2.png" class="contained" alt="A pie chart showing Federal Spending for the United States in fiscal year 2019; The categories are pensions 25%, defense 22%, education 3%, health care 28%, interest 8%, wellfare 8%, transportation 2%, protection 1%, general government 1% and other spending 2%"></div></div></div> <ol id="p-6393" class="lower-alpha">
 <li id="li-2852"><p id="p-6394">Defense</p></li>
 <li id="li-2853"><p id="p-6395">Social Security Payments</p></li>
 <li id="li-2854"><p id="p-6396">Healthcare</p></li>
@@ -567,45 +546,41 @@ true);
 </div>
 </div>
 <article class="exercise exercise-like" id="exercise-910"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
-<p id="p-6514">The total state budget for the state of Virginia in 2018-2019 is approximately $63.9 billion and their population is about 8.5 million people. Use the pie chart (Virginia Department of Planning and Budget, 2018) to calculate how much is budgeted for:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Virginia_State_Budget.png" class="contained" alt="A pie chart showing the Virginia state budget in 2018-2021; The categories are education 34%, health and human resources 30%, transportation 12%, administration 7%, public safety 6% and other 11%."></div></div></div>
-<ol id="p-6515" class="lower-alpha">
+<p id="p-6514">The total state budget for the state of Virginia in 2018-2019 is approximately $63.9 billion and their population is about 8.5 million people. Use the pie chart (Virginia Department of Planning and Budget, 2018) to calculate how much is budgeted for:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Virginia_State_Budget.png" class="contained" alt="A pie chart showing the Virginia state budget in 2018-2021; The categories are education 34%, health and human resources 30%, transportation 12%, administration 7%, public safety 6% and other 11%."></div></div></div> <ol id="p-6515" class="lower-alpha">
 <li id="li-2937"><p id="p-6516">Transportation in total</p></li>
 <li id="li-2938"><p id="p-6517">Health and human resources per person</p></li>
 <li id="li-2939"><p id="p-6518">Public safety in total</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-911"><h4 class="heading"><span class="codenumber">18<span class="period">.</span></span></h4>
-<p id="p-6523">The Wisconsin state budget for 2018 was $8.9 billion and their population is about 5.8 million. Use the pie chart (Wisconsin Budget Project, 2020) to calculate how much was budgeted for:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Wisconsin_State_Budget.png" class="contained" alt="A pie chart showing the Wisconsin state budget in 2018; The categories are K-12 education 35%, Higher education 6%, property tax credits 7%, medical assistance 18%, local governments 5%, corrections 7% and other 22%."></div></div></div>
-<ol id="p-6524" class="lower-alpha">
+<p id="p-6523">The Wisconsin state budget for 2018 was $8.9 billion and their population is about 5.8 million. Use the pie chart (Wisconsin Budget Project, 2020) to calculate how much was budgeted for:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_6/Wisconsin_State_Budget.png" class="contained" alt="A pie chart showing the Wisconsin state budget in 2018; The categories are K-12 education 35%, Higher education 6%, property tax credits 7%, medical assistance 18%, local governments 5%, corrections 7% and other 22%."></div></div></div> <ol id="p-6524" class="lower-alpha">
 <li id="li-2943"><p id="p-6525">K-12 education in total</p></li>
 <li id="li-2944"><p id="p-6526">Local governments per person</p></li>
 <li id="li-2945"><p id="p-6527">Corrections in total</p></li>
 </ol></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-105"><div class="fn">
 <a class="external" href="https://www.pgpf.org/chart-archive/0173_revenues_spending" target="_blank">"Federal Revenue and Spending, 1985-2050"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-106" id="fn-106"><sup> 106 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-107" id="fn-107"><sup> 107 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-108" id="fn-108"><sup> 108 </sup></a> for educational use.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-106"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/chart-archive/0173_revenues_spending</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-107"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-108"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-106"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/chart-archive/0173_revenues_spending</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-107"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-108"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/permissions</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-109"><div class="fn">
 <a class="external" href="https://www.cbo.gov/publication/55151" target="_blank">"Updated Budget Projections: 2019 to 2029"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-110" id="fn-110"><sup> 110 </sup></a> by <a class="external" href="https://www.cbo.gov/" target="_blank">Congressional Budget Office</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-111" id="fn-111"><sup> 111 </sup></a> is in the <a class="external" href="https://wiki.creativecommons.org/Public_domain" target="_blank">Public Domain.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-112" id="fn-112"><sup> 112 </sup></a>
 </div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-110"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.cbo.gov/publication/55151</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-111"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.cbo.gov/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-112"><div class="fn"><code class="code-inline tex2jax_ignore">https://wiki.creativecommons.org/Public_domain</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-110"><div class="fn"><code class="code-inline tex2jax_ignore">www.cbo.gov/publication/55151</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-111"><div class="fn"><code class="code-inline tex2jax_ignore">www.cbo.gov/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-112"><div class="fn"><code class="code-inline tex2jax_ignore">wiki.creativecommons.org/Public_domain</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-113"><div class="fn">
 <a class="external" href="https://www.pgpf.org/chart-archive/0025_federal-debt-hist" target="_blank">"Federal Debt: 1791-2019"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-114" id="fn-114"><sup> 114 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-115" id="fn-115"><sup> 115 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-116" id="fn-116"><sup> 116 </sup></a> for educational use.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-114"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/chart-archive/0025_federal-debt-hist</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-115"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-116"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-114"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/chart-archive/0025_federal-debt-hist</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-115"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-116"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/permissions</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-117"><div class="fn">
 <a class="external" href="https://www.pgpf.org/analysis/2018/12/higher-interest-rates-will-raise-interest-costs-on-the-national-debt" target="_blank">"Net Interest Cost"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-118" id="fn-118"><sup> 118 </sup></a> is copyrighted by <a class="external" href="https://www.pgpf.org/" target="_blank">Peter G. Peterson Foundation</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-119" id="fn-119"><sup> 119 </sup></a> and used under the <a class="external" href="https://www.pgpf.org/permissions" target="_blank">permissions granted</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-120" id="fn-120"><sup> 120 </sup></a> for educational use.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-118"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/analysis/2018/12/higher-interest-rates-will-raise-interest-costs-on-the-national-debt</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-119"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-120"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.pgpf.org/permissions</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-121"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.usdebtclock.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-118"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/analysis/2018/12/higher-interest-rates-will-raise-interest-costs-on-the-national-debt</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-119"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-120"><div class="fn"><code class="code-inline tex2jax_ignore">www.pgpf.org/permissions</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-121"><div class="fn"><code class="code-inline tex2jax_ignore">www.usdebtclock.org/</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-122"><div class="fn">
 <a class="external" href="https://commons.wikimedia.org/wiki/File:Public_debt_percent_gdp_world_map_(2010).svg" target="_blank">"Public Debt Percent GDP World Map"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-123" id="fn-123"><sup> 123 </sup></a> by <a class="external" href="" target="_blank">Wikimedia Commons Contributors</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-124" id="fn-124"><sup> 124 </sup></a>, <a class="external" href="" target="_blank">Wikimedia Commons, the free media repository.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-125" id="fn-125"><sup> 125 </sup></a>
 </div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-123"><div class="fn"><code class="code-inline tex2jax_ignore">https://commons.wikimedia.org/wiki/File:Public_debt_percent_gdp_world_map_(2010).svg</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-123"><div class="fn"><code class="code-inline tex2jax_ignore">commons.wikimedia.org/wiki/File:Public_debt_percent_gdp_world_map_(2010).svg</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-124"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-125"><div class="fn"><code class="code-inline tex2jax_ignore"></code></div></div>
 </div></main>

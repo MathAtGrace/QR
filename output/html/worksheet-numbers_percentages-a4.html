@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:03-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet a4">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -227,31 +216,23 @@ true);
 </div>
 </h3>
 <section class="onepage" id="page-37"><div class="introduction" id="introduction-26">
-<p id="p-172">The World Health Organization (www.who.org) is the part of the United Nations that oversees health issues in the world. The WHO leads numerous studies on tobacco use around the world. In its study on Gender and Tobacco, the organization learned that tobacco use among women is increasing. For example, recent research shows that just as many young girls smoke as young boys. The report is filled with information about percentages of women who smoke, percentages of men who smoke, and the percentage of smokers who start smoking by age 10. The language used to describe this information can be difficult to understand. Pay close attention to the language used to describe a percent at the beginning of this lesson. This will help you to understand new findings in the relationship between tobacco use and gender.</p>
-<p id="p-173">Consider the following two quantities:</p>
-<ul class="disc">
+<p id="p-172">The World Health Organization (www.who.org) is the part of the United Nations that oversees health issues in the world. The WHO leads numerous studies on tobacco use around the world. In its study on Gender and Tobacco, the organization learned that tobacco use among women is increasing. For example, recent research shows that just as many young girls smoke as young boys. The report is filled with information about percentages of women who smoke, percentages of men who smoke, and the percentage of smokers who start smoking by age 10. The language used to describe this information can be difficult to understand. Pay close attention to the language used to describe a percent at the beginning of this lesson. This will help you to understand new findings in the relationship between tobacco use and gender.</p> <p id="p-173">Consider the following two quantities:</p> <ul class="disc">
 <li id="li-127"><p id="p-derived-li-127">Quantity 1 (Q1): The percentage of women who smoke.</p></li>
 <li id="li-128"><p id="p-derived-li-128">Quantity 2 (Q2): The percentage of smokers who are women.</p></li>
 </ul>
-</div>
-<article class="exercise exercise-like" id="exercise-percentages-1"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Are these two quantities necessarily equal?<div class="workspace" data-space="0.25in"></div></article><article class="exercise exercise-like" id="exercise-percentages-2"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
-<p id="p-174">For each quantity, what information would you need to compute these percentages?</p>
-<p id="p-175">For Quantity 1 (Q1):  (select all you would need)</p>
-<ul class="disc">
+</div> <article class="exercise exercise-like" id="exercise-percentages-1"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Are these two quantities necessarily equal?<div class="workspace" data-space="0.25in"></div></article> <article class="exercise exercise-like" id="exercise-percentages-2"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-174">For each quantity, what information would you need to compute these percentages?</p> <p id="p-175">For Quantity 1 (Q1):  (select all you would need)</p> <ul class="square">
 <li id="li-129"><p id="p-derived-li-129">Total number of smokers in the population</p></li>
 <li id="li-130"><p id="p-derived-li-130">Total number of women in the population</p></li>
 <li id="li-131"><p id="p-derived-li-131">Total number of women smokers in the population</p></li>
-</ul>
-<p id="p-176">For Quantity 2 (Q2):  (select all you would need)</p>
-<ul class="disc">
+</ul> <p id="p-176">For Quantity 2 (Q2):  (select all you would need)</p> <ul class="square">
 <li id="li-132"><p id="p-derived-li-132">Total number of smokers in the population</p></li>
 <li id="li-133"><p id="p-derived-li-133">Total number of women in the population</p></li>
 <li id="li-134"><p id="p-derived-li-134">Total number of women smokers in the population</p></li>
-</ul></article><div class="exercisegroup" id="exercise-group-percentages-1">
+</ul></article> <div class="exercisegroup" id="exercise-group-percentages-1">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-27">
-<p id="p-179">Suppose a study on smoking was conducted at Midland University. The following table indicates the results of the study.  Use this table for the next 3 questions.</p>
-<figure class="table table-like" id="table-percentages-1"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.1<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-179">Suppose a study on smoking was conducted at Midland University. The following table indicates the results of the study.  Use this table for the next 3 questions.</p> <figure class="table table-like" id="table-percentages-1"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.1<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b0 r0 l0 t0 lines"></td>
 <td class="l m b0 r0 l0 t0 lines">Men</td>
@@ -275,8 +256,7 @@ true);
 </div></section><section class="onepage" id="page-38"><div class="exercisegroup" id="exercise-group-percentages-2">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-28">
-<p id="p-180">Suppose a study on smoking was conducted at Northwest College. The following table indicates the results of the study.  Use this table for the next 4 questions.</p>
-<figure class="table table-like" id="table-percentages-2"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.2<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-180">Suppose a study on smoking was conducted at Northwest College. The following table indicates the results of the study.  Use this table for the next 4 questions.</p> <figure class="table table-like" id="table-percentages-2"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.2<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b0 r0 l0 t0 lines"></td>
 <td class="l m b0 r0 l0 t0 lines">Men</td>
@@ -296,8 +276,7 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-percentages-6"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>What percentage of women smoke at Northwest College (round to the nearest one percent)?<div class="workspace" data-space="0.25in"></div></article><article class="exercise exercise-like" id="exercise-percentages-7"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>What percentage of smokers at Northwest College are women (round to the nearest one percent)?<div class="workspace" data-space="0.25in"></div></article><article class="exercise exercise-like" id="exercise-percentages-8"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-181">Just looking at the data, without making any calculations, which of the following statements is true?</p>
-<ul class="disc">
+<p id="p-181">Just looking at the data, without making any calculations, which of the following statements is true?</p> <ul class="disc">
 <li id="li-139"><p id="p-derived-li-139">More than 70% of men smoke</p></li>
 <li id="li-140"><p id="p-derived-li-140">More than 50% of men smoke</p></li>
 <li id="li-141"><p id="p-derived-li-141">Less than 25% of men smoke</p></li>
@@ -318,8 +297,7 @@ true);
 </div></section><section class="onepage" id="page-40"><div class="exercisegroup" id="exercise-group-percentages-4">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-30">
-<p id="p-182">A teacher has collected data on the grades his students received in his two classes. The following tables show two different ways to represent the same data.</p>
-<figure class="table table-like" id="table-percentages-3"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.3<span class="period">.</span></span><span class="space"> </span>Table 1</figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-182">A teacher has collected data on the grades his students received in his two classes. The following tables show two different ways to represent the same data.</p> <figure class="table table-like" id="table-percentages-3"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.3<span class="period">.</span></span><span class="space"> </span>Table 1</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b0 r0 l0 t0 lines"></td>
 <td class="l m b0 r0 l0 t0 lines" colspan="5">Grades</td>
@@ -348,7 +326,7 @@ true);
 <td class="l m b0 r0 l0 t0 lines">8.60%</td>
 <td class="l m b0 r0 l0 t0 lines">20.00%</td>
 </tr>
-</table></div></figure><figure class="table table-like" id="table-percentages-4"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.4<span class="period">.</span></span><span class="space"> </span>Table 2</figcaption><div class="tabular-box natural-width"><table class="tabular">
+</table></div></figure> <figure class="table table-like" id="table-percentages-4"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.7.4<span class="period">.</span></span><span class="space"> </span>Table 2</figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b0 r0 l0 t0 lines"></td>
 <td class="l m b0 r0 l0 t0 lines">Grades</td>
@@ -385,14 +363,12 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-percentages-16"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-183">Which table could be used to answer the following question: “What percentage of the students who received an A are in the morning class?”</p>
-<ul class="disc">
+<p id="p-183">Which table could be used to answer the following question: “What percentage of the students who received an A are in the morning class?”</p> <ul class="disc">
 <li id="li-146"><p id="p-derived-li-146">Table 1</p></li>
 <li id="li-147"><p id="p-derived-li-147">Table 2</p></li>
 <li id="li-148"><p id="p-derived-li-148">Neither table</p></li>
 </ul></article><article class="exercise exercise-like" id="exercise-percentages-17"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
-<p id="p-184">Which table could be used to answer the following question: “What percentage of the students in the morning class received an A?”</p>
-<ul class="disc">
+<p id="p-184">Which table could be used to answer the following question: “What percentage of the students in the morning class received an A?”</p> <ul class="disc">
 <li id="li-149"><p id="p-derived-li-149">Table 1</p></li>
 <li id="li-150"><p id="p-derived-li-150">Table 2</p></li>
 <li id="li-151"><p id="p-derived-li-151">Neither table</p></li>

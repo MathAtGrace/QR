@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:35-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -240,8 +229,7 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-878"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
-<p id="p-6156">A small country consists of four states, whose populations are listed below. If the legislature has 78 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6156">A small country consists of four states, whose populations are listed below. If the legislature has 78 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -256,8 +244,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-879"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
 <p id="p-6162">Reapportion the previous problem with 90 seats.</p></article><article class="exercise exercise-like" id="exercise-880"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
-<p id="p-6168">A small country consists of five states, whose populations are listed below. If the legislature as 100 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6168">A small country consists of five states, whose populations are listed below. If the legislature as 100 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -291,8 +278,7 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-882"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
-<p id="p-6187">A Portland Community College Board member race has four candidates: E, F, G, H. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6187">A Portland Community College Board member race has four candidates: E, F, G, H. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">12</th>
@@ -348,10 +334,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">E</td>
 <td class="c m b1 r1 l0 t0 lines">H</td>
 </tr>
-</table></div></div></div>
-<p id="p-6188"></p></article><article class="exercise exercise-like" id="exercise-883"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
-<p id="p-6196">A Forest Grove School Board position has four candidates: I, J, K, L. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6188"></p></article><article class="exercise exercise-like" id="exercise-883"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
+<p id="p-6196">A Forest Grove School Board position has four candidates: I, J, K, L. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">15</th>
@@ -412,10 +396,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">L</td>
 <td class="c m b1 r1 l0 t0 lines">I</td>
 </tr>
-</table></div></div></div>
-<p id="p-6197"></p></article><article class="exercise exercise-like" id="exercise-884"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-6205">A Multnomah County Commissioner's race has five candidates: M, N, O, P, Q. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6197"></p></article><article class="exercise exercise-like" id="exercise-884"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
+<p id="p-6205">A Multnomah County Commissioner's race has five candidates: M, N, O, P, Q. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">31</th>
@@ -470,10 +452,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">O</td>
 <td class="c m b1 r1 l0 t0 lines">P</td>
 </tr>
-</table></div></div></div>
-<p id="p-6206"></p></article><article class="exercise exercise-like" id="exercise-885"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-6214">The Oregon State Governor's race has five candidates: R, S, T, U, V. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6206"></p></article><article class="exercise exercise-like" id="exercise-885"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
+<p id="p-6214">The Oregon State Governor's race has five candidates: R, S, T, U, V. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">22</th>
@@ -534,23 +514,20 @@ true);
 <td class="c m b1 r1 l0 t0 lines">T</td>
 <td class="c m b1 r1 l0 t0 lines">R</td>
 </tr>
-</table></div></div></div>
-<p id="p-6215"></p></article>
+</table></div></div></div> <p id="p-6215"></p></article>
 </div>
 </div>
 <div class="exercisegroup" id="exercisegroup-95">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-144">
-<p id="p-6223">In each fictional country in problems 9-10, use the rules of the U.S. government to complete the table and determine the following:</p>
-<ol id="p-6224" class="lower-alpha">
+<p id="p-6223">In each fictional country in problems 9-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6224" class="lower-alpha">
 <li id="li-2769"><p id="p-6225">The total number of electors in the state.</p></li>
 <li id="li-2770"><p id="p-6226">The number of electoral votes needed for a majority and win a presidential election.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-886"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-6227">In this country there is one representative for every 55,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6227">In this country there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -587,8 +564,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-887"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
-<p id="p-6231">In this country there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6231">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -637,16 +613,14 @@ true);
 <div class="exercisegroup" id="exercisegroup-96">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-145">
-<p id="p-6235">In each fictional country in problems 11-12, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p>
-<ol id="p-6236" class="lower-alpha">
+<p id="p-6235">In each fictional country in problems 11-12, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-6236" class="lower-alpha">
 <li id="li-2775"><p id="p-6237">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
 <li id="li-2776"><p id="p-6238">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-888"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-6239">In this country from problem 9, there is one representative for every 55,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6239">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -683,8 +657,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-889"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
-<p id="p-6243">In this country from problem 10, there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6243">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -733,16 +706,14 @@ true);
 <div class="exercisegroup" id="exercisegroup-97">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-146">
-<p id="p-6247">In each fictional country in problems 13-14, use the rules of the U.S. government to complete the table and determine the following:</p>
-<ol id="p-6248" class="lower-alpha">
+<p id="p-6247">In each fictional country in problems 13-14, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6248" class="lower-alpha">
 <li id="li-2781"><p id="p-6249">The state that has the most electoral power</p></li>
 <li id="li-2782"><p id="p-6250">The state that has the least electoral power</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-890"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-6251">In this country from problem 9, there is one representative for every 55,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6251">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -776,8 +747,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-891"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
-<p id="p-6255">In this country from problem 10, there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-6255">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -824,8 +794,7 @@ true);
 <div class="exercisegroup" id="exercisegroup-98">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-147">
-<p id="p-6259">For each map in problems 15-16, complete the following:</p>
-<ol id="p-6260" class="lower-alpha">
+<p id="p-6259">For each map in problems 15-16, complete the following:</p> <ol id="p-6260" class="lower-alpha">
 <li id="li-2787"><p id="p-6261">How many votes are needed for a majority?</p></li>
 <li id="li-2788"><p id="p-6262">How many seats are won by each party?</p></li>
 <li id="li-2789"><p id="p-6263">Calculate the efficiency gap.</p></li>
@@ -836,13 +805,11 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-892"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
-<p id="p-6267">This state has 5 districts with 9 people in each district.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<p id="p-6267">This state has 5 districts with 9 people in each district.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
 <div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_5/review_exercise_15.png" class="contained" alt="A map with 5 districts drawn; Districts 1, 2, 4 and 5 have 4 D's and 5 R's each; District 3 has 9 D's and 0 R's."></div>
 <div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6268"></p></div>
 </div></div></article><article class="exercise exercise-like" id="exercise-893"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-6276">This state has 6 districts with 7 people in each.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<p id="p-6276">This state has 6 districts with 7 people in each.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
 <div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_5/review_exercise_16.png" class="contained" alt="A map with 6 districts drawn; Districts 1 through 5 have 4 D's and 3 R's; District 6 has 1 D and 6 R's."></div>
 <div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6277"></p></div>
 </div></div></article>

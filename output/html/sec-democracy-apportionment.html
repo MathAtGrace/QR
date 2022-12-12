@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:17-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -239,50 +228,50 @@ true);
 </h3>
 <p id="p-5238">The U.S. government was officially formed in 1787. During the <em class="alert">Constitutional Convention</em>, the framers were tasked with making decisions on the three branches of government and how people (or those considered to be people) would be represented. At that time only white men with property were allowed to vote.</p>
 <p id="p-5239">In creating the Legislative Branch of government, it was decided that Congress would be made up of the Senate and the House of Representatives. Representation for the <em class="alert">Senate</em> would be <em class="alert">equal</em> with two senators per state. To account for the different sizes of the states, the representation in the <em class="alert">House of Representatives</em> would be <em class="alert">proportional</em> to the state’s population, but there was a controversy over how to count the population.</p>
-<blockquote class="blockquote" id="blockquote-30">Representatives and direct Taxes shall be apportioned among the several States which may be included within this Union, according to their respective Numbers, which shall be determined by adding to the whole Number of free Persons, including those bound to Service for a Term of Years, and excluding Indians not taxed, three fifths of all other Persons.1 The actual Enumeration shall be made within three Years after the first Meeting of the Congress of the United States, and within every subsequent Term of ten Years, in such Manner as they shall by Law direct. The Number of Representatives shall not exceed one for every thirty Thousand, but each State shall have at Least one Representative; and until such enumeration shall be made, the State of New Hampshire shall be entitled to chuse three, Massachusetts eight, Rhode Island and Providence Plantations one, Connecticut five, New-York six, New Jersey four, Pennsylvania eight, Delaware one, Maryland six, Virginia ten, North Carolina five, South Carolina five, and Georgia three. <cite class="attribution">―United States Constitution, Article I, Section 2, Clause 3</cite>
+<blockquote class="blockquote" id="blockquote-30">
+<p id="p-5240">Representatives and direct Taxes shall be apportioned among the several States which may be included within this Union, according to their respective Numbers, which shall be determined by adding to the whole Number of free Persons, including those bound to Service for a Term of Years, and excluding Indians not taxed, three fifths of all other Persons.1 The actual Enumeration shall be made within three Years after the first Meeting of the Congress of the United States, and within every subsequent Term of ten Years, in such Manner as they shall by Law direct. The Number of Representatives shall not exceed one for every thirty Thousand, but each State shall have at Least one Representative; and until such enumeration shall be made, the State of New Hampshire shall be entitled to chuse three, Massachusetts eight, Rhode Island and Providence Plantations one, Connecticut five, New-York six, New Jersey four, Pennsylvania eight, Delaware one, Maryland six, Virginia ten, North Carolina five, South Carolina five, and Georgia three.</p> <p id="p-5241"><cite class="attribution">United States Constitution, Article I, Section 2, Clause 3</cite></p>
 </blockquote></section><section class="subsection" id="subsection-145"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.2</span> <span class="title">What is Apportionment?</span>
 </h3>
-<p id="p-5240">The number of representatives each state gets is based on its population, so once the framers decided how to count the population, they had to figure out how to divide up the representatives. This math problem is called apportionment.</p>
-<p id="p-5241"><em class="alert">Apportionment</em> is the problem of dividing up a fixed number of things among groups of different sizes. In the United States, there is a certain number of representatives as stated in the constitution, currently 435, and they need to be divided fairly among the 50 states. Since the states are different sizes, and we cannot use fractions of people, this is not an easy task. In addition, the population in each state may change over time. Every 10 years after the census is taken, the representatives are reapportioned.</p>
-<p id="p-5242">The apportionment problem comes up in a variety of non-political areas too. Here are the rules for apportionment in general.</p>
+<p id="p-5242">The number of representatives each state gets is based on its population, so once the framers decided how to count the population, they had to figure out how to divide up the representatives. This math problem is called apportionment.</p>
+<p id="p-5243"><em class="alert">Apportionment</em> is the problem of dividing up a fixed number of things among groups of different sizes. In the United States, there is a certain number of representatives as stated in the constitution, currently 435, and they need to be divided fairly among the 50 states. Since the states are different sizes, and we cannot use fractions of people, this is not an easy task. In addition, the population in each state may change over time. Every 10 years after the census is taken, the representatives are reapportioned.</p>
+<p id="p-5244">The apportionment problem comes up in a variety of non-political areas too. Here are the rules for apportionment in general.</p>
 <article class="assemblage assemblage-like" id="assemblage-44"><h4 class="heading"><span class="title">Apportionment rules.</span></h4>
-<ol id="p-5243" class="decimal">
-<li id="li-2326"><p id="p-5244">The things being divided up can exist only in whole numbers.</p></li>
-<li id="li-2327"><p id="p-5245">We must use all of the things being divided up, and we cannot use any more.</p></li>
-<li id="li-2328"><p id="p-5246">Each group must get at least one of the things being divided up.</p></li>
-<li id="li-2329"><p id="p-5247">The number of things assigned to each group should be at least approximately proportional to the population of the group. (Exact proportionality isn’t possible because of the whole number requirement, but we should try to be close.)</p></li>
-</ol></article><p id="p-5248">In terms of the apportionment of the United States House of Representatives, these rules imply:</p>
+<ol id="p-5245" class="decimal">
+<li id="li-2326"><p id="p-5246">The things being divided up can exist only in whole numbers.</p></li>
+<li id="li-2327"><p id="p-5247">We must use all of the things being divided up, and we cannot use any more.</p></li>
+<li id="li-2328"><p id="p-5248">Each group must get at least one of the things being divided up.</p></li>
+<li id="li-2329"><p id="p-5249">The number of things assigned to each group should be at least approximately proportional to the population of the group. (Exact proportionality isn’t possible because of the whole number requirement, but we should try to be close.)</p></li>
+</ol></article><p id="p-5250">In terms of the apportionment of the United States House of Representatives, these rules imply:</p>
 <ol class="decimal">
-<li id="li-2330"><p id="p-5249">We can only have whole representatives (a state can’t have 3.4 representatives).</p></li>
-<li id="li-2331"><p id="p-5250">We can only use the 435 representatives available.</p></li>
-<li id="li-2332"><p id="p-5251">Every state gets at least one representative.</p></li>
-<li id="li-2333"><p id="p-5252">The number of representatives each state gets should be approximately proportional to the state population. This way, the number of constituents each representative has should be approximately equal.</p></li>
+<li id="li-2330"><p id="p-5251">We can only have whole representatives (a state can’t have 3.4 representatives).</p></li>
+<li id="li-2331"><p id="p-5252">We can only use the 435 representatives available.</p></li>
+<li id="li-2332"><p id="p-5253">Every state gets at least one representative.</p></li>
+<li id="li-2333"><p id="p-5254">The number of representatives each state gets should be approximately proportional to the state population. This way, the number of constituents each representative has should be approximately equal.</p></li>
 </ol>
-<p id="p-5253">We will look at four ways of solving the apportionment problem, developed by different people: Hamilton, Jefferson, Webster, and the Huntington-Hill method that is used today. We will continue to look at U.S. history throughout this section including Hamilton, Jefferson and Webster’s relationship to slavery.</p></section><section class="subsection" id="subsection-146"><h3 class="heading hide-type">
+<p id="p-5255">We will look at four ways of solving the apportionment problem, developed by different people: Hamilton, Jefferson, Webster, and the Huntington-Hill method that is used today. We will continue to look at U.S. history throughout this section including Hamilton, Jefferson and Webster’s relationship to slavery.</p></section><section class="subsection" id="subsection-146"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.3</span> <span class="title">Hamilton's Method</span>
 </h3>
-<p id="p-5254">Alexander Hamilton (1755 - 1804) was raised in St. Croix in the U.S. Virgin Islands by a poor family. He was motivated by his low socioeconomic status to work himself into a higher social standing. He eventually came to the colonies and worked himself into circles of wealth and influence. While Hamilton wasn’t pro-slavery and considered himself an abolitionist, when choosing between his societal status and moral obligation, he chose the former.</p>
-<p id="p-5255">He wed Elizabeth Schuyler, who was from a prominent family who owned slaves. He was involved with the transactions of slaves for his in-laws which further muddled his anti-slavery stance. Furthermore, Hamilton also traded and sold slaves as part of his duties for the Continental Army.</p>
-<p id="p-5256">Alexander Hamilton proposed the method that now bears his name. His method was approved by Congress in 1791 but was vetoed by President Washington. It was later adopted in 1852 and used through 1910. He begins by determining, to several decimal places, how many people each representative should represent (the divisor).</p>
+<p id="p-5256">Alexander Hamilton (1755 - 1804) was raised in St. Croix in the U.S. Virgin Islands by a poor family. He was motivated by his low socioeconomic status to work himself into a higher social standing. He eventually came to the colonies and worked himself into circles of wealth and influence. While Hamilton wasn’t pro-slavery and considered himself an abolitionist, when choosing between his societal status and moral obligation, he chose the former.</p>
+<p id="p-5257">He wed Elizabeth Schuyler, who was from a prominent family who owned slaves. He was involved with the transactions of slaves for his in-laws which further muddled his anti-slavery stance. Furthermore, Hamilton also traded and sold slaves as part of his duties for the Continental Army.</p>
+<p id="p-5258">Alexander Hamilton proposed the method that now bears his name. His method was approved by Congress in 1791 but was vetoed by President Washington. It was later adopted in 1852 and used through 1910. He begins by determining, to several decimal places, how many people each representative should represent (the divisor).</p>
 <article class="assemblage assemblage-like" id="assemblage-45"><h4 class="heading"><span class="title">Hamilton’s Method.</span></h4>
-<ol id="p-5257" class="decimal">
-<li id="li-2334"><p id="p-5258">Determine how many people each representative should represent. Do this by dividing the total population of all the states by the total number of representatives. This answer is called the <em class="alert">divisor</em>.</p></li>
+<ol id="p-5259" class="decimal">
+<li id="li-2334"><p id="p-5260">Determine how many people each representative should represent. Do this by dividing the total population of all the states by the total number of representatives. This answer is called the <em class="alert">divisor</em>.</p></li>
 <li id="li-2335">
-<p id="p-5259">Divide each state’s population by the divisor to determine how many representatives it should have. Record this answer to several decimal places. This answer is called the <em class="alert">quota</em>.</p>
-<p id="p-5260"><em class="emphasis">Since we can only allocate whole representatives, Hamilton resolved the whole number problem as follows:</em></p>
+<p id="p-5261">Divide each state’s population by the divisor to determine how many representatives it should have. Record this answer to several decimal places. This answer is called the <em class="alert">quota</em>.</p>
+<p id="p-5262"><em class="emphasis">Since we can only allocate whole representatives, Hamilton resolved the whole number problem as follows:</em></p>
 </li>
-<li id="li-2336"><p id="p-5261">Cut off all the decimal parts of all the quotas (but don’t forget what the decimals were). This is the <em class="alert">initial</em> apportionment and will always be less than or equal to the total number of representatives. Add up the whole numbers.</p></li>
+<li id="li-2336"><p id="p-5263">Cut off all the decimal parts of all the quotas (but don’t forget what the decimals were). This is the <em class="alert">initial</em> apportionment and will always be less than or equal to the total number of representatives. Add up the whole numbers.</p></li>
 <li id="li-2337">
-<p id="p-5262">If the total from Step 3 is less than the total number of representatives, assign the remaining representatives, one each, to the states whose decimal parts of the quota were largest, until the desired total is reached.</p>
-<p id="p-5263">Make sure that each state ends up with at least one representative.</p>
+<p id="p-5264">If the total from Step 3 is less than the total number of representatives, assign the remaining representatives, one each, to the states whose decimal parts of the quota were largest, until the desired total is reached.</p>
+<p id="p-5265">Make sure that each state ends up with at least one representative.</p>
 </li>
-</ol></article><p id="p-5264">Let’s see how this works in an example.</p>
+</ol></article><p id="p-5266">Let’s see how this works in an example.</p>
 <article class="example example-like" id="example-132"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.1</span><span class="period">.</span>
 </h4>
-<p id="p-5265">A new state is named after George Floyd, killed by the police in Minneapolis, Minnesota in 2020. Floyd has three counties: King, Garner and Taylor. They are named after African Americans who were also victims of police brutality. Rodney King was brutally beaten by four white police officers and Eric Garner and Breonna Taylor were killed by the police. The Floyd State House of Representatives has 41 members. If the legislature wants to divide this representation along county lines (which is <em class="emphasis">not</em> required, but let’s pretend they do), let’s use Hamilton’s method to apportion them. The populations of the counties are as follows:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5267">A new state is named after George Floyd, killed by the police in Minneapolis, Minnesota in 2020. Floyd has three counties: King, Garner and Taylor. They are named after African Americans who were also victims of police brutality. Rodney King was brutally beaten by four white police officers and Eric Garner and Breonna Taylor were killed by the police. The Floyd State House of Representatives has 41 members. If the legislature wants to divide this representation along county lines (which is <em class="emphasis">not</em> required, but let’s pretend they do), let’s use Hamilton’s method to apportion them. The populations of the counties are as follows:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -303,10 +292,7 @@ true);
 <td class="c m b1 r1 l1 t0 lines">Total</td>
 <td class="c m b1 r1 l0 t0 lines">897,934</td>
 </tr>
-</table></div></div></div>
-<p id="p-5266">Step 1: First, we divide the total population by the number of representatives to find the divisor: <span class="process-math">\(897934/41 = 21900.82927\text{.}\)</span></p>
-<p id="p-5267">Step 2: Now we determine each county’s quota by dividing the county’s population by the divisor: For example, for King, we take <span class="process-math">\(162,310/21,900.82927\)</span> which equals 7.4111.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5268">Step 1: First, we divide the total population by the number of representatives to find the divisor: <span class="process-math">\(897934/41 = 21900.82927\text{.}\)</span></p> <p id="p-5269">Step 2: Now we determine each county’s quota by dividing the county’s population by the divisor: For example, for King, we take <span class="process-math">\(162,310/21,900.82927\)</span> which equals 7.4111.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -332,9 +318,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">897,934</td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5268">Step 3: Removing the decimal parts of the quotas gives our initial apportionment and we add those numbers up.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5270">Step 3: Removing the decimal parts of the quotas gives our initial apportionment and we add those numbers up.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -365,9 +349,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines">40</td>
 </tr>
-</table></div></div></div>
-<p id="p-5269">Step 4: We need 41 representatives, and right now we only have 40. The remaining one goes to the county with the largest decimal part, which is Garner:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5271">Step 4: We need 41 representatives, and right now we only have 40. The remaining one goes to the county with the largest decimal part, which is Garner:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -405,16 +387,13 @@ true);
 <td class="c m b1 r1 l0 t0 lines">40</td>
 <td class="c m b1 r1 l0 t0 lines">41</td>
 </tr>
-</table></div></div></div>
-<p id="p-5270">Our final apportionment is King: 7, Garner: 25, Taylor: 9, for a total of 41 representatives.</p></article><article class="example example-like" id="example-133"><h4 class="heading">
+</table></div></div></div> <p id="p-5272">Our final apportionment is King: 7, Garner: 25, Taylor: 9, for a total of 41 representatives.</p></article><article class="example example-like" id="example-133"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.2</span><span class="period">.</span>
 </h4>
-<p id="p-5271">We will use Hamilton’s method again, to apportion 75 seats for a new state of Lewis, which has five counties. Lewis and its counties are named for civil rights leaders John Lewis, Rosa Parks, Dr. Martin Luther King Jr., Ella Baker, Daisy Bates and Roy Wilkins.</p>
+<p id="p-5273">We will use Hamilton’s method again, to apportion 75 seats for a new state of Lewis, which has five counties. Lewis and its counties are named for civil rights leaders John Lewis, Rosa Parks, Dr. Martin Luther King Jr., Ella Baker, Daisy Bates and Roy Wilkins.</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-467" id="solution-467"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-467"><div class="solution solution-like">
-<p id="p-5272">Step 1: The divisor is <span class="process-math">\(1,052,567/75 = 14,034.22667\text{.}\)</span></p>
-<p id="p-5273">Step 2: Determine each county’s quota by dividing its population by the divisor:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-467" id="solution-467"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-467"><div class="solution solution-like">
+<p id="p-5274">Step 1: The divisor is <span class="process-math">\(1,052,567/75 = 14,034.22667\text{.}\)</span></p> <p id="p-5275">Step 2: Determine each county’s quota by dividing its population by the divisor:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -450,9 +429,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">1,052,567</td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5274">Step 3: Remove the decimal part of each quota and add up the initial apportionment:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5276">Step 3: Remove the decimal part of each quota and add up the initial apportionment:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -495,9 +472,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines">72</td>
 </tr>
-</table></div></div></div>
-<p id="p-5275">Step 4: We need 75 representatives and we only have 72, so we assign the remaining three, one each, to the three counties with the largest decimal parts, which are Baker, King, and Bates in that order:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5277">Step 4: We need 75 representatives and we only have 72, so we assign the remaining three, one each, to the three counties with the largest decimal parts, which are Baker, King, and Bates in that order:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -553,23 +528,19 @@ true);
 <td class="c m b1 r1 l0 t0 lines">72</td>
 <td class="c m b1 r1 l0 t0 lines">75</td>
 </tr>
-</table></div></div></div>
-<p id="p-5276">Our final apportionment is Parks: 3, King: 12, Baker: 6, Bates: 45, and Wilkins: 9 for a total of 75 representatives.</p>
-<p id="p-5277">Note that even though Parks County’s decimal part is greater than .5, it isn’t big enough to get an additional representative, because three other counties have greater decimal parts.</p>
+</table></div></div></div> <p id="p-5278">Our final apportionment is Parks: 3, King: 12, Baker: 6, Bates: 45, and Wilkins: 9 for a total of 75 representatives.</p> <p id="p-5279">Note that even though Parks County’s decimal part is greater than .5, it isn’t big enough to get an additional representative, because three other counties have greater decimal parts.</p>
 </div></div>
-</div></article><p id="p-5278">Hamilton’s method obeys something called the Quota Rule. The Quota Rule isn’t a law, but an idea that some people think is a good one.</p>
+</div></article><p id="p-5280">Hamilton’s method obeys something called the Quota Rule. The Quota Rule isn’t a law, but an idea that some people think is a good one.</p>
 <article class="assemblage assemblage-like" id="assemblage-46"><h4 class="heading"><span class="title">Quota Rule.</span></h4>
-<p id="p-5279">The <em class="alert">Quota Rule</em> says that the final number of representatives a state gets should be within one of that state’s quota. Since we’re dealing with whole numbers for our final answers, that means that each state should either go up to the next whole number above its quota, or down to the next whole number below its quota.</p></article></section><section class="subsection" id="subsection-147"><h3 class="heading hide-type">
+<p id="p-5281">The <em class="alert">Quota Rule</em> says that the final number of representatives a state gets should be within one of that state’s quota. Since we’re dealing with whole numbers for our final answers, that means that each state should either go up to the next whole number above its quota, or down to the next whole number below its quota.</p></article></section><section class="subsection" id="subsection-147"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.4</span> <span class="title">Problems with Hamilton’s Method</span>
 </h3>
-<p id="p-5280">After using Hamilton’s method for many years, three paradoxes happened, on separate occasions, where unfair things happened in new apportionments. This led to other methods being needed.</p>
-<p id="p-5281"><dfn class="terminology">The Alabama Paradox</dfn> is named for an incident that happened during the apportionment that took place after the 1880 census. (A similar incident happened ten years earlier involving the state of Rhode Island, but the paradox is named after Alabama.) The post-1880 apportionment had been completed, using Hamilton’s method and the new population numbers from the census. Then it was decided that because of the country’s growing population, the House of Representatives should be made larger. That meant that the apportionment would need to be done again, still using Hamilton’s method and the same 1880 census numbers, but with more representatives. The assumption was that some states would gain another representative and others would stay with the same number they already had (since there weren’t enough new representatives being added to give one more to every state). The paradox is that Alabama ended up <em class="emphasis">losing</em> a representative in the process, even though no populations were changed, and the total number of representatives increased.</p>
-<p id="p-5282"><dfn class="terminology">The New States Paradox</dfn> happened when Oklahoma became a state in 1907. Oklahoma had enough population to qualify for five representatives in Congress. Those five representatives would need to come from somewhere, though, so five states, presumably, would lose one representative each. That happened, but another thing also happened: Maine gained a representative (from New York).</p>
-<p id="p-5283"><dfn class="terminology">The Population Paradox</dfn> happened between the apportionments after the census of 1900 and of 1910. In those ten years, Virginia’s population grew at an average annual rate of 1.07%, while Maine’s grew at an average annual rate of 0.67%. Virginia started with more people, grew at a faster rate, grew by more people, and ended up with more people than Maine. By itself, that doesn’t mean that Virginia should gain representatives or Maine shouldn’t, because there are lots of other states involved. But Virginia ended up losing a representative <em class="emphasis">to Maine</em>.</p></section><section class="subsection" id="subsection-148"><h3 class="heading hide-type">
+<p id="p-5282">After using Hamilton’s method for many years, three paradoxes happened, on separate occasions, where unfair things happened in new apportionments. This led to other methods being needed.</p>
+<p id="p-5283"><dfn class="terminology">The Alabama Paradox</dfn> is named for an incident that happened during the apportionment that took place after the 1880 census. (A similar incident happened ten years earlier involving the state of Rhode Island, but the paradox is named after Alabama.) The post-1880 apportionment had been completed, using Hamilton’s method and the new population numbers from the census. Then it was decided that because of the country’s growing population, the House of Representatives should be made larger. That meant that the apportionment would need to be done again, still using Hamilton’s method and the same 1880 census numbers, but with more representatives. The assumption was that some states would gain another representative and others would stay with the same number they already had (since there weren’t enough new representatives being added to give one more to every state). The paradox is that Alabama ended up <em class="emphasis">losing</em> a representative in the process, even though no populations were changed, and the total number of representatives increased.</p>
+<p id="p-5284"><dfn class="terminology">The New States Paradox</dfn> happened when Oklahoma became a state in 1907. Oklahoma had enough population to qualify for five representatives in Congress. Those five representatives would need to come from somewhere, though, so five states, presumably, would lose one representative each. That happened, but another thing also happened: Maine gained a representative (from New York).</p>
+<p id="p-5285"><dfn class="terminology">The Population Paradox</dfn> happened between the apportionments after the census of 1900 and of 1910. In those ten years, Virginia’s population grew at an average annual rate of 1.07%, while Maine’s grew at an average annual rate of 0.67%. Virginia started with more people, grew at a faster rate, grew by more people, and ended up with more people than Maine. By itself, that doesn’t mean that Virginia should gain representatives or Maine shouldn’t, because there are lots of other states involved. But Virginia ended up losing a representative <em class="emphasis">to Maine</em>.</p></section><section class="subsection" id="subsection-148"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.5</span> <span class="title">Jefferson's Method</span>
 </h3>
-<p id="p-5284">“All men are created equal,” are words penned by our third president and Founding Father, Thomas Jefferson (1743 - 1826), in the preamble to the Constitution. However, over the course of his life, Jefferson owned around 600 slaves. Among these hundreds of slaves, Jefferson fathered at least six children with one of his slaves, Sally Hennings.</p>
-<p id="p-5285">Over his lifetime and his writings, Jefferson wrestled with his conscience regarding slavery, which can be seen in documents such as drafts of the Constitution before its final version. In the end, his personal and monetary gain surpassed that of his concern for the enslaved.</p>
 <p id="p-5286">Thomas Jefferson proposed a different method for apportionment. After Washington vetoed Hamilton’s method, Jefferson’s method was adopted, and used in Congress from 1791 through 1842. Jefferson, of course, had political reasons for wanting his method to be used rather than Hamilton’s. Primarily, his method favors larger states, and his own home state of Virginia was the largest at the time. He would also argue that it’s the ratio of people to representatives that is the critical thing, and apportionment methods should be based on that.</p>
 <p id="p-5287">The first three steps of Jefferson’s method are the same as Hamilton’s. He found the same divisor and the same quota and cut off the decimal parts in the same way, giving the same initial apportionment that is less than the required total.</p>
 <p id="p-5288">What changes is how Jefferson assigned the remaining representatives. He said that since we ended up with an answer that is too small, our divisor must have been too big. He changed the divisor by making it smaller and looked at the new total. He would raise or lower the divisor until he found one that produced the required total. This is a trial and error process that takes some patience.</p>
@@ -583,9 +554,7 @@ true);
 </ol></article><article class="example example-like" id="example-134"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.3</span><span class="period">.</span>
 </h4>
-<p id="p-5294">We’ll return to the state of Floyd and apply Jefferson’s method. We begin, as we did with Hamilton’s method, by finding the quotas with the original divisor, 21,900.82927.</p>
-<p id="p-5295">Steps 1-3 are the same as Hamilton’s Method. Since we will be using different divisors, we will write the divisor at the bottom of the population column to be clear what we are dividing each number in that column by. You can also write it above that column if you prefer.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5294">We’ll return to the state of Floyd and apply Jefferson’s method. We begin, as we did with Hamilton’s method, by finding the quotas with the original divisor, 21,900.82927.</p> <p id="p-5295">Steps 1-3 are the same as Hamilton’s Method. Since we will be using different divisors, we will write the divisor at the bottom of the population column to be clear what we are dividing each number in that column by. You can also write it above that column if you prefer.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -622,10 +591,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5296">We need 41 representatives, and this divisor gives only 40. We must reduce the divisor until we get 41 representatives. Let’s try 21,500 as the divisor</p>
-<p id="p-5297">Step 4:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5296">We need 41 representatives, and this divisor gives only 40. We must reduce the divisor until we get 41 representatives. Let’s try 21,500 as the divisor</p> <p id="p-5297">Step 4:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -662,14 +628,10 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5298">That worked and our final apportionment is King: 7, Garner: 25, and Taylor: 9.</p>
-<p id="p-5299">Notice that with the new, lower divisor, the quota for Garner County (the largest county in the state) increased by much more than those of King County or Taylor County.</p>
-<p id="p-5300">In this example, we got lucky and found the modified divisor on the first try. If we still had 40, we would reduce the divisor more. If we had more than 41, we would need to raise it. We will show how to do the trial-and-error part in the next example.</p></article><article class="example example-like" id="example-135"><h4 class="heading">
+</table></div></div></div> <p id="p-5298">That worked and our final apportionment is King: 7, Garner: 25, and Taylor: 9.</p> <p id="p-5299">Notice that with the new, lower divisor, the quota for Garner County (the largest county in the state) increased by much more than those of King County or Taylor County.</p> <p id="p-5300">In this example, we got lucky and found the modified divisor on the first try. If we still had 40, we would reduce the divisor more. If we had more than 41, we would need to raise it. We will show how to do the trial-and-error part in the next example.</p></article><article class="example example-like" id="example-135"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.4</span><span class="period">.</span>
 </h4>
-<p id="p-5301">We’ll apply Jefferson’s method for Lewis. The original divisor of 14,034.22667 gave these results:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5301">We’ll apply Jefferson’s method for Lewis. The original divisor of 14,034.22667 gave these results:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -718,9 +680,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5302">We need 75 representatives and we only have 72, so we need to use a smaller divisor. Let’s try lowering it to 13,500:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5302">We need 75 representatives and we only have 72, so we need to use a smaller divisor. Let’s try lowering it to 13,500:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -769,9 +729,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5303">We got a total of 76 representatives which is too many, so we lowered it too far. We need a divisor that’s greater than 13,500 but less than 14,034.22667. Let’s try 13,700:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5303">We got a total of 76 representatives which is too many, so we lowered it too far. We need a divisor that’s greater than 13,500 but less than 14,034.22667. Let’s try 13,700:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -820,10 +778,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5304">Using a modified divisor of 13,700 gives us exactly 75 representatives. Note there is usually more than one modified divisor that will work.</p>
-<p id="p-5305">This can take a lot of writing, so in practice, we can write this all out in one table. With each try we are dividing the population by the new divisor to get the new quotas.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5304">Using a modified divisor of 13,700 gives us exactly 75 representatives. Note there is usually more than one modified divisor that will work.</p> <p id="p-5305">This can take a lot of writing, so in practice, we can write this all out in one table. With each try we are dividing the population by the new divisor to get the new quotas.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -904,8 +859,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"><em class="emphasis">÷13,700</em></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5306">Notice, in comparison to Hamilton’s method, that although the results were the same, they came about in a different way, and the outcome was almost different. Bates County (the largest) almost went up to 46 representatives before King (which is much smaller) got to 12. Although that didn’t happen here, it can. Divisor-adjusting methods like Jefferson’s are not guaranteed to follow the quota rule.</p></article></section><section class="subsection" id="subsection-149"><h3 class="heading hide-type">
+</table></div></div></div> <p id="p-5306">Notice, in comparison to Hamilton’s method, that although the results were the same, they came about in a different way, and the outcome was almost different. Bates County (the largest) almost went up to 46 representatives before King (which is much smaller) got to 12. Although that didn’t happen here, it can. Divisor-adjusting methods like Jefferson’s are not guaranteed to follow the quota rule.</p></article></section><section class="subsection" id="subsection-149"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.1.6</span> <span class="title">Webster's Method</span>
 </h3>
 <p id="p-5307">Daniel Webster (1782-1852) was a lawyer, congressman, Senator of Massachusetts and also served as the U.S. Secretary of State. He was from the North and did not own slaves. He was an opponent of slavery extension and he spoke against annexing Texas and against going to war with Mexico. He argued, however, that no law was needed to prevent the further extension of slavery in new states and he supported the Compromise of 1850, which disappointed his abolitionist supporters (History.com Editors, 2018b).</p>
@@ -921,8 +875,7 @@ true);
 <article class="example example-like" id="example-136"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.5</span><span class="period">.</span>
 </h4>
-<p id="p-5315">We will look at Floyd again, with an initial divisor of 21,900.82927 and 41 representatives:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5315">We will look at Floyd again, with an initial divisor of 21,900.82927 and 41 representatives:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -959,12 +912,10 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5316">This time Garner is the only county with a decimal of 0.5 or higher, so it gets rounded up. This gives the required total, so we’re done.</p></article><article class="example example-like" id="example-137"><h4 class="heading">
+</table></div></div></div> <p id="p-5316">This time Garner is the only county with a decimal of 0.5 or higher, so it gets rounded up. This gives the required total, so we’re done.</p></article><article class="example example-like" id="example-137"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.6</span><span class="period">.</span>
 </h4>
-<p id="p-5317">Let’s look at Lewis again, with an initial divisor of 14,034.22667 and 75 representatives:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5317">Let’s look at Lewis again, with an initial divisor of 14,034.22667 and 75 representatives:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1013,9 +964,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5318">This is one too many, so we need to increase the divisor. Let’s try 14,100:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5318">This is one too many, so we need to increase the divisor. Let’s try 14,100:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1064,9 +1013,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5319">This gives us exactly 75, so we’re done. This is how it would look all in one table:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5319">This gives us exactly 75, so we’re done. This is how it would look all in one table:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1198,8 +1145,7 @@ true);
 <article class="example example-like" id="example-138"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.8</span><span class="period">.</span>
 </h4>
-<p id="p-5337">Again, we will practice with Floyd, with an initial divisor of 21,900.82927 and 41 representatives:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5337">Again, we will practice with Floyd, with an initial divisor of 21,900.82927 and 41 representatives:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1248,12 +1194,10 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5338">Notice that for Garner, the quota of 24.5872 is above the geometric mean of 24.49, so we round up to 25. This gives the required total, so we’re done.</p></article><article class="example example-like" id="example-139"><h4 class="heading">
+</table></div></div></div> <p id="p-5338">Notice that for Garner, the quota of 24.5872 is above the geometric mean of 24.49, so we round up to 25. This gives the required total, so we’re done.</p></article><article class="example example-like" id="example-139"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.9</span><span class="period">.</span>
 </h4>
-<p id="p-5339">Again, here is Lewis, with an initial divisor of 14,034.22667:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5339">Again, here is Lewis, with an initial divisor of 14,034.22667:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1318,9 +1262,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5340">We end up with 76 which is too many, so we need to increase the divisor. Let’s try 14,100:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5340">We end up with 76 which is too many, so we need to increase the divisor. Let’s try 14,100:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1385,15 +1327,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5341">This time Bates had a quota less than its geometric mean, so it did not get rounded up and we have exactly 75 representatives.</p>
-<p id="p-5342">In both these cases, the apportionment produced by the Huntington-Hill method was the same as those from Webster’s method, but that will not always be the case.</p></article><p id="p-5343">In 1980, two mathematicians, Peyton Young and Mike Balinski, proved what we now call the Balinski-Young Impossibility Theorem.</p>
+</table></div></div></div> <p id="p-5341">This time Bates had a quota less than its geometric mean, so it did not get rounded up and we have exactly 75 representatives.</p> <p id="p-5342">In both these cases, the apportionment produced by the Huntington-Hill method was the same as those from Webster’s method, but that will not always be the case.</p></article><p id="p-5343">In 1980, two mathematicians, Peyton Young and Mike Balinski, proved what we now call the Balinski-Young Impossibility Theorem.</p>
 <article class="assemblage assemblage-like" id="assemblage-50"><h4 class="heading"><span class="title">Balinski-Young Impossibility Theorem.</span></h4>
 <p id="p-5344">The Balinski-Young Impossibility Theorem shows that any apportionment method which always follows the quota rule will be subject to the possibility of paradoxes like the Alabama, New States, or Population paradoxes. In other words, we can choose a method that avoids those paradoxes, but only if we are willing to give up the guarantee of following the quota rule.</p></article><article class="example example-like" id="example-140"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.10</span><span class="period">.</span>
 </h4>
-<p id="p-5345">Consider a small country with 5 states, two of which are much larger than the others. We need to apportion 70 representatives. Apportion the representatives using both Webster’s method and the Huntington-Hill method.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5345">Consider a small country with 5 states, two of which are much larger than the others. We need to apportion 70 representatives. Apportion the representatives using both Webster’s method and the Huntington-Hill method.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1420,10 +1359,8 @@ true);
 </tr>
 </table></div></div></div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-468" id="solution-468"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-468"><div class="solution solution-like">
-<p id="p-5346">Step 1: The total population is 610,000. Dividing this by the 70 representatives gives the divisor: 8714.286.</p>
-<p id="p-5347">Step 2: Dividing each state’s population by the divisor gives the quotas.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-468" id="solution-468"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-468"><div class="solution solution-like">
+<p id="p-5346">Step 1: The total population is 610,000. Dividing this by the 70 representatives gives the divisor: 8714.286.</p> <p id="p-5347">Step 2: Dividing each state’s population by the divisor gives the quotas.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1464,10 +1401,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"><em class="emphasis">÷8714.286</em></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5348"><em class="alert">Webster’s Method</em></p>
-<p id="p-5349">Step 3: Using Webster’s method, we round each quota to the nearest whole number using the rounding rule of 0.5 or higher to round up.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5348"><em class="alert">Webster’s Method</em></p> <p id="p-5349">Step 3: Using Webster’s method, we round each quota to the nearest whole number using the rounding rule of 0.5 or higher to round up.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1516,9 +1450,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5350">Step 4: Adding these up only gives us 69 representatives, so we adjust the divisor down. We try 8,700, which gives us 70 representatives. Notice that State A, the largest state, is the one that got rounded up the second time.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5350">Step 4: Adding these up only gives us 69 representatives, so we adjust the divisor down. We try 8,700, which gives us 70 representatives. Notice that State A, the largest state, is the one that got rounded up the second time.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1567,10 +1499,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5351"><em class="alert">Huntington-Hill Method</em></p>
-<p id="p-5352">Step 3: Using the Huntington-Hill method, we cut off the decimal to find the lower quota, then calculate the geometric mean based on each lower quota. If the quota is less than the geometric mean, we round down; if the quota is more than the geometric mean, we round up.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5351"><em class="alert">Huntington-Hill Method</em></p> <p id="p-5352">Step 3: Using the Huntington-Hill method, we cut off the decimal to find the lower quota, then calculate the geometric mean based on each lower quota. If the quota is less than the geometric mean, we round down; if the quota is more than the geometric mean, we round up.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1635,8 +1564,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5353">These allocations add up to 70. Notice that this allocation is different than that produced by Webster’s method. In this case, state E, which is smaller, got one more seat and state A got one less.</p>
+</table></div></div></div> <p id="p-5353">These allocations add up to 70. Notice that this allocation is different than that produced by Webster’s method. In this case, state E, which is smaller, got one more seat and state A got one less.</p>
 </div></div>
 </div></article><p id="p-5354">In this section we have learned four different methods of apportionment used in U.S. history, intertwined with the U.S. treatment of women, Native Americans and Black people. In the next section we will continue with our brief history of voting rights and look at different methods used for voting.</p></section><section class="exercises" id="exercises-17"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber">6.1.10</span> <span class="title">Exercises</span>
@@ -1654,8 +1582,7 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-794"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
-<p id="p-5360">A college offers tutoring in Math, English, Chemistry, and Biology. The number of students enrolled in each subject is listed below. If the college can only afford to hire 15 tutors, determine how many tutors should be assigned to each subject.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5360">A college offers tutoring in Math, English, Chemistry, and Biology. The number of students enrolled in each subject is listed below. If the college can only afford to hire 15 tutors, determine how many tutors should be assigned to each subject.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Math</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">English</th>
@@ -1670,8 +1597,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-795"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
 <p id="p-5366">Reapportion the previous problem if the college can hire 20 tutors.</p></article><article class="exercise exercise-like" id="exercise-796"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
-<p id="p-5372">The number of salespeople assigned to work during a shift is apportioned based on the average number of customers during that shift. Apportion 20 salespeople given the information below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5372">The number of salespeople assigned to work during a shift is apportioned based on the average number of customers during that shift. Apportion 20 salespeople given the information below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Shift</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Morning</th>
@@ -1688,8 +1614,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-797"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
 <p id="p-5378">Reapportion the previous problem if the store has 25 salespeople.</p></article><article class="exercise exercise-like" id="exercise-798"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
-<p id="p-5384">Three people invest in a treasure dive, each investing the amount listed below. The dive results in 36 gold coins. Apportion those coins to the investor.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5384">Three people invest in a treasure dive, each investing the amount listed below. The dive results in 36 gold coins. Apportion those coins to the investor.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Aisha</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Basir</th>
@@ -1702,8 +1627,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-799"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
 <p id="p-5390">Reapportion the previous problem if 37 gold coins are recovered.</p></article><article class="exercise exercise-like" id="exercise-800"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-5396">A small country consists of four states, whose populations are listed below. If the legislature has 116 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5396">A small country consists of four states, whose populations are listed below. If the legislature has 116 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1718,8 +1642,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-801"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
 <p id="p-5402">Reapportion the previous problem with 124 seats.</p></article><article class="exercise exercise-like" id="example7"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-5408">A small country consists of five states, whose populations are listed below. If the legislature has 119 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5408">A small country consists of five states, whose populations are listed below. If the legislature has 119 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1736,8 +1659,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-803"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
 <p id="p-5414">Reapportion the previous problem with 126 seats.</p></article><article class="exercise exercise-like" id="exercise-804"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-5420">A small country consists of six states, whose populations are listed below. If the legislature has 200 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5420">A small country consists of six states, whose populations are listed below. If the legislature has 200 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1756,8 +1678,7 @@ true);
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-805"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
 <p id="p-5426">Reapportion the previous problem with 180 seats</p></article><article class="exercise exercise-like" id="exercise-806"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-5432">A small country consists of six states, whose populations are listed below. If the legislature has 250 seats, apportion the seats.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5432">A small country consists of six states, whose populations are listed below. If the legislature has 250 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1779,8 +1700,7 @@ true);
 </div>
 </div>
 <article class="exercise exercise-like" id="exercise-808"><h4 class="heading"><span class="codenumber">15<span class="period">.</span></span></h4>
-<p id="p-5444">A small country consists of three states, whose populations are listed below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5444">A small country consists of three states, whose populations are listed below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1791,15 +1711,13 @@ true);
 <td class="c m b1 r1 l0 t0 lines">6,000</td>
 <td class="c m b1 r1 l0 t0 lines">2,000</td>
 </tr>
-</table></div></div></div>
-<ol id="p-5445" class="lower-alpha">
+</table></div></div></div> <ol id="p-5445" class="lower-alpha">
 <li id="li-2411"><p id="p-5446">If the legislature has 10 seats, use Hamilton’s method to apportion the seats.</p></li>
 <li id="li-2412"><p id="p-5447">If the legislature grows to 11 seats, use Hamilton’s method to apportion the seats.</p></li>
 <li id="li-2413"><p id="p-5448">Explain what happened in part b. What do you think would be a fair solution?</p></li>
 <li id="li-2414"><p id="p-5449">Try Jefferson’s method for 11 seats. Does that solve the problem?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-809"><h4 class="heading"><span class="codenumber">16<span class="period">.</span></span></h4>
-<p id="p-5455">A small country consists of three states, whose populations are listed below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5455">A small country consists of three states, whose populations are listed below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -1810,14 +1728,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">10,000</td>
 <td class="c m b1 r1 l0 t0 lines">1,000</td>
 </tr>
-</table></div></div></div>
-<ol id="p-5456" class="lower-alpha">
+</table></div></div></div> <ol id="p-5456" class="lower-alpha">
 <li id="li-2419"><p id="p-5457">If the legislature has 10 seats, use Hamilton’s method to apportion the seats. Which rule is not met in this case?</p></li>
 <li id="li-2420"><p id="p-5458">If the legislature grows to 11 seats, use Hamilton’s method to apportion the seats.</p></li>
 <li id="li-2421"><p id="p-5459">If there could only be 10 seats, what do you think would be a fair solution?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-810"><h4 class="heading"><span class="codenumber">17<span class="period">.</span></span></h4>
-<p id="p-5464">A state with five counties has 50 seats in their legislature. Using Hamilton’s method, apportion the seats based on the 2010 census, then again using the 2020 census. Explain what happened in 2020 apportionment. Do you think it is fair?</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5464">A state with five counties has 50 seats in their legislature. Using Hamilton’s method, apportion the seats based on the 2010 census, then again using the 2020 census. Explain what happened in 2020 apportionment. Do you think it is fair?</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">2000 Population</th>
@@ -1849,8 +1765,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">118,400</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-811"><h4 class="heading"><span class="codenumber">18<span class="period">.</span></span></h4>
-<p id="p-5468">A state with five counties has 62 seats in their legislature. Using Hamilton’s method, apportion the seats based on the 2010 census, then again using the 2010 census. Explain what happened in 2020 apportionment. Do you think it is fair?</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5468">A state with five counties has 62 seats in their legislature. Using Hamilton’s method, apportion the seats based on the 2010 census, then again using the 2010 census. Explain what happened in 2020 apportionment. Do you think it is fair?</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">County</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">2000 Population</th>
@@ -1899,7 +1814,7 @@ true);
 <div class="hidden-content tex2jax_ignore" id="hk-fn-69"><div class="fn">
 <a class="external" href="https://www.juneteenth.com/history.htm" target="_blank">https://www.juneteenth.com/history.htm</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-70" id="fn-70"><sup> 70 </sup></a>
 </div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-70"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.juneteenth.com/history.htm</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-70"><div class="fn"><code class="code-inline tex2jax_ignore">www.juneteenth.com/history.htm</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-71"><div class="fn"><a class="external" href="https://www.ferris.edu/htmls/news/jimcrow/timeline/slavery.htm" target="_blank"><code class="code-inline tex2jax_ignore">https://www.ferris.edu/htmls/news/jimcrow/timeline/slavery.htm</code></a></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-72"><div class="fn"><a class="external" href="https://www.carnegie.org/topics/topic-articles/voting-rights/voting-rights-timeline/" target="_blank"><code class="code-inline tex2jax_ignore">https://www.carnegie.org/topics/topic-articles/voting-rights/voting-rights-timeline/</code></a></div></div>
 </div></main>

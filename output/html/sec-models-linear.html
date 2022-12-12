@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:56:43-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -237,9 +226,7 @@ true);
 <li id="li-1772"><p id="p-derived-li-1772">Translate problems from a variety of contexts into mathematical representation and vice versa (linear, exponential, simple quadratics).</p></li>
 <li id="li-1773"><p id="p-derived-li-1773">Identify when a linear model is reasonable for a given situation and, when appropriate, formulate a linear model. In the context of the situation interpret the slope and intercepts and determine the reasonable domain and range.</p></li>
 <li id="li-1774"><p id="p-derived-li-1774">Use functional models to make predictions and solve problems.</p></li>
-</ol></article><section class="introduction" id="introduction-110"><p id="p-4226">In this activity we define a function and develop an understanding of function notation by comparing statements we already understand in English to equivalent statements written in “math” language.</p>
-<p id="p-4227">The prerequisites for this lesson are knowing how to read a graph or a table of values and how to use a formula to make a calculation.</p>
-<figure class="figure figure-like" id="figure-25"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-10" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/zHU1xH6Ogs4?t=48?&amp;modestbranding=1&amp;rel=0"></iframe></div>
+</ol></article><section class="introduction" id="introduction-110"><p id="p-4226">In this activity we define a function and develop an understanding of function notation by comparing statements we already understand in English to equivalent statements written in “math” language.</p> <p id="p-4227">The prerequisites for this lesson are knowing how to read a graph or a table of values and how to use a formula to make a calculation.</p> <figure class="figure figure-like" id="figure-25"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-10" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/zHU1xH6Ogs4?t=48?&amp;modestbranding=1&amp;rel=0"></iframe></div>
 <figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.1<span class="period">.</span></span><span class="space"> </span>A Mathematician Excited About Functions</figcaption></figure></section><section class="subsection" id="subsection-127"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.3.1</span> <span class="title">What is a Function?</span>
 </h3>
@@ -248,15 +235,9 @@ true);
 <p id="p-4230">Start by remembering this: one input, one output.</p>
 <p id="p-4231">A <dfn class="terminology">function</dfn>  is a rule that takes a piece of “usable” information that you choose (input) and gives you some kind of result (output). By “usable” we mean information that has meaning for the function.</p>
 <p id="p-4232">Think of a function as a sort of machine. Using some input, the machine does something to the input and then out pops a result. In this course our inputs will be mostly numbers and the process will yield numbers as results.</p>
-<article class="exercise exercise-like" id="exercise-628"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-628"><h4 class="heading">
+<article class="exercise exercise-like" id="exercise-628"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-628"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Temperature Converter.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-628"><article class="exercise exercise-like"><p id="p-4233">A simple example of a function is a temperature converter. It converts a temperature from degrees Fahrenheit to degrees Celsius.</p>
-<p id="p-4234">The function is the rule or process used to convert from one unit of temperature to the other.</p>
-<p id="p-4235">Our function is a graph, but it could have been a table of values or a formula.</p>
-<p id="p-4236">The graph illustrates that the temperature in degrees Celsius is a <dfn class="terminology">function</dfn> of the temperature in degrees Fahrenheit.</p>
-<p id="p-4237">The temperature in degrees Fahrenheit, <span class="process-math">\(F\text{,}\)</span> is the input while the temperature in degrees Celsius, <span class="process-math">\(C\text{,}\)</span> is the output.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/temperature.png" class="contained"></div></div></div>
-<p id="p-4238">Use the graph to estimate your answers below:</p>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-628"><article class="exercise exercise-like"><p id="p-4233">A simple example of a function is a temperature converter. It converts a temperature from degrees Fahrenheit to degrees Celsius.</p> <p id="p-4234">The function is the rule or process used to convert from one unit of temperature to the other.</p> <p id="p-4235">Our function is a graph, but it could have been a table of values or a formula.</p> <p id="p-4236">The graph illustrates that the temperature in degrees Celsius is a <dfn class="terminology">function</dfn> of the temperature in degrees Fahrenheit.</p> <p id="p-4237">The temperature in degrees Fahrenheit, <span class="process-math">\(F\text{,}\)</span> is the input while the temperature in degrees Celsius, <span class="process-math">\(C\text{,}\)</span> is the output.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/temperature.png" class="contained"></div></div></div> <p id="p-4238">Use the graph to estimate your answers below:</p>
 <ol class="decimal">
 <li id="li-1775"><p id="p-4239">The temperature of <span class="process-math">\(77\)</span> degrees Fahrenheit to degrees Celsius</p></li>
 <li id="li-1776"><p id="p-4240">What temperature in Fahrenheit is the same as <span class="process-math">\(-20\)</span> degrees Celsius?</p></li>
@@ -275,7 +256,7 @@ true);
 </h3>
 <p id="p-4252">Math is just another language. We use it to communicate measurements, changes in value and how things are related to or affect one another. Almost everything you say or describe in Math, you can say or describe in English.</p>
 <p id="p-4253">In this next exercise we learn to communicate the position of a train as time passes and develop the notation to express where the train is at different times. We will assume that this train runs on time, every day and the conditions every day are the same. You know, an alternate universe called “example land”.</p>
-<article class="exercise exercise-like" id="exercise-models-linear-2"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-models-linear-2"><h4 class="heading">
+<article class="exercise exercise-like" id="exercise-models-linear-2"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-models-linear-2"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span>
 </h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-2"><article class="exercise exercise-like">Consider the graph below. The dot on the graph represents the position of a train at a particular time. The cross-hairs represent the time. Notice that the train’s distance, in miles, from downtown depends on the time, in hours, after 8 a.m. <div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> How far from downtown is the train at 10 a.m.?</article></div>
 <p id="p-4254">In English you can communicate information about time and position in a simple sentence like</p>
@@ -291,11 +272,7 @@ true);
 <p id="p-4262"><dfn class="terminology">Variables</dfn> are used to represent values we don't know or that may change. For a function, the input is called the <dfn class="terminology">independent variable</dfn>, and the output is called the <dfn class="terminology">dependent variable</dfn>. This is because the output depends on the input.</p>
 <p id="p-4263">The distance from downtown is constantly changing with time, so we can let the dependent variable <span class="process-math">\(D\)</span> represent the “Train's distance in miles from downtown”. Similarly, we can use the independent variable <span class="process-math">\(t\)</span> to represent the “number of hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>”.</p>
 <p id="p-4264">Typically, we use variables that have something to do with the context of the problem, but sometimes we generalize an expression or equation with <span class="process-math">\(x\)</span>'s and <span class="process-math">\(y\)</span>'s when we have nothing specific in mind.</p>
-<section class="paragraphs" id="paragraphs-1"><h4 class="heading"><span class="title">Variables have units.</span></h4>
-<p id="p-4265">If the variables represent actual things or events, we must define them to include the <dfn class="terminology">units</dfn>  we used to measure the event. This allows us to extract meaning from the values or expressions.</p>
-<p id="p-4266">If you know Spanish you can <em class="emphasis">interpret</em> the meaning of a Spanish article you read by translating it into English. Likewise, if you know “math”, you can interpret the meaning of function notation by translating it into English, provided you know what the variables in the notation mean or what they are measuring.</p>
-<blockquote class="blockquote" id="blockquote-28"><p id="p-4267">If <span class="process-math">\(D\)</span> represents distance, you must define the units in which the distance is measured: miles, inches, centimeters, light years, etc.</p></blockquote>
-<blockquote class="blockquote" id="blockquote-29"><p id="p-4268">If <span class="process-math">\(t\)</span> represents time, will it be measured with units of seconds, hours or years?</p></blockquote></section><p id="p-4269">Since the position of the train depends on the amount of time that has passed, we say “the distance depends on time”. More specifically, we say that the distance of the train from downtown is a <dfn class="terminology">function of time</dfn>.</p>
+<section class="paragraphs" id="paragraphs-1"><h4 class="heading"><span class="title">Variables have units.</span></h4> <p id="p-4265">If the variables represent actual things or events, we must define them to include the <dfn class="terminology">units</dfn>  we used to measure the event. This allows us to extract meaning from the values or expressions.</p> <p id="p-4266">If you know Spanish you can <em class="emphasis">interpret</em> the meaning of a Spanish article you read by translating it into English. Likewise, if you know “math”, you can interpret the meaning of function notation by translating it into English, provided you know what the variables in the notation mean or what they are measuring.</p> <blockquote class="blockquote" id="blockquote-28"><p id="p-4267">If <span class="process-math">\(D\)</span> represents distance, you must define the units in which the distance is measured: miles, inches, centimeters, light years, etc.</p></blockquote> <blockquote class="blockquote" id="blockquote-29"><p id="p-4268">If <span class="process-math">\(t\)</span> represents time, will it be measured with units of seconds, hours or years?</p></blockquote></section><p id="p-4269">Since the position of the train depends on the amount of time that has passed, we say “the distance depends on time”. More specifically, we say that the distance of the train from downtown is a <dfn class="terminology">function of time</dfn>.</p>
 <p id="p-4270">Function notation allows us to communicate that distance is a function of time by simply writing <span class="process-math">\(D = f(t)\text{.}\)</span> The notation <span class="process-math">\(f(t)\)</span> is read as, “<span class="process-math">\(f\)</span> of <span class="process-math">\(t\)</span>”.</p>
 <p id="p-4271">Remember <span class="process-math">\(t\)</span> is a value. The function uses <span class="process-math">\(t\)</span> to create the value <span class="process-math">\(D\text{.}\)</span></p>
 <p id="p-4272">Also, don't confuse the notation with multiplication! The expression <span class="process-math">\(f(t)\)</span> does <em class="alert">not</em> mean <span class="process-math">\(f\)</span> times <span class="process-math">\(t\text{.}\)</span></p>
@@ -304,8 +281,7 @@ true);
 </h4>
 <p id="p-4273">The word “function” usually refers to the actual <em class="emphasis">rule</em> which turns the input into the output. Sometimes, however, we will use it to describe the output of the relationship.</p></article><article class="exercise exercise-like" id="exercise-models-linear-3"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-models-linear-3"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-3"><article class="exercise exercise-like"><p id="p-4274">How would you say the function notation in each statement below?</p>
-<ol class="decimal">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-3"><article class="exercise exercise-like"><p id="p-4274">How would you say the function notation in each statement below?</p> <ol class="decimal">
 <li id="li-1783">
 <p id="p-4275">Tarzan(the jungle)</p>
 <ol class="lower-alpha cols2">
@@ -344,11 +320,9 @@ f(\text{input}) = \mathit{output}
 <p class="continuation">The function notation <span class="process-math">\(f(0)\)</span> is telling us the input is <span class="process-math">\(0\text{.}\)</span> That means, “<span class="process-math">\(0\)</span> hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>” In other words, it's <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr></p>
 <p id="p-4282">On the other hand, <span class="process-math">\(f(0)\)</span> represents an output. It is “the train's distance from downtown, <span class="process-math">\(0\)</span> hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>” But we don't know what that distance actually is yet. In this case, the notation <span class="process-math">\(f(0)\)</span> means “Whatever the distance is at t = 0”.</p>
 <p id="p-4283">Nonetheless, the input and output create an <dfn class="terminology">ordered pair</dfn>  <span class="process-math">\((0, f(0))\text{.}\)</span> On a graph the ordered pair is a <dfn class="terminology">point</dfn>. </p>
-<article class="exercise exercise-like" id="exercise-models-linear-4"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-models-linear-4"><h4 class="heading">
+<article class="exercise exercise-like" id="exercise-models-linear-4"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-models-linear-4"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.6</span><span class="period">.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-4"><article class="exercise exercise-like"><p id="p-4284">The graph below is a function that illustrates a train's distance from downtown, in miles, as a function of time in hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr> When using a graph the best you can do is estimate. Since <span class="process-math">\(f(0)\)</span> represents a distance at <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>, we can use the graph to find what the distance is.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<ul class="disc">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-4"><article class="exercise exercise-like"><p id="p-4284">The graph below is a function that illustrates a train's distance from downtown, in miles, as a function of time in hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr> When using a graph the best you can do is estimate. Since <span class="process-math">\(f(0)\)</span> represents a distance at <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>, we can use the graph to find what the distance is.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <ul class="disc">
 <li id="li-1798"><p id="p-derived-li-1798">What is <span class="process-math">\(f(0) \)</span> approximately equal to?</p></li>
 <li id="li-1799"><p id="p-derived-li-1799">What time is <span class="process-math">\(f(0)\)</span> referring to?</p></li>
 <li id="li-1800"><p id="p-derived-li-1800">The notation <span class="process-math">\(f(0)\)</span> is read as “<span class="process-math">\(f\)</span> of zero.”  What do you think <span class="process-math">\(f(0)\)</span> means in the context of this train story?</p></li>
@@ -364,9 +338,7 @@ f(\text{input}) = \mathit{output}
 </ul></article></div></section><section class="subsection" id="subsection-130"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.3.4</span> <span class="title">Average Rate of Change, Inuitive Knowledge</span>
 </h3>
-<section class="introduction" id="introduction-111"><p id="p-4286">In this activity we introduce the Greek letter <span class="process-math">\(\Delta\)</span> that represents change, and we develop the concept of <dfn class="terminology">average rate of change</dfn>.</p>
-<p id="p-4287">The prerequisites for this lesson are knowing how to calculate the slope of a line and understanding the meaning of slope.</p>
-<p id="p-4288">Let's start by realizing you already understand the concept of average rate of change, but maybe you have never heard the phrase before.</p></section><p id="p-4289">It turns out, <dfn class="terminology">average rate of change</dfn> is just another way to talk about slope. As the name implies, it measures how quickly things change, on average.</p>
+<section class="introduction" id="introduction-111"><p id="p-4286">In this activity we introduce the Greek letter <span class="process-math">\(\Delta\)</span> that represents change, and we develop the concept of <dfn class="terminology">average rate of change</dfn>.</p> <p id="p-4287">The prerequisites for this lesson are knowing how to calculate the slope of a line and understanding the meaning of slope.</p> <p id="p-4288">Let's start by realizing you already understand the concept of average rate of change, but maybe you have never heard the phrase before.</p></section><p id="p-4289">It turns out, <dfn class="terminology">average rate of change</dfn> is just another way to talk about slope. As the name implies, it measures how quickly things change, on average.</p>
 <p id="p-4290">Common examples of average rate of change:</p>
 <ul id="p-4291" class="disc">
 <li id="li-1808"><p id="p-4292">Traveling from Portland, OR to Seattle, WA (about <span class="process-math">\(200\)</span> miles) in <span class="process-math">\(4\)</span> hours is an average speed of <span class="quantity">50 mph</span>.</p></li>
@@ -376,11 +348,9 @@ f(\text{input}) = \mathit{output}
 <p id="p-4295">In each example there is a function that relates an input with an output. When the input changes by some amount, the output will also change (though usually by some other amount).</p>
 <p id="p-4296">The change in the output divided by the change in the input is called an <dfn class="terminology">average rate of change</dfn>  of the function.</p>
 <p id="p-4297">Be careful to remember that we are only talking about an <em class="emphasis">average</em>. For instance, no one can drive from Portland to Seattle at a constant speed. There is always stop and go traffic, variations in speed limits, etc.</p>
-<article class="exercise exercise-like" id="exercise-models-linear-6"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-models-linear-6"><h4 class="heading">
+<article class="exercise exercise-like" id="exercise-models-linear-6"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-models-linear-6"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.8</span><span class="period">.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-6"><article class="exercise exercise-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<p id="p-4299">As the time changes along the horizontal axis the result is the changing position of the train measured on the vertical axis. The key word here is “change”</p>
-<ol class="lower-alpha">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-6"><article class="exercise exercise-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <p id="p-4299">As the time changes along the horizontal axis the result is the changing position of the train measured on the vertical axis. The key word here is “change”</p> <ol class="lower-alpha">
 <li id="li-1811"><p id="p-4300">Use the graph to find the change in distance between the <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>.</p></li>
 <li id="li-1812"><p id="p-4301">What is the change in time between the <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>?</p></li>
 <li id="li-1813"><p id="p-4302">What is the average speed (rate of change) between <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>?</p></li>
@@ -389,11 +359,9 @@ f(\text{input}) = \mathit{output}
 <p id="p-4309">In math we use the Greek letter <span class="process-math">\(\Delta\)</span> to mean “change in”. Change between two values is typically measured by subtracting an old value from a new value.</p>
 <p id="p-4310">In our train story where <span class="process-math">\(D = f(t)\text{,}\)</span> the expression <span class="process-math">\(\Delta f\)</span> means “change in miles from downtown”. As the train travels away from downtown, the distance from downtown increases. New distance is greater than old distance, so traveling away from downtown is a positive change in distance.</p>
 <p id="p-4311">However, the distance from downtown decreases as the train travels towards downtown. New distance is less than old distance, therefore traveling toward downtown is a negative change in distance.</p>
-<article class="exercise exercise-like" id="exercise-models-linear-7"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-models-linear-7"><h4 class="heading">
+<article class="exercise exercise-like" id="exercise-models-linear-7"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-models-linear-7"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.9</span><span class="period">.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-7"><article class="exercise exercise-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<p id="p-4312">Use the graph to find the value of <span class="process-math">\(\Delta f\)</span> during the first <span class="process-math">\(2\)</span> hours of the trip</p>
-<p id="p-4313">What is the meaning of the expression <span class="process-math">\(\Delta t\)</span> in the context of the train story?</p>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-models-linear-7"><article class="exercise exercise-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <p id="p-4312">Use the graph to find the value of <span class="process-math">\(\Delta f\)</span> during the first <span class="process-math">\(2\)</span> hours of the trip</p> <p id="p-4313">What is the meaning of the expression <span class="process-math">\(\Delta t\)</span> in the context of the train story?</p>
 <ol class="decimal cols2">
 <li id="li-1819"><p id="p-derived-li-1819">Change in hours since 8 a.m.</p></li>
 <li id="li-1820"><p id="p-derived-li-1820">Delta t</p></li>
@@ -506,8 +474,7 @@ T = 1.3733 \times P + 4.2673
 <div class="sidebyside"><div class="sbsrow" style="margin-left:1.25%;margin-right:1.25%;">
 <div class="sbspanel top" style="width:25.6410256410256%;"><p id="p-4328">In the graph shown, we can see that the graph is a line, so the equation is linear.  We can compute the slope using any two pairs of points by counting how much the input and output change, and divide them.  Notice that we get the same slope regardless of which points we use.</p></div>
 <div class="sbspanel top" style="width:71.7948717948718%;"><img src="external/M96-L3-2-g2.jfif" class="contained"></div>
-</div></div>
-<p id="p-4329">If the output increases as the input increases, we consider that a positive change.  If the output decreases as the input increases, that is a negative change, and the slope will be negative.</p></article><p id="p-4330">Some people call the calculation of slope <em class="emphasis">"rise over run"</em>, where "rise" refers to the vertical change in output, and "run" refers to the horizontal change of input.</p>
+</div></div> <p id="p-4329">If the output increases as the input increases, we consider that a positive change.  If the output decreases as the input increases, that is a negative change, and the slope will be negative.</p></article><p id="p-4330">Some people call the calculation of slope <em class="emphasis">"rise over run"</em>, where "rise" refers to the vertical change in output, and "run" refers to the horizontal change of input.</p>
 <p id="p-4331">The units on slope will be a rate based on the units of the output and input variables.  It will have units of "output units per input units".  For example,</p>
 <ul class="disc">
 <li id="li-1823"><p id="p-derived-li-1823">Input: hours.  Output:  miles.   Slope:  miles per hour</p></li>
@@ -537,20 +504,16 @@ T = 1.3733 \times P + 4.2673
 <article class="subexercises" id="subexercises-1"><h4 class="heading"><span class="title">Evaluate, apply and interpret function notation, including the notation for inverse functions and composition of Functions</span></h4>
 <article class="exercise exercise-like" id="exercise-636"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
 <p id="p-4336">The function W(h) represents the average weight (measured in pounds) of 60 year old American men as a function of their height (measured in centimeters). Suppose <span class="process-math">\(W^{-1}(181)=180\text{.}\)</span> Explain what this means in a complete sentence.</p></article><article class="exercise exercise-like" id="exercise-637"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
-<p id="p-4337">Suppose the function <span class="process-math">\(p=f(t)\)</span> represents the population of a certain town, where <span class="process-math">\(p\)</span> represents the population and <span class="process-math">\(t\)</span> represents the year.</p>
-<p id="p-4338">Choose the equation that means, “There were <span class="process-math">\(2015\)</span> people in the town in <span class="process-math">\(2010\text{.}\)</span>”</p>
-<ul id="p-4339" class="disc">
+<p id="p-4337">Suppose the function <span class="process-math">\(p=f(t)\)</span> represents the population of a certain town, where <span class="process-math">\(p\)</span> represents the population and <span class="process-math">\(t\)</span> represents the year.</p> <p id="p-4338">Choose the equation that means, “There were <span class="process-math">\(2015\)</span> people in the town in <span class="process-math">\(2010\text{.}\)</span>”</p> <ul id="p-4339" class="disc">
 <li id="li-1825"><p id="p-4340"><span class="process-math">\(\displaystyle f(2010)=2015\)</span></p></li>
 <li id="li-1826"><p id="p-4341"><span class="process-math">\(\displaystyle f(2015)=2010\)</span></p></li>
 </ul></article><article class="exercise exercise-like" id="exercise-638"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
-<p id="p-4342">Let <span class="process-math">\(I=f(T)\)</span> and <span class="process-math">\(H=g(T)\)</span> be two functions that return <span class="process-math">\(I\text{,}\)</span> the number of ice cream bars you sell at your food cart in one day, and <span class="process-math">\(H\text{,}\)</span>the number of hot coffee drinks you sell at your food cart in one day. Let <span class="process-math">\(T\)</span> be the average temperature outside in degrees Fahrenheit.</p>
-<ol id="p-4343" class="lower-alpha">
+<p id="p-4342">Let <span class="process-math">\(I=f(T)\)</span> and <span class="process-math">\(H=g(T)\)</span> be two functions that return <span class="process-math">\(I\text{,}\)</span> the number of ice cream bars you sell at your food cart in one day, and <span class="process-math">\(H\text{,}\)</span>the number of hot coffee drinks you sell at your food cart in one day. Let <span class="process-math">\(T\)</span> be the average temperature outside in degrees Fahrenheit.</p> <ol id="p-4343" class="lower-alpha">
 <li id="li-1827"><p id="p-4344">Do you expect the function <span class="process-math">\(f\)</span> should be increasing or decreasing? Explain your answer.</p></li>
 <li id="li-1828"><p id="p-4345">Do you expect the function <span class="process-math">\(g\)</span> should be increasing or decreasing? Explain your answer.</p></li>
 <li id="li-1829"><p id="p-4346">If you charge <span class="process-math">\(\$2.50\)</span> for an ice cream bar and <span class="process-math">\(\$1.75\)</span> for a hot coffee drink, write an expression (using function notation) that represents the total amount of money you will make from coffee and ice cream in one day, if the average temperature outside is <span class="process-math">\(80\)</span> degrees.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-639"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
-<p id="p-4347">Suppose the function <span class="process-math">\(f(w)\)</span> represents the hours of labor it will take for <span class="process-math">\(w\)</span> workers to paint a particular house.</p>
-<ol id="p-4348" class="lower-alpha">
+<p id="p-4347">Suppose the function <span class="process-math">\(f(w)\)</span> represents the hours of labor it will take for <span class="process-math">\(w\)</span> workers to paint a particular house.</p> <ol id="p-4348" class="lower-alpha">
 <li id="li-1830"><p id="p-4349">What is the best interpretation of the statement <span class="process-math">\(f(3)=120?\)</span></p></li>
 <li id="li-1831"><p id="p-4350">Interpret the meaning of the statement “evaluate <span class="process-math">\(f(4)\)</span>”.</p></li>
 <li id="li-1832"><p id="p-4351">Interpret the meaning of the statement “solve <span class="process-math">\(f(w)=100\)</span>”.</p></li>
@@ -564,8 +527,7 @@ T = 1.3733 \times P + 4.2673
 </div>
 </li>
 </ol></article><article class="exercise exercise-like" id="exercise-640"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
-<p id="p-4354">Let <span class="process-math">\(g(x)\)</span> be a linear function such that <span class="process-math">\(\frac{g(5)-g(2)}{3}=4\text{.}\)</span></p>
-<ol id="p-4355" class="lower-alpha">
+<p id="p-4354">Let <span class="process-math">\(g(x)\)</span> be a linear function such that <span class="process-math">\(\frac{g(5)-g(2)}{3}=4\text{.}\)</span></p> <ol id="p-4355" class="lower-alpha">
 <li id="li-1835"><p id="p-4356">Is it necessarily true that <span class="process-math">\(g(1)=4\text{?}\)</span> Explain your answer.</p></li>
 <li id="li-1836"><p id="p-4357">Suppose we know <span class="process-math">\(g(0)=2\text{.}\)</span> What is the value of <span class="process-math">\(g(3)\text{?}\)</span></p></li>
 <li id="li-1837"><p id="p-4358">Sketch an example of another function <span class="process-math">\(f(x)\)</span> that has the same average rate of change on the interval <span class="process-math">\(2 \leq x \leq 5\)</span> such that <span class="process-math">\(f(1) \neq 4\)</span></p></li>
@@ -587,22 +549,15 @@ T = 1.3733 \times P + 4.2673
 </div>
 </h3>
 <section class="onepage" id="page-77"><article class="exercise exercise-like" id="exercise-648"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
-<p id="p-4359">A simple example of a function is a temperature converter. It converts a temperature from degrees Fahrenheit to degrees Celsius.</p>
-<p id="p-4360">The function is the rule or process used to convert from one unit of temperature to the other.</p>
-<p id="p-4361">Our function is a graph, but it could have been a table of values or a formula.</p>
-<p id="p-4362">The graph illustrates that the temperature in degrees Celsius is a <dfn class="terminology">function</dfn> of the temperature in degrees Fahrenheit.</p>
-<p id="p-4363">The temperature in degrees Fahrenheit, <span class="process-math">\(F\text{,}\)</span> is the input while the temperature in degrees Celsius, <span class="process-math">\(C\text{,}\)</span> is the output.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/temperature.png" class="contained"></div></div></div>
-<p id="p-4364">Use the graph to estimate your answers below:</p>
+<p id="p-4359">A simple example of a function is a temperature converter. It converts a temperature from degrees Fahrenheit to degrees Celsius.</p> <p id="p-4360">The function is the rule or process used to convert from one unit of temperature to the other.</p> <p id="p-4361">Our function is a graph, but it could have been a table of values or a formula.</p> <p id="p-4362">The graph illustrates that the temperature in degrees Celsius is a <dfn class="terminology">function</dfn> of the temperature in degrees Fahrenheit.</p> <p id="p-4363">The temperature in degrees Fahrenheit, <span class="process-math">\(F\text{,}\)</span> is the input while the temperature in degrees Celsius, <span class="process-math">\(C\text{,}\)</span> is the output.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/temperature.png" class="contained"></div></div></div> <p id="p-4364">Use the graph to estimate your answers below:</p>
 <ol class="lower-alpha">
 <li id="li-1841"><p id="p-4365">The temperature of <span class="process-math">\(77\)</span> degrees Fahrenheit to degrees Celsius</p></li>
 <li id="li-1842"><p id="p-4366">What temperature in Fahrenheit is the same as <span class="process-math">\(-20\)</span> degrees Celsius?</p></li>
 <li id="li-1843"><p id="p-4367">The temperature of <span class="process-math">\(32\)</span> degrees Fahrenheit to degrees Celsius</p></li>
 <li id="li-1844"><p id="p-4368">What temperature in Fahrenheit is the same as <span class="process-math">\(10\)</span> degrees Celsius?</p></li>
 </ol>
-<div class="workspace" data-space="2in"></div></article></section><section class="onepage" id="page-78"><article class="exercise exercise-like" id="exercise-649"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>Consider the graph below. The dot on the graph represents the position of a train at a particular time. The cross-hairs represent the time. Notice that the train’s distance, in miles, from downtown depends on the time, in hours, after 8 a.m. <div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> How far from downtown is the train at 10 a.m.?<div class="workspace" data-space="0.5in"></div></article><article class="exercise exercise-like" id="exercise-650"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
-<p id="p-4371">How would you say the function notation in each statement below?</p>
-<ol class="lower-alpha">
+<div class="workspace" data-space="2in"></div></article></section><section class="onepage" id="page-78"><article class="exercise exercise-like" id="exercise-649"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>Consider the graph below. The dot on the graph represents the position of a train at a particular time. The cross-hairs represent the time. Notice that the train’s distance, in miles, from downtown depends on the time, in hours, after 8 a.m. <div class="sidebyside"><div class="sbsrow" style="margin-left:10%;margin-right:10%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> How far from downtown is the train at 10 a.m.?<div class="workspace" data-space="0.5in"></div></article> <article class="exercise exercise-like" id="exercise-650"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-4371">How would you say the function notation in each statement below?</p> <ol class="lower-alpha">
 <li id="li-1845">
 <p id="p-4372">Tarzan(the jungle)</p>
 <ol class="lower-roman cols2">
@@ -628,32 +583,26 @@ T = 1.3733 \times P + 4.2673
 <li id="li-1859"><p id="p-derived-li-1859">f x</p></li>
 </ol></p></li>
 </ol></article></section><section class="onepage" id="page-79"><article class="exercise exercise-like" id="exercise-651"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
-<p id="p-4374">The graph below is a function that illustrates a train's distance from downtown, in miles, as a function of time in hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr> When using a graph the best you can do is estimate. Since <span class="process-math">\(f(0)\)</span> represents a distance at <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>, we can use the graph to find what the distance is.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<ul class="disc">
+<p id="p-4374">The graph below is a function that illustrates a train's distance from downtown, in miles, as a function of time in hours after <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr> When using a graph the best you can do is estimate. Since <span class="process-math">\(f(0)\)</span> represents a distance at <span class="process-math">\(8\)</span> <abbr class="initialism">a.m.</abbr>, we can use the graph to find what the distance is.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:15%;margin-right:15%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <ul class="disc">
 <li id="li-1860"><p id="p-derived-li-1860">What is <span class="process-math">\(f(0) \)</span> approximately equal to?</p></li>
 <li id="li-1861"><p id="p-derived-li-1861">What time is <span class="process-math">\(f(0)\)</span> referring to?</p></li>
 <li id="li-1862"><p id="p-derived-li-1862">The notation <span class="process-math">\(f(0)\)</span> is read as “<span class="process-math">\(f\)</span> of zero.”  What do you think <span class="process-math">\(f(0)\)</span> means in the context of this train story?</p></li>
 <li id="li-1863"><p id="p-derived-li-1863">How would you represent the statement “train's distance at 10 a.m.” using function notation?</p></li>
 </ul>
-<div class="workspace" data-space="2in"></div></article><article class="exercise exercise-like" id="exercise-652"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>Let <span class="process-math">\(V = f(A)\)</span> be a function in which the input is the area of a house (measured in square feet), and the output is the value of the house in dollars. Consider the equation <span class="process-math">\(f(900)=209700\)</span> The notation gives us information about the house. Given <span class="process-math">\(f(900)=209700\text{,}\)</span> <ul class="disc">
+<div class="workspace" data-space="2in"></div></article> <article class="exercise exercise-like" id="exercise-652"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>Let <span class="process-math">\(V = f(A)\)</span> be a function in which the input is the area of a house (measured in square feet), and the output is the value of the house in dollars. Consider the equation <span class="process-math">\(f(900)=209700\)</span> The notation gives us information about the house. Given <span class="process-math">\(f(900)=209700\text{,}\)</span> <ul class="disc">
 <li id="li-1864"><p id="p-derived-li-1864">What is the area of the house?</p></li>
 <li id="li-1865"><p id="p-derived-li-1865">What is the value of the house?</p></li>
 <li id="li-1866"><p id="p-derived-li-1866">Interpret the meaning of <span class="process-math">\(f(900)=209700\)</span> in English.</p></li>
 </ul>
 <div class="workspace" data-space="2in"></div></article></section><section class="onepage" id="page-80"><article class="exercise exercise-like" id="exercise-653"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<p id="p-4376">As the time changes along the horizontal axis the result is the changing position of the train measured on the vertical axis. The key word here is “change”</p>
-<ol class="lower-alpha">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <p id="p-4376">As the time changes along the horizontal axis the result is the changing position of the train measured on the vertical axis. The key word here is “change”</p> <ol class="lower-alpha">
 <li id="li-1870"><p id="p-4377">Use the graph to find the change in distance between the <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>.</p></li>
 <li id="li-1871"><p id="p-4378">What is the change in time between the <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>?</p></li>
 <li id="li-1872"><p id="p-4379">What is the average speed (rate of change) between <span class="process-math">\(9{:}00\)</span> and <span class="process-math">\(11{:}00\)</span> <abbr class="initialism">A.M.</abbr>?</p></li>
 <li id="li-1873"><p id="p-4380">Use function notation (as in part a) to write an expression that represents the <em class="emphasis">change in distance</em> between the <span class="process-math">\(10{:}00\)</span> <abbr class="initialism">A.M.</abbr> and <span class="process-math">\(1{:}00\)</span> <abbr class="initialism">P.M.</abbr>.</p></li>
 </ol>
 <div class="workspace" data-space="2in"></div></article></section><section class="onepage" id="page-81"><article class="exercise exercise-like" id="exercise-654"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div>
-<p id="p-4386">Use the graph to find the value of <span class="process-math">\(\Delta f\)</span> during the first <span class="process-math">\(2\)</span> hours of the trip</p>
-<p id="p-4387">What is the meaning of the expression <span class="process-math">\(\Delta t\)</span> in the context of the train story?</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/train.png" class="contained"></div></div></div> <p id="p-4386">Use the graph to find the value of <span class="process-math">\(\Delta f\)</span> during the first <span class="process-math">\(2\)</span> hours of the trip</p> <p id="p-4387">What is the meaning of the expression <span class="process-math">\(\Delta t\)</span> in the context of the train story?</p>
 <ol class="lower-alpha cols2">
 <li id="li-1878"><p id="p-derived-li-1878">Change in hours since 8 a.m.</p></li>
 <li id="li-1879"><p id="p-derived-li-1879">Delta t</p></li>
@@ -661,9 +610,7 @@ T = 1.3733 \times P + 4.2673
 <li id="li-1881"><p id="p-derived-li-1881">There is no meaning to this expression</p></li>
 </ol>
 <div class="workspace" data-space="0.5in"></div></article></section><section class="onepage" id="page-82"><article class="exercise exercise-like" id="exercise-655"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>
-<figure class="figure figure-like" id="figure-26"><iframe src="https://www.geogebra.org/material/iframe/id/vB6mAHUg/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-1" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.14<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-4390">Use the graph of the function <span class="process-math">\(f(x)\)</span> to place each point at the specified coordinates. You will get a message when the points are placed correctly.</p>
-<p id="p-4391">Point <span class="process-math">\(A\)</span> at <span class="process-math">\((7,f(7))\text{,}\)</span> Point <span class="process-math">\(B\)</span> at <span class="process-math">\((2,f(2))\)</span> and Point <span class="process-math">\(C\)</span> at <span class="process-math">\((-8,f(-8))\text{.}\)</span></p>
-<ol id="p-4392" class="lower-alpha">
+<figure class="figure figure-like" id="figure-26"><iframe src="https://www.geogebra.org/material/iframe/id/vB6mAHUg/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-1" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.14<span class="period">.</span></span><span class="space"> </span></figcaption></figure> <p id="p-4390">Use the graph of the function <span class="process-math">\(f(x)\)</span> to place each point at the specified coordinates. You will get a message when the points are placed correctly.</p> <p id="p-4391">Point <span class="process-math">\(A\)</span> at <span class="process-math">\((7,f(7))\text{,}\)</span> Point <span class="process-math">\(B\)</span> at <span class="process-math">\((2,f(2))\)</span> and Point <span class="process-math">\(C\)</span> at <span class="process-math">\((-8,f(-8))\text{.}\)</span></p> <ol id="p-4392" class="lower-alpha">
 <li id="li-1882">
 <p id="p-4393">Use the graph to approximate values for the following outputs:</p>
 <p id="p-4394"><span class="process-math">\(f(7) \approx\)</span></p>
@@ -683,15 +630,12 @@ T = 1.3733 \times P + 4.2673
 </li>
 </ol>
 <div class="workspace" data-space="2in"></div></article></section><section class="onepage" id="page-83"><article class="exercise exercise-like" id="exercise-656"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
-<figure class="figure figure-like" id="figure-27"><iframe src="https://www.geogebra.org/material/iframe/id/vdbw2XUs/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-2" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.15<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-4402">The average rate of change you just found between points <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> is the slope of the line connecting the two points.</p>
-<p id="p-4403">It means that the function drops about <span class="process-math">\(-1\)</span> unit for every unit we move to the right, on average. But this is only if the inputs are in the interval between <span class="process-math">\(x = 2\)</span> and <span class="process-math">\(x = 7\text{.}\)</span></p>
-<p id="p-4404">Here is how you say that in math:</p>
+<figure class="figure figure-like" id="figure-27"><iframe src="https://www.geogebra.org/material/iframe/id/vdbw2XUs/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-2" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.15<span class="period">.</span></span><span class="space"> </span></figcaption></figure> <p id="p-4402">The average rate of change you just found between points <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> is the slope of the line connecting the two points.</p> <p id="p-4403">It means that the function drops about <span class="process-math">\(-1\)</span> unit for every unit we move to the right, on average. But this is only if the inputs are in the interval between <span class="process-math">\(x = 2\)</span> and <span class="process-math">\(x = 7\text{.}\)</span></p> <p id="p-4404">Here is how you say that in math:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{\Delta f}{\Delta x} \approx -1 \text{ for }2 \leq x \leq 7
 \end{equation*}
-</div>
-<ol id="p-4405" class="upper-alpha">
+</div> <ol id="p-4405" class="upper-alpha">
 <li id="li-1886">
 <p id="p-4406">What is the equation of the line between points <span class="process-math">\(A\)</span> and <span class="process-math">\(B\text{?}\)</span></p>
 <p id="p-4407">The equation is</p>
@@ -715,17 +659,13 @@ T = 1.3733 \times P + 4.2673
 </li>
 </ol>
 <div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="page-84"><article class="exercise exercise-like" id="exercise-657"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
-<figure class="figure figure-like" id="figure-28"><iframe src="https://www.geogebra.org/material/iframe/id/GxRSTPsw/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-3" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.16<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="p-4417">The average rate of change you just found between points <span class="process-math">\(B\)</span> and <span class="process-math">\(C\)</span> is the slope of the line connecting the two points.</p>
-<p id="p-4418">It means that the function increases about <span class="process-math">\(2\)</span> units for every unit we move to the right, on average. But this is only if the inputs are in the interval between <span class="process-math">\(x = -8\)</span> and <span class="process-math">\(x = 2\text{.}\)</span></p>
-<p id="p-4419">Here is how you say that in math:</p>
+<figure class="figure figure-like" id="figure-28"><iframe src="https://www.geogebra.org/material/iframe/id/GxRSTPsw/width/800/height/450/border/888888/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" id="interactive-3" width="600" height="600"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.16<span class="period">.</span></span><span class="space"> </span></figcaption></figure> <p id="p-4417">The average rate of change you just found between points <span class="process-math">\(B\)</span> and <span class="process-math">\(C\)</span> is the slope of the line connecting the two points.</p> <p id="p-4418">It means that the function increases about <span class="process-math">\(2\)</span> units for every unit we move to the right, on average. But this is only if the inputs are in the interval between <span class="process-math">\(x = -8\)</span> and <span class="process-math">\(x = 2\text{.}\)</span></p> <p id="p-4419">Here is how you say that in math:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{\Delta f}{\Delta x} \approx \text{ for }-8 \leq x \leq 2
 \end{equation*}
-</div>
-<p id="p-4420">What is the equation of the line between points <span class="process-math">\(B\)</span> and <span class="process-math">\(C\text{?}\)</span></p>
-<p id="p-4421">The equation for the line is</p>
-<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-658"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>Write the equation of a line with slope 4 and <span class="process-math">\(y\)</span>-intercept of <span class="process-math">\((0, 6)\text{.}\)</span>  Use <span class="process-math">\(x\)</span> as the input variable, and <span class="process-math">\(y\)</span> as the output variable.<div class="workspace" data-space="1in"></div></article></section></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-64"><div class="fn"><code class="code-inline tex2jax_ignore">https://en.wikipedia.org/wiki/Function_(mathematics)</code></div></div>
+</div> <p id="p-4420">What is the equation of the line between points <span class="process-math">\(B\)</span> and <span class="process-math">\(C\text{?}\)</span></p> <p id="p-4421">The equation for the line is</p>
+<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-658"><h4 class="heading"><span class="codenumber">11<span class="period">.</span></span></h4>Write the equation of a line with slope 4 and <span class="process-math">\(y\)</span>-intercept of <span class="process-math">\((0, 6)\text{.}\)</span>  Use <span class="process-math">\(x\)</span> as the input variable, and <span class="process-math">\(y\)</span> as the output variable.<div class="workspace" data-space="1in"></div></article></section></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-64"><div class="fn"><code class="code-inline tex2jax_ignore">en.wikipedia.org/wiki/Function_(mathematics)</code></div></div>
 </div></main>
 </div>
 </body>

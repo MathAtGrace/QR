@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:54:56-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet letter">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -227,9 +216,7 @@ true);
 </div>
 </h3>
 <section class="onepage" id="orders-of-mag-worksheet-p1"><div class="introduction" id="introduction-13">
-<p id="p-70">A large economic and political concern is the federal deficit, the amount of money spent by the federal government in excess of revenue collected annually.  The federal budget deficit for 2015 was approximately $435 billion.  The federal debt is the accumulated deficits from all years, and in 2015 was about $18.1 trillion.</p>
-<p id="p-71">It is difficult to understand just how big a billion or a trillion is. Here is a way to help you think about it.</p>
-<figure class="table table-like" id="million-billion-trillion"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.2.1<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<p id="p-70">A large economic and political concern is the federal deficit, the amount of money spent by the federal government in excess of revenue collected annually.  The federal budget deficit for 2015 was approximately $435 billion.  The federal debt is the accumulated deficits from all years, and in 2015 was about $18.1 trillion.</p> <p id="p-71">It is difficult to understand just how big a billion or a trillion is. Here is a way to help you think about it.</p> <figure class="table table-like" id="million-billion-trillion"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.2.1<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr>
 <td class="l m b2 r2 l2 t2 lines">1 million</td>
 <td class="l m b2 r2 l0 t2 lines">= 1,000 <span class="process-math">\(\times\)</span> 1,000</td>
@@ -249,9 +236,8 @@ true);
 <td class="l m b2 r2 l0 t0 lines"><span class="process-math">\(=10^{12}\)</span></td>
 </tr>
 </table></div></figure>
-</div>
-<figure class="figure figure-like" id="figure-national-debt"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;"><img src="external/debt.jpg" class="contained" alt="Source:  9 "></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.2.2<span class="period">.</span></span><span class="space"> </span>U.S. National Debt from 1990-2020.</figcaption></figure><div class="exercisegroup" id="national-debt-group-1">
+</div> <figure class="figure figure-like" id="figure-national-debt"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;"><img src="external/debt.jpg" class="contained" alt="Source:  9 "></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.2.2<span class="period">.</span></span><span class="space"> </span>U.S. National Debt from 1990-2020.</figcaption></figure> <div class="exercisegroup" id="national-debt-group-1">
 <h4 class="heading"><span class="title">National Debt.</span></h4>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="national-debt-1"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>What is a simpler way to express 2000 billion dollars?<div class="workspace" data-space=".5in"></div></article><article class="exercise exercise-like" id="national-debt-2"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>Imagine a stack of 1,000 one‐dollar bills, which is about 4.3 inches tall. Imagine combining 1,000 stacks of 1,000 one‐dollar bills. How much money is in the stack?<div class="workspace" data-space=".5in"></div></article><article class="exercise exercise-like" id="national-debt-3"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>How tall would that stack be, in inches?  How tall in feet (rounded to the nearest foot)<div class="workspace" data-space=".5in"></div></article>
@@ -264,10 +250,7 @@ true);
 </div></section><section class="onepage" id="orders-of-mag-worksheet-p3"><div class="exercisegroup" id="scientific-notation-group">
 <h4 class="heading"><span class="title">Problem Situation 2:  Scientific Notation.</span></h4>
 <div class="introduction" id="introduction-14">
-<p id="p-72">You saw that 1 billion can be written as 1,000,000,000 or represented as <span class="process-math">\(10^9\text{.}\)</span>  How would 2 billion be represented?  Since 2 billion is 2 times 1 billion, then 2 billion can be written as <span class="process-math">\(2 \times 10^9\text{.}\)</span>  Writing numbers in this way is called scientific notation.  Scientific notation is used primarily for writing very large numbers and very small numbers.  In this lesson, we will focus on large numbers.</p>
-<p id="p-73">The form for scientific notation is <span class="process-math">\(M \times 10^n\)</span> where <span class="process-math">\(1\leq M &lt; 10\text{.}\)</span>  The exponent equals the number of decimal places between the location of the decimal in the number as written in standard notation and the number written in scientific notation.</p>
-<p id="p-74">For example, if the number 500 were to be written in scientific notation, it could be thought of as <span class="process-math">\(5 \times 100\)</span> or <span class="process-math">\(5 \times 10 \times 10\)</span> which is equal to <span class="process-math">\(5 \times 10^2\text{.}\)</span>  The decimal point has been moved 2 places which corresponds to the exponent of 2.</p>
-<p id="p-75">Likewise, if the number 4300 were to be written in scientific  notation, it could be thought of as <span class="process-math">\(4.3 \times 1000\)</span> or <span class="process-math">\(4.3 \times 10 \times 10 \times 10\)</span> which is equal to <span class="process-math">\(4.3 \times 10^3\text{.}\)</span>  The decimal point has been moved 3 places (between 4300. and 4.3) which corresponds to the exponent of 3.</p>
+<p id="p-72">You saw that 1 billion can be written as 1,000,000,000 or represented as <span class="process-math">\(10^9\text{.}\)</span>  How would 2 billion be represented?  Since 2 billion is 2 times 1 billion, then 2 billion can be written as <span class="process-math">\(2 \times 10^9\text{.}\)</span>  Writing numbers in this way is called scientific notation.  Scientific notation is used primarily for writing very large numbers and very small numbers.  In this lesson, we will focus on large numbers.</p> <p id="p-73">The form for scientific notation is <span class="process-math">\(M \times 10^n\)</span> where <span class="process-math">\(1\leq M &lt; 10\text{.}\)</span>  The exponent equals the number of decimal places between the location of the decimal in the number as written in standard notation and the number written in scientific notation.</p> <p id="p-74">For example, if the number 500 were to be written in scientific notation, it could be thought of as <span class="process-math">\(5 \times 100\)</span> or <span class="process-math">\(5 \times 10 \times 10\)</span> which is equal to <span class="process-math">\(5 \times 10^2\text{.}\)</span>  The decimal point has been moved 2 places which corresponds to the exponent of 2.</p> <p id="p-75">Likewise, if the number 4300 were to be written in scientific  notation, it could be thought of as <span class="process-math">\(4.3 \times 1000\)</span> or <span class="process-math">\(4.3 \times 10 \times 10 \times 10\)</span> which is equal to <span class="process-math">\(4.3 \times 10^3\text{.}\)</span>  The decimal point has been moved 3 places (between 4300. and 4.3) which corresponds to the exponent of 3.</p>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="scientific-notation-1"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>Write the numbers below in both standard notation and scientific notation. <figure class="table table-like" id="table-5"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.2.3<span class="period">.</span></span><span class="space"> </span></figcaption><div class="tabular-box natural-width"><table class="tabular">
@@ -350,9 +333,7 @@ true);
 </div></section><section class="onepage" id="orders-of-mag-worksheet-p4"><div class="exercisegroup" id="exercisegroup-compare-sizes-numbers">
 <h4 class="heading"><span class="title">Problem Situation 3: Comparing the Sizes of Numbers.</span></h4>
 <div class="introduction" id="introduction-15">
-<p id="p-76">One of the skills you will learn in this course is how to write quantitative information. A writing principle that you will use throughout the course is given below followed by Question 2, which gives you an example of how to use this principle.</p>
-<p id="p-77">Writing Principle: Use specific and complete information. The reader should understand what you are trying to say even if they have not read the question or writing prompt. This includes</p>
-<ul class="disc">
+<p id="p-76">One of the skills you will learn in this course is how to write quantitative information. A writing principle that you will use throughout the course is given below followed by Question 2, which gives you an example of how to use this principle.</p> <p id="p-77">Writing Principle: Use specific and complete information. The reader should understand what you are trying to say even if they have not read the question or writing prompt. This includes</p> <ul class="disc">
 <li id="li-57"><p id="p-derived-li-57">information about context, and</p></li>
 <li id="li-58"><p id="p-derived-li-58">quantitative information</p></li>
 </ul>
@@ -363,7 +344,7 @@ true);
 <li id="li-60"><p id="p-derived-li-60">$69 million is about a thousandth of $77 billion</p></li>
 <li id="li-61"><p id="p-derived-li-61">The $69 million vetoed is a very small part of the entire state budget of $77 billion</p></li>
 <li id="li-62"><p id="p-derived-li-62">The $69 million that was vetoed is about one tenth of one percent of the total $77 billion state budget.</p></li>
-</ol></article><article class="exercise exercise-like" id="writing-principle-2"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>The federal budget in 2012 included $471 billion for Medicare and $47 billion for International Affairs.  Complete the statement below that compares the two quantities. <blockquote class="blockquote" id="blockquote-15"><p id="p-78">The budget of $471 billion for Medicare is about <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> times larger than the $47 billion budget for International Affairs.</p></blockquote></article><article class="exercise exercise-like" id="writing-principle-3"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>Using the writing principle above, in a full sentence compare the 2009 deficit and the 2014 deficit from exercise <a href="" class="xref" data-knowl="./knowl/scientific-notation-2.html" title="Worksheet Exercise 2.2.9">Worksheet Exercise 2.2.9</a><div class="workspace" data-space="1in"></div></article>
+</ol></article><article class="exercise exercise-like" id="writing-principle-2"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>The federal budget in 2012 included $471 billion for Medicare and $47 billion for International Affairs.  Complete the statement below that compares the two quantities. <blockquote class="blockquote" id="blockquote-15"><p id="p-78">The budget of $471 billion for Medicare is about <span class="fillin underline" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> times larger than the $47 billion budget for International Affairs.</p></blockquote></article><article class="exercise exercise-like" id="writing-principle-3"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>Using the writing principle above, in a full sentence compare the 2009 deficit and the 2014 deficit from exercise <a href="" class="xref" data-knowl="./knowl/scientific-notation-2.html" title="Worksheet Exercise 2.2.9">Worksheet Exercise 2.2.9</a><div class="workspace" data-space="1in"></div></article>
 </div>
 </div></section><section class="onepage" id="orders-of-mag-worksheet-p5"><div class="exercisegroup" id="exercisegroup-estimation">
 <h4 class="heading"><span class="title">Estimate.</span></h4>
@@ -371,8 +352,7 @@ true);
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="nation-wide-min-wage-increase"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>About 3 million working people in the U.S. make at or below the federal minimum wage of $7.25 per hour.  Estimate the amount of money needed per year to raise their wages to $15 per hour.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="nation-wide-girl-scout-cookies"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>The amount of money needed to buy everyone in the United States a box of Girl Scout cookies.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="state-wide-college"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>The amount of money needed to send all adults in your state to college for four years.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="us-national-debt"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>If the U.S. national debt was $22 trillion in 2019, and was evenly divided among the people living in the United States, how much would each person's share be?<div class="workspace" data-space="1in"></div></article>
 </div>
-</div>
-<div class="exercisegroup" id="exercisegroup-11">
+</div> <div class="exercisegroup" id="exercisegroup-11">
 <h4 class="heading"><span class="title">Calculate.</span></h4>
 <div class="introduction" id="introduction-17">Now use a calculator to refine your estimates from above.</div>
 <div class="exercisegroup-exercises">
@@ -383,8 +363,7 @@ true);
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="calc-state-wide-college"><h5 class="heading"><span class="codenumber">19<span class="period">.</span></span></h5>The amount of money needed to send all adults in your state to college for four years.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="calc-us-national-debt"><h5 class="heading"><span class="codenumber">20<span class="period">.</span></span></h5>If the U.S. national debt was $22 trillion in 2019, and was evenly divided among the people living in the United States, how much would each person's share be?<div class="workspace" data-space="1in"></div></article>
 </div>
-</div>
-<div class="exercisegroup" id="exercisegroup-13">
+</div> <div class="exercisegroup" id="exercisegroup-13">
 <h4 class="heading"><span class="title">Percent of National Debt.</span></h4>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="est-percent-debt"><h5 class="heading"><span class="codenumber">21<span class="period">.</span></span></h5>If the U.S. budget is about $4.1 trillion, estimate the percentage of the budget which would be needed to pay for your estimate in Question 5 above.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="calc-precent-debt"><h5 class="heading"><span class="codenumber">22<span class="period">.</span></span></h5>If the U.S. budget is about $4.1 trillion, calculate the percentage of the budget which would be needed to pay for your estimate in Question 9 above.  Round to the nearest hundredth of a percent.<div class="workspace" data-space="1in"></div></article>

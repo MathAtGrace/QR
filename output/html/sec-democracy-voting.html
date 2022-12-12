@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:24-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -252,8 +241,7 @@ true);
 <article class="example example-like" id="example-141"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.1</span><span class="period">.</span>
 </h4>
-<p id="p-5504">Students are voting for their class president and the candidates are Omar (O), Ana (A), and Helena (H). They have ranked the candidates according to their preference.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5504">Students are voting for their class president and the candidates are Omar (O), Ana (A), and Helena (H). They have ranked the candidates according to their preference.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines"></th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Vien</th>
@@ -350,8 +338,7 @@ true);
 <article class="example example-like" id="example_2"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.2</span><span class="period">.</span>
 </h4>
-<p id="p-5509">In our election from above, we had this preference table:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5509">In our election from above, we had this preference table:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">1</td>
@@ -380,15 +367,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">A</td>
 <td class="c m b1 r1 l0 t0 lines">O</td>
 </tr>
-</table></div></div></div>
-<p id="p-5510">For the plurality method, we only look at the 1st choice row. Totaling them up:</p>
+</table></div></div></div> <p id="p-5510">For the plurality method, we only look at the 1st choice row. Totaling them up:</p>
 <ul class="disc">
 <li id="li-2447"><p id="p-5511">Ana: <span class="process-math">\(1+3 = 4\)</span> votes</p></li>
 <li id="li-2448"><p id="p-5512">Omar: <span class="process-math">\(3\)</span> votes</p></li>
 <li id="li-2449"><p id="p-5513">Helena: <span class="process-math">\(3\)</span> votes</p></li>
-</ul>
-<p id="p-5514">Ana is the winner using the plurality voting method.</p>
-<p id="p-5515">Notice that Ana won with 4 out of 10 votes, or 40% of the votes, which is a plurality of the votes, but not a majority.</p></article></section><section class="subsection" id="subsection-157"><h3 class="heading hide-type">
+</ul> <p id="p-5514">Ana is the winner using the plurality voting method.</p> <p id="p-5515">Notice that Ana won with 4 out of 10 votes, or 40% of the votes, which is a plurality of the votes, but not a majority.</p></article></section><section class="subsection" id="subsection-157"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.2.5</span> <span class="title">How Many Votes are Needed to Win?</span>
 </h3>
 <p id="p-5516">If we know how many voters there are, we can calculate the minimum number of votes needed for a majority win.</p>
@@ -403,8 +387,7 @@ true);
 <article class="example example-like" id="example-143"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.3</span><span class="period">.</span>
 </h4>
-<p id="p-5523">Here is a two-party election with preferences shown below. It is a close race, but candidate B would win.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5523">Here is a two-party election with preferences shown below. It is a close race, but candidate B would win.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">96</td>
@@ -420,9 +403,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">B</td>
 <td class="c m b1 r1 l0 t0 lines">A</td>
 </tr>
-</table></div></div></div>
-<p id="p-5524">Suppose a third candidate, C, entered the race, and a segment of voters sincerely want to vote for that third candidate. Here is the new preference schedule.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5524">Suppose a third candidate, C, entered the race, and a segment of voters sincerely want to vote for that third candidate. Here is the new preference schedule.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">96</td>
@@ -447,8 +428,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">C</td>
 <td class="c m b1 r1 l0 t0 lines">A</td>
 </tr>
-</table></div></div></div>
-<p id="p-5525">The ten people who prefer candidate C are in a bind because if they vote for C, then A will win, but they prefer B over A. It is likely that they will vote for B, their second choice, to keep A from winning.</p></article><p id="p-5526">Situations like this can lead to insincere voting. <em class="alert">Insincere voting</em> is when a person doesn’t vote according to their actual preference for strategic purposes. In the case above, a person who wants to vote for a third-party candidate realizes it would take a vote away from their major party candidate. Not wanting to see their party lose the election, they vote for the major party candidate.</p></section><section class="subsection" id="subsection-159"><h3 class="heading hide-type">
+</table></div></div></div> <p id="p-5525">The ten people who prefer candidate C are in a bind because if they vote for C, then A will win, but they prefer B over A. It is likely that they will vote for B, their second choice, to keep A from winning.</p></article><p id="p-5526">Situations like this can lead to insincere voting. <em class="alert">Insincere voting</em> is when a person doesn’t vote according to their actual preference for strategic purposes. In the case above, a person who wants to vote for a third-party candidate realizes it would take a vote away from their major party candidate. Not wanting to see their party lose the election, they vote for the major party candidate.</p></section><section class="subsection" id="subsection-159"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.2.7</span> <span class="title">Instant Runoff Method</span>
 </h3>
 <p id="p-5527">The <em class="alert">Instant Runoff Method</em> is a modification of the plurality method that attempts to address the issue of insincere voting.</p>
@@ -456,8 +436,7 @@ true);
 <article class="example example-like" id="example-144"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.4</span><span class="period">.</span>
 </h4>
-<p id="p-5529">Consider the preference schedule below, in which a committee is choosing a chairperson. The candidates are labeled A, B, C, D, and E for simplicity. Here is the preference schedule:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5529">Consider the preference schedule below, in which a committee is choosing a chairperson. The candidates are labeled A, B, C, D, and E for simplicity. Here is the preference schedule:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">3</td>
@@ -518,43 +497,31 @@ true);
 <td class="c m b1 r1 l0 t0 lines">D</td>
 <td class="c m b1 r1 l0 t0 lines">C</td>
 </tr>
-</table></div></div></div>
-<p id="p-5530">Let’s start by tallying the first-choices.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
+</table></div></div></div> <p id="p-5530">Let’s start by tallying the first-choices.</p>   <div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5531">A: <span class="process-math">\(2\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5532">B: <span class="process-math">\(3+5=8\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5533">C: <span class="process-math">\(5+1=6\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5534">D: <span class="process-math">\(7\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5535">E: <span class="process-math">\(1\)</span></p></div>
-</div></div>
-<p id="p-5536">If this was a plurality election, B would be the winner with 8 first-choice votes.</p>
-<p id="p-5537"></p>
-<section class="paragraphs" id="paragraphs-2"><h5 class="heading"><span class="title">Round 1.</span></h5>
-<p id="p-5538">We make our first elimination. Choice E has the fewest first-place votes, so we eliminate E from the election. To transfer the 1 vote, we look at the person who voted for E in the last column. Their second choice was D, so we transfer that one vote to D, who will now have 8 votes:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
+</div></div> <p id="p-5536">If this was a plurality election, B would be the winner with 8 first-choice votes.</p> <p id="p-5537"></p> <section class="paragraphs" id="paragraphs-2"><h5 class="heading"><span class="title">Round 1.</span></h5> <p id="p-5538">We make our first elimination. Choice E has the fewest first-place votes, so we eliminate E from the election. To transfer the 1 vote, we look at the person who voted for E in the last column. Their second choice was D, so we transfer that one vote to D, who will now have 8 votes:</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5539">A: <span class="process-math">\(2\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5540">B: <span class="process-math">\(8\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5541">C: <span class="process-math">\(6\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5542">D: <span class="process-math">\(7+1 = 8\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5543"><del class="delete">E: <span class="process-math">\(1\)</span></del></p></div>
-</div></div></section><section class="paragraphs" id="paragraphs-3"><h5 class="heading"><span class="title">Round 2.</span></h5>
-<p id="p-5544">There are 24 votes in total, so a majority would be 13 votes. Since no candidate has the majority, we eliminate the next candidate with the fewest votes, which is A. We look at the column for the two people who chose A. Their second choice was E, who is already eliminated. Their third choice is B, so their 2 votes are transferred to B, for a total of 10:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
+</div></div></section> <section class="paragraphs" id="paragraphs-3"><h5 class="heading"><span class="title">Round 2.</span></h5> <p id="p-5544">There are 24 votes in total, so a majority would be 13 votes. Since no candidate has the majority, we eliminate the next candidate with the fewest votes, which is A. We look at the column for the two people who chose A. Their second choice was E, who is already eliminated. Their third choice is B, so their 2 votes are transferred to B, for a total of 10:</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5545"><del class="delete">A: <span class="process-math">\(2\)</span></del></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5546">B: <span class="process-math">\(8+2=10\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5547">C: <span class="process-math">\(6\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5548">D: <span class="process-math">\(8\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5549"><del class="delete">E: <span class="process-math">\(1\)</span></del></p></div>
-</div></div></section><section class="paragraphs" id="paragraphs-4"><h5 class="heading"><span class="title">Round 3.</span></h5>
-<p id="p-5550">Now C has the fewest votes, and there are two columns for C in the preference schedule. Five people who voted for C chose A second, then E (who have already been eliminated), then D. So, we transfer their 5 votes to D. One person who voted for C selected B as their second choice, so their one vote goes to B. Then we tally the votes for each remaining candidate.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
+</div></div></section> <section class="paragraphs" id="paragraphs-4"><h5 class="heading"><span class="title">Round 3.</span></h5> <p id="p-5550">Now C has the fewest votes, and there are two columns for C in the preference schedule. Five people who voted for C chose A second, then E (who have already been eliminated), then D. So, we transfer their 5 votes to D. One person who voted for C selected B as their second choice, so their one vote goes to B. Then we tally the votes for each remaining candidate.</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:0.5%;margin-right:0.5%;">
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5551"><del class="delete">A: <span class="process-math">\(2\)</span></del></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5552">B: <span class="process-math">\(10+1=11\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5553"><del class="delete">C: <span class="process-math">\(6\)</span></del></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5554">D: <span class="process-math">\(8+5=13\)</span></p></div>
 <div class="sbspanel top" style="width:19.1919191919192%;"><p id="p-5555"><del class="delete">E: <span class="process-math">\(1\)</span></del></p></div>
-</div></div>
-<p id="p-5556">Now we can see that D is the winner of the instant runoff method with 13 votes. We can stop this method earlier if a candidate reaches a majority.</p></section></article><p id="p-5557">The Instant Runoff Method is similar to the idea of holding runoff elections, but since every voter’s order of preference is recorded on the ballot, the runoff can be computed quickly without requiring a second costly election. It also makes it safe to vote for a third-party candidate knowing that your vote will go to your second choice if your first choice can’t win.</p>
+</div></div> <p id="p-5556">Now we can see that D is the winner of the instant runoff method with 13 votes. We can stop this method earlier if a candidate reaches a majority.</p></section></article><p id="p-5557">The Instant Runoff Method is similar to the idea of holding runoff elections, but since every voter’s order of preference is recorded on the ballot, the runoff can be computed quickly without requiring a second costly election. It also makes it safe to vote for a third-party candidate knowing that your vote will go to your second choice if your first choice can’t win.</p>
 <p id="p-5558">This voting method is used in several places around the world, including the election of members of the Australian House of Representatives, statewide elections in Maine, and local elections in Benton County, Oregon (Ranked Choice Voting Resource Center, 2020).</p></section><section class="subsection" id="subsection-160"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.2.8</span> <span class="title">Borda Count (Point System)</span>
 </h3>
@@ -562,8 +529,7 @@ true);
 <article class="example example-like" id="example-145"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.5</span><span class="period">.</span>
 </h4>
-<p id="p-5560">A group of PCC students are getting together for a student leadership conference and they need to decide where to meet. Their members are from four campuses: Sylvania, Rock Creek, Cascade and Southeast. The votes for where to hold the conference were:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5560">A group of PCC students are getting together for a student leadership conference and they need to decide where to meet. Their members are from four campuses: Sylvania, Rock Creek, Cascade and Southeast. The votes for where to hold the conference were:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">31</td>
@@ -599,9 +565,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Rock Creek</td>
 <td class="c m b1 r1 l0 t0 lines">Sylvania</td>
 </tr>
-</table></div></div></div>
-<p id="p-5561">Now we will add a column on the left side of the table for the points. Then we multiply the points by the number of voters who put each candidate in that rank,</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5561">Now we will add a column on the left side of the table for the points. Then we multiply the points by the number of voters who put each candidate in that rank,</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Points</td>
 <td class="c m b1 r1 l0 t1 lines">Number of voters</td>
@@ -642,15 +606,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Rock Creek</td>
 <td class="c m b1 r1 l0 t0 lines">Sylvania</td>
 </tr>
-</table></div></div></div>
-<p id="p-5562">We will start with Sylvania in the bottom row and move up. They have one point times 14 voters, 2 points times 25 + 10 voters, 3 points times zero, and 4 points times 31 voters. Multiplying and then adding gives us a total of 208 points for Sylvania. You can see the calculation below and we will do the same thing for each campus:</p>
-<ul id="p-5563" class="disc">
+</table></div></div></div> <p id="p-5562">We will start with Sylvania in the bottom row and move up. They have one point times 14 voters, 2 points times 25 + 10 voters, 3 points times zero, and 4 points times 31 voters. Multiplying and then adding gives us a total of 208 points for Sylvania. You can see the calculation below and we will do the same thing for each campus:</p> <ul id="p-5563" class="disc">
 <li id="li-2450"><p id="p-5564">Sylvania: <span class="process-math">\(1 \cdot 14 + 2 \cdot 35 + 3 \cdot 0 + 4 \cdot 31=208 \)</span> points</p></li>
 <li id="li-2451"><p id="p-5565">Rock Creek: <span class="process-math">\(1 \cdot 10 + 2 \cdot 31 + 3 \cdot 14 + 4 \cdot 25= 214\)</span> points</p></li>
 <li id="li-2452"><p id="p-5566">Cascade: <span class="process-math">\(1 \cdot 31 + 2 \cdot 0 + 3 \cdot 35 + 4 \cdot 14= 192\)</span> points</p></li>
 <li id="li-2453"><p id="p-5567">Southwest: <span class="process-math">\(1 \cdot 25 + 2 \cdot 14 + 3 \cdot 31 + 4 \cdot 10 = 186\)</span> points</p></li>
-</ul>
-<p id="p-5568">Using the Borda count method, Rock Creek is the winning location.</p></article><p id="p-5569">Note that Sylvania would have won with the plurality method. Borda count is sometimes described as a consensus-based voting system, since it can be used to choose a more broadly acceptable option over the one with the most first-choice support. This is a different approach than plurality and instant runoff voting that focus on first-choice votes; Borda Count considers every voter’s entire ranking to determine the outcome.</p>
+</ul> <p id="p-5568">Using the Borda count method, Rock Creek is the winning location.</p></article><p id="p-5569">Note that Sylvania would have won with the plurality method. Borda count is sometimes described as a consensus-based voting system, since it can be used to choose a more broadly acceptable option over the one with the most first-choice support. This is a different approach than plurality and instant runoff voting that focus on first-choice votes; Borda Count considers every voter’s entire ranking to determine the outcome.</p>
 <p id="p-5570">Because of this consensus behavior, Borda Count, or some variation of it, is commonly used in awarding sports awards. Variations are used to determine the Most Valuable Player in baseball, to rank teams in NCAA sports, and to award the Heisman trophy.</p></section><section class="subsection" id="subsection-161"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.2.9</span> <span class="title">Pairwise Comparison: Copeland’s Method</span>
 </h3>
@@ -660,8 +621,7 @@ true);
 <article class="example example-like" id="example-146"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.6</span><span class="period">.</span>
 </h4>
-<p id="p-5574">Consider our class president example from the beginning of the chapter. Determine the winner using Copeland’s Method.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5574">Consider our class president example from the beginning of the chapter. Determine the winner using Copeland’s Method.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">1</td>
@@ -690,15 +650,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">A</td>
 <td class="c m b1 r1 l0 t0 lines">O</td>
 </tr>
-</table></div></div></div>
-<p id="p-5575">We need to look at each pair of candidates to see which would win in a one-to-one comparison. First, we will systematically list all of the pairs of candidates:</p>
+</table></div></div></div> <p id="p-5575">We need to look at each pair of candidates to see which would win in a one-to-one comparison. First, we will systematically list all of the pairs of candidates:</p>
 <ul class="disc">
 <li id="li-2454"><p id="p-5576">Helena vs. Omar</p></li>
 <li id="li-2455"><p id="p-5577">Helena vs. Ana</p></li>
 <li id="li-2456"><p id="p-5578">Ana vs. Omar</p></li>
-</ul>
-<p id="p-5579">Next, comparing Helena with Omar, we see that 6 voters, those marked in bold in the table below, would prefer Helena over Omar. Note that Helena doesn’t have to be the voter’s first choice – we’re imagining that Ana wasn’t in the race. The other 4 people chose Omar over Helena.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</ul> <p id="p-5579">Next, comparing Helena with Omar, we see that 6 voters, those marked in bold in the table below, would prefer Helena over Omar. Note that Helena doesn’t have to be the voter’s first choice – we’re imagining that Ana wasn’t in the race. The other 4 people chose Omar over Helena.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">1</td>
@@ -727,21 +684,16 @@ true);
 <td class="c m b1 r1 l0 t0 lines">A</td>
 <td class="c m b1 r1 l0 t0 lines"><em class="alert">O</em></td>
 </tr>
-</table></div></div></div>
-<p id="p-5580">Based on this comparison of Helena vs. Omar, Helena wins 1 point.</p>
-<p id="p-5581">Next, comparing Helena with Ana, the 6 voters in the last two columns prefer Helena to Ana, so Helena gets one point. Lastly, we compare Ana with Omar. The 1 voter in the first column prefers Ana, as do the 3 voters in the second column. The 3 voters in the third column prefer Omar, but the 3 voters in the last column would choose Ana. So, altogether <span class="process-math">\(1+3+3=7\)</span> voters prefer Ana over Omar. Ana gets 1 point.</p>
-<p id="p-5582">To summarize, we write how many voters prefer each candidate ignoring all other candidates:</p>
+</table></div></div></div> <p id="p-5580">Based on this comparison of Helena vs. Omar, Helena wins 1 point.</p> <p id="p-5581">Next, comparing Helena with Ana, the 6 voters in the last two columns prefer Helena to Ana, so Helena gets one point. Lastly, we compare Ana with Omar. The 1 voter in the first column prefers Ana, as do the 3 voters in the second column. The 3 voters in the third column prefer Omar, but the 3 voters in the last column would choose Ana. So, altogether <span class="process-math">\(1+3+3=7\)</span> voters prefer Ana over Omar. Ana gets 1 point.</p> <p id="p-5582">To summarize, we write how many voters prefer each candidate ignoring all other candidates:</p>
 <ul class="disc">
 <li id="li-2457"><p id="p-5583">Helena-6 vs Omar-4 (Helena gets 1 point)</p></li>
 <li id="li-2458"><p id="p-5584">Helena-6 vs Ana-4 (Helena gets 1 point)</p></li>
 <li id="li-2459"><p id="p-5585">Ana-7 vs Omar-3 (Ana gets 1 point)</p></li>
-</ul>
-<p id="p-5586">Ana has a total of 1 point and Helena has 2 points, so Helena is the winner under Copeland’s Method. This method gave us a different winner than the plurality method where Ana won, because more people preferred Helena to Ana, even though they didn’t choose Helena for their first choice.</p></article><p id="p-5587">Now that we’ve seen an example of each voting method, let’s run through each method for the same scenario.</p>
+</ul> <p id="p-5586">Ana has a total of 1 point and Helena has 2 points, so Helena is the winner under Copeland’s Method. This method gave us a different winner than the plurality method where Ana won, because more people preferred Helena to Ana, even though they didn’t choose Helena for their first choice.</p></article><p id="p-5587">Now that we’ve seen an example of each voting method, let’s run through each method for the same scenario.</p>
 <article class="example example-like" id="example-147"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.7</span><span class="period">.</span>
 </h4>
-<p id="p-5588">Consider an advertising team voting to choose one of four different slogans, labeled A, B, C and D. Determine the winner using each method we have learned.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5588">Consider an advertising team voting to choose one of four different slogans, labeled A, B, C and D. Determine the winner using each method we have learned.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">5</td>
@@ -784,32 +736,23 @@ true);
 </tr>
 </table></div></div></div>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-489" id="solution-489"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-489"><div class="solution solution-like">
-<p id="p-5589"><em class="alert">Plurality Method:</em> We tally the first-place votes:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-489" id="solution-489"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-489"><div class="solution solution-like">
+<p id="p-5589"><em class="alert">Plurality Method:</em> We tally the first-place votes:</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5590">A: <span class="process-math">\(3+2=5\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5591">B: <span class="process-math">\(4\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5592">C: <span class="process-math">\(6\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5593">D: <span class="process-math">\(5\)</span></p></div>
-</div></div>
-<p id="p-5594">C wins the plurality method.</p>
-<p id="p-5595"><em class="alert">Instant Runoff Method:</em> We start with the plurality tallies. Then we look for the slogan with the least first-choice votes, and that is B. Looking in the preference schedule at the 4 people who voted for B, we see their second choice is D. So we transfer those 4 votes to D, which now has 9.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
+</div></div> <p id="p-5594">C wins the plurality method.</p> <p id="p-5595"><em class="alert">Instant Runoff Method:</em> We start with the plurality tallies. Then we look for the slogan with the least first-choice votes, and that is B. Looking in the preference schedule at the 4 people who voted for B, we see their second choice is D. So we transfer those 4 votes to D, which now has 9.</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5596">A: <span class="process-math">\(5\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5597"><del class="delete">B: <span class="process-math">\(4\)</span></del></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5598">C: <span class="process-math">\(6\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5599">D: <span class="process-math">\(5+4=9\)</span></p></div>
-</div></div>
-<p id="p-5600">Now A has the least number of votes with 5, so we look at the voters who chose A for their first choice. There are two columns, so three of those votes will be transferred to C and 2 will be transferred to D.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
+</div></div> <p id="p-5600">Now A has the least number of votes with 5, so we look at the voters who chose A for their first choice. There are two columns, so three of those votes will be transferred to C and 2 will be transferred to D.</p>  <div class="sidebyside"><div class="sbsrow" style="margin-left:3%;margin-right:3%;">
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5601"><del class="delete">A: <span class="process-math">\(5\)</span></del></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5602"><del class="delete">B: <span class="process-math">\(4\)</span></del></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5603">C: <span class="process-math">\(6+3=9\)</span></p></div>
 <div class="sbspanel top" style="width:20.2127659574468%;"><p id="p-5604">D: <span class="process-math">\(9+2=11\)</span></p></div>
-</div></div>
-<p id="p-5605">D is the winner of the instant runoff method.</p>
-<p id="p-5606"><em class="alert">Borda Count:</em> We add a column on the left for the points, starting with 1 point for last place and counting up. Then we multiply the points by the number of votes and add them all up.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</div></div> <p id="p-5605">D is the winner of the instant runoff method.</p> <p id="p-5606"><em class="alert">Borda Count:</em> We add a column on the left for the points, starting with 1 point for last place and counting up. Then we multiply the points by the number of votes and add them all up.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Points</td>
 <td class="c m b1 r1 l0 t1 lines">Number of voters</td>
@@ -855,16 +798,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">C</td>
 <td class="c m b1 r1 l0 t0 lines">B</td>
 </tr>
-</table></div></div></div>
-<ul id="p-5607" class="disc">
+</table></div></div></div> <ul id="p-5607" class="disc">
 <li id="li-2460"><p id="p-5608">A: <span class="process-math">\(1 \cdot 0 + 2 \cdot 10 + 3 \cdot 5 + 4 \cdot 5 = 55\)</span> points</p></li>
 <li id="li-2461"><p id="p-5609">B: <span class="process-math">\(1 \cdot 7 + 2 \cdot 3 + 3 \cdot 6 + 4 \cdot 4 = 47\)</span> points</p></li>
 <li id="li-2462"><p id="p-5610">C: <span class="process-math">\(1 \cdot 4 + 2 \cdot 7 + 3 \cdot 3 + 4 \cdot 6 = 51\)</span> points</p></li>
 <li id="li-2463"><p id="p-5611">D: <span class="process-math">\(1 \cdot 9 + 2 \cdot 0 + 3 \cdot 6 + 4 \cdot 5 = 47\)</span> points</p></li>
-</ul>
-<p id="p-5612">A is the winner of the Borda count method.</p>
-<p id="p-5613"><em class="alert">Pairwise Comparison:</em></p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+</ul> <p id="p-5612">A is the winner of the Borda count method.</p> <p id="p-5613"><em class="alert">Pairwise Comparison:</em></p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel top" style="width:50%;">
 <p id="p-5614">First we list all the possible pairs:</p>
 <ul class="disc">
@@ -887,15 +826,13 @@ true);
 <li id="li-2475"><p id="p-5627">C-9 vs D-11</p></li>
 </ul>
 </div>
-</div></div>
-<p id="p-5628">Totaling one point for each win and half a point for each tie gives us:</p>
+</div></div> <p id="p-5628">Totaling one point for each win and half a point for each tie gives us:</p>
 <ul class="disc">
 <li id="li-2476"><p id="p-5629">A has 2.5 points</p></li>
 <li id="li-2477"><p id="p-5630">B has 1.5 points</p></li>
 <li id="li-2478"><p id="p-5631">C has 1 point</p></li>
 <li id="li-2479"><p id="p-5632">D has 1 point</p></li>
-</ul>
-<p id="p-5633">A is the winner of the pairwise comparison method.</p>
+</ul> <p id="p-5633">A is the winner of the pairwise comparison method.</p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-162"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.2.10</span> <span class="title">Which Method is the Most Fair?</span>
@@ -940,10 +877,8 @@ true);
 <span class="type">Exercises</span> <span class="codenumber">6.2.12</span> <span class="title">Exercises</span>
 </h3>
 <article class="exercise exercise-like" id="exercise-814"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
-<p id="p-5643">To decide on a new website design, the designer asks people to rank three designs that have been created (labeled A, B, and C). The individual ballots are shown below. Create a preference table.</p>
-<p id="p-5644">ABC, ABC, ACB, BAC, BCA, BCA, ACB, CAB, CAB, BCA, ACB, ABC</p></article><article class="exercise exercise-like" id="exercise-815"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
-<p id="p-5645">To decide on a movie to watch, a group of friends all vote for one of the choices (labeled A, B, and C). The individual ballots are shown below. Create a preference table.</p>
-<p id="p-5646">CAB, CBA, BAC, BCA, CBA, ABC, ABC, CBA, BCA, CAB, CAB, BAC</p></article><div class="exercisegroup" id="exercisegroup-87">
+<p id="p-5643">To decide on a new website design, the designer asks people to rank three designs that have been created (labeled A, B, and C). The individual ballots are shown below. Create a preference table.</p> <p id="p-5644">ABC, ABC, ACB, BAC, BCA, BCA, ACB, CAB, CAB, BCA, ACB, ABC</p></article><article class="exercise exercise-like" id="exercise-815"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-5645">To decide on a movie to watch, a group of friends all vote for one of the choices (labeled A, B, and C). The individual ballots are shown below. Create a preference table.</p> <p id="p-5646">CAB, CBA, BAC, BCA, CBA, ABC, ABC, CBA, BCA, CAB, CAB, BAC</p></article><div class="exercisegroup" id="exercisegroup-87">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-134">
 <p id="p-5647">In exercises 3-18, complete the following:</p>
@@ -958,8 +893,7 @@ true);
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-816"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
-<p id="p-5654">The planning committee for a renewable energy trade show is trying to decide where to hold their next trade show in. The votes are shown below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5654">The planning committee for a renewable energy trade show is trying to decide where to hold their next trade show in. The votes are shown below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">9</td>
@@ -989,8 +923,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Atlanta</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-817"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
-<p id="p-5662">A non-profit agency is electing a new chair of the board. The votes are shown below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5662">A non-profit agency is electing a new chair of the board. The votes are shown below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">11</td>
@@ -1024,8 +957,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Cantos</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-818"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
-<p id="p-5670">A group of students is deciding which class to take together. The votes are shown below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5670">A group of students is deciding which class to take together. The votes are shown below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">2</td>
@@ -1063,8 +995,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Art</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-819"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
-<p id="p-5678">A professional psychology association is deciding where to hold their next conference. The votes are shown below.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5678">A professional psychology association is deciding where to hold their next conference. The votes are shown below.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">3</td>
@@ -1102,8 +1033,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Alaska</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-820"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-5686">The Hillsboro City Council has an election with three candidates, D, E, F. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5686">The Hillsboro City Council has an election with three candidates, D, E, F. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">5</td>
@@ -1141,8 +1071,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">E</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-821"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-5694">The Vancouver mayor’s race has three candidates, G, H, I. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5694">The Vancouver mayor’s race has three candidates, G, H, I. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">12</td>
@@ -1180,8 +1109,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">G</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-822"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-5702">The Beaverton City Council has an election for one open position. There are four candidates (labeled A, B, C, and D for convenience). The preference schedule for the election is:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5702">The Beaverton City Council has an election for one open position. There are four candidates (labeled A, B, C, and D for convenience). The preference schedule for the election is:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">120</td>
@@ -1228,8 +1156,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">C</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-823"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
-<p id="p-5710">Portland City Council has an election for one open position. There are four candidates (labeled E, F, G, H for convenience). The preference schedule for the election is:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5710">Portland City Council has an election for one open position. There are four candidates (labeled E, F, G, H for convenience). The preference schedule for the election is:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">11</td>
@@ -1281,8 +1208,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">H</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-824"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-5718">The Portland mayor’s race has four candidates, I, J, K, L. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5718">The Portland mayor’s race has four candidates, I, J, K, L. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">21</td>
@@ -1339,8 +1265,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">K</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-825"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
-<p id="p-5726">A Reynolds School Board position has four candidates, M, N, O, P. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5726">A Reynolds School Board position has four candidates, M, N, O, P. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">16</td>
@@ -1402,8 +1327,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">P</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-826"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-5734">The Gresham mayor’s race has four candidates, Q, R, S, T. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5734">The Gresham mayor’s race has four candidates, Q, R, S, T. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">11</td>
@@ -1460,8 +1384,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">Q</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-827"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
-<p id="p-5742">The Parkrose School Board has an election for an open position with four candidates, U, V, W, X. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5742">The Parkrose School Board has an election for an open position with four candidates, U, V, W, X. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">16</td>
@@ -1523,8 +1446,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">X</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-828"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
-<p id="p-5750">A Multnomah county commissioner’s race has five candidates, A, B, C, D, E. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5750">A Multnomah county commissioner’s race has five candidates, A, B, C, D, E. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">12</td>
@@ -1580,8 +1502,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">A</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-829"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-5758">The Oregon State governor’s race has five candidates, F, G, H, I, J. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5758">The Oregon State governor’s race has five candidates, F, G, H, I, J. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">16</td>
@@ -1643,8 +1564,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">I</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-830"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
-<p id="p-5766">A Washington county commissioner’s race has five candidates, K, L, M, N, O. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5766">A Washington county commissioner’s race has five candidates, K, L, M, N, O. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">22</td>
@@ -1712,8 +1632,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">N</td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-831"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
-<p id="p-5774">A Clackamas county commissioner’s race has five candidates, P, Q, R, S, T. The votes are:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5774">A Clackamas county commissioner’s race has five candidates, P, Q, R, S, T. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t1 lines">Number of voters</td>
 <td class="c m b1 r1 l0 t1 lines">31</td>
@@ -1792,12 +1711,12 @@ true);
 <div class="hidden-content tex2jax_ignore" id="hk-fn-74"><div class="fn">
 <a class="external" href="https://www.rankedchoicevoting.org/mark_rcv_ballot" target="_blank">"Ranked Choice Ballot"</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-75" id="fn-75"><sup> 75 </sup></a>, <a class="external" href="https://www.rankedchoicevoting.org/" target="_blank">Copyright 2020 Ranked Choice Voting Resource Center</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-76" id="fn-76"><sup> 76 </sup></a> is licensed under <a class="external" href="http://creativecommons.org/licenses/by-sa/3.0" target="_blank">CC BY-SA 3.0</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-77" id="fn-77"><sup> 77 </sup></a>
 </div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-75"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.rankedchoicevoting.org/mark_rcv_ballot</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-76"><div class="fn"><code class="code-inline tex2jax_ignore">https://www.rankedchoicevoting.org/</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-77"><div class="fn"><code class="code-inline tex2jax_ignore">http://creativecommons.org/licenses/by-sa/3.0</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-75"><div class="fn"><code class="code-inline tex2jax_ignore">www.rankedchoicevoting.org/mark_rcv_ballot</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-76"><div class="fn"><code class="code-inline tex2jax_ignore">www.rankedchoicevoting.org/</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-77"><div class="fn"><code class="code-inline tex2jax_ignore">creativecommons.org/licenses/by-sa/3.0</code></div></div>
 <div class="hidden-content tex2jax_ignore" id="hk-fn-78"><div class="fn">
 <a class="external" href="http://www.opentextbookstore.com/mathinsociety/index.html" target="_blank">Math in Society: Voting Theory</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-79" id="fn-79"><sup> 79 </sup></a>, by David Lippman</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-79"><div class="fn"><code class="code-inline tex2jax_ignore">http://www.opentextbookstore.com/mathinsociety/index.html</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-79"><div class="fn"><code class="code-inline tex2jax_ignore">www.opentextbookstore.com/mathinsociety/index.html</code></div></div>
 </div></main>
 </div>
 </body>

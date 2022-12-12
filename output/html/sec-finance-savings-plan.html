@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:22-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -232,8 +221,7 @@ true);
 <li id="li-313"><p id="p-719">Use a spreadsheet and/or formula to calculate the future value and interest earned on savings plans</p></li>
 <li id="li-314"><p id="p-720">Use a spreadsheet and/or formula to calculate payment amounts for savings plans</p></li>
 <li id="li-315"><p id="p-721">Analyze and compare lump sum and regular payment savings plans</p></li>
-</ul></article><section class="introduction" id="introduction-49"><p id="p-722">For most of us it is not practical to deposit a large sum of money in the bank. Instead, we save by depositing smaller amounts of money regularly. We might save in an IRA or 401-K for retirement. We might also save for a down payment on a car or house, or in a college savings plan for our children.</p>
-<p id="p-723">Just like the last section, we will emphasize spreadsheets but calculate each example with the formulas as well. Check with your instructor for which way you should do your problems.</p></section><section class="subsection" id="subsection-22"><h3 class="heading hide-type">
+</ul></article><section class="introduction" id="introduction-49"><p id="p-722">For most of us it is not practical to deposit a large sum of money in the bank. Instead, we save by depositing smaller amounts of money regularly. We might save in an IRA or 401-K for retirement. We might also save for a down payment on a car or house, or in a college savings plan for our children.</p> <p id="p-723">Just like the last section, we will emphasize spreadsheets but calculate each example with the formulas as well. Check with your instructor for which way you should do your problems.</p> </section><section class="subsection" id="subsection-22"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">3.4.1</span> <span class="title">Savings Plan Formulas</span>
 </h3>
 <p id="p-724">To make calculations for savings plans using a spreadsheet, we can use the <code class="code-inline tex2jax_ignore">=FV</code> formula we have already used. This time for regular payments we will use the field for payment amount. If we are not making an initial deposit, the present value will be zero.</p>
@@ -277,49 +265,32 @@ A=\frac{d\left(\left(1+\frac{r}{n}\right)^{nt}-1\right)}{\left(\frac{r}{n}\right
 </h4>
 <p id="p-745">A traditional individual retirement account (IRA) is a special type of retirement account in which the money you invest is exempt from income taxes until you withdraw it. If you deposit $100 each month into an IRA earning 6% APR, how much will you have in the account after 20 years? How much will you have earned in interest? What percentage of the balance is interest?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-82"><div class="solution solution-like">
-<p id="p-746">To use a spreadsheet, we will use <code class="code-inline tex2jax_ignore">=FV</code> because we want to know the balance in the future. We enter 100 for the payment amount and 0 for the present value:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-82" id="solution-82"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-82"><div class="solution solution-like">
+<p id="p-746">To use a spreadsheet, we will use <code class="code-inline tex2jax_ignore">=FV</code> because we want to know the balance in the future. We enter 100 for the payment amount and 0 for the present value:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-747">=FV(0.06/12, 12*20, 100, 0)</pre>
 <p id="p-748">which gives a result of $46,204.09.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/savings_plan1.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-749">Remember that the output of the formula gives the answer with the opposite sign as the principal and payments. For our purposes we will ignore the signs. To use the formula, we use the one solved for <em class="emphasis">A</em>, since we want to know the final amount.</p>
-<p id="p-750"><span class="process-math">\(d=\$100\text{,}\)</span> the monthly deposit</p>
-<p id="p-751"><span class="process-math">\(r=0.06\text{,}\)</span> 6% annual rate</p>
-<p id="p-752"><span class="process-math">\(n=12\text{,}\)</span> since we’re doing monthly deposits, we’ll compound monthly</p>
-<p id="p-753"><span class="process-math">\(t=20\text{,}\)</span> we want the amount after 20 years</p>
-<p id="p-754">Putting this into the equation we have:</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-59">
+</div></div> <p id="p-749">Remember that the output of the formula gives the answer with the opposite sign as the principal and payments. For our purposes we will ignore the signs. To use the formula, we use the one solved for <em class="emphasis">A</em>, since we want to know the final amount.</p> <p id="p-750"><span class="process-math">\(d=\$100\text{,}\)</span> the monthly deposit</p> <p id="p-751"><span class="process-math">\(r=0.06\text{,}\)</span> 6% annual rate</p> <p id="p-752"><span class="process-math">\(n=12\text{,}\)</span> since we’re doing monthly deposits, we’ll compound monthly</p> <p id="p-753"><span class="process-math">\(t=20\text{,}\)</span> we want the amount after 20 years</p> <p id="p-754">Putting this into the equation we have:</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-59">
 \begin{align*}
 A\amp=\frac{100\left(\left(1+\frac{0.06}{12}\right)^{12\cdot 20}-1\right)}{\left(\frac{0.06}{12}\right)}\\
 \amp=\frac{100\left((1.005)^{240}-1\right)}{(0.005)}\\
 \amp\approx \$46.204.09
 \end{align*}
-</div>
-<p id="p-756">With U.S. dollars we round to the nearest cent. The account will grow to $46,204.09 after 20 years.</p>
-<p id="p-757">To find the <em class="alert">amount of interest earned</em>, calculate the total of all your deposits.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="p-758">
+</div> <p id="p-756">With U.S. dollars we round to the nearest cent. The account will grow to $46,204.09 after 20 years.</p> <p id="p-757">To find the <em class="alert">amount of interest earned</em>, calculate the total of all your deposits.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="p-758">
 \begin{equation*}
 \$100(20)(12)=\$24,000
 \end{equation*}
-</div>
-<p id="p-759">The difference between the total amount and the deposits is the interest earned.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="p-760">
+</div> <p id="p-759">The difference between the total amount and the deposits is the interest earned.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="p-760">
 \begin{equation*}
 \$46,204.09-\$24,000=\$22,204.09
 \end{equation*}
-</div>
-<p id="p-761">The total amount of interest you earned was $22,204.09.</p>
-<p id="p-762">To find the <em class="alert">percentage of the balance that is interest</em> we will divide the interest by the total balance.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="p-763">
+</div> <p id="p-761">The total amount of interest you earned was $22,204.09.</p> <p id="p-762">To find the <em class="alert">percentage of the balance that is interest</em> we will divide the interest by the total balance.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="p-763">
 \begin{equation*}
 \frac{\$22,204.09}{\$46,204.09}\approx 0.4810
 \end{equation*}
-</div>
-<p id="p-764">or 48.1%. After 20 years 48.1% of the balance is from interest.</p>
+</div> <p id="p-764">or 48.1%. After 20 years 48.1% of the balance is from interest.</p>
 </div></div>
 </div></article><p id="p-765">Now here’s an example with an initial deposit and monthly deposits. We can do this with the spreadsheet formula.</p>
 <article class="example example-like" id="example-29"><h4 class="heading">
@@ -327,9 +298,8 @@ A\amp=\frac{100\left(\left(1+\frac{0.06}{12}\right)^{12\cdot 20}-1\right)}{\left
 </h4>
 <p id="p-766">You want to jumpstart your saving by depositing $1500 from your tax return and then deposit $150 every month into an account that earns 5.5% APR compounded monthly. How much will you have in the account after 30 years?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-83" id="solution-83"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-83"><div class="solution solution-like">
-<p id="p-767">Using the spreadsheet formula, we can enter an initial deposit and a monthly payment. We enter</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-83" id="solution-83"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-83"><div class="solution solution-like">
+<p id="p-767">Using the spreadsheet formula, we can enter an initial deposit and a monthly payment. We enter</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-768">=FV(0.055/12, 12*30, 150,1500)</pre>
 <p id="p-769">and get a result of $144,822.87.</p>
@@ -359,29 +329,20 @@ A\amp=\frac{100\left(\left(1+\frac{0.06}{12}\right)^{12\cdot 20}-1\right)}{\left
 </h4>
 <p id="p-779">You want to have half a million dollars in your account when you retire in 30 years. Your retirement account earns 8% APR. How much do you need to deposit each month to meet your retirement goal?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-84" id="solution-84"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-84"><div class="solution solution-like">
-<p id="p-780">To calculate this with a spreadsheet, we will use the <code class="code-inline tex2jax_ignore">=PMT</code> function and enter 0 for the present value and $500,000 for the future value. We cannot enter commas within the numbers however, because spreadsheets use commas to separate the inputs. We enter:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-84" id="solution-84"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-84"><div class="solution solution-like">
+<p id="p-780">To calculate this with a spreadsheet, we will use the <code class="code-inline tex2jax_ignore">=PMT</code> function and enter 0 for the present value and $500,000 for the future value. We cannot enter commas within the numbers however, because spreadsheets use commas to separate the inputs. We enter:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-781">=PMT(0.08/12, 12*30, 0, 500000)</pre>
 <p id="p-782">and get a result of $335.49.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/finding_payments1.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-783">To see how this works with the formulas, we use the one solved for <em class="emphasis">d</em>, the regular deposit amount.</p>
-<p id="p-784"><span class="process-math">\(r=0.08\text{,}\)</span> 8% annual rate</p>
-<p id="p-785"><span class="process-math">\(n=12\text{,}\)</span> since we’re depositing monthly</p>
-<p id="p-786"><span class="process-math">\(t=30\text{,}\)</span> 30 years</p>
-<p id="p-787"><span class="process-math">\(A=\$500,000\text{,}\)</span> the amount we want to have in 30 years</p>
-<p id="p-788"></p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-60">
+</div></div> <p id="p-783">To see how this works with the formulas, we use the one solved for <em class="emphasis">d</em>, the regular deposit amount.</p> <p id="p-784"><span class="process-math">\(r=0.08\text{,}\)</span> 8% annual rate</p> <p id="p-785"><span class="process-math">\(n=12\text{,}\)</span> since we’re depositing monthly</p> <p id="p-786"><span class="process-math">\(t=30\text{,}\)</span> 30 years</p> <p id="p-787"><span class="process-math">\(A=\$500,000\text{,}\)</span> the amount we want to have in 30 years</p> <p id="p-788"></p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-60">
 \begin{align*}
 d\amp=\frac{A\left(\frac{r}{n}\right)}{\left(\left(1+\frac{r}{n}\right)^{nt}-1\right)}\\
 \amp=\frac{500000\left(\frac{0.08}{12}\right)}{\left(\left(1+\frac{0.08}{12}\right)^{12\cdot 30}-1\right)}\\
 \amp\approx\$335.49
 \end{align*}
-</div>
-<p id="p-790">So, you would need to deposit $335.49 each month to have $500,000 in 30 years if your account earns 8% interest.</p>
+</div> <p id="p-790">So, you would need to deposit $335.49 each month to have $500,000 in 30 years if your account earns 8% interest.</p>
 </div></div>
 </div></article><article class="assemblage assemblage-like" id="assemblage-12"><h4 class="heading"><span class="title">A note about rounding.</span></h4>
 <p id="p-791">If you are using the formulas and round during intermediate steps you will probably have some roundoff error. For this reason, we enter the whole expression into the calculator and do not show the intermediate steps.</p></article><p id="p-792">One of the challenges in this chapter is choosing the correct formula or spreadsheet function. Read this next example and see if you can determine which formula to use.</p>
@@ -390,35 +351,23 @@ d\amp=\frac{A\left(\frac{r}{n}\right)}{\left(\left(1+\frac{r}{n}\right)^{nt}-1\r
 </h4>
 <p id="p-793">A more conservative investment account pays 3% APR. If you deposit $5 a day into this account, how much will you have after 10 years? What amount and percentage are from interest?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-85" id="solution-85"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-85"><div class="solution solution-like">
-<p id="p-794">In this example we are given the regular deposit amount and we are looking for the future value. In a spreadsheet we use the <code class="code-inline tex2jax_ignore">=FV</code> function and enter:</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-85" id="solution-85"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-85"><div class="solution solution-like">
+<p id="p-794">In this example we are given the regular deposit amount and we are looking for the future value. In a spreadsheet we use the <code class="code-inline tex2jax_ignore">=FV</code> function and enter:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-795">=FV(0.03/365, 365*10, 5,0)</pre>
 <p id="p-796">which gives a result of $21,282.07.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/finding_payments2.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-797">To use a mathematical formula, we choose the one solved for <em class="emphasis">A</em>:</p>
-<p id="p-798"><span class="process-math">\(d=\$5\text{,}\)</span> the daily deposit</p>
-<p id="p-799"><span class="process-math">\(r=0.03\text{,}\)</span> 3% annual rate</p>
-<p id="p-800"><span class="process-math">\(n=365\text{,}\)</span> since we’re doing daily deposits, we’ll compound daily</p>
-<p id="p-801"><span class="process-math">\(t=10\text{,}\)</span> we want the amount after 10 years</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-61">
+</div></div> <p id="p-797">To use a mathematical formula, we choose the one solved for <em class="emphasis">A</em>:</p> <p id="p-798"><span class="process-math">\(d=\$5\text{,}\)</span> the daily deposit</p> <p id="p-799"><span class="process-math">\(r=0.03\text{,}\)</span> 3% annual rate</p> <p id="p-800"><span class="process-math">\(n=365\text{,}\)</span> since we’re doing daily deposits, we’ll compound daily</p> <p id="p-801"><span class="process-math">\(t=10\text{,}\)</span> we want the amount after 10 years</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-61">
 \begin{align*}
 A\amp=\frac{5\left(\left(1+\frac{0.03}{365}\right)^{365\cdot 10}-1\right)}{\left(\frac{0.03}{365}\right)}\\
 \amp\approx\$21,282.07
 \end{align*}
-</div>
-<p id="p-803">To find the amount of interest, we will calculate how much was deposited in the account. Since you put in $5 a day for 10 years we get</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="p-804">
+</div> <p id="p-803">To find the amount of interest, we will calculate how much was deposited in the account. Since you put in $5 a day for 10 years we get</p> <div class="displaymath process-math" data-contains-math-knowls="" id="p-804">
 \begin{equation*}
 \$5(365)(10)=\$18,250\text{.}
 \end{equation*}
-</div>
-<p id="p-805">The interest earned is <span class="process-math">\(\$21,282.07-\$18,250=\$3,032.07\text{.}\)</span></p>
-<p id="p-806">To find the percentage we divide by the total balance to get <span class="process-math">\(\frac{\$3,032.07}{\$21,282.07}\approx0.1425\)</span> or 14.25%.</p>
-<p id="p-807">After 10 years, about 14.25% of the account is interest.</p>
+</div> <p id="p-805">The interest earned is <span class="process-math">\(\$21,282.07-\$18,250=\$3,032.07\text{.}\)</span></p> <p id="p-806">To find the percentage we divide by the total balance to get <span class="process-math">\(\frac{\$3,032.07}{\$21,282.07}\approx0.1425\)</span> or 14.25%.</p> <p id="p-807">After 10 years, about 14.25% of the account is interest.</p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-24"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">3.4.3</span> <span class="title">Comparing Lump Sum and Regular Savings Payments</span>
@@ -427,57 +376,43 @@ A\amp=\frac{5\left(\left(1+\frac{0.03}{365}\right)^{365\cdot 10}-1\right)}{\left
 <article class="example example-like" id="example-32"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">3.4.5</span><span class="period">.</span>
 </h4>
-<p id="p-809">Scenario 1: Suppose you invest $200 a month for 15 years into an account earning 10% APR compounded monthly. After 15 years, you leave the money, without making additional deposits, in the account for another 20 years. How much will you have in the end?</p>
-<p id="p-810">Scenario 2: Suppose instead you didn't invest anything for the first 15 years, then deposited $200 a month for 20 years into an account earning 10% APR compounded monthly. How much will you have in the end?</p>
+<p id="p-809">Scenario 1: Suppose you invest $200 a month for 15 years into an account earning 10% APR compounded monthly. After 15 years, you leave the money, without making additional deposits, in the account for another 20 years. How much will you have in the end?</p> <p id="p-810">Scenario 2: Suppose instead you didn't invest anything for the first 15 years, then deposited $200 a month for 20 years into an account earning 10% APR compounded monthly. How much will you have in the end?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-86"><div class="solution solution-like">
-<p id="p-811">Before we calculate the balance for both scenarios, which one do you think will have a higher balance at the end?</p>
-<p id="p-812">For scenario 1, there are two steps involved. The first part is the monthly payments for 15 years. To calculate this with a spreadsheet we enter</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-86" id="solution-86"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-86"><div class="solution solution-like">
+<p id="p-811">Before we calculate the balance for both scenarios, which one do you think will have a higher balance at the end?</p> <p id="p-812">For scenario 1, there are two steps involved. The first part is the monthly payments for 15 years. To calculate this with a spreadsheet we enter</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-813">=FV(0.10/12, 12*15, 200,0)</pre>
 <p id="p-814">which gives $82,894.07.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/comparing_payments1.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-815">Now you will stop making payments and let the money sit and earn interest for 20 more years. With a spreadsheet we enter</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+</div></div> <p id="p-815">Now you will stop making payments and let the money sit and earn interest for 20 more years. With a spreadsheet we enter</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-816">=FV(0.10/12, 12*20, 0, 82894.07)</pre>
 <p id="p-817">which gives $607,453.85.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/comparing_payments2.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-818">The process is similar with the formulas. For the first step we have:</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-62">
+</div></div> <p id="p-818">The process is similar with the formulas. For the first step we have:</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-62">
 \begin{align*}
 A\amp=\frac{200\left(\left(1+\frac{0.10}{12}\right)^{12\cdot 15}-1\right)}{\left(\frac{0.10}{12}\right)}\\
 \amp\approx\$82,894.07
 \end{align*}
-</div>
-<p id="p-820">And for the second step we use the compound interest formula from <a href="sec-finance-simple-compound.html" class="internal" title="Section 3.2: Simple and Compound Interest">Section 3.2</a>.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-63">
+</div> <p id="p-820">And for the second step we use the compound interest formula from <a href="sec-finance-simple-compound.html" class="internal" title="Section 3.2: Simple and Compound Interest">Section 3.2</a>.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-63">
 \begin{align*}
 A\amp=\$82,894.07\left(1+\frac{0.10}{12}\right)^{12\cdot 20}\\
 \amp\approx\$607,453.85
 \end{align*}
-</div>
-<p id="p-822">Now for Scenario 2: Since we are not investing anything for the first 15 years there is nothing to calculate. This is a one-step problem. We will find the future value with the monthly payments of $200 for 20 years. With a spreadsheet we enter</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+</div> <p id="p-822">Now for Scenario 2: Since we are not investing anything for the first 15 years there is nothing to calculate. This is a one-step problem. We will find the future value with the monthly payments of $200 for 20 years. With a spreadsheet we enter</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel middle" style="width:40%;">
 <pre class="code-display tex2jax_ignore" id="p-823">=FV(0.10/12, 12*20, 200,0)</pre>
 <p id="p-824">which gives $151,873.77.</p>
 </div>
 <div class="sbspanel middle" style="width:54%;"><img src="external/financial_math/2_3/comparing_payments3.png" class="contained" alt="An image of the spreadsheet showing the formula used and the result."></div>
-</div></div>
-<p id="p-825">To check that with the formula we have:</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-64">
+</div></div> <p id="p-825">To check that with the formula we have:</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-64">
 \begin{align*}
 A\amp=\frac{200\left(\left(1+\frac{0.10}{12}\right)^{12\cdot 20}-1\right)}{\left(\frac{0.10}{12}\right)}\\
 \amp\approx\$151,873.77
 \end{align*}
-</div>
-<p id="p-827">Were you surprised by these numbers? You would put in less money in scenario 1 and end up with four times as much. The key to compounding interest is to start early. If you remember the graph of compound interest in <a href="sec-finance-simple-compound.html" class="internal" title="Section 3.2: Simple and Compound Interest">Section 3.2</a>, we can see that as time goes on, the balance increases exponentially.</p>
+</div> <p id="p-827">Were you surprised by these numbers? You would put in less money in scenario 1 and end up with four times as much. The key to compounding interest is to start early. If you remember the graph of compound interest in <a href="sec-finance-simple-compound.html" class="internal" title="Section 3.2: Simple and Compound Interest">Section 3.2</a>, we can see that as time goes on, the balance increases exponentially.</p>
 </div></div>
 </div></article></section><section class="subsection" id="subsection-25"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">3.4.4</span> <span class="title">Deriving the Savings Plan Formula (Optional)</span>

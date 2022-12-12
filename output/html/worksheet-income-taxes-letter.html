@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:35-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet letter">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -230,10 +219,8 @@ true);
 <ul class="disc">
 <li id="li-557"><p id="p-derived-li-557">Demonstrate operation sense by communicating in words and symbols the effects of operations on numbers. Apply the correct order of operations in evaluating expressions and formulas.</p></li>
 <li id="li-558"><p id="p-derived-li-558">Apply quantitative reasoning strategies to solve real-world problems with proportional relationships using whole numbers, fractions, decimals, and percents as appropriate.</p></li>
-</ul></article><div class="introduction" id="introduction-taxes">
-<p id="p-1567">In the United States, people pay income tax on any income they earn during the year.  The total amount of money they earn through work, investments, and other means is called <em class="emphasis">total income</em>.  From this, people are able to deduct certain things, like retirement contributions and tuition payments, reducing their income to what is called their <em class="emphasis">adjusted gross income</em>.  From this, certain expenses can be deducted resulting in the <em class="emphasis">taxable income</em> that tax is actually calculated on.</p>
-<p id="p-1568">Taxes can be, as you've probably heard, fairly complicated, but for this lesson we are going to focus on a simple case: a couple we'll name Gracie and Lancel.</p>
-<ul class="disc">
+</ul></article> <div class="introduction" id="introduction-taxes">
+<p id="p-1567">In the United States, people pay income tax on any income they earn during the year.  The total amount of money they earn through work, investments, and other means is called <em class="emphasis">total income</em>.  From this, people are able to deduct certain things, like retirement contributions and tuition payments, reducing their income to what is called their <em class="emphasis">adjusted gross income</em>.  From this, certain expenses can be deducted resulting in the <em class="emphasis">taxable income</em> that tax is actually calculated on.</p> <p id="p-1568">Taxes can be, as you've probably heard, fairly complicated, but for this lesson we are going to focus on a simple case: a couple we'll name Gracie and Lancel.</p> <ul class="disc">
 <li id="li-559"><p id="p-derived-li-559">Gracie and Lancel are married with no kids, filing jointly.  No one can claim either as a dependent.</p></li>
 <li id="li-560"><p id="p-derived-li-560">Together, they earned $106,900 of wage income</p></li>
 <li id="li-561"><p id="p-derived-li-561">They did <em class="emphasis">not</em> earn anything from interest, dividends, distributions, annuities, benefits, capital gains, or anything else.</p></li>
@@ -242,8 +229,7 @@ true);
 <li id="li-564"><p id="p-derived-li-564">They had no qualified business income</p></li>
 <li id="li-565"><p id="p-derived-li-565">They can claim $2250 in adjustments to income because Gracie is an elementary teacher who can mark $250 for educator expenses and they can claim $2000 because of their payments toward the interest of their student loans.</p></li>
 </ul>
-</div>
-<article class="exercise exercise-like" id="exercise-income-taxes-1"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Fill out boxes 1-15 the form to find the couple's taxable income <div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/1040.jpg" class="contained"></div>
+</div> <article class="exercise exercise-like" id="exercise-income-taxes-1"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>Fill out boxes 1-15 the form to find the couple's taxable income <div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/1040.jpg" class="contained"></div>
 <div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-income-taxes-p2"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel top" style="width:75%;"><article class="exercise exercise-like" id="exercise-taxes-2"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>Usually tax owed is looked up from a tax table. You would use the first line of the table if the taxable income from line 6  is at least 72,000 but less than 72,050. <ol class="lower-alpha">
 <li id="li-566"><p id="p-derived-li-566">Write this as a compound inequality, using t to represent the income from line 6.</p></li>
@@ -251,9 +237,7 @@ true);
 </ol>
 <div class="workspace" data-space="1in"></div></article></div>
 <div class="sbspanel top" style="width:25%;"><img src="external/tax-table-78.png" class="contained"></div>
-</div></div>
-<p id="p-1579">Alternatively, the couple could calculate the tax based on tax rate information.  A portion of the rate table from 2022 is shown.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-25"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.8.1<span class="period">.</span></span><span class="space"> </span>Married Filing Jointly (Tax Year 2022)</figcaption><table class="tabular">
+</div></div> <p id="p-1579">Alternatively, the couple could calculate the tax based on tax rate information.  A portion of the rate table from 2022 is shown.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><figure class="table table-like" id="table-25"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.8.1<span class="period">.</span></span><span class="space"> </span>Married Filing Jointly (Tax Year 2022)</figcaption><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="l m b1 r1 l1 t1 lines">If taxable income is:</th>
 <th scope="col" class="l m b1 r1 l0 t1 lines">The tax is:</th>
@@ -286,13 +270,7 @@ true);
 <td class="l m b1 r1 l1 t0 lines">$647,851 or more.</td>
 <td class="l m b1 r1 l0 t0 lines">$174,253.50 plus 37% of the amount over $647,850.</td>
 </tr>
-</table></figure></div></div></div>
-<p id="p-1580">The rates you see on the right (10%, 12%, 22%, 24%, 32%, 35%, 37%) are called <em class="emphasis">marginal tax rates</em>, but most people just call them <em class="emphasis">tax brackets</em>.</p>
-<article class="exercise exercise-like" id="exercise-taxes-4"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>Use the tax rates above to calculate the couple's tax.  Does it match the tax table?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-income-taxes-p3"><article class="exercise exercise-like" id="exercise-taxes-5"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>A commonly held belief is that marginal tax rate applies to all of a person's taxable income.  What is 12% of their taxable income, and how does this compare to actual income tax?<div class="workspace" data-space=".5in"></div></article><article class="exercise exercise-like" id="exercise-taxes-6"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>What percent of their taxable income are they paying?  This is called the effective or average tax rate.  Round your answer to a tenth of a percentage point.<div class="workspace" data-space=".5in"></div></article><p id="p-1589">Sometimes people have been hesitant to accept raises, worried that it will push them into a new tax bracket and they'll end up losing money.</p>
-<article class="exercise exercise-like" id="exercise-taxes-7"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>Suppose the couple got an unexpected $6,000 bonus at the end of the year, pushing them into the 22% marginal rate tax bracket. How much tax will they pay?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-taxes-8"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>What is the difference between their take-home pay with and without the bonus?  Will the couple end up with less take-home pay because the bonus pushed them into a higher tax bracket?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-income-taxes-p4"><p id="p-1597">While tax tables and the tax rates work well for calculating tax for a single individual, a business might want to create a spreadsheet that automatically calculates the tax for their employees.</p>
-<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/taxes-company.jpg" class="contained"></div>
-<p id="p-1598">For simplicity, let's assume all of the employees are married and filing jointly, and all of their taxable incomes fall between $20,551 and $83,550.  Let's also assume that they will take the standard deduction, have no other income, make no adjustments to their taxable income, and give nothing to charity.  These assumptions will be close enough for this company's purposes.</p>
-<article class="exercise exercise-like" id="exercise-taxes-9"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>Write an equation for cell C2.  It should be general enough to be copied down the rest of the column.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-taxes-10"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>Write an equation for cell D2.  It should be general enough to be copied down the rest of the column.<div class="workspace" data-space="1in"></div></article></section></section></div></main>
+</table></figure></div></div></div> <p id="p-1580">The rates you see on the right (10%, 12%, 22%, 24%, 32%, 35%, 37%) are called <em class="emphasis">marginal tax rates</em>, but most people just call them <em class="emphasis">tax brackets</em>.</p> <article class="exercise exercise-like" id="exercise-taxes-4"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>Use the tax rates above to calculate the couple's tax.  Does it match the tax table?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-income-taxes-p3"><article class="exercise exercise-like" id="exercise-taxes-5"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>A commonly held belief is that marginal tax rate applies to all of a person's taxable income.  What is 12% of their taxable income, and how does this compare to actual income tax?<div class="workspace" data-space=".5in"></div></article> <article class="exercise exercise-like" id="exercise-taxes-6"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>What percent of their taxable income are they paying?  This is called the effective or average tax rate.  Round your answer to a tenth of a percentage point.<div class="workspace" data-space=".5in"></div></article> <p id="p-1589">Sometimes people have been hesitant to accept raises, worried that it will push them into a new tax bracket and they'll end up losing money.</p> <article class="exercise exercise-like" id="exercise-taxes-7"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>Suppose the couple got an unexpected $6,000 bonus at the end of the year, pushing them into the 22% marginal rate tax bracket. How much tax will they pay?<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-taxes-8"><h4 class="heading"><span class="codenumber">7<span class="period">.</span></span></h4>What is the difference between their take-home pay with and without the bonus?  Will the couple end up with less take-home pay because the bonus pushed them into a higher tax bracket?<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-income-taxes-p4"><p id="p-1597">While tax tables and the tax rates work well for calculating tax for a single individual, a business might want to create a spreadsheet that automatically calculates the tax for their employees.</p> <div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/taxes-company.jpg" class="contained"></div> <p id="p-1598">For simplicity, let's assume all of the employees are married and filing jointly, and all of their taxable incomes fall between $20,551 and $83,550.  Let's also assume that they will take the standard deduction, have no other income, make no adjustments to their taxable income, and give nothing to charity.  These assumptions will be close enough for this company's purposes.</p> <article class="exercise exercise-like" id="exercise-taxes-9"><h4 class="heading"><span class="codenumber">8<span class="period">.</span></span></h4>Write an equation for cell C2.  It should be general enough to be copied down the rest of the column.<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-taxes-10"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>Write an equation for cell D2.  It should be general enough to be copied down the rest of the column.<div class="workspace" data-space="1in"></div></article></section></section></div></main>
 </div>
 </body>
 </html>

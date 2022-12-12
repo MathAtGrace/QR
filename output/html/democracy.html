@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:10-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -226,18 +215,14 @@ true);
 <span class="type">Chapter</span> <span class="codenumber">6</span> <span class="title">Democracy</span>
 </h2>
 <section class="introduction" id="introduction-130"><h2 class="heading">Dr. Graciela Chichilnisky and Social Choice.<span></span>
-</h2>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+</h2> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel top" style="width:63%;">
 <p id="p-5227">Dr. Graciela Chichilnisky<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-66" id="fn-66"><sup> 66 </sup></a> is a professor of Economics and Mathematical Statistics at Columbia University. She holds Ph.D. degrees in Mathematics and Economics from MIT and the University of California Berkeley.</p>
 <p id="p-5228">Dr. Chichilnisky applied algebraic topology to voting theory and the theory of social choice. She accounted for not only the order of voting preference but also the intensity of preference among the alternatives (Chichilnisky, 1980). Due to her innovative work in this area, continuous social choice has become an international subdiscipline.</p>
 <p id="p-5229">More recently, Dr. Chichilnisky combined her research in math and economics to focus on climate change. Dr. Chichilnisky acted as the lead author on the Intergovernmental Panel on Climate Change, which received the 2007 Nobel Prize for its work in deciding world policy with respect to climate change, and she worked extensively on the Kyoto Protocol, creating and designing the carbon market that became international law in 2005 (Siegle, 2010).</p>
 </div>
 <div class="sbspanel top" style="width:35%;"><img src="external/democracy/5_1/gc_pic.png" class="contained" alt="A photo of Dr. Graciela Chichilnisky"></div>
-</div></div>
-<p id="p-5230">As a world-renowned economist, she is the creator of the formal theory of Sustainable Development (Siegle, 2010). Her pioneering work uses innovative market mechanisms to create Green Capitalism.</p>
-<p id="p-5231">Dr. Chichilnisky is the CEO and Co-founder of Global Thermostat<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-67" id="fn-67"><sup> 67 </sup></a>, a company in which she co-invented a “Carbon Negative Technology” that captures CO2 from the air and transforms it into profitable assets such as biofuels, food, beverages, polymers, and valuable building materials (Chichilnisky, 2018).</p>
-<p id="p-5232">Dr. Chichilnisky taught previously at Harvard, Essex and Stanford Universities. She was elected one of the Ten Most Influential Latinos in the U.S. She is a frequent political and economic speaker on CNN, ABC, BBC TV News, and Bloomberg News, as well as a frequent keynote speaker at leading international conferences and universities. Her two most recent books are “Reversing Climate Change: How Carbon Removals Can Resolve Climate Change and Fix the Economy” and “The Economics of Climate Change”. Dr. Chichilnisky is also the author of “Saving Kyoto”, which won the American Library Association's 2010 Outstanding Academic Title of the Year and the American Geographical Society's Book of the Month Award in October 2009.</p></section><nav class="summary-links"><ul>
+</div></div> <p id="p-5230">As a world-renowned economist, she is the creator of the formal theory of Sustainable Development (Siegle, 2010). Her pioneering work uses innovative market mechanisms to create Green Capitalism.</p> <p id="p-5231">Dr. Chichilnisky is the CEO and Co-founder of Global Thermostat<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-67" id="fn-67"><sup> 67 </sup></a>, a company in which she co-invented a “Carbon Negative Technology” that captures CO2 from the air and transforms it into profitable assets such as biofuels, food, beverages, polymers, and valuable building materials (Chichilnisky, 2018).</p> <p id="p-5232">Dr. Chichilnisky taught previously at Harvard, Essex and Stanford Universities. She was elected one of the Ten Most Influential Latinos in the U.S. She is a frequent political and economic speaker on CNN, ABC, BBC TV News, and Bloomberg News, as well as a frequent keynote speaker at leading international conferences and universities. Her two most recent books are “Reversing Climate Change: How Carbon Removals Can Resolve Climate Change and Fix the Economy” and “The Economics of Climate Change”. Dr. Chichilnisky is also the author of “Saving Kyoto”, which won the American Library Association's 2010 Outstanding Academic Title of the Year and the American Geographical Society's Book of the Month Award in October 2009.</p></section><nav class="summary-links"><ul>
 <li><a href="sec-democracy-apportionment.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Apportionment</span></a></li>
 <li><a href="sec-democracy-voting.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Voting Methods</span></a></li>
 <li><a href="sec-democracy-popular-vote.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Popular Vote, Electoral College and Electoral Power</span></a></li>

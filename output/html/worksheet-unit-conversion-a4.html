@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:01-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet a4">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -228,28 +217,24 @@ true);
 </h3>
 <section class="onepage" id="worksheet-unit-conversion-p1"><article class="exercise exercise-like" id="exercise-height-to-meters"><h4 class="heading">
 <span class="codenumber">1<span class="period">.</span></span><span class="space"> </span><span class="title">Height.</span>
-</h4>In the US we measure height in feet and inches.  In other parts of the world height is measured in meters.  Use dimensional analysis convert the height of a person who is 5 feet, 10 inches into meters.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-weight-to-kilograms"><h4 class="heading">
+</h4>In the US we measure height in feet and inches.  In other parts of the world height is measured in meters.  Use dimensional analysis convert the height of a person who is 5 feet, 10 inches into meters.<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-weight-to-kilograms"><h4 class="heading">
 <span class="codenumber">2<span class="period">.</span></span><span class="space"> </span><span class="title">Weight.</span>
-</h4>In the US we measure weight in pounds.  In other parts of the world weight is measured in kilograms.  Use dimensional analysis convert the weight of a person who is 180 pounds into kilograms.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-pesticide"><h4 class="heading">
+</h4>In the US we measure weight in pounds.  In other parts of the world weight is measured in kilograms.  Use dimensional analysis convert the weight of a person who is 180 pounds into kilograms.<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-pesticide"><h4 class="heading">
 <span class="codenumber">3<span class="period">.</span></span><span class="space"> </span><span class="title">Pesticide.</span>
 </h4>A pesticide is supposed to be diluted in water at the rate of 2 pounds per gallon. Use dimensional analysis convert this to ounces per quart.<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-unit-conversion-p2"><div class="exercisegroup" id="exercisegroup-17">
 <h4 class="heading"><span class="title">Problem Situation: Texting While Driving.</span></h4>
 <div class="introduction" id="introduction-22">Indiana state law says: <blockquote class="blockquote" id="blockquote-19">
-<p id="p-147">Except as provided in subsections (b) and (c), a person may not hold or use a telecommunications device while operating a moving motor vehicle.</p>
-<p id="p-148">(b) A telecommunications device may be used in conjunction with hands free or voice operated technology.</p>
-<p id="p-149">(c) A telecommunications device may be used or held to call 911 to report a bona fide emergency.</p>
+<p id="p-147">Except as provided in subsections (b) and (c), a person may not hold or use a telecommunications device while operating a moving motor vehicle.</p> <p id="p-148">(b) A telecommunications device may be used in conjunction with hands free or voice operated technology.</p> <p id="p-149">(c) A telecommunications device may be used or held to call 911 to report a bona fide emergency.</p>
 </blockquote> Is texting while driving actually a problem?  A person might spend only 4 seconds to answer a text.  How far would the car go in that time?  It depends on the car’s speed.</div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-texting-driving-1"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>Suppose a car is traveling at 35 miles per hour.  Before calculating, given an <em class="emphasis">educated guess</em> for the distance, in feet, the car will travel in 4 seconds.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-2"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>Suppose a car is traveling at 35 miles per hour.  Use dimensional analysis to calculate the distance, in feet, the car will travel in 4 seconds.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-3"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>If you are driving in Canada, following the posted speed limit of 80 km/hr, how many feet would you go during the 4 seconds spent texting?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-4"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-150">Suppose the typical texting response time is between 2 seconds and 6 seconds.  That could be written as a compound inequality for time t as:<span class="process-math">\(2\leq t \leq6\)</span> seconds.</p>
-<p id="p-151">If a car is travelling at 35 mph what is the typical distance a car would travel during a typical texting response?</p>
+<p id="p-150">Suppose the typical texting response time is between 2 seconds and 6 seconds.  That could be written as a compound inequality for time t as:<span class="process-math">\(2\leq t \leq6\)</span> seconds.</p> <p id="p-151">If a car is travelling at 35 mph what is the typical distance a car would travel during a typical texting response?</p>
 <div class="workspace" data-space="1in"></div></article>
 </div>
 </div></section><section class="onepage" id="worksheet-unit-conversion-p3"><div class="exercisegroup" id="exercisegroup-18">
 <h4 class="heading"><span class="title">Problem Situation 2:  Length, Area, Volume.</span></h4>
 <div class="introduction" id="introduction-23">
-<p id="p-152">We can think of our physical world as having 3 dimensions.  A length or distance is one dimension.  An area is 2 dimensions and a volume is 3 dimensions.  Examples of the type of units used for each of these are shown in the table of unit equivalencies.</p>
-<p id="p-153">While helping a friend remodel their house in Canada, you realize you brought your American tape measure.  You measure the living room to be 12 feet wide and 14 feet 6 inches long.</p>
+<p id="p-152">We can think of our physical world as having 3 dimensions.  A length or distance is one dimension.  An area is 2 dimensions and a volume is 3 dimensions.  Examples of the type of units used for each of these are shown in the table of unit equivalencies.</p> <p id="p-153">While helping a friend remodel their house in Canada, you realize you brought your American tape measure.  You measure the living room to be 12 feet wide and 14 feet 6 inches long.</p>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-area-volume-1"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>

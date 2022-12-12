@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:57:28-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -254,8 +243,7 @@ true);
 <p id="p-5796">How many electoral votes are there in the U.S. Electoral College?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-508" id="solution-508"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-508"><div class="solution solution-like">
-<p id="p-5797"><span class="process-math">\(100+435+3=538\)</span></p>
-<p id="p-5798">By adding all the U.S. Senators, Representatives and 3 for Washington, D.C., we have a total of 538 electoral votes.</p>
+<p id="p-5797"><span class="process-math">\(100+435+3=538\)</span></p> <p id="p-5798">By adding all the U.S. Senators, Representatives and 3 for Washington, D.C., we have a total of 538 electoral votes.</p>
 </div></div>
 </div></article><article class="example example-like" id="example-149"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.2</span><span class="period">.</span>
@@ -263,8 +251,7 @@ true);
 <p id="p-5799">How many electoral votes does a candidate need to win to become the President of the United States?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-509" id="solution-509"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-509"><div class="solution solution-like">
-<p id="p-5800"><span class="process-math">\(538\div2=269\)</span> then round up to 270.</p>
-<p id="p-5801">A candidate needs 270 electoral votes to win the U.S. Presidency.</p>
+<p id="p-5800"><span class="process-math">\(538\div2=269\)</span> then round up to 270.</p> <p id="p-5801">A candidate needs 270 electoral votes to win the U.S. Presidency.</p>
 </div></div>
 </div></article><article class="example example-like" id="example-150"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.3</span><span class="period">.</span>
@@ -272,8 +259,7 @@ true);
 <p id="p-5802">The number of people who voted in the presidential election in 2016 was 136,452,150 (Ballotpedia, n.d.). How many votes would be needed to win a majority of the popular vote?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-510" id="solution-510"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-510"><div class="solution solution-like">
-<p id="p-5803"><span class="process-math">\(136,452,150\div2=68,226,075\)</span> then round up to 68,226,076.</p>
-<p id="p-5804">A candidate would need 68,226,076 votes to win the popular vote.</p>
+<p id="p-5803"><span class="process-math">\(136,452,150\div2=68,226,075\)</span> then round up to 68,226,076.</p> <p id="p-5804">A candidate would need 68,226,076 votes to win the popular vote.</p>
 </div></div>
 </div></article><article class="example example-like" id="example-151"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.4</span><span class="period">.</span>
@@ -281,8 +267,7 @@ true);
 <p id="p-5805">There were approximately 230,931,921 eligible voters at the time of the 2016 election (McDonald, 2016). What percentage of eligible voters voted?</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-511" id="solution-511"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-511"><div class="solution solution-like">
-<p id="p-5806"><span class="process-math">\(136,452,150 \div 230,931,921 = 0.591\)</span></p>
-<p id="p-5807">About 59% of all the eligible voters voted in the 2016 election.</p>
+<p id="p-5806"><span class="process-math">\(136,452,150 \div 230,931,921 = 0.591\)</span></p> <p id="p-5807">About 59% of all the eligible voters voted in the 2016 election.</p>
 </div></div>
 </div></article><p id="p-5808">If you are interested in the 2016 election voting rates by race, Hispanic origin and age, you can find them in this Census Bureau Report<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-81" id="fn-81"><sup> 81 </sup></a>.</p></section><section class="subsection" id="subsection-165"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.3.2</span> <span class="title">How Electoral Votes are Determined</span>
@@ -294,8 +279,7 @@ true);
 <article class="example example-like" id="example-152"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.5</span><span class="period">.</span>
 </h4>
-<p id="p-5813">Consider this country with 4 states. The rules for the number of senators and electors are the same as the U.S. government. Each state will get 1 representative for every 40,000 residents. For simplicity we will ignore any remainders.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5813">Consider this country with 4 states. The rules for the number of senators and electors are the same as the U.S. government. Each state will get 1 representative for every 40,000 residents. For simplicity we will ignore any remainders.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -331,8 +315,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<ol id="p-5814" class="lower-alpha">
+</table></div></div></div> <ol id="p-5814" class="lower-alpha">
 <li id="li-2589"><p id="p-5815">Determine the number of electors for each state and the total for the country.</p></li>
 <li id="li-2590"><p id="p-5816">How many electoral votes are needed to win the presidential election?</p></li>
 <li id="li-2591"><p id="p-5817">Determine which candidate wins the popular vote and the electoral college vote.</p></li>
@@ -341,7 +324,7 @@ true);
 <li id="li-2594"><p id="p-5820">What is the smallest percentage of the population that you can win the Electoral College with?</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-512" id="solution-512"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-512"><div class="solution solution-like"><ol id="p-5821" class="lower-alpha">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-512" id="solution-512"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-512"><div class="solution solution-like"><ol id="p-5821" class="lower-alpha">
 <li id="li-2595">
 <p id="p-5822">To find the number of electors for each state, we first divide each state population by 40,000 to determine the number of representatives they will have. We will drop the decimal remainders, similar to Hamilton’s method.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
@@ -758,8 +741,7 @@ true);
 <article class="example example-like" id="example-153"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.6</span><span class="period">.</span>
 </h4>
-<p id="p-5852">Using the same fictional country, use the table below to calculate the electoral power of each state.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5852">Using the same fictional country, use the table below to calculate the electoral power of each state.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -800,10 +782,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div>
-<p id="p-5853">First, we fill in the number of representatives, senators and electoral votes for each state that we found earlier. Then we will calculate the number of electoral votes per 40,000 people.</p>
-<p id="p-5854">To do that, divide the number of electors by the number of representatives, since they each represent approximately 40,000 people. The results are shown in the table below. Note this is approximate because we cut off the decimal remainders when calculating the number of representatives.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5853">First, we fill in the number of representatives, senators and electoral votes for each state that we found earlier. Then we will calculate the number of electoral votes per 40,000 people.</p> <p id="p-5854">To do that, divide the number of electors by the number of representatives, since they each represent approximately 40,000 people. The results are shown in the table below. Note this is approximate because we cut off the decimal remainders when calculating the number of representatives.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -844,14 +823,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines">23</td>
 <td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(23\div21 \approx 1.10\)</span></td>
 </tr>
-</table></div></div></div>
-<p id="p-5855">Are you surprised to see that the smallest states have the highest electoral power? That is part of the design of the electoral college. The founders from small states were concerned that their votes would not matter, so every state gets 2 senators added to the number of representatives. For a state with few representatives, those 2 extra electoral votes make a big difference. For a large states, the extra 2 electoral votes don’t make a very big difference.</p>
-<p id="p-5856">You may have noticed a pattern when dividing to find the electoral power. Each time we divided the number of electoral votes by that number minus two. We can write that pattern as <span class="process-math">\(\frac{n}{n-2}\text{.}\)</span> Using GeoGebra to graph that pattern this is what we see.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral1.png" class="contained" alt="A cartesian coordinate graph with number of electors on the x-axis and electoral power on the y-axis. The graph shows the maximum electoral power of 3 when there are 3 electors and an exponential decay as the number of electors goes up. With 4 electors the electoral power is 2, with 5 electors the electoral power is about 1.67 and the pattern levels off at an electoral power just over 1.0 as the number of electors increases."></div></div></div>
-<p id="p-5857">The minimum number of electors is three, since each state gets at least one representative in the apportionment process. The smallest states and Washington, D.C. have 3 electors and the greatest electoral power on the left side of the graph. The largest states like California, Florida and Texas have the least electoral power on the right side of the graph.</p>
-<p id="p-5858">Let’s say instead each state had equal electoral power by removing the 2 extra electoral votes or by using the popular vote. Then the graph would look like this.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral2.png" class="contained" alt="A cartesian coordinate graph with the same axes as the previous graph. This time the electoral power is constant with an electoral power of 1 for every number of electors."></div></div></div>
-<p id="p-5859">Now that we have studied the popular vote, the Electoral College and electoral power, we leave it up to you to choose which method you think is best.</p></article></section><section class="exercises" id="exercises-19"><h3 class="heading hide-type">
+</table></div></div></div> <p id="p-5855">Are you surprised to see that the smallest states have the highest electoral power? That is part of the design of the electoral college. The founders from small states were concerned that their votes would not matter, so every state gets 2 senators added to the number of representatives. For a state with few representatives, those 2 extra electoral votes make a big difference. For a large states, the extra 2 electoral votes don’t make a very big difference.</p> <p id="p-5856">You may have noticed a pattern when dividing to find the electoral power. Each time we divided the number of electoral votes by that number minus two. We can write that pattern as <span class="process-math">\(\frac{n}{n-2}\text{.}\)</span> Using GeoGebra to graph that pattern this is what we see.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral1.png" class="contained" alt="A cartesian coordinate graph with number of electors on the x-axis and electoral power on the y-axis. The graph shows the maximum electoral power of 3 when there are 3 electors and an exponential decay as the number of electors goes up. With 4 electors the electoral power is 2, with 5 electors the electoral power is about 1.67 and the pattern levels off at an electoral power just over 1.0 as the number of electors increases."></div></div></div> <p id="p-5857">The minimum number of electors is three, since each state gets at least one representative in the apportionment process. The smallest states and Washington, D.C. have 3 electors and the greatest electoral power on the left side of the graph. The largest states like California, Florida and Texas have the least electoral power on the right side of the graph.</p> <p id="p-5858">Let’s say instead each state had equal electoral power by removing the 2 extra electoral votes or by using the popular vote. Then the graph would look like this.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral2.png" class="contained" alt="A cartesian coordinate graph with the same axes as the previous graph. This time the electoral power is constant with an electoral power of 1 for every number of electors."></div></div></div> <p id="p-5859">Now that we have studied the popular vote, the Electoral College and electoral power, we leave it up to you to choose which method you think is best.</p></article></section><section class="exercises" id="exercises-19"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber">6.3.4</span> <span class="title">Exercises</span>
 </h3>
 <article class="exercise exercise-like" id="exercise-832"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
@@ -863,16 +835,14 @@ true);
 <p id="p-5870">What is the length of a term of a U.S. Representative?</p></article><div class="exercisegroup" id="exercisegroup-88">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-136">
-<p id="p-5872">In each fictional country in problems 7-10, use the rules of the U.S. government to complete the table and determine the following:</p>
-<ol id="p-5873" class="lower-alpha">
+<p id="p-5872">In each fictional country in problems 7-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5873" class="lower-alpha">
 <li id="li-2601"><p id="p-5874">The total number of electors in the state.</p></li>
 <li id="li-2602"><p id="p-5875">The number of electoral votes needed for a majority and win a presidential election.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-838"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-5876">In this country there is one representative for every 50,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5876">In this country there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -909,8 +879,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-839"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-5880">In this country there is one representative for every 75,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5880">In this country there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -947,8 +916,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-840"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-5884">In this country there is one representative for every 40,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5884">In this country there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -992,8 +960,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-841"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
-<p id="p-5888">In this country there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5888">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1042,16 +1009,14 @@ true);
 <div class="exercisegroup" id="exercisegroup-89">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-137">
-<p id="p-5892">In each fictional country in problems 11-14, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p>
-<ol id="p-5893" class="lower-alpha">
+<p id="p-5892">In each fictional country in problems 11-14, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-5893" class="lower-alpha">
 <li id="li-2611"><p id="p-5894">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
 <li id="li-2612"><p id="p-5895">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-842"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-5896">In this country from problem 7, there is one representative for every 50,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5896">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1088,8 +1053,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-843"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
-<p id="p-5900">In this country from problem 8, there is one representative for every 75,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5900">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1126,8 +1090,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-844"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-5904">In this country from problem 9, there is one representative for every 40,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5904">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1171,8 +1134,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-845"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
-<p id="p-5908">In this country from problem 10, there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5908">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1221,16 +1183,14 @@ true);
 <div class="exercisegroup" id="exercisegroup-90">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
 <div class="introduction" id="introduction-138">
-<p id="p-5912">In each fictional country in problems 15-18, use the rules of the U.S. government to complete the table and determine the following:</p>
-<ol id="p-5913" class="lower-alpha">
+<p id="p-5912">In each fictional country in problems 15-18, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5913" class="lower-alpha">
 <li id="li-2621"><p id="p-5914">The state that has the most electoral power</p></li>
 <li id="li-2622"><p id="p-5915">The state that has the least electoral power</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-846"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
-<p id="p-5916">In this country from problem 7, there is one representative for every 50,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5916">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1264,8 +1224,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-847"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-5920">In this country from problem 8, there is one representative for every 75,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5920">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1299,8 +1258,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-848"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
-<p id="p-5924">In this country from problem 9, there is one representative for every 40,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5924">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1342,8 +1300,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-849"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
-<p id="p-5928">In this country from problem 10, there is one representative for every 60,000 residents.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5928">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:56:13-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -259,19 +248,13 @@ true);
 <article class="example example-like" id="mean18_and_sd4"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.2</span><span class="period">.</span>
 </h4>
-<p id="p-3192">The test scores on a math quiz are approximately normally distributed with a mean of 18 points and a standard deviation of 4 points. Draw the Normal distribution and label the axis using the standard deviation.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:29%;margin-right:29%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_6/mean18_sd4_pic2.png" class="contained" alt="A normal curve with the mean of 18 points labeled in the middle. To the right, 3 standard deviations are labeled 22, 26 and 30 points. To the left 3 standard deviations are labeled 14, 10 and 6 points."></div></div></div>
-<p id="p-3193">We start by drawing a Normal curve and the horizontal axis. Then we place the mean of 18 points in the center of the graph and make 3 marks on each side, ending where the curve gets close to the axis.</p>
-<p id="p-3194">Each mark represents one standard deviation. As we move to the right of the mean we will add the standard deviation of 4 points to get 22, 26 and 30 points. These are the values that are 1, 2 and 3 standard deviations above the mean.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-156">
+<p id="p-3192">The test scores on a math quiz are approximately normally distributed with a mean of 18 points and a standard deviation of 4 points. Draw the Normal distribution and label the axis using the standard deviation.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:29%;margin-right:29%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_6/mean18_sd4_pic2.png" class="contained" alt="A normal curve with the mean of 18 points labeled in the middle. To the right, 3 standard deviations are labeled 22, 26 and 30 points. To the left 3 standard deviations are labeled 14, 10 and 6 points."></div></div></div> <p id="p-3193">We start by drawing a Normal curve and the horizontal axis. Then we place the mean of 18 points in the center of the graph and make 3 marks on each side, ending where the curve gets close to the axis.</p> <p id="p-3194">Each mark represents one standard deviation. As we move to the right of the mean we will add the standard deviation of 4 points to get 22, 26 and 30 points. These are the values that are 1, 2 and 3 standard deviations above the mean.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-156">
 \begin{align*}
 \text{Mean} + 1 \text{ standard deviation} \amp= 18 + 4 = 22\\
 \text{Mean} + 2 \text{ standard deviations} \amp= 18 + 2(4) = 26\\
 \text{Mean} + 3 \text{ standard deviations} \amp= 18 + 3(4) = 30
 \end{align*}
-</div>
-<p id="p-3196">Then we move to the left of the mean we subtract the standard deviation of 4 from 18 to get 14, 10 and 6 points. These are the values that are 1, 2 and 3 standard deviations below the mean.</p>
-<div class="displaymath process-math" data-contains-math-knowls="" id="md-157">
+</div> <p id="p-3196">Then we move to the left of the mean we subtract the standard deviation of 4 from 18 to get 14, 10 and 6 points. These are the values that are 1, 2 and 3 standard deviations below the mean.</p> <div class="displaymath process-math" data-contains-math-knowls="" id="md-157">
 \begin{gather*}
 \text{Mean}-1 \text{ standard deviation} = 18-4 = 14\\
 \text{Mean}-2 \text{ standard deviations} = 18-2(4) = 10\\
@@ -304,14 +287,14 @@ true);
 <li id="li-1248">
 <p id="p-3206">Use the Empirical Rule to complete following statements.</p>
 <ul class="disc">
-<li id="li-1249"><p id="p-3207">Approximately 68% of black labs weigh between <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
-<li id="li-1250"><p id="p-3208">Approximately 95% of black lab dogs weigh between <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
-<li id="li-1251"><p id="p-3209">Approximately 99.7% of black lab dogs weigh between <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
+<li id="li-1249"><p id="p-3207">Approximately 68% of black labs weigh between <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
+<li id="li-1250"><p id="p-3208">Approximately 95% of black lab dogs weigh between <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
+<li id="li-1251"><p id="p-3209">Approximately 99.7% of black lab dogs weigh between <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> pounds.</p></li>
 </ul>
 </li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-347" id="solution-347"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-347"><div class="solution solution-like"><ol id="p-3210" class="lower-alpha">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-347" id="solution-347"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-347"><div class="solution solution-like"><ol id="p-3210" class="lower-alpha">
 <li id="li-1252"><p id="p-3211">We start by drawing the Normal curve and the horizontal axis, labeling 3 standard deviations on each side. <div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_6/mean78_sd7_pic.png" class="contained" alt="A normal curve labeled with 57, 64, 71, 78, 85, 92 and 99 pounds. The title of the graph is weights of black lab dogs in points."></div></div></div></p></li>
 <li id="li-1253"><ul id="p-3212" class="disc">
 <li id="li-1254"><p id="p-3213">Approximately 68% of black labs weigh between 71 and 85 pounds.</p></li>
@@ -376,13 +359,11 @@ true);
 <article class="example example-like" id="example-100"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.4</span><span class="period">.</span>
 </h4>
-<p id="p-3223">For the quiz score data that are approximately normally distributed with a mean of 18 points and a standard deviation 4 points, use the 68-95-99.7% rule to calculate the following probabilities:</p>
-<ol id="p-3224" class="lower-alpha">
+<p id="p-3223">For the quiz score data that are approximately normally distributed with a mean of 18 points and a standard deviation 4 points, use the 68-95-99.7% rule to calculate the following probabilities:</p> <ol id="p-3224" class="lower-alpha">
 <li id="li-1257"><p id="p-3225">What percentage of students earned scores between 22 and 30 points?</p></li>
 <li id="li-1258"><p id="p-3226">What percentage of students earned scores above 14 points?</p></li>
 <li id="li-1259"><p id="p-3227">What percentage of students earned a score below 14 or above 22 points?</p></li>
-</ol>
-<p id="p-3228">Solution</p>
+</ol> <p id="p-3228">Solution</p>
 <ol class="lower-alpha">
 <li id="li-1260">
 <p id="p-3229">Using the diagram above, we add the two segments between 22 and 30 to get</p>
@@ -421,14 +402,13 @@ true);
 <article class="example example-like" id="example-101"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.5</span><span class="period">.</span>
 </h4>
-<p id="p-3233">Continuing with the black lab dogs whose weights are approximately normally distributed with a mean of 78 pounds and a standard deviation 7 pounds, use the 68-95-99.7% rule to calculate the following probabilities:</p>
-<ol id="p-3234" class="lower-alpha">
+<p id="p-3233">Continuing with the black lab dogs whose weights are approximately normally distributed with a mean of 78 pounds and a standard deviation 7 pounds, use the 68-95-99.7% rule to calculate the following probabilities:</p> <ol id="p-3234" class="lower-alpha">
 <li id="li-1263"><p id="p-3235">What percentage of black labs weigh between 78 and 92 pounds?</p></li>
 <li id="li-1264"><p id="p-3236">What percentage of black labs weigh below 71 points?</p></li>
 <li id="li-1265"><p id="p-3237">What percentage of black labs weigh below 64 or above 78 points?</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-348" id="solution-348"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-348"><div class="solution solution-like">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image" data-refid="hk-solution-348" id="solution-348"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-348"><div class="solution solution-like">
 <p id="p-3238">First we need to draw this distribution and label three standard deviations on each side of the mean to determine where these weights fall. That will tell us which segments to add up. Here is our drawing of this distribution from before. <div class="sidebyside"><div class="sbsrow" style="margin-left:27.5%;margin-right:27.5%;"><div class="sbspanel top" style="width:100%;"><img src="external/statistics/3_6/mean78_sd7_pic.png" class="contained" alt="The previous normal curve of weights of black lab dogs in pounds. The scale at the bottom is 57, 64, 71, 78, 85, 92, 99 pounds."></div></div></div></p>
 <ol class="lower-alpha">
 <li id="li-1266">
@@ -507,14 +487,12 @@ P(X\leq \text{value})\text{.}
 <article class="example example-like" id="example-102"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.6</span><span class="period">.</span>
 </h4>
-<p id="p-3247">For the quiz score data that are approximately normally distributed with a mean of 18 points and a standard deviation 4 points, use technology to calculate the following probabilities:</p>
-<ol id="p-3248" class="lower-alpha">
+<p id="p-3247">For the quiz score data that are approximately normally distributed with a mean of 18 points and a standard deviation 4 points, use technology to calculate the following probabilities:</p> <ol id="p-3248" class="lower-alpha">
 <li id="li-1269"><p id="p-3249">What percentage of students earned a score below 12 points?</p></li>
 <li id="li-1270"><p id="p-3250">What percentage of students earned scores above 27 points?</p></li>
 <li id="li-1271"><p id="p-3251">What percentage of students earned scores between 21 and 25 points?</p></li>
 <li id="li-1272"><p id="p-3252">What percentage of students earned scores less than 11 or more than 23?</p></li>
-</ol>
-<p id="p-3253">Solution</p>
+</ol> <p id="p-3253">Solution</p>
 <ol class="lower-alpha">
 <li id="li-1273"><div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
 <div class="sbspanel top" style="width:41.2371134020619%;">
@@ -548,8 +526,7 @@ P(X\leq \text{value})\text{.}
 <article class="example example-like" id="example-103"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.7</span><span class="period">.</span>
 </h4>
-<p id="p-3263">Continuing with the black lab dogs whose weights are approximately normally distributed with a mean of 78 pounds and a standard deviation 7 pounds, use technology to calculate the following probabilities:</p>
-<ol id="p-3264" class="lower-alpha">
+<p id="p-3263">Continuing with the black lab dogs whose weights are approximately normally distributed with a mean of 78 pounds and a standard deviation 7 pounds, use technology to calculate the following probabilities:</p> <ol id="p-3264" class="lower-alpha">
 <li id="li-1277"><p id="p-3265">The probability that a randomly chosen black lab weighs at least 95 pounds.</p></li>
 <li id="li-1278"><p id="p-3266">The probability that a randomly chosen black lab weighs less than 72 pounds.</p></li>
 <li id="li-1279"><p id="p-3267">The probability that a black lab weighs less than 65 pounds or greater than 86 pounds.</p></li>
@@ -582,8 +559,7 @@ Z=\frac{\text{data value } - \text{ mean}}{\text{standard deviation}}
 <article class="example example-like" id="example-104"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">4.8.8</span><span class="period">.</span>
 </h4>
-<p id="p-3281">Let's say a student scored 27 points on the math quiz where the scores were approximately normally distributed with a mean of 18 points and a standard deviation of 4 points. We know from our earlier drawing that they scored between 2 and 3 standard deviations above the mean. Let's calculate the Z-score to determine exactly how many standard deviations from the mean they scored.</p>
-<p id="p-3282">First we take the data value and subtract the mean of 18, then we divide by the standard deviation of 4 points:</p>
+<p id="p-3281">Let's say a student scored 27 points on the math quiz where the scores were approximately normally distributed with a mean of 18 points and a standard deviation of 4 points. We know from our earlier drawing that they scored between 2 and 3 standard deviations above the mean. Let's calculate the Z-score to determine exactly how many standard deviations from the mean they scored.</p> <p id="p-3282">First we take the data value and subtract the mean of 18, then we divide by the standard deviation of 4 points:</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 Z=\frac{27-18}{4}=\frac{9}{4}=2.25\text{ standard deviations}\text{.}
@@ -732,7 +708,7 @@ Z=\frac{15-18}{4}=\frac{(-3)}{4}=-0.75\text{ standard deviations}\text{.}
 </div>
 <article class="exercise exercise-like" id="exercise-461"><h4 class="heading"><span class="codenumber">23<span class="period">.</span></span></h4>
 <p id="p-3407">What does a z-score measure?</p></article><article class="exercise exercise-like" id="exercise-462"><h4 class="heading"><span class="codenumber">24<span class="period">.</span></span></h4>
-<p id="p-3409">Consider the Standard Normal distribution. The mean is always <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and the standard deviation is always <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span>.</p></article><article class="exercise exercise-like" id="exercise-463"><h4 class="heading"><span class="codenumber">25<span class="period">.</span></span></h4>
+<p id="p-3409">Consider the Standard Normal distribution. The mean is always <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> and the standard deviation is always <span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span>.</p></article><article class="exercise exercise-like" id="exercise-463"><h4 class="heading"><span class="codenumber">25<span class="period">.</span></span></h4>
 <p id="p-3411">For the distribution in problem 15, calculate the Z-score for a data value of 6.2 inches.</p></article><article class="exercise exercise-like" id="exercise-464"><h4 class="heading"><span class="codenumber">26<span class="period">.</span></span></h4>
 <p id="p-3413">For the distribution in problem 16, calculate the Z-score for a data value of 32 cm.</p></article><article class="exercise exercise-like" id="exercise-465"><h4 class="heading"><span class="codenumber">27<span class="period">.</span></span></h4>
 <p id="p-3415">For the distribution in problem 17, calculate the Z-score for a data value of $5.</p></article><article class="exercise exercise-like" id="exercise-466"><h4 class="heading"><span class="codenumber">28<span class="period">.</span></span></h4>
@@ -741,8 +717,8 @@ Z=\frac{15-18}{4}=\frac{(-3)}{4}=-0.75\text{ standard deviations}\text{.}
 <p id="p-3421">Scores on a certain quiz are normally distributed. In sample of 25 students the mean score was 14 points with a standard error estimate of 2 points. Calculate the margin of error and the 95% confidence intervals. Interpret Confidence interval.</p></article><article class="exercise exercise-like" id="exercise-469"><h4 class="heading"><span class="codenumber">31<span class="period">.</span></span></h4>
 <p id="p-3423">A researcher works on a study and found the sample mean to be 84.5 cm and the standard error of estimate to be 0.11 cm. What is the margin of error for the 95% confidence level? What is the 95% confidence interval for the true mean? Interpret the results.</p></article><article class="exercise exercise-like" id="exercise-470"><h4 class="heading"><span class="codenumber">32<span class="period">.</span></span></h4>
 <p id="p-3425">A researcher works on a study and found that the sample mean to be $35.4 and the standard error of estimate to be $0.75. What is the margin of error for the 95% confidence level? What is the 95% confidence interval for the true mean? Interpret the results.</p></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-61"><div class="fn">All of the Normal drawings in this section were created with the online probability calculator at <a class="external" href="http://onlinestatbook.com/2/calculators/normal_dist.html" target="_blank">onlinestatbook.com/2/calculators/normal_dist.html</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-62" id="fn-62"><sup> 62 </sup></a> which is in the public domain.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-62"><div class="fn"><code class="code-inline tex2jax_ignore">http://onlinestatbook.com/2/calculators/normal_dist.html</code></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-63"><div class="fn"><code class="code-inline tex2jax_ignore">http://onlinestatbook.com/2/calculators/normal_dist.html</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-62"><div class="fn"><code class="code-inline tex2jax_ignore">onlinestatbook.com/2/calculators/normal_dist.html</code></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-63"><div class="fn"><code class="code-inline tex2jax_ignore">onlinestatbook.com/2/calculators/normal_dist.html</code></div></div>
 </div></main>
 </div>
 </body>

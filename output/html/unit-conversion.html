@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:55:01-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -226,11 +215,7 @@ true);
 </h2>
 <article class="objectives goal-like" id="objectives-6"><h3 class="heading"><span class="type">Objectives</span></h3>
 <ul class="disc"><li id="li-73"><p id="p-derived-li-73">4. Use dimensional analysis to convert units, rates, and ratios from any given units to other units. Include conversions among and between U.S. and metric units using a variety of metric prefixes.</p></li></ul></article><section class="introduction" id="introduction-21"><h3 class="heading">Introduction to Dimensional Analysis.<span></span>
-</h3>
-<p id="p-85">Most numbers used in the real world have units attached, which clarify what the number is referring to. Examples of units are gallons, dollars, meters, miles, and pounds. Some units are for geometric measurements such as area or volume. Many disciplines such as medicine or engineering have special units for use in their field.</p>
-<p id="p-86">This lesson will focus on a valuable strategy for converting from one set of units to another. This skill is called dimensional analysis.It is also known as unit analysis, unit-factor conversion, and the factor-label method.</p>
-<p id="p-87">The dimensional analysis strategy is based on three familiar ideas:</p>
-<ul class="disc">
+</h3> <p id="p-85">Most numbers used in the real world have units attached, which clarify what the number is referring to. Examples of units are gallons, dollars, meters, miles, and pounds. Some units are for geometric measurements such as area or volume. Many disciplines such as medicine or engineering have special units for use in their field.</p> <p id="p-86">This lesson will focus on a valuable strategy for converting from one set of units to another. This skill is called dimensional analysis.It is also known as unit analysis, unit-factor conversion, and the factor-label method.</p> <p id="p-87">The dimensional analysis strategy is based on three familiar ideas:</p> <ul class="disc">
 <li id="li-74"><p id="p-derived-li-74">A fraction with equivalent expressions in the numerator and the denominator is equal to the number one. Examples:<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 \frac{3a}{3a}=1 \hspace{1in} \frac{2+5}{7}=1 \hspace{1in} \frac{7\text{ ft}^3}{7\text{ ft}^3} = 1
@@ -250,29 +235,21 @@ true);
 \frac{3\text{g}}{7\text{m}} \cdot \frac{1\text{m}}{2} = \frac{3\text{g}}{14}
 \end{equation*}
 </div></p></li>
-</ul>
-<p id="p-88">The key to unit conversions with dimensional analysis is multiplying by the number one in the form of a conversion fraction. Conversion fractions are fractions with different units in the numerator and denominator but in which the value of the numerator equals the value of the denominator. Examples:</p>
-<ul class="disc">
+</ul> <p id="p-88">The key to unit conversions with dimensional analysis is multiplying by the number one in the form of a conversion fraction. Conversion fractions are fractions with different units in the numerator and denominator but in which the value of the numerator equals the value of the denominator. Examples:</p> <ul class="disc">
 <li id="li-77"><p id="p-derived-li-77">Since 3 feet is equal to 1 yard, the fraction <span class="process-math">\(\dfrac{3 \text{ feet}}{1 \text{ yard}}=1\text{.}\)</span></p></li>
 <li id="li-78"><p id="p-derived-li-78">Since 1 hour equals 60 minutes, the fraction <span class="process-math">\(\dfrac{60 \text{ minutes}}{1 \text{ hour}}=1\text{.}\)</span></p></li>
-</ul>
-<p id="p-89">To use the dimensional analysis method:</p>
-<p id="p-90">Start with the original quantity and multiply it by the number 1 written as a conversion fraction of two units so that the units you <em class="emphasis">don't</em> want can divide out of the numerator and denominator.</p>
-<article class="example example-like" id="example-unit-conversion-1"><h4 class="heading">
+</ul> <p id="p-89">To use the dimensional analysis method:</p> <p id="p-90">Start with the original quantity and multiply it by the number 1 written as a conversion fraction of two units so that the units you <em class="emphasis">don't</em> want can divide out of the numerator and denominator.</p> <article class="example example-like" id="example-unit-conversion-1"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 300 feet to yards.</span>
-</h4>
-<ul class="disc">
+</h4> <ul class="disc">
 <li id="li-79"><p id="p-derived-li-79">Start with 300 feet</p></li>
 <li id="li-80"><p id="p-derived-li-80">Multiply by a conversion fraction with feet in the denominator (so that the “feet” divides out of both numerator and denominator), and in the numerator you want to have yards<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
 300\text{ feet} \cdot \left( \frac{1\text{ yard}}{3 \text{ feet}}\right) = 300\cancel{\text{ feet}} \cdot \left( \frac{1\text{ yard}}{3 \cancel{\text{ feet}}}\right) = 100 \text{ yards}
 \end{equation*}
 </div></p></li>
-</ul></article><article class="example example-like" id="example-unit-conversion-2"><h4 class="heading">
+</ul></article> <article class="example example-like" id="example-unit-conversion-2"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 30 ounces of weight to the metric unit of grams.</span>
-</h4>
-<p id="p-91">Determine conversion factors from the Unit Equivalencies table below, in the part for weight and mass.</p>
-<ul class="disc">
+</h4> <p id="p-91">Determine conversion factors from the Unit Equivalencies table below, in the part for weight and mass.</p> <ul class="disc">
 <li id="li-81"><p id="p-derived-li-81">Start with 30 ounces.</p></li>
 <li id="li-82"><p id="p-derived-li-82">Multiply by a conversion fraction with ounces in the denominator, and you'd like grams in the numerator. However, in the equivalencies table, it doesn't say how many ounces equals how many grams. But it does give equivalencies for ounces to pounds and then pounds to grams. So we use two conversion fractions.<div class="displaymath process-math" data-contains-math-knowls="" id="md-2">
 \begin{align*}
@@ -282,7 +259,7 @@ true);
 \amp=850.5 \text{ grams}
 \end{align*}
 </div></p></li>
-</ul></article><p id="p-92">To create conversion fractions equal to 1, you must know which units are equivalent. The table on the below provides some unit equivalencies.</p></section><section class="subsection" id="subsection-2"><h3 class="heading hide-type">
+</ul></article> <p id="p-92">To create conversion fractions equal to 1, you must know which units are equivalent. The table on the below provides some unit equivalencies.</p></section><section class="subsection" id="subsection-2"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.4.1</span> <span class="title">Equivalences Table</span>
 </h3>
 <p id="p-93">Notice the structure of the table:</p>
@@ -454,17 +431,13 @@ true);
 <p id="p-137">WARNING: Watching videos can give a false sense of knowledge.  There is no substitute for actually trying to solve problems</p>
 <article class="example example-like" id="example-3"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">Video: Converting Units with Conversion Factors.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-1" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/7N0lRJLwpPI?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-4"><h4 class="heading">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-1" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/7N0lRJLwpPI?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-4"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">Video: American Unit Conversion.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-2" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/ozSnWr4do5o?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-5"><h4 class="heading">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-2" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/ozSnWr4do5o?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-5"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.7</span><span class="period">.</span><span class="space"> </span><span class="title">Video: Metric Unit Conversion.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-3" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/cMFwpxkIFMY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-6"><h4 class="heading">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-3" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/cMFwpxkIFMY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-6"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Video: American and Metric Conversions.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-4" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/sn8Y7qpYLCY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="subsection" id="subsection-5"><h3 class="heading hide-type">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-4" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/sn8Y7qpYLCY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="subsection" id="subsection-5"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.4.4</span> <span class="title">Rates</span>
 </h3>
 <p id="p-138">A ratio (that is, a fraction) that includes a unit in the numerator that is different from the unit in its denominator is typically called a “rate”.  Rates show how one variable changes for each change in the second variable.  For example, a rate of speed is <span class="process-math">\(\dfrac{35\text{ mi}}{\text{hr}}\)</span> which can be read as 35 miles per hour.</p>
@@ -508,11 +481,9 @@ true);
 </ul></div></div>
 </div></article><article class="example example-like" id="example-9"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Video: Converting Rates.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-5" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/x2UrGWM4IxY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-10"><h4 class="heading">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-5" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/x2UrGWM4IxY?&amp;modestbranding=1&amp;rel=0"></iframe></div></article><article class="example example-like" id="example-10"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.12</span><span class="period">.</span><span class="space"> </span><span class="title">Video: Convert Mile Per Hour to Feet Per Second.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-6" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/GPRwWrAy9WQ?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="subsection" id="subsection-6"><h3 class="heading hide-type">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-6" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/GPRwWrAy9WQ?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="subsection" id="subsection-6"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">2.4.5</span> <span class="title">Using Dimensional Analysis for Area and Volume units</span>
 </h3>
 <p id="p-144">There are two methods of converting area and volume units:</p>
@@ -522,8 +493,7 @@ true);
 </ul>
 <article class="example example-like" id="example-convert-4-square-feet"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.13</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 4 square feet to inches.</span>
-</h4>
-<ul class="disc">
+</h4> <ul class="disc">
 <li id="li-95"><p id="p-derived-li-95">First write the question using symbols for the units:   Convert 4 ft<span class="process-math">\(^2\)</span>  to  in<span class="process-math">\(^2\text{.}\)</span></p></li>
 <li id="li-96"><p id="p-derived-li-96">As with other unit conversions, we want to multiply 4 ft<span class="process-math">\(^2\)</span>  by a conversion fraction with ft2  in the denominator and in2  in the numerator.  So we need to know how many ft<span class="process-math">\(^2\)</span>  equal how many in<span class="process-math">\(^2\text{.}\)</span>  You may not know this fact, which is fine because we can find it out from knowing the linear measurement equivalency that 1 ft = 12 in.  We will use that to find the area unit equivalency by squaring each side of the equation:<div class="displaymath process-math" data-contains-math-knowls="" id="md-3">
 \begin{align*}
@@ -543,8 +513,7 @@ true);
 </div></p></li>
 </ul></article><article class="example example-like" id="example-12"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 4 square feet to inches, again with the other method.</span>
-</h4>
-<ul class="disc">
+</h4> <ul class="disc">
 <li id="li-99"><p id="p-derived-li-99">First re-write in symbols:  Convert 4 ft<span class="process-math">\(^2\)</span>  to  in<span class="process-math">\(^2\text{.}\)</span></p></li>
 <li id="li-100">
 <p id="p-146">We want to multiply 4 ft<span class="process-math">\(^2\)</span>  by a conversion fraction with ft<span class="process-math">\(^2\)</span>  in the denominator and in<span class="process-math">\(^2\)</span>  in the numerator.  If we could find a conversion factor for feet in the denominator and inches in the numerator, then we could square that entire fraction so we’d end up with square units.  The linear measurement equivalency that 1 ft = 12 in.  So we’ll use square the fraction (12 in/1ft).</p>
@@ -556,8 +525,7 @@ true);
 </li>
 </ul></article><article class="example example-like" id="example-13"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.15</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 3,000,000 cubic centimeter to cubic meters..</span>
-</h4>
-<ul class="disc">
+</h4> <ul class="disc">
 <li id="li-101"><p id="p-derived-li-101">First write the question using symbols for the units:   Convert 4 ft<span class="process-math">\(^2\)</span>  to  in<span class="process-math">\(^2\text{.}\)</span></p></li>
 <li id="li-102"><p id="p-derived-li-102">We want to multiply 4 ft<span class="process-math">\(^2\)</span>  by a conversion fraction with ft<span class="process-math">\(^2\)</span>  in the denominator and in<span class="process-math">\(^2\)</span>  in the numerator.  If we could find a conversion factor for feet in the denominator and inches in the numerator, then we could square that entire fraction so we’d end up with square units.  The linear measurement equivalency that 1 ft = 12 in.  So we’ll use square the fraction (12 in/1ft).<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
@@ -566,8 +534,7 @@ true);
 </div></p></li>
 </ul></article><article class="example example-like" id="example-14"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.16</span><span class="period">.</span><span class="space"> </span><span class="title">Convert 3,000,000 cubic centimeter to cubic meters, again with the other method.</span>
-</h4>
-<ul class="disc">
+</h4> <ul class="disc">
 <li id="li-103"><p id="p-derived-li-103">First re-write in symbols:   convert  3,000,000 cm<span class="process-math">\(^3\)</span>  to m<span class="process-math">\(^3\text{.}\)</span></p></li>
 <li id="li-104"><p id="p-derived-li-104">Find a conversion fraction for cm in the denominator and m in the numerator, and then cube that fraction.  We know 1 m = 100 cm, so use the conversion fraction  (1m / 100 cm) and cube it.<div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
@@ -585,36 +552,31 @@ true);
 \end{align*}
 </div></article><article class="example example-like" id="example-16"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.4.18</span><span class="period">.</span><span class="space"> </span><span class="title">Video: Unit conversions with area and volume.</span>
-</h4>
-<div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-7" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/aFAk8JA4-d8?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="worksheet" id="worksheet-unit-conversion"><h3 class="heading hide-type">
+</h4> <div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-7" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed/aFAk8JA4-d8?&amp;modestbranding=1&amp;rel=0"></iframe></div></article></section><section class="worksheet" id="worksheet-unit-conversion"><h3 class="heading hide-type">
 <span class="type">Worksheet</span> <span class="codenumber">2.4.6</span> <span class="title">Unit Conversion Worksheet</span><div class="print-links">
 <a href="worksheet-unit-conversion-a4.html" class="a4">A4</a><a href="worksheet-unit-conversion-letter.html" class="us">US</a>
 </div>
 </h3>
 <section class="onepage" id="worksheet-unit-conversion-p1"><article class="exercise exercise-like" id="exercise-height-to-meters"><h4 class="heading">
 <span class="codenumber">1<span class="period">.</span></span><span class="space"> </span><span class="title">Height.</span>
-</h4>In the US we measure height in feet and inches.  In other parts of the world height is measured in meters.  Use dimensional analysis convert the height of a person who is 5 feet, 10 inches into meters.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-weight-to-kilograms"><h4 class="heading">
+</h4>In the US we measure height in feet and inches.  In other parts of the world height is measured in meters.  Use dimensional analysis convert the height of a person who is 5 feet, 10 inches into meters.<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-weight-to-kilograms"><h4 class="heading">
 <span class="codenumber">2<span class="period">.</span></span><span class="space"> </span><span class="title">Weight.</span>
-</h4>In the US we measure weight in pounds.  In other parts of the world weight is measured in kilograms.  Use dimensional analysis convert the weight of a person who is 180 pounds into kilograms.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-pesticide"><h4 class="heading">
+</h4>In the US we measure weight in pounds.  In other parts of the world weight is measured in kilograms.  Use dimensional analysis convert the weight of a person who is 180 pounds into kilograms.<div class="workspace" data-space="1in"></div></article> <article class="exercise exercise-like" id="exercise-pesticide"><h4 class="heading">
 <span class="codenumber">3<span class="period">.</span></span><span class="space"> </span><span class="title">Pesticide.</span>
 </h4>A pesticide is supposed to be diluted in water at the rate of 2 pounds per gallon. Use dimensional analysis convert this to ounces per quart.<div class="workspace" data-space="1in"></div></article></section><section class="onepage" id="worksheet-unit-conversion-p2"><div class="exercisegroup" id="exercisegroup-17">
 <h4 class="heading"><span class="title">Problem Situation: Texting While Driving.</span></h4>
 <div class="introduction" id="introduction-22">Indiana state law says: <blockquote class="blockquote" id="blockquote-19">
-<p id="p-147">Except as provided in subsections (b) and (c), a person may not hold or use a telecommunications device while operating a moving motor vehicle.</p>
-<p id="p-148">(b) A telecommunications device may be used in conjunction with hands free or voice operated technology.</p>
-<p id="p-149">(c) A telecommunications device may be used or held to call 911 to report a bona fide emergency.</p>
+<p id="p-147">Except as provided in subsections (b) and (c), a person may not hold or use a telecommunications device while operating a moving motor vehicle.</p> <p id="p-148">(b) A telecommunications device may be used in conjunction with hands free or voice operated technology.</p> <p id="p-149">(c) A telecommunications device may be used or held to call 911 to report a bona fide emergency.</p>
 </blockquote> Is texting while driving actually a problem?  A person might spend only 4 seconds to answer a text.  How far would the car go in that time?  It depends on the car’s speed.</div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-texting-driving-1"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>Suppose a car is traveling at 35 miles per hour.  Before calculating, given an <em class="emphasis">educated guess</em> for the distance, in feet, the car will travel in 4 seconds.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-2"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>Suppose a car is traveling at 35 miles per hour.  Use dimensional analysis to calculate the distance, in feet, the car will travel in 4 seconds.<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-3"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>If you are driving in Canada, following the posted speed limit of 80 km/hr, how many feet would you go during the 4 seconds spent texting?<div class="workspace" data-space="1in"></div></article><article class="exercise exercise-like" id="exercise-texting-driving-4"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-150">Suppose the typical texting response time is between 2 seconds and 6 seconds.  That could be written as a compound inequality for time t as:<span class="process-math">\(2\leq t \leq6\)</span> seconds.</p>
-<p id="p-151">If a car is travelling at 35 mph what is the typical distance a car would travel during a typical texting response?</p>
+<p id="p-150">Suppose the typical texting response time is between 2 seconds and 6 seconds.  That could be written as a compound inequality for time t as:<span class="process-math">\(2\leq t \leq6\)</span> seconds.</p> <p id="p-151">If a car is travelling at 35 mph what is the typical distance a car would travel during a typical texting response?</p>
 <div class="workspace" data-space="1in"></div></article>
 </div>
 </div></section><section class="onepage" id="worksheet-unit-conversion-p3"><div class="exercisegroup" id="exercisegroup-18">
 <h4 class="heading"><span class="title">Problem Situation 2:  Length, Area, Volume.</span></h4>
 <div class="introduction" id="introduction-23">
-<p id="p-152">We can think of our physical world as having 3 dimensions.  A length or distance is one dimension.  An area is 2 dimensions and a volume is 3 dimensions.  Examples of the type of units used for each of these are shown in the table of unit equivalencies.</p>
-<p id="p-153">While helping a friend remodel their house in Canada, you realize you brought your American tape measure.  You measure the living room to be 12 feet wide and 14 feet 6 inches long.</p>
+<p id="p-152">We can think of our physical world as having 3 dimensions.  A length or distance is one dimension.  An area is 2 dimensions and a volume is 3 dimensions.  Examples of the type of units used for each of these are shown in the table of unit equivalencies.</p> <p id="p-153">While helping a friend remodel their house in Canada, you realize you brought your American tape measure.  You measure the living room to be 12 feet wide and 14 feet 6 inches long.</p>
 </div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-area-volume-1"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>

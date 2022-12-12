@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:54:50-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left standalone worksheet letter">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -227,17 +216,14 @@ true);
 </div>
 </h3>
 <section class="onepage" id="worksheet-time-p1"><article class="objectives goal-like" id="objectives-1"><h4 class="heading"><span class="type">Objectives</span></h4>
-<ul class="disc"><li id="li-1"><p id="p-derived-li-1">The purpose of this handout is to provide some concrete information for students on time management.</p></li></ul></article><div class="introduction" id="introduction-3">
-<p id="p-8">Students who make a decision to carefully schedule their time are <em class="emphasis">not</em> ones who have decided to spend all their time studying and doing nothing else.  Instead, they usually have decided to efficiently use the time they have to spend studying and to "de-sensitize" themselves to the many distractions that are commonly occurring.</p>
-<p id="p-9">What is “desensitizing?”  It means reducing the day-to-day and hour-to-hour decisions that you have to make about how to spend your time. Decisions such as whether or not you’re going to spend the next hour studying, or whether you will or will not go to the math lab at the library to get work done today, or whether you will or will not go to a movie on impulse, or whether or not to use an hour between classes to get next week's homework assignment out of the way. If you have a plan for how to spend your time, then those decisions are already made for you!</p>
-<p id="p-10">Hence, a reasonable, well-thought-out time schedule can make decisions for you, thus desensitizing you to momentary distractions. And, an hour of study in one course is not disturbed by wondering when you will study for another course, or when you'll be able to get out and have some fun, because you’ve developed a plan, stuck to it, and can feel confident that you’re doing what you need to in order to succeed in school.  Create a master schedule (see below) and try to stick to it. It may take time, practice, and persistence. However, you’ll most likely be amazed at how efficient you can become and how much time for “fun” stuff you might actually find yourself creating for yourself.</p>
+<ul class="disc"><li id="li-1"><p id="p-derived-li-1">The purpose of this handout is to provide some concrete information for students on time management.</p></li></ul></article> <div class="introduction" id="introduction-3">
+<p id="p-8">Students who make a decision to carefully schedule their time are <em class="emphasis">not</em> ones who have decided to spend all their time studying and doing nothing else.  Instead, they usually have decided to efficiently use the time they have to spend studying and to "de-sensitize" themselves to the many distractions that are commonly occurring.</p> <p id="p-9">What is “desensitizing?”  It means reducing the day-to-day and hour-to-hour decisions that you have to make about how to spend your time. Decisions such as whether or not you’re going to spend the next hour studying, or whether you will or will not go to the math lab at the library to get work done today, or whether you will or will not go to a movie on impulse, or whether or not to use an hour between classes to get next week's homework assignment out of the way. If you have a plan for how to spend your time, then those decisions are already made for you!</p> <p id="p-10">Hence, a reasonable, well-thought-out time schedule can make decisions for you, thus desensitizing you to momentary distractions. And, an hour of study in one course is not disturbed by wondering when you will study for another course, or when you'll be able to get out and have some fun, because you’ve developed a plan, stuck to it, and can feel confident that you’re doing what you need to in order to succeed in school.  Create a master schedule (see below) and try to stick to it. It may take time, practice, and persistence. However, you’ll most likely be amazed at how efficient you can become and how much time for “fun” stuff you might actually find yourself creating for yourself.</p>
 </div></section><section class="onepage" id="worksheet-time-p2"><div class="exercisegroup" id="exercise-group-1">
 <h4 class="heading"><span class="title">Rule of 60.</span></h4>
 <div class="introduction" id="introduction-4">Before you do any detailed time management planning, it’s useful to get a very general feeling of whether or not you’ve potentially overextended yourself when it comes to your time resources. Once way to do this is by using the “Rule of 60.”</div>
 <div class="exercisegroup-exercises">
 <article class="exercise exercise-like" id="exercise-time-1"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
-<p id="p-11">Multiply your session-credits by four and your semester-credits by two, and then add these two numbers together.  By session-credits, we mean how many credits are you taking right now in the form of courses that only run for a session (i.e. session A or B)?  By semester-credits, we mean how many credits are you taking right now in the form of classes that run the whole semester.</p>
-<p id="p-12">For example: Your answer should be something like <span class="process-math">\(4 \times (6\text{ credits}) + 2 \times (3\text{ credits}) = 30\text{ hours}\)</span> if you're currently in two session-length courses and one semester-length course.</p>
+<p id="p-11">Multiply your session-credits by four and your semester-credits by two, and then add these two numbers together.  By session-credits, we mean how many credits are you taking right now in the form of courses that only run for a session (i.e. session A or B)?  By semester-credits, we mean how many credits are you taking right now in the form of classes that run the whole semester.</p> <p id="p-12">For example: Your answer should be something like <span class="process-math">\(4 \times (6\text{ credits}) + 2 \times (3\text{ credits}) = 30\text{ hours}\)</span> if you're currently in two session-length courses and one semester-length course.</p>
 <div class="workspace" data-space=".25 in"></div></article><article class="exercise exercise-like" id="exercise-time-2"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>How many hours per week do you work, on average? How many hours per week do you participate in clubs or sports, on average?  Add these hours together.<div class="workspace" data-space=".25 in"></div></article><article class="exercise exercise-like" id="exercise-time-3"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>How many hours per week do you spend on personal activities, family duties, driving, etc.?  Try to estimate an average.<div class="workspace" data-space=".25 in"></div></article><article class="exercise exercise-like" id="exercise-time-4"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>Add together your answers from Exercises 1-3 .<div class="workspace" data-space=".25 in"></div></article>
 </div>
 <div class="conclusion" id="conclusion-1">A university study found that if this number is 60 or higher, you should NOT be surprised if you find yourself having academic difficulties. If you have a total higher than 60, this study found you are much more likely to struggle in school and become overwhelmed. This seems to be a general “magic number” for most students. It does not guarantee anything, but at least gives you an initial realistic idea of whether or not your schedule is manageable. Keep in mind that if you are taking math and/or science, 60 may be too large and you may have to aim for lower hours since math/science courses typically require more time. So, when you register for classes, take this into account. You’re better off taking fewer credits now and being successful, as opposed to overloading yourself, failing, and slowing down your progress and momentum.</div>
@@ -259,8 +245,7 @@ true);
 </div></section><section class="onepage" id="worksheet-time-p4"><div class="exercisegroup" id="exercise-group-3">
 <h4 class="heading"><span class="title">Option 1: Paper and Pencil.</span></h4>
 <div class="introduction" id="introduction-6">
-<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/week_cal.jpg" class="contained"></div>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:1%;margin-right:1%;">
+<div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="external/week_cal.jpg" class="contained"></div> <div class="sidebyside"><div class="sbsrow" style="margin-left:1%;margin-right:1%;">
 <div class="sbspanel top" style="width:48.9795918367347%;"><img src="external/goals.png" class="contained"></div>
 <div class="sbspanel top" style="width:48.9795918367347%;"><img src="external/tasks.png" class="contained"></div>
 </div></div>
@@ -271,8 +256,7 @@ true);
 <div class="exercisegroup-exercises"><article class="exercise exercise-like" id="exercise-time-6"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>Fill out <a class="external" href="https://docs.google.com/spreadsheets/d/19-HYBxHE73gsXpqHz_YCzyMPGshjSDR93isGk6z6EPk/edit?usp=sharing" target="_blank"><code class="code-inline tex2jax_ignore">this spreadsheet</code></a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-5" id="fn-5"><sup> 5 </sup></a> and copy it below.  (Only do this if you are viewing this worksheet online)<div class="workspace" data-space="8.5in"></div></article></div>
 </div></section><section class="onepage" id="worksheet-time-p6"><div class="conclusion" id="conclusion-2">
 <h4 class="heading">20 Tips for Managing Your Time<span></span>
-</h4>
-<div class="introduction" id="introduction-7"><ol class="decimal">
+</h4> <div class="introduction" id="introduction-7"><ol class="decimal">
 <li id="li-12"><p id="p-derived-li-12">Create and maintain a Master Time Schedule. Give it a prominent place (binder cover) where you can see it easily and often. Revise it weekly during your Weekly Review time (see above).</p></li>
 <li id="li-13"><p id="p-derived-li-13">Put up reminders in your home or office about your goals. Always keep your short and long-term goals in mind. Let them help you prioritize how you use your time.</p></li>
 <li id="li-14"><p id="p-derived-li-14">Examine and revise your goals on a regular basis. Be sure to record progress towards those goals when you make it.</p></li>

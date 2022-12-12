@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!--********************************************-->
 <!--*       Generated from PreTeXt source      *-->
-<!--*       on 2022-12-06T16:56:57-05:00       *-->
-<!--*   A recent stable commit (2020-08-09):   *-->
-<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
 <!--*                                          *-->
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
@@ -17,13 +14,14 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="Quantitative Wisdom">
 <meta property="book:author" content="Dr. Ryan Johnson">
-<script>window.MathJax = {
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
   tex: {
     inlineMath: [['\\(','\\)']],
     tags: "none",
     tagSide: "right",
     tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl']}
   },
   options: {
     ignoreHtmlClass: "tex2jax_ignore|ignore-math",
@@ -50,38 +48,18 @@
     load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
     paths: {pretext: "https://pretextbook.org/js/lib"},
   },
-/* support for the sfrac command in MathJax (Beveled fraction) */
   startup: {
-    ready() {
-      //
-      // Creating a simple "sfrac" package on-the-fly
-      //
-      const Configuration = MathJax._.input.tex.Configuration.Configuration;
-      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
-      
-      new CommandMap('sfrac', {
-        sfrac: 'SFrac'
-        }, {
-        SFrac(parser, name) {
-        const num = parser.ParseArg(name);
-        const den = parser.ParseArg(name);
-        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
-        parser.Push(frac);
-        }
-      });
-      //
-      // Create the package for the overridden macros
-      //
-      Configuration.create('sfrac', {
-        handler: {macro: ['sfrac']}
-      });
-      
-    MathJax.startup.defaultReady();
-    }
-  },
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+},
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
 <script src="https://cdn.geogebra.org/apps/deployggb.js"></script><link href="https://pretextbook.org/css/0.4/pretext.css" rel="stylesheet" type="text/css">
@@ -92,7 +70,6 @@
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
-<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link href="developer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -109,11 +86,23 @@
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
 \newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
 \)</span></div>
 <header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
 <a id="logo-link" href=""></a><div class="title-container">
 <h1 class="heading"><a href="quantitative-wisdom.html"><span class="title">Quantitative Wisdom:</span> <span class="subtitle">A course on quantitative reasoning from a Christian perspective of wisdom</span></a></h1>
 <p class="byline">Dr. Ryan Johnson</p>
+</div>
+<div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
 </div>
 </div></div>
 <nav id="primary-navbar" class="navbar"><div class="container">
@@ -224,9 +213,7 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="sec-models-exponential"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">5.4</span> <span class="title">Exponential Growth and Decay</span>
 </h2>
-<section class="introduction" id="introduction-115"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:40%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/computer-chip.png" class="contained" alt="computer chip, Andre Kudyusov/Getty Images"></div></div></div>
-<p id="p-4422">We next consider another important family of functions, called <dfn class="terminology">exponential functions</dfn>. These functions describe growth by a constant factor in equal time periods. Exponential functions model many familiar processes, including the growth of populations, compound interest, and radioactive decay.  Here is an example.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
+<section class="introduction" id="introduction-115"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:40%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/computer-chip.png" class="contained" alt="computer chip, Andre Kudyusov/Getty Images"></div></div></div> <p id="p-4422">We next consider another important family of functions, called <dfn class="terminology">exponential functions</dfn>. These functions describe growth by a constant factor in equal time periods. Exponential functions model many familiar processes, including the growth of populations, compound interest, and radioactive decay.  Here is an example.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
 <div class="sbspanel top" style="width:47.3684210526316%;"><p id="p-4423">In 1965, Gordon Moore, the cofounder of Intel, observed that the number of transistors on a computer chip had doubled every year since the integrated circuit was invented. Moore predicted that the pace would slow down a bit, but the number of transistors would continue to double every 2 years. More recently, data density has doubled approximately every 18 months, and this is the current definition of Moore's law. Most experts, including Moore himself, expected Moore's law to hold for at least another two decades.</p></div>
 <div class="sbspanel fixed-width top" style="width:47.3684210526316%;"><table class="tabular">
 <tr>
@@ -300,8 +287,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(9,500,000\)</span></td>
 </tr>
 </table></div>
-</div></div>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:1.25%;margin-right:1.25%;">
+</div></div> <div class="sidebyside"><div class="sbsrow" style="margin-left:1.25%;margin-right:1.25%;">
 <div class="sbspanel top" style="width:46.1538461538462%;">
 <p id="p-4424">The data shown are modeled by the exponential function</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
@@ -312,15 +298,14 @@ N(t) = 2200(1.356)^t\text{,}
 <p class="continuation">where <span class="process-math">\(t\)</span> is the number of years since <span class="process-math">\(1970\text{.}\)</span></p>
 </div>
 <div class="sbspanel top" style="width:51.2820512820513%;"><img src="external/models/fig-Moores-Law.svg" role="img" class="contained" alt="growth"></div>
-</div></div>
-<article class="investigation project-like" id="investigation-population-growth"><h3 class="heading">
+</div></div> <article class="investigation project-like" id="investigation-population-growth"><h3 class="heading">
 <span class="type">Puzzle</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span><span class="space"> </span><span class="title">Population Growth.</span>
 </h3>
-<ol id="p-4425" class="decimal">
+<ol id="p-4425" class="upper-alpha">
 <li id="li-1891">
 <p id="p-4426">In a laboratory experiment, researchers establish a colony of <span class="process-math">\(100\)</span> bacteria and monitor its growth. The colony triples in population every day.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:4.5%;margin-right:4.5%;">
-<div class="sbspanel top" style="width:54.9450549450549%;"><ol id="p-4427" class="lower-alpha">
+<div class="sbspanel top" style="width:54.9450549450549%;"><ol id="p-4427" class="decimal">
 <li id="li-1892"><p id="p-4428">Fill in the table showing the population P(t) of bacteria t days later.</p></li>
 <li id="li-1893"><p id="p-4429">Plot the data points from the table and connect them with a smooth curve.</p></li>
 <li id="li-1894"><p id="p-4430">Write a function that gives the population of the colony at any time <span class="process-math">\(t\text{,}\)</span> in days. <em class="emphasis">Hint:</em> Express the values you calculated in part (1) using powers of <span class="process-math">\(3\text{.}\)</span> Do you see a connection between the value of <span class="process-math">\(t\)</span> and the exponent on <span class="process-math">\(3\text{?}\)</span></p></li>
@@ -380,7 +365,7 @@ N(t) = 2200(1.356)^t\text{,}
 <li id="li-1897">
 <p id="p-4434">Under ideal conditions, the number of rabbits in a certain area can double every <span class="process-math">\(3\)</span> months. A rancher estimates that <span class="process-math">\(60\)</span> rabbits live on his land.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
-<div class="sbspanel top" style="width:52.6315789473684%;"><ol id="p-4435" class="lower-alpha">
+<div class="sbspanel top" style="width:52.6315789473684%;"><ol id="p-4435" class="decimal">
 <li id="li-1898"><p id="p-4436">Fill in the table showing the population <span class="process-math">\(P(t)\)</span> of rabbits <span class="process-math">\(t\)</span> months later.</p></li>
 <li id="li-1899"><p id="p-4437">Plot the data points and connect them with a smooth curve.</p></li>
 <li id="li-1900"><p id="p-4438">Write a function that gives the population of rabbits at any time <span class="process-math">\(t\text{,}\)</span> in months. <em class="emphasis">Hint:</em> Express the values you calculated in part (1) using powers of <span class="process-math">\(2\text{.}\)</span> Note that the population of rabbits is multiplied by <span class="process-math">\(2\)</span> every <span class="process-math">\(3\)</span> months. If you know the value of <span class="process-math">\(t\text{,}\)</span> how do you find the corresponding exponent in <span class="process-math">\(P(t)\text{?}\)</span></p></li>
@@ -461,10 +446,9 @@ P(t) = 100 \cdot 3^t
 <p class="continuation">so <span class="process-math">\(P_0 = 100\)</span> and <span class="process-math">\(b = 3\text{.}\)</span></p>
 <article class="exercise exercise-like" id="exercise-659"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-659"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 1.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-659"><article class="exercise exercise-like"><div id="webwork-28" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="28" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJwYXJzZXJWZWN0b3JVdGlscy5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JGNvbSA9IFJhZGlvQnV0dG9ucygKICBbIkl0IGlzIHRydWUgYmVjYXVzZSB3ZSB1c2VkIHR3byBwb2ludHMuIiwKICAiSXQgaXMgZmFsc2UgYmVjYXVzZSBcKFxEZWx0YSB4XCkgYW5kIFwoXERlbHRhIHlcKSBoYXZlIG9wcG9zaXRlIHNpZ25zLiIsCiAgIkl0IGlzIHRydWUgYmVjYXVzZSB0aGUgdmFsdWVzIGFyZSBpbmNyZWFzaW5nLiIsCiAgIkl0IGlzIGZhbHNlIGJlY2F1c2UgdGhlIHNsb3BlIGlzIFwoXGRmcmFjezN9ezV9XCkuIl0sCiAgMCwgCik7CgpCRUdJTl9QR01MCkNvbW1lbnQgb24gdGhlIGZvbGxvd2luZyBjYWxjdWxhdGlvbjogVGhlIGludGVyY2VwdHMgb2YgYSBsaW5lIGFyZSBbYCgwLDMpYF0gYW5kIFtgKDUsMClcdGV4dHssfWBdIHNvIHRoZSBzbG9wZSBvZiB0aGUgbGluZSBpcyBbYFxkZnJhY3s1fXszfVx0ZXh0ey59YF0KCiAgICBbX117JGNvbX17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpJdCBpcyBmYWxzZSBiZWNhdXNlIFtgXERlbHRhIHhgXSBhbmQgW2BcRGVsdGEgeWBdIGhhdmUgb3Bwb3NpdGUgc2lnbnMuIChUaGUgc2xvcGUgb2YgdGhlIGxpbmUgaXMgW2BcZGZyYWN7LTV9ezN9XHRleHR7Ln1gXSkKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-659"><article class="exercise exercise-like"><div id="webwork-28" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="28" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJwYXJzZXJWZWN0b3JVdGlscy5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwpDb250ZXh0KCdOdW1lcmljJyk7JGNvbSA9IFJhZGlvQnV0dG9ucygKICBbIkl0IGlzIHRydWUgYmVjYXVzZSB3ZSB1c2VkIHR3byBwb2ludHMuIiwKICAiSXQgaXMgZmFsc2UgYmVjYXVzZSBcKFxEZWx0YSB4XCkgYW5kIFwoXERlbHRhIHlcKSBoYXZlIG9wcG9zaXRlIHNpZ25zLiIsCiAgIkl0IGlzIHRydWUgYmVjYXVzZSB0aGUgdmFsdWVzIGFyZSBpbmNyZWFzaW5nLiIsCiAgIkl0IGlzIGZhbHNlIGJlY2F1c2UgdGhlIHNsb3BlIGlzIFwoXGRmcmFjezN9ezV9XCkuIl0sCiAgMCwgCik7CgpCRUdJTl9QR01MCkNvbW1lbnQgb24gdGhlIGZvbGxvd2luZyBjYWxjdWxhdGlvbjogVGhlIGludGVyY2VwdHMgb2YgYSBsaW5lIGFyZSBbYCgwLDMpYF0gYW5kIFtgKDUsMClcdGV4dHssfWBdIHNvIHRoZSBzbG9wZSBvZiB0aGUgbGluZSBpcyBbYFxkZnJhY3s1fXszfVx0ZXh0ey59YF0KCiAgICBbX117JGNvbX17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpJdCBpcyBmYWxzZSBiZWNhdXNlIFtgXERlbHRhIHhgXSBhbmQgW2BcRGVsdGEgeWBdIGhhdmUgb3Bwb3NpdGUgc2lnbnMuIChUaGUgc2xvcGUgb2YgdGhlIGxpbmUgaXMgW2BcZGZyYWN7LTV9ezN9XHRleHR7Ln1gXSkKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4447">Comment on the following calculation: The intercepts of a line are <span class="process-math">\((0,3)\)</span> and <span class="process-math">\((5,0)\text{,}\)</span> so the slope of the line is <span class="process-math">\(\dfrac{5}{3}\text{.}\)</span></p>
-<p id="p-4448"><ul style="list-style:circle;">
+<p id="p-4447">Comment on the following calculation: The intercepts of a line are <span class="process-math">\((0,3)\)</span> and <span class="process-math">\((5,0)\text{,}\)</span> so the slope of the line is <span class="process-math">\(\dfrac{5}{3}\text{.}\)</span></p> <p id="p-4448"><ul style="list-style:circle;">
 <li id="li-1903"><p id="p-4449">It is true because we used two points.</p></li>
 <li id="li-1904"><p id="p-4450">It is false because <span class="process-math">\(\Delta x\)</span> and <span class="process-math">\(\Delta y\)</span> have opposite signs.</p></li>
 <li id="li-1905"><p id="p-4451">It is true because the values are increasing.</p></li>
@@ -474,18 +458,18 @@ P(t) = 100 \cdot 3^t
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-107" id="answer-107"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-107"><div class="answer solution-like"><p id="p-4453"><span class="process-math">\(\text{Choice 1}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-28')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-28')">Activate</button></div>
 </div></article></div>
 <article class="example example-like" id="example-bacteria"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.2</span><span class="period">.</span>
 </h4>
 <p id="p-4455">A colony of bacteria starts with <span class="process-math">\(300\)</span> organisms and doubles every week.</p>
-<ol class="decimal">
+<ol class="lower-alpha">
 <li id="li-1907"><p id="p-4456">Write a formula for the population of the bacteria colony after <span class="process-math">\(t\)</span> weeks.</p></li>
 <li id="li-1908"><p id="p-4457">How many bacteria will there be after <span class="process-math">\(8\)</span> weeks? After <span class="process-math">\(5\)</span> days?</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-431" id="solution-431"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-431"><div class="solution solution-like"><ol id="p-4458" class="decimal">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-431" id="solution-431"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-431"><div class="solution solution-like"><ol id="p-4458" class="lower-alpha">
 <li id="li-1909">
 <p id="p-4459">The initial value of the population was <span class="process-math">\(P_0 = 300\text{,}\)</span> and its weekly growth factor is <span class="process-math">\(b = 2\text{.}\)</span> Thus, a formula for the population after <span class="process-math">\(t\)</span> weeks is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
@@ -521,21 +505,21 @@ P\left(\alert{\frac{5}{7}}\right)= 300 \cdot 2^{\alert{5/7}} = 492.2
 </div>
 <p class="continuation">According to the order of operations, we compute the power <span class="process-math">\(2^8\)</span> first, then multiply by <span class="process-math">\(300\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-660"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-660"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 1.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-660"><article class="exercise exercise-like"><div id="webwork-29" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="29" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJGdW5jdGlvbi5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwokeDAgPSAzOwokeDEgPSA1OwokeTAgPSAyOwokeTEgPSA4OwokbSA9ICgkeTEtJHkwKS8oJHgxLSR4MCk7CkNvbnRleHQoIk51bWVyaWMiKS0+dmFyaWFibGVzLT5hZGQoYT0+IlJlYWwiLCBiPT4iUmVhbCIpOwpwYXJzZXJGdW5jdGlvbigiZih4KSIgPT4gImUqKngiKTsgI2FyYml0cmFyeSBmdW5jdGlvbgoKJGFuc3dlciA9IEZvcm11bGEoIihmKGIpLWYoYSkpLyhiLWEpIik7CgpCRUdJTl9QR01MCmEuICBGaW5kIFtgZiAoMylgXSBhbmQgW2BmICg1KVx0ZXh0ey59YF0KCiAgICBbYGYoMyk9YF1bX117JHkwfXszfQoKICAgIFtgZig1KT1gXVtfXXskeTF9ezN9CgoKYS4gIENvbXB1dGUgdGhlIHNsb3BlIG9mIHRoZSBsaW5lIHNlZ21lbnQgam9pbmluZyB0aGUgcG9pbnRzIGF0IFtgeCA9IDNgXSBhbmQgW2B4ID0gNVx0ZXh0ey59YF0KCiAgICBbYG09YF1bX117JG19ezN9CgoKYS4gIFdyaXRlIGFuIGV4cHJlc3Npb24gZm9yIHRoZSBzbG9wZSBvZiB0aGUgbGluZSBzZWdtZW50IGpvaW5pbmcgdGhlIHBvaW50cyBhdCBbYHggPSBhYF0gYW5kIFtgeCA9IGJcdGV4dHsufWBdCgogICAgW2BtPWBdW19deyRhbnN3ZXJ9ezIwfQoKICAgIE5vdGU6IEJlIGNhcmVmdWwgdG8gdXNlIGFwcHJvcHJpYXRlIHBhcmVudGhlc2VzLiBQcmVzcyB0aGUgIlByZXZpZXcgTXkgQW5zd2VycyIgYnV0dG9uIGJlbG93IHRvIHNlZSBpZiB5b3UgYXJlIGVudGVyaW5nIGFuIGFwcHJvcHJpYXRlIGV4cHJlc3Npb24uCgoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCmEuICBbYGYgKDMpID0gMiwgfmYgKDUpID0gOGBdCgoKYS4gIFtgM2BdCgoKYS4gIFtgXGRmcmFje2YoYiktZihhKX17Yi1hfSBgXQoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-660"><article class="exercise exercise-like"><div id="webwork-29" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="29" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJGdW5jdGlvbi5wbCIsIlBHY291cnNlLnBsIiwpO1RFWFQoYmVnaW5wcm9ibGVtKCkpOwokeDAgPSAzOwokeDEgPSA1OwokeTAgPSAyOwokeTEgPSA4OwokbSA9ICgkeTEtJHkwKS8oJHgxLSR4MCk7CkNvbnRleHQoIk51bWVyaWMiKS0+dmFyaWFibGVzLT5hZGQoYT0+IlJlYWwiLCBiPT4iUmVhbCIpOwpwYXJzZXJGdW5jdGlvbigiZih4KSIgPT4gImUqKngiKTsgI2FyYml0cmFyeSBmdW5jdGlvbgoKJGFuc3dlciA9IEZvcm11bGEoIihmKGIpLWYoYSkpLyhiLWEpIik7CgpCRUdJTl9QR01MCmEuICBGaW5kIFtgZiAoMylgXSBhbmQgW2BmICg1KVx0ZXh0ey59YF0KCiAgICBbYGYoMyk9YF1bX117JHkwfXszfQoKICAgIFtgZig1KT1gXVtfXXskeTF9ezN9CgoKYS4gIENvbXB1dGUgdGhlIHNsb3BlIG9mIHRoZSBsaW5lIHNlZ21lbnQgam9pbmluZyB0aGUgcG9pbnRzIGF0IFtgeCA9IDNgXSBhbmQgW2B4ID0gNVx0ZXh0ey59YF0KCiAgICBbYG09YF1bX117JG19ezN9CgoKYS4gIFdyaXRlIGFuIGV4cHJlc3Npb24gZm9yIHRoZSBzbG9wZSBvZiB0aGUgbGluZSBzZWdtZW50IGpvaW5pbmcgdGhlIHBvaW50cyBhdCBbYHggPSBhYF0gYW5kIFtgeCA9IGJcdGV4dHsufWBdCgogICAgW2BtPWBdW19deyRhbnN3ZXJ9ezIwfQoKICAgIE5vdGU6IEJlIGNhcmVmdWwgdG8gdXNlIGFwcHJvcHJpYXRlIHBhcmVudGhlc2VzLiBQcmVzcyB0aGUgIlByZXZpZXcgTXkgQW5zd2VycyIgYnV0dG9uIGJlbG93IHRvIHNlZSBpZiB5b3UgYXJlIGVudGVyaW5nIGFuIGFwcHJvcHJpYXRlIGV4cHJlc3Npb24uCgoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCmEuICBbYGYgKDMpID0gMiwgfmYgKDUpID0gOGBdCgoKYS4gIFtgM2BdCgoKYS4gIFtgXGRmcmFje2YoYiktZihhKX17Yi1hfSBgXQoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
 <ol id="p-4462" class="lower-alpha">
 <li id="li-1911">
 <p id="p-4463">Find <span class="process-math">\(f (3)\)</span> and <span class="process-math">\(f (5)\text{.}\)</span></p>
-<p id="p-4464"><span class="process-math">\(f(3)=\)</span><span class="fillin" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
-<p id="p-4465"><span class="process-math">\(f(5)=\)</span><span class="fillin" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
+<p id="p-4464"><span class="process-math">\(f(3)=\)</span><span class="fillin underline" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
+<p id="p-4465"><span class="process-math">\(f(5)=\)</span><span class="fillin underline" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
 </li>
 <li id="li-1912">
 <p id="p-4466">Compute the slope of the line segment joining the points at <span class="process-math">\(x = 3\)</span> and <span class="process-math">\(x = 5\text{.}\)</span></p>
-<p id="p-4467"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
+<p id="p-4467"><span class="process-math">\(m=\)</span><span class="fillin underline" role="img" aria-label="3-character blank" style="width: 1.363636363636364em;"></span></p>
 </li>
 <li id="li-1913">
 <p id="p-4468">Write an expression for the slope of the line segment joining the points at <span class="process-math">\(x = a\)</span> and <span class="process-math">\(x = b\text{.}\)</span></p>
-<p id="p-4469"><span class="process-math">\(m=\)</span><span class="fillin" role="img" aria-label="20-character blank" style="width: 9.090909090909092em;"></span></p>
+<p id="p-4469"><span class="process-math">\(m=\)</span><span class="fillin underline" role="img" aria-label="20-character blank" style="width: 9.090909090909092em;"></span></p>
 <p id="p-4470">Note: Be careful to use appropriate parentheses. Press the “Preview My Answers” button below to see if you are entering an appropriate expression.</p>
 </li>
 </ol>
@@ -546,13 +530,13 @@ P\left(\alert{\frac{5}{7}}\right)= 300 \cdot 2^{\alert{5/7}} = 492.2
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-111" id="answer-111"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">4</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-111"><div class="answer solution-like"><p id="p-4474"><span class="process-math">\(\frac{f\!\left(b\right)-f\!\left(a\right)}{b-a}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-29')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-29')">Activate</button></div>
 </div></article></div>
 <article class="exercise exercise-like" id="exercise-661"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-661"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.5</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 2.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-661"><article class="exercise exercise-like"><div id="webwork-30" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="30" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKU3VtbWFyaXplIHdoYXQgeW91IGxlYXJuZWQgYWJvdXQgc2xvcGUgaW4gdGhpcyBsZXNzb24uCgpbQEFOUyhlc3NheV9jbXAoKSk7ZXNzYXlfYm94KDYsNzYpQF0qIFtAZXNzYXlfaGVscCgpQF0qCgoKRU5EX1BHTUwKCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-661"><article class="exercise exercise-like"><div id="webwork-30" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="30" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKU3VtbWFyaXplIHdoYXQgeW91IGxlYXJuZWQgYWJvdXQgc2xvcGUgaW4gdGhpcyBsZXNzb24uCgpbQEFOUyhlc3NheV9jbXAoKSk7ZXNzYXlfYm94KDYsNzYpQF0qIFtAZXNzYXlfaGVscCgpQF0qCgoKRU5EX1BHTUwKCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents"><p id="p-4479">Summarize what you learned about slope in this lesson.</p></div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-30')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-30')">Activate</button></div>
 </div></article></div></section><section class="subsection" id="subsection-135"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.4.2</span> <span class="title">Growth Factors</span>
 </h3>
@@ -579,10 +563,9 @@ P(t) = 60 \cdot \left(2^{1/3}\right)^t
 <p class="continuation">The initial value of the function is <span class="process-math">\(P_0 = 60\text{,}\)</span> and the growth factor is <span class="process-math">\(b = 2^{1/3}\text{,}\)</span> or approximately <span class="process-math">\(1.26\text{.}\)</span> The rabbit population grows by a factor of about <span class="process-math">\(1.26\)</span> every month.</p>
 <article class="exercise exercise-like" id="exercise-662"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-662"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.6</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 3.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-662"><article class="exercise exercise-like"><div id="webwork-31" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="31" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyR0YWJleHAgPSBSYWRpb0J1dHRvbnMoCiAgWyJEdXJpbmcgZWFjaCBlcXVhbCB0aW1lIGludGVydmFsLCB0aGUgb3V0cHV0IGluY3JlYXNlcyBieSB0aGUgc2FtZSBhbW91bnQuIiwKICAiRHVyaW5nIGVhY2ggZXF1YWwgdGltZSBpbnRlcnZhbCwgdGhlIG91dHB1dCBpbmNyZWFzZXMgYnkgdGhlIHNhbWUgZmFjdG9yLiIsCiAgIkR1cmluZyBlYWNoIGVxdWFsIHRpbWUgaW50ZXJ2YWwsIHRoZSBvdXRwdXQgaW5jcmVhc2VzIGFzIFwodF5uXCkuIiwKICAiRHVyaW5nIGVhY2ggZXF1YWwgdGltZSBpbnRlcnZhbCwgdGhlIG91dHB1dCBpbmNyZWFzZXMgdG93YXJkcyBhbiBhc3ltcHRvdGUuIl0sCiAgMSwgCik7CgpCRUdJTl9QR01MCkhvdyBjYW4geW91IHRlbGwgZnJvbSBhIHRhYmxlIG9mIHZhbHVlcyB0aGF0IGEgZnVuY3Rpb24gZGVzY3JpYmVzIGV4cG9uZW50aWFsIGdyb3d0aD8KCiAgICBbX117JHRhYmV4cH17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpEdXJpbmcgZWFjaCBlcXVhbCB0aW1lIGludGVydmFsLCB0aGUgb3V0cHV0IGluY3JlYXNlcyBieSB0aGUgc2FtZSBmYWN0b3IuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-662"><article class="exercise exercise-like"><div id="webwork-31" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="31" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyR0YWJleHAgPSBSYWRpb0J1dHRvbnMoCiAgWyJEdXJpbmcgZWFjaCBlcXVhbCB0aW1lIGludGVydmFsLCB0aGUgb3V0cHV0IGluY3JlYXNlcyBieSB0aGUgc2FtZSBhbW91bnQuIiwKICAiRHVyaW5nIGVhY2ggZXF1YWwgdGltZSBpbnRlcnZhbCwgdGhlIG91dHB1dCBpbmNyZWFzZXMgYnkgdGhlIHNhbWUgZmFjdG9yLiIsCiAgIkR1cmluZyBlYWNoIGVxdWFsIHRpbWUgaW50ZXJ2YWwsIHRoZSBvdXRwdXQgaW5jcmVhc2VzIGFzIFwodF5uXCkuIiwKICAiRHVyaW5nIGVhY2ggZXF1YWwgdGltZSBpbnRlcnZhbCwgdGhlIG91dHB1dCBpbmNyZWFzZXMgdG93YXJkcyBhbiBhc3ltcHRvdGUuIl0sCiAgMSwgCik7CgpCRUdJTl9QR01MCkhvdyBjYW4geW91IHRlbGwgZnJvbSBhIHRhYmxlIG9mIHZhbHVlcyB0aGF0IGEgZnVuY3Rpb24gZGVzY3JpYmVzIGV4cG9uZW50aWFsIGdyb3d0aD8KCiAgICBbX117JHRhYmV4cH17NX0KCgpFTkRfUEdNTAoKQkVHSU5fUEdNTF9TT0xVVElPTgpEdXJpbmcgZWFjaCBlcXVhbCB0aW1lIGludGVydmFsLCB0aGUgb3V0cHV0IGluY3JlYXNlcyBieSB0aGUgc2FtZSBmYWN0b3IuCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4482">How can you tell from a table of values that a function describes exponential growth?</p>
-<p id="p-4483"><ul style="list-style:circle;">
+<p id="p-4482">How can you tell from a table of values that a function describes exponential growth?</p> <p id="p-4483"><ul style="list-style:circle;">
 <li id="li-1917"><p id="p-4484">During each equal time interval, the output increases by the same amount.</p></li>
 <li id="li-1918"><p id="p-4485">During each equal time interval, the output increases by the same factor.</p></li>
 <li id="li-1919"><p id="p-4486">During each equal time interval, the output increases as <span class="process-math">\(t^n\text{.}\)</span></p></li>
@@ -592,7 +575,7 @@ P(t) = 60 \cdot \left(2^{1/3}\right)^t
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-112" id="answer-112"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-112"><div class="answer solution-like"><p id="p-4488"><span class="process-math">\(\text{Choice 2}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-31')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-31')">Activate</button></div>
 </div></article></div>
 <p id="p-4490">If the units are the same, a population with a larger growth factor grows faster than one with a smaller growth factor.</p>
 <article class="example example-like" id="example-compare-growth-factors"><h4 class="heading">
@@ -617,17 +600,17 @@ P(t) = 50 \cdot 3^{t/3} = 50 \cdot \left(\alert{3^{1/3}}\right)^t
 </div></div>
 </div></article><article class="exercise exercise-like" id="exercise-663"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-663"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 2.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-663"><article class="exercise exercise-like"><div id="webwork-32" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="32" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgpLT52YXJpYWJsZXMtPmFkZCh0PT4iUmVhbCIpOwokUCA9IEZvcm11bGEoIjI0KjMqKnQiKTsKJHQwID0gNjsKJFAwID0gJFAtPmV2YWwodD0+JHQwKTsKJHQxID0gMy80OwokUDEgPSAkUC0+ZXZhbCh0PT4kdDEpOwokUDEgPSByb3VuZCgkUDEpOwoKQkVHSU5fUEdNTApBIHBvcHVsYXRpb24gb2YgMjQgZnJ1aXQgZmxpZXMgdHJpcGxlcyBldmVyeSBtb250aC4KYS4gIFdyaXRlIGEgZm9ybXVsYSBmb3IgdGhlIHBvcHVsYXRpb24gb2YgZnJ1aXQgZmxpZXMgYWZ0ZXIgW2B0YF0gbW9udGhzLgoKICAgIFtgUCh0KT1gXVtfXXskUH17Nn0KCgphLiAgSG93IG1hbnkgZnJ1aXQgZmxpZXMgd2lsbCB0aGVyZSBiZSBhZnRlciA2IG1vbnRocz8gW19deyRQMH17NX0gTm90ZTogRW50ZXIgKGxhcmdlKSBudW1iZXJzIHdpdGhvdXQgYW55IGNvbW1hcy4gVGhhdCBpcywgZW50ZXIgIjEwMDAwIiByYXRoZXIgdGhhbiAiMTAsMDAwIi4KCiAgICBBZnRlciAzIHdlZWtzPyBbX117JFAxfXsyfSAoQXNzdW1lIHRoYXQgYSBtb250aCBlcXVhbHMgNCB3ZWVrcywgYW5kIHJvdW5kIHlvdXIgYW5zd2VyIHRvIHRoZSBuZWFyZXN0IHdob2xlIG51bWJlciBvZiBmbGllcy4pCgoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCmEuICBbYFAodCkgPSAyNFxjZG90IDNedGBdCgoKYS4gIDE3LDQ5NjsgNTUKCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-663"><article class="exercise exercise-like"><div id="webwork-32" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="32" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgpLT52YXJpYWJsZXMtPmFkZCh0PT4iUmVhbCIpOwokUCA9IEZvcm11bGEoIjI0KjMqKnQiKTsKJHQwID0gNjsKJFAwID0gJFAtPmV2YWwodD0+JHQwKTsKJHQxID0gMy80OwokUDEgPSAkUC0+ZXZhbCh0PT4kdDEpOwokUDEgPSByb3VuZCgkUDEpOwoKQkVHSU5fUEdNTApBIHBvcHVsYXRpb24gb2YgMjQgZnJ1aXQgZmxpZXMgdHJpcGxlcyBldmVyeSBtb250aC4KYS4gIFdyaXRlIGEgZm9ybXVsYSBmb3IgdGhlIHBvcHVsYXRpb24gb2YgZnJ1aXQgZmxpZXMgYWZ0ZXIgW2B0YF0gbW9udGhzLgoKICAgIFtgUCh0KT1gXVtfXXskUH17Nn0KCgphLiAgSG93IG1hbnkgZnJ1aXQgZmxpZXMgd2lsbCB0aGVyZSBiZSBhZnRlciA2IG1vbnRocz8gW19deyRQMH17NX0gTm90ZTogRW50ZXIgKGxhcmdlKSBudW1iZXJzIHdpdGhvdXQgYW55IGNvbW1hcy4gVGhhdCBpcywgZW50ZXIgIjEwMDAwIiByYXRoZXIgdGhhbiAiMTAsMDAwIi4KCiAgICBBZnRlciAzIHdlZWtzPyBbX117JFAxfXsyfSAoQXNzdW1lIHRoYXQgYSBtb250aCBlcXVhbHMgNCB3ZWVrcywgYW5kIHJvdW5kIHlvdXIgYW5zd2VyIHRvIHRoZSBuZWFyZXN0IHdob2xlIG51bWJlciBvZiBmbGllcy4pCgoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCmEuICBbYFAodCkgPSAyNFxjZG90IDNedGBdCgoKYS4gIDE3LDQ5NjsgNTUKCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
 <p id="p-4493">A population of 24 fruit flies triples every month.</p>
 <ol class="lower-alpha">
 <li id="li-1921">
 <p id="p-4494">Write a formula for the population of fruit flies after <span class="process-math">\(t\)</span> months.</p>
-<p id="p-4495"><span class="process-math">\(P(t)=\)</span><span class="fillin" role="img" aria-label="6-character blank" style="width: 2.727272727272727em;"></span></p>
+<p id="p-4495"><span class="process-math">\(P(t)=\)</span><span class="fillin underline" role="img" aria-label="6-character blank" style="width: 2.727272727272727em;"></span></p>
 </li>
 <li id="li-1922">
-<p id="p-4496">How many fruit flies will there be after 6 months? <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> Note: Enter (large) numbers without any commas. That is, enter “10000” rather than “10,000”.</p>
-<p id="p-4497">After 3 weeks? <span class="fillin" role="img" aria-label="2-character blank" style="width: 0.909090909090909em;"></span> (Assume that a month equals 4 weeks, and round your answer to the nearest whole number of flies.)</p>
+<p id="p-4496">How many fruit flies will there be after 6 months? <span class="fillin underline" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span> Note: Enter (large) numbers without any commas. That is, enter “10000” rather than “10,000”.</p>
+<p id="p-4497">After 3 weeks? <span class="fillin underline" role="img" aria-label="2-character blank" style="width: 0.909090909090909em;"></span> (Assume that a month equals 4 weeks, and round your answer to the nearest whole number of flies.)</p>
 </li>
 </ol>
 <div class="solutions">
@@ -636,7 +619,7 @@ P(t) = 50 \cdot 3^{t/3} = 50 \cdot \left(\alert{3^{1/3}}\right)^t
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-115" id="answer-115"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">3</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-115"><div class="answer solution-like"><p id="p-4500"><span class="process-math">\(55\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-32')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-32')">Activate</button></div>
 </div></article></div></section><section class="subsection" id="subsection-136"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.4.3</span> <span class="title">Percent Increase</span>
 </h3>
@@ -758,10 +741,9 @@ A(t) = 100(1.05)^t
 </h4>
 <p id="p-4511">The notion of <dfn class="terminology">percent increase</dfn> is often used to describe the growth factor for quantities that grow exponentially. Note carefully the distinction between the percent increase, <span class="process-math">\(r\text{,}\)</span> and the growth factor, <span class="process-math">\(b=1+r\text{.}\)</span></p></article><article class="exercise exercise-like" id="exercise-664"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-664"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.10</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 4.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-664"><article class="exercise exercise-like"><div id="webwork-33" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="33" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRvcm9wID0gUmFkaW9CdXR0b25zKAogIFsiWWVzLCB3ZSBjYW4gc2ltcGxpZnkgdGhlIHByb2R1Y3QuIiwKICAiWWVzLCBpdCBpcyBleHBvbmVudGlhbCBncm93dGguIiwKICAiTm8sIHBvd2VycyBhcmUgcGVyZm9ybWVkIGJlZm9yZSBwcm9kdWN0cy4iLAogICJObywgaXQgc2hvdWxkIGJlIFwoOV50XCkuIl0sCiAgMiwgCik7CgpCRUdJTl9QR01MCklzIFtgNSBcY2RvdCA0XnRgXSBlcXVpdmFsZW50IHRvIFtgMjBedFx0ZXh0ez99YF0KCiAgICBbX117JG9yb3B9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KTm8sIHBvd2VycyBhcmUgcGVyZm9ybWVkIGJlZm9yZSBwcm9kdWN0cy4KCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-664"><article class="exercise exercise-like"><div id="webwork-33" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="33" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRvcm9wID0gUmFkaW9CdXR0b25zKAogIFsiWWVzLCB3ZSBjYW4gc2ltcGxpZnkgdGhlIHByb2R1Y3QuIiwKICAiWWVzLCBpdCBpcyBleHBvbmVudGlhbCBncm93dGguIiwKICAiTm8sIHBvd2VycyBhcmUgcGVyZm9ybWVkIGJlZm9yZSBwcm9kdWN0cy4iLAogICJObywgaXQgc2hvdWxkIGJlIFwoOV50XCkuIl0sCiAgMiwgCik7CgpCRUdJTl9QR01MCklzIFtgNSBcY2RvdCA0XnRgXSBlcXVpdmFsZW50IHRvIFtgMjBedFx0ZXh0ez99YF0KCiAgICBbX117JG9yb3B9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KTm8sIHBvd2VycyBhcmUgcGVyZm9ybWVkIGJlZm9yZSBwcm9kdWN0cy4KCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4512">Is <span class="process-math">\(5 \cdot 4^t\)</span> equivalent to <span class="process-math">\(20^t\text{?}\)</span></p>
-<p id="p-4513"><ul style="list-style:circle;">
+<p id="p-4512">Is <span class="process-math">\(5 \cdot 4^t\)</span> equivalent to <span class="process-math">\(20^t\text{?}\)</span></p> <p id="p-4513"><ul style="list-style:circle;">
 <li id="li-1925"><p id="p-4514">Yes, we can simplify the product.</p></li>
 <li id="li-1926"><p id="p-4515">Yes, it is exponential growth.</p></li>
 <li id="li-1927"><p id="p-4516">No, powers are performed before products.</p></li>
@@ -771,20 +753,20 @@ A(t) = 100(1.05)^t
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-116" id="answer-116"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-116"><div class="answer solution-like"><p id="p-4518"><span class="process-math">\(\text{Choice 3}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-33')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-33')">Activate</button></div>
 </div></article></div>
 <article class="example example-like" id="example-inflation"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.11</span><span class="period">.</span>
 </h4>
 <p id="p-4520">During a period of rapid inflation, prices rose by <span class="process-math">\(12\)</span>% over <span class="process-math">\(6\)</span> months. At the beginning of the inflationary period, a pound of butter cost $<span class="process-math">\(2\text{.}\)</span></p>
-<ol class="decimal">
+<ol class="lower-alpha">
 <li id="li-1929"><p id="p-4521">Make a table of values showing the rise in the cost of butter over the next <span class="process-math">\(2\)</span> years.</p></li>
 <li id="li-1930"><p id="p-4522">Write a function that gives the price of a pound of butter <span class="process-math">\(t\)</span> years after inflation began.</p></li>
 <li id="li-1931"><p id="p-4523">How much did a pound of butter cost after <span class="process-math">\(3\)</span> years? After <span class="process-math">\(15\)</span> months?</p></li>
 <li id="li-1932"><p id="p-4524">Graph the function you found in part (b).</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-437" id="solution-437"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-437"><div class="solution solution-like"><ol id="p-4525" class="decimal">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image has-tabular" data-refid="hk-solution-437" id="solution-437"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-437"><div class="solution solution-like"><ol id="p-4525" class="lower-alpha">
 <li id="li-1933">
 <p id="p-4526">The percent increase in the price of butter is <span class="process-math">\(12\)</span>% every <span class="process-math">\(6\)</span> months. Therefore, the growth factor for the price of butter is <span class="process-math">\(1 + 0.12 = 1.12\)</span> every half-year. If <span class="process-math">\(P(t)\)</span> represents the price of butter after <span class="process-math">\(t\)</span> years, then <span class="process-math">\(P(0) = 2\text{,}\)</span> and every half-year we multiply the price by <span class="process-math">\(1.12\text{,}\)</span> as shown in the table.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:20%;margin-right:20%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-table-inflation.svg" role="img" class="contained" alt="table for inflation"></div></div></div>
@@ -869,10 +851,9 @@ P(t)\amp = 2(1.12)^{2t} \\
 <p class="continuation">Thus, the annual growth factor for the price of butter is <span class="process-math">\(1.2544\text{,}\)</span> and the annual percent growth rate is <span class="process-math">\(25.44\)</span>%.</p>
 <article class="exercise exercise-like" id="exercise-665"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-665"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.12</span><span class="period">.</span><span class="space"> </span><span class="title">Pause and Reflect.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-665"><article class="exercise exercise-like"><div id="webwork-34" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="34" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRnZiA9IFJhZGlvQnV0dG9ucygKICBbIlwoXGZyYWN7M317NH1cKSIsCiAgIlwoXHNxcnRbM117NH1cKSIsCiAgIlwoM140XCkiLAogICJcKDNee1xmcmFjezF9ezR9fVwpIl0sCiAgMywgCik7CgpCRUdJTl9QR01MCkEgcG9wdWxhdGlvbiB0cmlwbGVzIGV2ZXJ5IGZvdXIgeWVhcnMuIFdoYXQgaXMgaXRzIGFubnVhbCBncm93dGggZmFjdG9yPwoKICAgIFtfXXskZ2Z9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KW2AzXntcZnJhY3sxfXs0fX1gXQoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-665"><article class="exercise exercise-like"><div id="webwork-34" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="34" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRnZiA9IFJhZGlvQnV0dG9ucygKICBbIlwoXGZyYWN7M317NH1cKSIsCiAgIlwoXHNxcnRbM117NH1cKSIsCiAgIlwoM140XCkiLAogICJcKDNee1xmcmFjezF9ezR9fVwpIl0sCiAgMywgCik7CgpCRUdJTl9QR01MCkEgcG9wdWxhdGlvbiB0cmlwbGVzIGV2ZXJ5IGZvdXIgeWVhcnMuIFdoYXQgaXMgaXRzIGFubnVhbCBncm93dGggZmFjdG9yPwoKICAgIFtfXXskZ2Z9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KW2AzXntcZnJhY3sxfXs0fX1gXQoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4531">A population triples every four years. What is its annual growth factor?</p>
-<p id="p-4532"><ul style="list-style:circle;">
+<p id="p-4531">A population triples every four years. What is its annual growth factor?</p> <p id="p-4532"><ul style="list-style:circle;">
 <li id="li-1937"><p id="p-4533"><span class="process-math">\(\displaystyle \frac{3}{4}\)</span></p></li>
 <li id="li-1938"><p id="p-4534"><span class="process-math">\(\displaystyle \sqrt[3]{4}\)</span></p></li>
 <li id="li-1939"><p id="p-4535"><span class="process-math">\(\displaystyle 3^4\)</span></p></li>
@@ -882,7 +863,7 @@ P(t)\amp = 2(1.12)^{2t} \\
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-117" id="answer-117"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-117"><div class="answer solution-like"><p id="p-4537"><span class="process-math">\(\text{Choice 4}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-34')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-34')">Activate</button></div>
 </div></article></div></section><section class="subsection" id="subsection-137"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.4.4</span> <span class="title">Exponential Decay</span>
 </h3>
@@ -896,7 +877,7 @@ P(t) = P_0 b^t
 <article class="investigation project-like" id="investigation-exponential-decay"><h4 class="heading">
 <span class="type">Puzzle</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span><span class="space"> </span><span class="title">Exponential Decay.</span>
 </h4>
-<ol id="p-4540" class="decimal">
+<ol id="p-4540" class="upper-alpha">
 <li id="li-1941">
 <p id="p-4541">A small coal-mining town has been losing population since 1940, when 5000 people lived there. At each census thereafter (taken at 10-year intervals), the population declined to approximately 0.90 of its earlier figure.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
@@ -944,7 +925,7 @@ P(t) = P_0 b^t
 </tr>
 </table></div></div></div>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
-<div class="sbspanel middle" style="width:63.9175257731959%;"><ol id="p-4542" class="lower-alpha">
+<div class="sbspanel middle" style="width:63.9175257731959%;"><ol id="p-4542" class="decimal">
 <li id="li-1942"><p id="p-4543">Fill in the table showing the population <span class="process-math">\(P(t)\)</span> of the town <span class="process-math">\(t\)</span> years after 1940.</p></li>
 <li id="li-1943"><p id="p-4544">Plot the data points and connect them with a smooth curve.</p></li>
 <li id="li-1944">
@@ -959,7 +940,7 @@ P(t) = P_0 b^t
 </li>
 <li id="li-1947">
 <p id="p-4549">A plastic window coating <span class="process-math">\(1\)</span> millimeter thick decreases the light coming through a window by <span class="process-math">\(25\)</span>%. This means that <span class="process-math">\(75\)</span>% of the original amount of light comes through <span class="process-math">\(1\)</span> millimeter of the coating. Each additional millimeter of coating reduces the light by another <span class="process-math">\(25\)</span>%.</p>
-<ol id="p-4550" class="lower-alpha">
+<ol id="p-4550" class="decimal">
 <li id="li-1948"><p id="p-4551">Fill in the table showing the percent of the light, <span class="process-math">\(P(x)\text{,}\)</span> that shines through <span class="process-math">\(x\)</span> millimeters of the window coating.</p></li>
 <li id="li-1949">
 <p id="p-4552">Plot the data points and connect them with a smooth curve.</p>
@@ -1040,25 +1021,24 @@ b \amp = 1 - r \\
 <li id="li-1954"><p id="p-derived-li-1954">A percent decrease of <span class="process-math">\(r\)</span> produces a decay factor of <span class="process-math">\(b=1-r\text{.}\)</span></p></li>
 </ul></article><article class="exercise exercise-like" id="exercise-666"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-666"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.14</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 5.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-666"><article class="exercise exercise-like"><div id="webwork-35" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="35" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJjb250ZXh0RnJhY3Rpb24ucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dChGcmFjdGlvbiktPnZhcmlhYmxlcy0+YWRkKHQ9PiJSZWFsIik7CiRhID0gQ29tcHV0ZSgiMioqKDEvNSkiKTsKJHQxID0gMTsKJHQyID0gMjsKJGYgPSBGb3JtdWxhKCI1MDc4KjIqKih0LzUpIik7CiRuMSA9ICRmLT5ldmFsKHQ9PiR0MSk7CiRuMiA9ICRmLT5ldmFsKHQ9PiR0Mik7CgpCRUdJTl9QR01MCkluIDE5OTksIGFuYWx5c3RzIGV4cGVjdGVkIHRoZSBudW1iZXIgb2YgSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnMgdG8gZG91YmxlIGluIGZpdmUgeWVhcnMuCmEuICBXaGF0IHdhcyB0aGUgYW5udWFsIGdyb3d0aCBmYWN0b3IgZm9yIHRoZSBudW1iZXIgb2YgSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnM/CgogICAgQW5zd2VyOiBbX117JGF9ezV9CgoKYS4gIElmIHRoZXJlIHdlcmUgW2A1MDc4YF0gSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnMgaW4gQXByaWwgMTk5OSwgZXN0aW1hdGUgdGhlIG51bWJlciBvZiBwcm92aWRlcnMgaW4gQXByaWwgMjAwMCBhbmQgaW4gQXByaWwgMjAwMS4KCiAgICBBcHJpbCAyMDAwOiBbX117JG4xfXs0fQoKICAgIEFwcmlsIDIwMDE6IFtfXXskbjJ9ezR9CgoKYS4gIFdyaXRlIGEgZm9ybXVsYSBmb3IgW2BJICh0KVx0ZXh0eyx9YF0gdGhlIG51bWJlciBvZiBJbnRlcm5ldCBzZXJ2aWNlIHByb3ZpZGVycyBbYHRgXSB5ZWFycyBhZnRlciAxOTk5LgoKICAgIFtgSSh0KT1gXVtfXXskZn17MTB9CgpTb3VyY2U6IExBIFRpbWVzLCBTZXB0LiA2LCAxOTk5CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KYS4gIFtgMl57MS81fWBdCgoKYS4gIFtgNTgzM2BdIGFuZCBbYDY3MDBgXQoKCmEuICBbYEkgKHQpID0gNTA3OFxjZG90IDJee3QvNX1gXQoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-666"><article class="exercise exercise-like"><div id="webwork-35" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="35" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJjb250ZXh0RnJhY3Rpb24ucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dChGcmFjdGlvbiktPnZhcmlhYmxlcy0+YWRkKHQ9PiJSZWFsIik7CiRhID0gQ29tcHV0ZSgiMioqKDEvNSkiKTsKJHQxID0gMTsKJHQyID0gMjsKJGYgPSBGb3JtdWxhKCI1MDc4KjIqKih0LzUpIik7CiRuMSA9ICRmLT5ldmFsKHQ9PiR0MSk7CiRuMiA9ICRmLT5ldmFsKHQ9PiR0Mik7CgpCRUdJTl9QR01MCkluIDE5OTksIGFuYWx5c3RzIGV4cGVjdGVkIHRoZSBudW1iZXIgb2YgSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnMgdG8gZG91YmxlIGluIGZpdmUgeWVhcnMuCmEuICBXaGF0IHdhcyB0aGUgYW5udWFsIGdyb3d0aCBmYWN0b3IgZm9yIHRoZSBudW1iZXIgb2YgSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnM/CgogICAgQW5zd2VyOiBbX117JGF9ezV9CgoKYS4gIElmIHRoZXJlIHdlcmUgW2A1MDc4YF0gSW50ZXJuZXQgc2VydmljZSBwcm92aWRlcnMgaW4gQXByaWwgMTk5OSwgZXN0aW1hdGUgdGhlIG51bWJlciBvZiBwcm92aWRlcnMgaW4gQXByaWwgMjAwMCBhbmQgaW4gQXByaWwgMjAwMS4KCiAgICBBcHJpbCAyMDAwOiBbX117JG4xfXs0fQoKICAgIEFwcmlsIDIwMDE6IFtfXXskbjJ9ezR9CgoKYS4gIFdyaXRlIGEgZm9ybXVsYSBmb3IgW2BJICh0KVx0ZXh0eyx9YF0gdGhlIG51bWJlciBvZiBJbnRlcm5ldCBzZXJ2aWNlIHByb3ZpZGVycyBbYHRgXSB5ZWFycyBhZnRlciAxOTk5LgoKICAgIFtgSSh0KT1gXVtfXXskZn17MTB9CgpTb3VyY2U6IExBIFRpbWVzLCBTZXB0LiA2LCAxOTk5CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KYS4gIFtgMl57MS81fWBdCgoKYS4gIFtgNTgzM2BdIGFuZCBbYDY3MDBgXQoKCmEuICBbYEkgKHQpID0gNTA3OFxjZG90IDJee3QvNX1gXQoKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
 <p id="p-4558">In 1999, analysts expected the number of Internet service providers to double in five years.</p>
 <ol class="lower-alpha">
 <li id="li-1955">
 <p id="p-4559">What was the annual growth factor for the number of Internet service providers?</p>
-<p id="p-4560">Answer: <span class="fillin" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span></p>
+<p id="p-4560">Answer: <span class="fillin underline" role="img" aria-label="5-character blank" style="width: 2.272727272727273em;"></span></p>
 </li>
 <li id="li-1956">
 <p id="p-4561">If there were <span class="process-math">\(5078\)</span> Internet service providers in April 1999, estimate the number of providers in April 2000 and in April 2001.</p>
-<p id="p-4562">April 2000: <span class="fillin" role="img" aria-label="4-character blank" style="width: 1.818181818181818em;"></span></p>
-<p id="p-4563">April 2001: <span class="fillin" role="img" aria-label="4-character blank" style="width: 1.818181818181818em;"></span></p>
+<p id="p-4562">April 2000: <span class="fillin underline" role="img" aria-label="4-character blank" style="width: 1.818181818181818em;"></span></p>
+<p id="p-4563">April 2001: <span class="fillin underline" role="img" aria-label="4-character blank" style="width: 1.818181818181818em;"></span></p>
 </li>
 <li id="li-1957">
 <p id="p-4564">Write a formula for <span class="process-math">\(I (t)\text{,}\)</span> the number of Internet service providers <span class="process-math">\(t\)</span> years after 1999.</p>
-<p id="p-4565"><span class="process-math">\(I(t)=\)</span><span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
+<p id="p-4565"><span class="process-math">\(I(t)=\)</span><span class="fillin underline" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span></p>
 </li>
-</ol>
-<p id="p-4566">Source: LA Times, Sept. 6, 1999</p>
+</ol> <p id="p-4566">Source: LA Times, Sept. 6, 1999</p>
 <div class="solutions">
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-118" id="answer-118"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">1</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-118"><div class="answer solution-like"><p id="p-4567"><span class="process-math">\(2^{{\frac{1}{5}}}\)</span></p></div></div>
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-119" id="answer-119"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">2</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-119"><div class="answer solution-like"><p id="p-4568"><span class="process-math">\(5833.09\)</span></p></div></div>
@@ -1066,19 +1046,19 @@ b \amp = 1 - r \\
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-121" id="answer-121"><span class="type">Answer</span><span class="space"> </span><span class="codenumber">4</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-121"><div class="answer solution-like"><p id="p-4570"><span class="process-math">\(5078\cdot 2^{\frac{t}{5}}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-35')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-35')">Activate</button></div>
 </div></article></div>
 <article class="example example-like" id="example-computing-prices"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.15</span><span class="period">.</span>
 </h4>
 <p id="p-4575">David Reed writes in Context magazine: "Computing prices have been falling exponentially—50% every 18 months—for the past 30 years and will probably stay on that curve for another couple of decades." An accounting firm invests $50,000 in new computer equipment.</p>
-<ol class="decimal">
+<ol class="lower-alpha">
 <li id="li-1961"><p id="p-4576">Write a formula for the value of the equipment <span class="process-math">\(t\)</span> years from now.</p></li>
 <li id="li-1962"><p id="p-4577">By what percent does the equipment depreciate each year?</p></li>
 <li id="li-1963"><p id="p-4578">What will the equipment be worth in <span class="process-math">\(5\)</span> years?</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-440" id="solution-440"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-440"><div class="solution solution-like"><ol id="p-4579" class="decimal">
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-440" id="solution-440"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-440"><div class="solution solution-like"><ol id="p-4579" class="lower-alpha">
 <li id="li-1964">
 <p id="p-4580">The initial value of the equipment is <span class="process-math">\(V_0 = 50,000\text{.}\)</span> Every <span class="process-math">\(18\)</span> months, the value of the equipment is multiplied by</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
@@ -1112,7 +1092,7 @@ V(\alert{5}) = 50,000(0.50)^{\alert{5}/1.5} = 4960.628
 <p class="continuation">To the nearest dollar, the equipment is worth $4961.</p>
 </li>
 </ol></div></div>
-</div></article><article class="exercise exercise-like" id="exercise-667"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-667"><h4 class="heading">
+</div></article><article class="exercise exercise-like" id="exercise-667"><a href="" data-knowl="" class="id-ref exercise-knowl original has-image" data-refid="hk-exercise-667"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.16</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 4.</span>
 </h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-667"><article class="exercise exercise-like"><div class="introduction" id="introduction-116"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:10%;"><div class="sbspanel top" style="width:44.4444444444444%;"><img src="generated/latex-image/fig-ex-7-1-4.svg" role="img" class="contained" alt="grid"></div></div></div></div>
 <div class="conclusion" id="conclusion-6"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:10%;"><div class="sbspanel top" style="width:44.4444444444444%;"><img src="generated/latex-image/fig-ex-7-1-4ans.svg" role="img" class="contained" alt="grid"></div></div></div></div></article></div>
@@ -1134,10 +1114,9 @@ P(t) = P_0 b^t
 <li id="li-1970"><p id="p-4587">If <span class="process-math">\(0 \lt b \lt 1\text{,}\)</span> then <span class="process-math">\(P(t)\)</span> is decreasing, and <span class="process-math">\(b = 1 - r\text{,}\)</span> where <span class="process-math">\(r\)</span> represents percent decrease.</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-668"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-668"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.17</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 6.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-668"><article class="exercise exercise-like"><div id="webwork-36" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="36" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRnZnAgPSBSYWRpb0J1dHRvbnMoCiAgWyI0LjUiLAogICIwLjQ1IiwKICAiMC4wNDUiLAogICIxLjA0NSJdLAogIDMsIAopOwoKQkVHSU5fUEdNTApBIHBvcHVsYXRpb24gZ3Jvd3MgYnkgNC41JSBwZXIgeWVhci4gV2hhdCBpcyBpdHMgYW5udWFsIGdyb3d0aCBmYWN0b3I/CgogICAgW19deyRnZnB9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KMS4wNDUKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-668"><article class="exercise exercise-like"><div id="webwork-36" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="36" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRnZnAgPSBSYWRpb0J1dHRvbnMoCiAgWyI0LjUiLAogICIwLjQ1IiwKICAiMC4wNDUiLAogICIxLjA0NSJdLAogIDMsIAopOwoKQkVHSU5fUEdNTApBIHBvcHVsYXRpb24gZ3Jvd3MgYnkgNC41JSBwZXIgeWVhci4gV2hhdCBpcyBpdHMgYW5udWFsIGdyb3d0aCBmYWN0b3I/CgogICAgW19deyRnZnB9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KMS4wNDUKCgpFTkRfUEdNTF9TT0xVVElPTgoKRU5ERE9DVU1FTlQoKTs=" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4588">A population grows by 4.5% per year. What is its annual growth factor?</p>
-<p id="p-4589"><ul style="list-style:circle;">
+<p id="p-4588">A population grows by 4.5% per year. What is its annual growth factor?</p> <p id="p-4589"><ul style="list-style:circle;">
 <li id="li-1971"><p id="p-4590">4.5</p></li>
 <li id="li-1972"><p id="p-4591">0.45</p></li>
 <li id="li-1973"><p id="p-4592">0.045</p></li>
@@ -1147,7 +1126,7 @@ P(t) = P_0 b^t
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-122" id="answer-122"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-122"><div class="answer solution-like"><p id="p-4594"><span class="process-math">\(\text{1.045}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-36')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-36')">Activate</button></div>
 </div></article></div></section><section class="subsection" id="subsection-139"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">5.4.6</span> <span class="title">Comparing Linear Growth and Exponential Growth</span>
 </h3>
@@ -1223,21 +1202,21 @@ L(t) = 5 + 2t ~\text{ and } ~ E(t) = 5 \cdot 2^t ~~~ (t \ge 0)
 <p id="p-4600">However, for each unit increase in <span class="process-math">\(t\text{,}\)</span> <span class="process-math">\(2\)</span> units are <em class="emphasis">added</em> to the value of <span class="process-math">\(L(t)\text{,}\)</span> whereas the value of <span class="process-math">\(E(t)\)</span> is <em class="emphasis">multiplied</em> by <span class="process-math">\(2\text{.}\)</span> An exponential function with growth factor <span class="process-math">\(2\)</span> eventually grows much more rapidly than a linear function with slope <span class="process-math">\(2\text{,}\)</span> as you can see by comparing the graphs in the figure or the function values in the tables.</p>
 <article class="exercise exercise-like" id="exercise-669"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-669"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.18</span><span class="period">.</span><span class="space"> </span><span class="title">QuickCheck 7.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-669"><article class="exercise exercise-like"><div id="webwork-37" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="37" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKRGVzY3JpYmUgY2FyZWZ1bGx5IHRoZSBtZWFuaW5ncyBvZiBbYGJgXSBhbmQgW2ByYF0gaW4gdGhlIGZvcm11bGFzIGZvciBleHBvbmVudGlhbCBncm93dGguCgpbQEFOUyhlc3NheV9jbXAoKSk7ZXNzYXlfYm94KDYsNzYpQF0qIFtAZXNzYXlfaGVscCgpQF0qCgoKRU5EX1BHTUwKCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-669"><article class="exercise exercise-like"><div id="webwork-37" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="37" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJQR2Vzc2F5bWFjcm9zLnBsIiwiUEdjb3Vyc2UucGwiLCk7VEVYVChiZWdpbnByb2JsZW0oKSk7CkNvbnRleHQoJ051bWVyaWMnKTsKCkJFR0lOX1BHTUwKRGVzY3JpYmUgY2FyZWZ1bGx5IHRoZSBtZWFuaW5ncyBvZiBbYGJgXSBhbmQgW2ByYF0gaW4gdGhlIGZvcm11bGFzIGZvciBleHBvbmVudGlhbCBncm93dGguCgpbQEFOUyhlc3NheV9jbXAoKSk7ZXNzYXlfYm94KDYsNzYpQF0qIFtAZXNzYXlfaGVscCgpQF0qCgoKRU5EX1BHTUwKCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents"><p id="p-4601">Describe carefully the meanings of <span class="process-math">\(b\)</span> and <span class="process-math">\(r\)</span> in the formulas for exponential growth.</p></div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-37')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-37')">Activate</button></div>
 </div></article></div>
 <article class="example example-like" id="example-compare-linear-vs-exponential"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">5.4.19</span><span class="period">.</span>
 </h4>
 <p id="p-4602">A solar energy company sold $<span class="process-math">\(80,000\)</span> worth of solar collectors last year, its first year of operation. This year its sales rose to $<span class="process-math">\(88,000\text{,}\)</span> an increase of <span class="process-math">\(10\)</span>%. The marketing department must estimate its projected sales for the next <span class="process-math">\(3\)</span> years.</p>
-<ol class="decimal">
+<ol class="lower-alpha">
 <li id="li-1975"><p id="p-4603">If the marketing department predicts that sales will grow linearly, what should it expect the sales total to be next year? Graph the projected sales figures over the next <span class="process-math">\(3\)</span> years, assuming that sales will grow linearly.</p></li>
 <li id="li-1976"><p id="p-4604">If the marketing department predicts that sales will grow exponentially, what should it expect the sales total to be next year? Graph the projected sales figures over the next <span class="process-math">\(3\)</span> years, assuming that sales will grow exponentially.</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-442" id="solution-442"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-442"><div class="solution solution-like">
-<ol id="p-4605" class="decimal">
+<a href="" data-knowl="" class="id-ref solution-knowl original has-image has-tabular" data-refid="hk-solution-442" id="solution-442"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-442"><div class="solution solution-like">
+<ol id="p-4605" class="lower-alpha">
 <li id="li-1977">
 <p id="p-4606">Let <span class="process-math">\(L(t)\)</span> represent the company's total sales <span class="process-math">\(t\)</span> years after starting business, where <span class="process-math">\(t = 0\)</span> is the first year of operation. If sales grow linearly, then <span class="process-math">\(L(t)\)</span> has the form <span class="process-math">\(L(t) = b + mt.\)</span> Now <span class="process-math">\(L(0) = 80,000\text{,}\)</span> so the intercept <span class="process-math">\(b\)</span> is <span class="process-math">\(80,000\text{.}\)</span> The slope <span class="process-math">\(m\)</span> of the graph is</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
@@ -1268,9 +1247,7 @@ E(2) = 80,000(1.10)^2= 96,800
 \end{equation*}
 </div>
 </li>
-</ol>
-<p id="p-4608">We evaluate each function at several points to obtain the graphs shown in the figure.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
+</ol> <p id="p-4608">We evaluate each function at several points to obtain the graphs shown in the figure.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:2.5%;margin-right:2.5%;">
 <div class="sbspanel fixed-width top" style="width:47.3684210526316%;"><table class="tabular">
 <tr>
 <td class="c m b1 r1 l1 t3 lines"><span class="process-math">\(t\)</span></td>
@@ -1308,10 +1285,9 @@ E(2) = 80,000(1.10)^2= 96,800
 </div></div>
 </div></article><article class="exercise exercise-like" id="exercise-670"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-670"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.20</span><span class="period">.</span><span class="space"> </span><span class="title">Practice 5.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-670"><article class="exercise exercise-like"><div id="webwork-38" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="38" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRkZnAgPSBSYWRpb0J1dHRvbnMoCiAgWyItMC4xMiIsCiAgIi0xLjEyIiwKICAiMC44OCIsCiAgIjEuODgiXSwKICAyLCAKKTsKCkJFR0lOX1BHTUwKQSBwb3B1bGF0aW9uIGRlY3JlYXNlcyBieSAxMiUgcGVyIHllYXIuIFdoYXQgaXMgaXRzIGFubnVhbCBkZWNheSBmYWN0b3I/CgogICAgW19deyRkZnB9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KMC44OAoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-670"><article class="exercise exercise-like"><div id="webwork-38" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="38" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRkZnAgPSBSYWRpb0J1dHRvbnMoCiAgWyItMC4xMiIsCiAgIi0xLjEyIiwKICAiMC44OCIsCiAgIjEuODgiXSwKICAyLCAKKTsKCkJFR0lOX1BHTUwKQSBwb3B1bGF0aW9uIGRlY3JlYXNlcyBieSAxMiUgcGVyIHllYXIuIFdoYXQgaXMgaXRzIGFubnVhbCBkZWNheSBmYWN0b3I/CgogICAgW19deyRkZnB9ezV9CgoKRU5EX1BHTUwKCkJFR0lOX1BHTUxfU09MVVRJT04KMC44OAoKCkVORF9QR01MX1NPTFVUSU9OCgpFTkRET0NVTUVOVCgpOw==" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4609">A population decreases by 12% per year. What is its annual decay factor?</p>
-<p id="p-4610"><ul style="list-style:circle;">
+<p id="p-4609">A population decreases by 12% per year. What is its annual decay factor?</p> <p id="p-4610"><ul style="list-style:circle;">
 <li id="li-1979"><p id="p-4611">-0.12</p></li>
 <li id="li-1980"><p id="p-4612">-1.12</p></li>
 <li id="li-1981"><p id="p-4613">0.88</p></li>
@@ -1321,14 +1297,13 @@ E(2) = 80,000(1.10)^2= 96,800
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-123" id="answer-123"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-123"><div class="answer solution-like"><p id="p-4615"><span class="process-math">\(\text{0.88}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-38')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-38')">Activate</button></div>
 </div></article></div>
 <article class="exercise exercise-like" id="exercise-671"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-671"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.4.21</span><span class="period">.</span><span class="space"> </span><span class="title">Pause and Reflect.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-671"><article class="exercise exercise-like"><div id="webwork-39" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="39" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKVEVYVChNT0RFUyhQVFg9PicnLEhUTUw9Pic8ZGl2IHN0eWxlPSJkaXNwbGF5Om5vbmU7Ij5cKFxuZXdjb21tYW5ke1xsdH17PH1cKTwvZGl2PicpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRkZm4gPSBSYWRpb0J1dHRvbnMoCiAgWyJcKFBfMFwpIGlzIG5lZ2F0aXZlIiwKICAiXChiXCkgaXMgbmVnYXRpdmUiLAogICJcKDAgXGx0IGIgXGx0IDFcKSIsCiAgIlwoMCBcbHQgUF8wIFxsdCAxXCkiXSwKICAyLCAKKTsKCkJFR0lOX1BHTUwKVGhlIGZ1bmN0aW9uIFtgUCh0KT1QXzAgYl50YF0gaXMgZGVjcmVhc2luZyBpZgoKICAgIFtfXXskZGZufXs1fQoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCltgMCBcbHQgYiBcbHQgMWBdCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-671"><article class="exercise exercise-like"><div id="webwork-39" class="exercise-wrapper" data-domain="https://webwork-ptx.aimath.org" data-seed="39" data-localize-correct="Correct" data-localize-incorrect="Incorrect" data-localize-blank="Blank" data-localize-submit="Submit" data-localize-check-responses="Check Responses" data-localize-reveal="Reveal" data-localize-randomize="Randomize" data-localize-reset="Reset" data-problemSource="RE9DVU1FTlQoKTsKbG9hZE1hY3JvcygiUEdzdGFuZGFyZC5wbCIsIk1hdGhPYmplY3RzLnBsIiwiUEdNTC5wbCIsIkFuc3dlckZvcm1hdEhlbHAucGwiLCJwYXJzZXJSYWRpb0J1dHRvbnMucGwiLCJQR2NvdXJzZS5wbCIsKTtURVhUKGJlZ2lucHJvYmxlbSgpKTsKVEVYVChNT0RFUyhQVFg9PicnLEhUTUw9Pic8ZGl2IHN0eWxlPSJkaXNwbGF5Om5vbmU7Ij5cKFxuZXdjb21tYW5ke1xsdH17PH1cKTwvZGl2PicpKTsKQ29udGV4dCgnTnVtZXJpYycpOyRkZm4gPSBSYWRpb0J1dHRvbnMoCiAgWyJcKFBfMFwpIGlzIG5lZ2F0aXZlIiwKICAiXChiXCkgaXMgbmVnYXRpdmUiLAogICJcKDAgXGx0IGIgXGx0IDFcKSIsCiAgIlwoMCBcbHQgUF8wIFxsdCAxXCkiXSwKICAyLCAKKTsKCkJFR0lOX1BHTUwKVGhlIGZ1bmN0aW9uIFtgUCh0KT1QXzAgYl50YF0gaXMgZGVjcmVhc2luZyBpZgoKICAgIFtfXXskZGZufXs1fQoKCkVORF9QR01MCgpCRUdJTl9QR01MX1NPTFVUSU9OCltgMCBcbHQgYiBcbHQgMWBdCgoKRU5EX1BHTUxfU09MVVRJT04KCkVORERPQ1VNRU5UKCk7" data-courseID="anonymous" data-userID="anonymous" data-coursePassword="anonymous" aria-live="polite">
 <div class="problem-contents">
-<p id="p-4617">The function <span class="process-math">\(P(t)=P_0 b^t\)</span> is decreasing if</p>
-<p id="p-4618"><ul style="list-style:circle;">
+<p id="p-4617">The function <span class="process-math">\(P(t)=P_0 b^t\)</span> is decreasing if</p> <p id="p-4618"><ul style="list-style:circle;">
 <li id="li-1983"><p id="p-4619"><span class="process-math">\(P_0\)</span> is negative</p></li>
 <li id="li-1984"><p id="p-4620"><span class="process-math">\(b\)</span> is negative</p></li>
 <li id="li-1985"><p id="p-4621"><span class="process-math">\(\displaystyle 0 \lt b \lt 1\)</span></p></li>
@@ -1338,7 +1313,7 @@ E(2) = 80,000(1.10)^2= 96,800
 <a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-124" id="answer-124"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-124"><div class="answer solution-like"><p id="p-4623"><span class="process-math">\(\text{Choice 3}\)</span></p></div></div>
 </div>
 </div>
-<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-39')">Make Interactive</button></div>
+<div class="problem-buttons"><button class="webwork-button" onclick="handleWW('webwork-39')">Activate</button></div>
 </div></article></div></section><section class="exercises" id="section-4-1-exercises"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber">5.4.7</span> <span class="title">Homework 4.1</span>
 </h3>
@@ -1373,8 +1348,7 @@ E(2) = 80,000(1.10)^2= 96,800
 <li id="li-2003"><p id="p-4653">Write a formula for the population if it grows by <span class="process-math">\(6000\)</span> people per year. What is the population after <span class="process-math">\(2\)</span> years?</p></li>
 <li id="li-2004"><p id="p-4654">Write a formula for the population if grows by <span class="process-math">\(6\%\)</span> per year. What is the population after <span class="process-math">\(2\)</span> years?</p></li>
 </ol></article><article class="exercise exercise-like" id="exercise-680"><h4 class="heading"><span class="codenumber">9<span class="period">.</span></span></h4>
-<p id="p-4655">The table shows the growth factor for a number of different populations. For each population, find the percent growth rate.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-4655">The table shows the growth factor for a number of different populations. For each population, find the percent growth rate.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="l m b1 r1 l1 t1 lines">Population</td>
 <td class="c m b1 r1 l0 t1 lines"><span class="process-math">\(A\)</span></td>
@@ -1400,8 +1374,7 @@ E(2) = 80,000(1.10)^2= 96,800
 <td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(\hphantom{00000}\)</span></td>
 </tr>
 </table></div></div></div></article><article class="exercise exercise-like" id="exercise-681"><h4 class="heading"><span class="codenumber">10<span class="period">.</span></span></h4>
-<p id="p-4657">The table shows the decay factor for a number of different populations. For each population, find the percent growth rate.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-4657">The table shows the decay factor for a number of different populations. For each population, find the percent growth rate.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr>
 <td class="l m b1 r1 l1 t1 lines">Population</td>
 <td class="c m b1 r1 l0 t1 lines"><span class="process-math">\(A\)</span></td>

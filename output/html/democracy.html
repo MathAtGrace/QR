@@ -58,7 +58,7 @@ window.MathJax = {
 },
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2.17/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
 <script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -70,6 +70,37 @@ window.MathJax = {
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '5.0.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runtime.13cbde9fc055c1d2.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/637.d54be67956c5c660.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runestone.69ee59b4f155095b.bundle.js"></script><link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/637.0fa6cababf056764.css">
+<link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/runestone.93e720e6c6581fb5.css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -186,7 +217,6 @@ true);
 <a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
 <li><a href="sec-models-slope.html" data-scroll="sec-models-slope" class="internal">Slope and Rate of Change</a></li>
 <li><a href="sec-models-lin-fun.html" data-scroll="sec-models-lin-fun" class="internal">Linear Functions</a></li>
-<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
 <li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
 <li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
 <li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
@@ -214,23 +244,23 @@ true);
 <section class="chapter" id="democracy"><h2 class="heading">
 <span class="type">Chapter</span> <span class="codenumber">6</span> <span class="title">Democracy</span>
 </h2>
-<section class="introduction" id="introduction-130"><h2 class="heading">Dr. Graciela Chichilnisky and Social Choice.<span></span>
+<section class="introduction" id="introduction-124"><h2 class="heading">Dr. Graciela Chichilnisky and Social Choice.<span></span>
 </h2> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
 <div class="sbspanel top" style="width:63%;">
-<p id="p-5227">Dr. Graciela Chichilnisky<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-66" id="fn-66"><sup> 66 </sup></a> is a professor of Economics and Mathematical Statistics at Columbia University. She holds Ph.D. degrees in Mathematics and Economics from MIT and the University of California Berkeley.</p>
-<p id="p-5228">Dr. Chichilnisky applied algebraic topology to voting theory and the theory of social choice. She accounted for not only the order of voting preference but also the intensity of preference among the alternatives (Chichilnisky, 1980). Due to her innovative work in this area, continuous social choice has become an international subdiscipline.</p>
-<p id="p-5229">More recently, Dr. Chichilnisky combined her research in math and economics to focus on climate change. Dr. Chichilnisky acted as the lead author on the Intergovernmental Panel on Climate Change, which received the 2007 Nobel Prize for its work in deciding world policy with respect to climate change, and she worked extensively on the Kyoto Protocol, creating and designing the carbon market that became international law in 2005 (Siegle, 2010).</p>
+<p id="p-5054">Dr. Graciela Chichilnisky<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-65" id="fn-65"><sup> 65 </sup></a> is a professor of Economics and Mathematical Statistics at Columbia University. She holds Ph.D. degrees in Mathematics and Economics from MIT and the University of California Berkeley.</p>
+<p id="p-5055">Dr. Chichilnisky applied algebraic topology to voting theory and the theory of social choice. She accounted for not only the order of voting preference but also the intensity of preference among the alternatives (Chichilnisky, 1980). Due to her innovative work in this area, continuous social choice has become an international subdiscipline.</p>
+<p id="p-5056">More recently, Dr. Chichilnisky combined her research in math and economics to focus on climate change. Dr. Chichilnisky acted as the lead author on the Intergovernmental Panel on Climate Change, which received the 2007 Nobel Prize for its work in deciding world policy with respect to climate change, and she worked extensively on the Kyoto Protocol, creating and designing the carbon market that became international law in 2005 (Siegle, 2010).</p>
 </div>
 <div class="sbspanel top" style="width:35%;"><img src="external/democracy/5_1/gc_pic.png" class="contained" alt="A photo of Dr. Graciela Chichilnisky"></div>
-</div></div> <p id="p-5230">As a world-renowned economist, she is the creator of the formal theory of Sustainable Development (Siegle, 2010). Her pioneering work uses innovative market mechanisms to create Green Capitalism.</p> <p id="p-5231">Dr. Chichilnisky is the CEO and Co-founder of Global Thermostat<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-67" id="fn-67"><sup> 67 </sup></a>, a company in which she co-invented a “Carbon Negative Technology” that captures CO2 from the air and transforms it into profitable assets such as biofuels, food, beverages, polymers, and valuable building materials (Chichilnisky, 2018).</p> <p id="p-5232">Dr. Chichilnisky taught previously at Harvard, Essex and Stanford Universities. She was elected one of the Ten Most Influential Latinos in the U.S. She is a frequent political and economic speaker on CNN, ABC, BBC TV News, and Bloomberg News, as well as a frequent keynote speaker at leading international conferences and universities. Her two most recent books are “Reversing Climate Change: How Carbon Removals Can Resolve Climate Change and Fix the Economy” and “The Economics of Climate Change”. Dr. Chichilnisky is also the author of “Saving Kyoto”, which won the American Library Association's 2010 Outstanding Academic Title of the Year and the American Geographical Society's Book of the Month Award in October 2009.</p></section><nav class="summary-links"><ul>
+</div></div> <p id="p-5057">As a world-renowned economist, she is the creator of the formal theory of Sustainable Development (Siegle, 2010). Her pioneering work uses innovative market mechanisms to create Green Capitalism.</p> <p id="p-5058">Dr. Chichilnisky is the CEO and Co-founder of Global Thermostat<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-66" id="fn-66"><sup> 66 </sup></a>, a company in which she co-invented a “Carbon Negative Technology” that captures CO2 from the air and transforms it into profitable assets such as biofuels, food, beverages, polymers, and valuable building materials (Chichilnisky, 2018).</p> <p id="p-5059">Dr. Chichilnisky taught previously at Harvard, Essex and Stanford Universities. She was elected one of the Ten Most Influential Latinos in the U.S. She is a frequent political and economic speaker on CNN, ABC, BBC TV News, and Bloomberg News, as well as a frequent keynote speaker at leading international conferences and universities. Her two most recent books are “Reversing Climate Change: How Carbon Removals Can Resolve Climate Change and Fix the Economy” and “The Economics of Climate Change”. Dr. Chichilnisky is also the author of “Saving Kyoto”, which won the American Library Association's 2010 Outstanding Academic Title of the Year and the American Geographical Society's Book of the Month Award in October 2009.</p></section><nav class="summary-links"><ul>
 <li><a href="sec-democracy-apportionment.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Apportionment</span></a></li>
 <li><a href="sec-democracy-voting.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Voting Methods</span></a></li>
 <li><a href="sec-democracy-popular-vote.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The Popular Vote, Electoral College and Electoral Power</span></a></li>
 <li><a href="sec-democracy-gerrymandering.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Gerrymandering and How to Measure It</span></a></li>
 <li><a href="chap_five_review.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Chapter 5 Review</span></a></li>
 <li><a href="chap_five_budget_deficit_debt.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Federal Budget, Deficit and National Debt</span></a></li>
-</ul></nav></section><div class="hidden-content tex2jax_ignore" id="hk-fn-66"><div class="fn">Photo: ©Michael Timmons. All rights reserved, used with permission.</div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-67"><div class="fn"><a class="external" href="https://globalthermostat.com/" target="_blank"><code class="code-inline tex2jax_ignore">https://globalthermostat.com/</code></a></div></div>
+</ul></nav></section><div class="hidden-content tex2jax_ignore" id="hk-fn-65"><div class="fn">Photo: ©Michael Timmons. All rights reserved, used with permission.</div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-66"><div class="fn"><a class="external" href="https://globalthermostat.com/" target="_blank"><code class="code-inline tex2jax_ignore">https://globalthermostat.com/</code></a></div></div>
 </div></main>
 </div>
 </body>

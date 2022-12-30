@@ -58,7 +58,7 @@ window.MathJax = {
 },
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2.17/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
 <script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -70,6 +70,37 @@ window.MathJax = {
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '5.0.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runtime.13cbde9fc055c1d2.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/637.d54be67956c5c660.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runestone.69ee59b4f155095b.bundle.js"></script><link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/637.0fa6cababf056764.css">
+<link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/runestone.93e720e6c6581fb5.css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -186,7 +217,6 @@ true);
 <a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
 <li><a href="sec-models-slope.html" data-scroll="sec-models-slope" class="internal">Slope and Rate of Change</a></li>
 <li><a href="sec-models-lin-fun.html" data-scroll="sec-models-lin-fun" class="internal">Linear Functions</a></li>
-<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
 <li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
 <li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
 <li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
@@ -213,23 +243,23 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="section" id="chap_five_review"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.5</span> <span class="title">Chapter 5 Review</span>
 </h2>
-<section class="exercises" id="exercises-21"><h3 class="heading hide-type">
+<section class="exercises" id="exercises-20"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber"></span> <span class="title">Review Exercises</span>
 </h3>
-<div class="exercisegroup" id="exercisegroup-93">
+<div class="exercisegroup" id="exercisegroup-92">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-142">
-<p id="p-6151">In exercises 1-4, determine the apportionment using</p>
+<div class="introduction" id="introduction-136">
+<p id="p-5978">In exercises 1-4, determine the apportionment using</p>
 <ol class="lower-alpha">
-<li id="li-2719"><p id="p-6152">Hamilton’s Method</p></li>
-<li id="li-2720"><p id="p-6153">Jefferson’s Method</p></li>
-<li id="li-2721"><p id="p-6154">Webster’s Method</p></li>
-<li id="li-2722"><p id="p-6155">Huntington-Hill Method</p></li>
+<li id="li-2603"><p id="p-5979">Hamilton’s Method</p></li>
+<li id="li-2604"><p id="p-5980">Jefferson’s Method</p></li>
+<li id="li-2605"><p id="p-5981">Webster’s Method</p></li>
+<li id="li-2606"><p id="p-5982">Huntington-Hill Method</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-878"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
-<p id="p-6156">A small country consists of four states, whose populations are listed below. If the legislature has 78 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-847"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
+<p id="p-5983">A small country consists of four states, whose populations are listed below. If the legislature has 78 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -242,9 +272,9 @@ true);
 <td class="c m b1 r1 l0 t0 lines">119,900</td>
 <td class="c m b1 r1 l0 t0 lines">384,900</td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-879"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
-<p id="p-6162">Reapportion the previous problem with 90 seats.</p></article><article class="exercise exercise-like" id="exercise-880"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
-<p id="p-6168">A small country consists of five states, whose populations are listed below. If the legislature as 100 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-848"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
+<p id="p-5989">Reapportion the previous problem with 90 seats.</p></article><article class="exercise exercise-like" id="exercise-849"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
+<p id="p-5995">A small country consists of five states, whose populations are listed below. If the legislature as 100 seats, apportion the seats.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">A</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">B</th>
@@ -259,26 +289,26 @@ true);
 <td class="c m b1 r1 l0 t0 lines">257,300</td>
 <td class="c m b1 r1 l0 t0 lines">104,300</td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-881"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
-<p id="p-6174">Reapportion the previous problem with 125 seats.</p></article>
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-850"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
+<p id="p-6001">Reapportion the previous problem with 125 seats.</p></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-94">
+<div class="exercisegroup" id="exercisegroup-93">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-143">
-<p id="p-6180">In exercises 5-8, complete the following:</p>
+<div class="introduction" id="introduction-137">
+<p id="p-6007">In exercises 5-8, complete the following:</p>
 <ol class="lower-alpha">
-<li id="li-2739"><p id="p-6181">How many voters voted in this election?</p></li>
-<li id="li-2740"><p id="p-6182">How many votes are needed for a majority?</p></li>
-<li id="li-2741"><p id="p-6183">Find the winner under the plurality method.</p></li>
-<li id="li-2742"><p id="p-6184">Find the winner under the Instant Runoff Voting method.</p></li>
-<li id="li-2743"><p id="p-6185">Find the winner under the Borda Count Method.</p></li>
-<li id="li-2744"><p id="p-6186">Find the winner under Copeland’s method.</p></li>
+<li id="li-2623"><p id="p-6008">How many voters voted in this election?</p></li>
+<li id="li-2624"><p id="p-6009">How many votes are needed for a majority?</p></li>
+<li id="li-2625"><p id="p-6010">Find the winner under the plurality method.</p></li>
+<li id="li-2626"><p id="p-6011">Find the winner under the Instant Runoff Voting method.</p></li>
+<li id="li-2627"><p id="p-6012">Find the winner under the Borda Count Method.</p></li>
+<li id="li-2628"><p id="p-6013">Find the winner under Copeland’s method.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-882"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
-<p id="p-6187">A Portland Community College Board member race has four candidates: E, F, G, H. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-851"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
+<p id="p-6014">A Portland Community College Board member race has four candidates: E, F, G, H. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">12</th>
@@ -334,8 +364,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">E</td>
 <td class="c m b1 r1 l0 t0 lines">H</td>
 </tr>
-</table></div></div></div> <p id="p-6188"></p></article><article class="exercise exercise-like" id="exercise-883"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
-<p id="p-6196">A Forest Grove School Board position has four candidates: I, J, K, L. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6015"></p></article><article class="exercise exercise-like" id="exercise-852"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
+<p id="p-6023">A Forest Grove School Board position has four candidates: I, J, K, L. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">15</th>
@@ -396,8 +426,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">L</td>
 <td class="c m b1 r1 l0 t0 lines">I</td>
 </tr>
-</table></div></div></div> <p id="p-6197"></p></article><article class="exercise exercise-like" id="exercise-884"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-6205">A Multnomah County Commissioner's race has five candidates: M, N, O, P, Q. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6024"></p></article><article class="exercise exercise-like" id="exercise-853"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
+<p id="p-6032">A Multnomah County Commissioner's race has five candidates: M, N, O, P, Q. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">31</th>
@@ -452,8 +482,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines">O</td>
 <td class="c m b1 r1 l0 t0 lines">P</td>
 </tr>
-</table></div></div></div> <p id="p-6206"></p></article><article class="exercise exercise-like" id="exercise-885"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-6214">The Oregon State Governor's race has five candidates: R, S, T, U, V. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-6033"></p></article><article class="exercise exercise-like" id="exercise-854"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
+<p id="p-6041">The Oregon State Governor's race has five candidates: R, S, T, U, V. The votes are:</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Number of voters</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">22</th>
@@ -514,20 +544,20 @@ true);
 <td class="c m b1 r1 l0 t0 lines">T</td>
 <td class="c m b1 r1 l0 t0 lines">R</td>
 </tr>
-</table></div></div></div> <p id="p-6215"></p></article>
+</table></div></div></div> <p id="p-6042"></p></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-95">
+<div class="exercisegroup" id="exercisegroup-94">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-144">
-<p id="p-6223">In each fictional country in problems 9-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6224" class="lower-alpha">
-<li id="li-2769"><p id="p-6225">The total number of electors in the state.</p></li>
-<li id="li-2770"><p id="p-6226">The number of electoral votes needed for a majority and win a presidential election.</p></li>
+<div class="introduction" id="introduction-138">
+<p id="p-6050">In each fictional country in problems 9-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6051" class="lower-alpha">
+<li id="li-2653"><p id="p-6052">The total number of electors in the state.</p></li>
+<li id="li-2654"><p id="p-6053">The number of electoral votes needed for a majority and win a presidential election.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-886"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-6227">In this country there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-855"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
+<p id="p-6054">In this country there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -563,8 +593,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-887"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
-<p id="p-6231">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-856"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
+<p id="p-6058">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -610,17 +640,17 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-96">
+<div class="exercisegroup" id="exercisegroup-95">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-145">
-<p id="p-6235">In each fictional country in problems 11-12, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-6236" class="lower-alpha">
-<li id="li-2775"><p id="p-6237">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
-<li id="li-2776"><p id="p-6238">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
+<div class="introduction" id="introduction-139">
+<p id="p-6062">In each fictional country in problems 11-12, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-6063" class="lower-alpha">
+<li id="li-2659"><p id="p-6064">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
+<li id="li-2660"><p id="p-6065">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-888"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-6239">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-857"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<p id="p-6066">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -656,8 +686,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-889"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
-<p id="p-6243">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-858"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<p id="p-6070">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -703,17 +733,17 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-97">
+<div class="exercisegroup" id="exercisegroup-96">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-146">
-<p id="p-6247">In each fictional country in problems 13-14, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6248" class="lower-alpha">
-<li id="li-2781"><p id="p-6249">The state that has the most electoral power</p></li>
-<li id="li-2782"><p id="p-6250">The state that has the least electoral power</p></li>
+<div class="introduction" id="introduction-140">
+<p id="p-6074">In each fictional country in problems 13-14, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-6075" class="lower-alpha">
+<li id="li-2665"><p id="p-6076">The state that has the most electoral power</p></li>
+<li id="li-2666"><p id="p-6077">The state that has the least electoral power</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-890"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-6251">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-859"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<p id="p-6078">In this country from problem 9, there is one representative for every 55,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -746,8 +776,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-891"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
-<p id="p-6255">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-860"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<p id="p-6082">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -791,27 +821,27 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-98">
+<div class="exercisegroup" id="exercisegroup-97">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-147">
-<p id="p-6259">For each map in problems 15-16, complete the following:</p> <ol id="p-6260" class="lower-alpha">
-<li id="li-2787"><p id="p-6261">How many votes are needed for a majority?</p></li>
-<li id="li-2788"><p id="p-6262">How many seats are won by each party?</p></li>
-<li id="li-2789"><p id="p-6263">Calculate the efficiency gap.</p></li>
-<li id="li-2790"><p id="p-6264">Calculate the percentage of the state that each district represents.</p></li>
-<li id="li-2791"><p id="p-6265">Calculate how many district seats the efficiency gap is worth.</p></li>
-<li id="li-2792"><p id="p-6266">Explain whether you think the map is fair and why or why not.</p></li>
+<div class="introduction" id="introduction-141">
+<p id="p-6086">For each map in problems 15-16, complete the following:</p> <ol id="p-6087" class="lower-alpha">
+<li id="li-2671"><p id="p-6088">How many votes are needed for a majority?</p></li>
+<li id="li-2672"><p id="p-6089">How many seats are won by each party?</p></li>
+<li id="li-2673"><p id="p-6090">Calculate the efficiency gap.</p></li>
+<li id="li-2674"><p id="p-6091">Calculate the percentage of the state that each district represents.</p></li>
+<li id="li-2675"><p id="p-6092">Calculate how many district seats the efficiency gap is worth.</p></li>
+<li id="li-2676"><p id="p-6093">Explain whether you think the map is fair and why or why not.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-892"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
-<p id="p-6267">This state has 5 districts with 9 people in each district.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<article class="exercise exercise-like" id="exercise-861"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
+<p id="p-6094">This state has 5 districts with 9 people in each district.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
 <div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_5/review_exercise_15.png" class="contained" alt="A map with 5 districts drawn; Districts 1, 2, 4 and 5 have 4 D's and 5 R's each; District 3 has 9 D's and 0 R's."></div>
-<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6268"></p></div>
-</div></div></article><article class="exercise exercise-like" id="exercise-893"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-6276">This state has 6 districts with 7 people in each.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6095"></p></div>
+</div></div></article><article class="exercise exercise-like" id="exercise-862"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
+<p id="p-6103">This state has 6 districts with 7 people in each.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
 <div class="sbspanel top" style="width:44.4444444444444%;"><img src="external/democracy/5_5/review_exercise_16.png" class="contained" alt="A map with 6 districts drawn; Districts 1 through 5 have 4 D's and 3 R's; District 6 has 1 D and 6 R's."></div>
-<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6277"></p></div>
+<div class="sbspanel top" style="width:44.4444444444444%;"><p id="p-6104"></p></div>
 </div></div></article>
 </div>
 </div></section></section></div></main>

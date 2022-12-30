@@ -23,7 +23,7 @@
       <!-- In addition to specifying the copyright holder, you should  -->
       <!-- include a license, such as the cc-by-sa license shown below -->
       <!-- so people reading your book know how they can use it.       -->
-      <year>2021<ndash/>2022</year>
+      <year>2021<ndash/>2023</year>
       <holder>Dr. Ryan Johnson</holder>
       <!-- <minilicense><image source="../images/by-sa.png" /></minilicense> -->
       <shortlicense>
@@ -33,7 +33,8 @@
         <url 
           href="http://creativecommons.org/licenses/by-sa/4.0/"
           visual="creativecommons.org/licenses/by-sa/4.0">
-          CreativeCommons.org</url>
+          CreativeCommons.org
+        </url>
       </shortlicense>
 
     </copyright>

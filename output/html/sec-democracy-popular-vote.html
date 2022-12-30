@@ -58,7 +58,7 @@ window.MathJax = {
 },
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2.17/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
 <script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -70,6 +70,37 @@ window.MathJax = {
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '5.0.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runtime.13cbde9fc055c1d2.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/637.d54be67956c5c660.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runestone.69ee59b4f155095b.bundle.js"></script><link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/637.0fa6cababf056764.css">
+<link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/runestone.93e720e6c6581fb5.css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -186,7 +217,6 @@ true);
 <a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
 <li><a href="sec-models-slope.html" data-scroll="sec-models-slope" class="internal">Slope and Rate of Change</a></li>
 <li><a href="sec-models-lin-fun.html" data-scroll="sec-models-lin-fun" class="internal">Linear Functions</a></li>
-<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
 <li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
 <li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
 <li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
@@ -214,72 +244,72 @@ true);
 <section class="section" id="sec-democracy-popular-vote"><h2 class="heading hide-type">
 <span class="type">Section</span> <span class="codenumber">6.3</span> <span class="title">The Popular Vote, Electoral College and Electoral Power</span>
 </h2>
-<article class="objectives goal-like" id="objectives-25"><h3 class="heading">
+<article class="objectives goal-like" id="objectives-24"><h3 class="heading">
 <span class="type">Objectives:</span><span class="space"> </span><span class="title">Section 6.3</span>
 </h3>
-<div class="introduction" id="introduction-135"><p id="p-5782">Students will be able to:</p></div>
+<div class="introduction" id="introduction-129"><p id="p-5609">Students will be able to:</p></div>
 <ul class="disc">
-<li id="li-2582"><p id="p-5783">Calculate the number of electors per state</p></li>
-<li id="li-2583"><p id="p-5784">Determine the winner of the popular vote</p></li>
-<li id="li-2584"><p id="p-5785">Determine the winner of the electoral college</p></li>
-<li id="li-2585"><p id="p-5786">Calculate the electoral power of each state</p></li>
-</ul></article><section class="subsection" id="subsection-164"><h3 class="heading hide-type">
+<li id="li-2466"><p id="p-5610">Calculate the number of electors per state</p></li>
+<li id="li-2467"><p id="p-5611">Determine the winner of the popular vote</p></li>
+<li id="li-2468"><p id="p-5612">Determine the winner of the electoral college</p></li>
+<li id="li-2469"><p id="p-5613">Calculate the electoral power of each state</p></li>
+</ul></article><section class="subsection" id="subsection-157"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.3.1</span> <span class="title">Choosing the U.S. President</span>
 </h3>
-<p id="p-5787">In the last section we talked about equal voting rights and studied several voting methods. To choose the President of the United States, we use another method, called the <em class="alert">Electoral College</em>. The Founders, with their newfound freedom from Britain, wanted to create a democracy where citizens could participate in choosing their president. Prior to the Electoral College, there were three options proposed (Best, 2004; Clayton, 2015). They were</p>
+<p id="p-5614">In the last section we talked about equal voting rights and studied several voting methods. To choose the President of the United States, we use another method, called the <em class="alert">Electoral College</em>. The Founders, with their newfound freedom from Britain, wanted to create a democracy where citizens could participate in choosing their president. Prior to the Electoral College, there were three options proposed (Best, 2004; Clayton, 2015). They were</p>
 <ol class="decimal">
-<li id="li-2586"><p id="p-5788">Congress would elect the president</p></li>
-<li id="li-2587"><p id="p-5789">State Legislatures would vote and elect the president</p></li>
-<li id="li-2588"><p id="p-5790">The people would elect a president by popular vote</p></li>
+<li id="li-2470"><p id="p-5615">Congress would elect the president</p></li>
+<li id="li-2471"><p id="p-5616">State Legislatures would vote and elect the president</p></li>
+<li id="li-2472"><p id="p-5617">The people would elect a president by popular vote</p></li>
 </ol>
-<p id="p-5791">The first option of having Congress do this work was declined as this would alter the balance of power among the three separate branches of government. The idea to have State Legislatures also failed as there wouldn’t be the separation between having an independent Federal Government and State Governments.</p>
-<p id="p-5792">The <em class="alert">popular vote</em> means a candidate must win a plurality of all the votes cast for president, regardless of which state the voters live in. The popular vote was decided against as the Founders didn’t think all citizens would be informed enough about the candidates to make an educated decision (Clayton, 2015).</p>
-<p id="p-5793">Instead, the <em class="alert">Electoral College</em> was decided upon and, in this system, each state was given a certain number of electoral votes. Each state got an equal two votes for the two senate seats. This gave smaller states a leg up as they would have at least these votes. In addition, each state would be given more votes based on their population, equal to their representation in the House (Clayton, 2015). The District of Columbia, which is not a state, also gets 3 electoral votes. A candidate must win a majority of the electoral votes to win the U.S. presidency. If no candidate has a majority of electoral votes then a contingent election would be held by the U.S. House of Representatives between the three candidates with the most electoral votes.</p>
-<p id="p-5794">The 4 million U.S. Citizens who live in the <em class="alert">U.S. territories</em> of Guam, the Virgin Islands, the Northern Mariana Islands and Puerto Rico cannot vote in the presidential elections and do not have any electors for the U.S. President. Additionally, there are U.S. Nationals in American Samoa and other territories that cannot vote. You can learn more about residents of these territories in this Census Bureau Report<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-80" id="fn-80"><sup> 80 </sup></a>.</p>
-<p id="p-5795">As stated in the Constitution, the U.S. currently has 435 representatives in the House. They each serve 2-year terms, while the two senators from each state serve 6-year terms.</p>
-<article class="example example-like" id="example-148"><h4 class="heading">
+<p id="p-5618">The first option of having Congress do this work was declined as this would alter the balance of power among the three separate branches of government. The idea to have State Legislatures also failed as there wouldn’t be the separation between having an independent Federal Government and State Governments.</p>
+<p id="p-5619">The <em class="alert">popular vote</em> means a candidate must win a plurality of all the votes cast for president, regardless of which state the voters live in. The popular vote was decided against as the Founders didn’t think all citizens would be informed enough about the candidates to make an educated decision (Clayton, 2015).</p>
+<p id="p-5620">Instead, the <em class="alert">Electoral College</em> was decided upon and, in this system, each state was given a certain number of electoral votes. Each state got an equal two votes for the two senate seats. This gave smaller states a leg up as they would have at least these votes. In addition, each state would be given more votes based on their population, equal to their representation in the House (Clayton, 2015). The District of Columbia, which is not a state, also gets 3 electoral votes. A candidate must win a majority of the electoral votes to win the U.S. presidency. If no candidate has a majority of electoral votes then a contingent election would be held by the U.S. House of Representatives between the three candidates with the most electoral votes.</p>
+<p id="p-5621">The 4 million U.S. Citizens who live in the <em class="alert">U.S. territories</em> of Guam, the Virgin Islands, the Northern Mariana Islands and Puerto Rico cannot vote in the presidential elections and do not have any electors for the U.S. President. Additionally, there are U.S. Nationals in American Samoa and other territories that cannot vote. You can learn more about residents of these territories in this Census Bureau Report<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-79" id="fn-79"><sup> 79 </sup></a>.</p>
+<p id="p-5622">As stated in the Constitution, the U.S. currently has 435 representatives in the House. They each serve 2-year terms, while the two senators from each state serve 6-year terms.</p>
+<article class="example example-like" id="example-147"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.1</span><span class="period">.</span>
 </h4>
-<p id="p-5796">How many electoral votes are there in the U.S. Electoral College?</p>
+<p id="p-5623">How many electoral votes are there in the U.S. Electoral College?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-508" id="solution-508"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-508"><div class="solution solution-like">
-<p id="p-5797"><span class="process-math">\(100+435+3=538\)</span></p> <p id="p-5798">By adding all the U.S. Senators, Representatives and 3 for Washington, D.C., we have a total of 538 electoral votes.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-496" id="solution-496"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-496"><div class="solution solution-like">
+<p id="p-5624"><span class="process-math">\(100+435+3=538\)</span></p> <p id="p-5625">By adding all the U.S. Senators, Representatives and 3 for Washington, D.C., we have a total of 538 electoral votes.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-149"><h4 class="heading">
+</div></article><article class="example example-like" id="example-148"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.2</span><span class="period">.</span>
 </h4>
-<p id="p-5799">How many electoral votes does a candidate need to win to become the President of the United States?</p>
+<p id="p-5626">How many electoral votes does a candidate need to win to become the President of the United States?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-509" id="solution-509"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-509"><div class="solution solution-like">
-<p id="p-5800"><span class="process-math">\(538\div2=269\)</span> then round up to 270.</p> <p id="p-5801">A candidate needs 270 electoral votes to win the U.S. Presidency.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-497" id="solution-497"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-497"><div class="solution solution-like">
+<p id="p-5627"><span class="process-math">\(538\div2=269\)</span> then round up to 270.</p> <p id="p-5628">A candidate needs 270 electoral votes to win the U.S. Presidency.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-150"><h4 class="heading">
+</div></article><article class="example example-like" id="example-149"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.3</span><span class="period">.</span>
 </h4>
-<p id="p-5802">The number of people who voted in the presidential election in 2016 was 136,452,150 (Ballotpedia, n.d.). How many votes would be needed to win a majority of the popular vote?</p>
+<p id="p-5629">The number of people who voted in the presidential election in 2016 was 136,452,150 (Ballotpedia, n.d.). How many votes would be needed to win a majority of the popular vote?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-510" id="solution-510"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-510"><div class="solution solution-like">
-<p id="p-5803"><span class="process-math">\(136,452,150\div2=68,226,075\)</span> then round up to 68,226,076.</p> <p id="p-5804">A candidate would need 68,226,076 votes to win the popular vote.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-498" id="solution-498"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-498"><div class="solution solution-like">
+<p id="p-5630"><span class="process-math">\(136,452,150\div2=68,226,075\)</span> then round up to 68,226,076.</p> <p id="p-5631">A candidate would need 68,226,076 votes to win the popular vote.</p>
 </div></div>
-</div></article><article class="example example-like" id="example-151"><h4 class="heading">
+</div></article><article class="example example-like" id="example-150"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.4</span><span class="period">.</span>
 </h4>
-<p id="p-5805">There were approximately 230,931,921 eligible voters at the time of the 2016 election (McDonald, 2016). What percentage of eligible voters voted?</p>
+<p id="p-5632">There were approximately 230,931,921 eligible voters at the time of the 2016 election (McDonald, 2016). What percentage of eligible voters voted?</p>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-511" id="solution-511"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-511"><div class="solution solution-like">
-<p id="p-5806"><span class="process-math">\(136,452,150 \div 230,931,921 = 0.591\)</span></p> <p id="p-5807">About 59% of all the eligible voters voted in the 2016 election.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-499" id="solution-499"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-499"><div class="solution solution-like">
+<p id="p-5633"><span class="process-math">\(136,452,150 \div 230,931,921 = 0.591\)</span></p> <p id="p-5634">About 59% of all the eligible voters voted in the 2016 election.</p>
 </div></div>
-</div></article><p id="p-5808">If you are interested in the 2016 election voting rates by race, Hispanic origin and age, you can find them in this Census Bureau Report<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-81" id="fn-81"><sup> 81 </sup></a>.</p></section><section class="subsection" id="subsection-165"><h3 class="heading hide-type">
+</div></article><p id="p-5635">If you are interested in the 2016 election voting rates by race, Hispanic origin and age, you can find them in this Census Bureau Report<a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-80" id="fn-80"><sup> 80 </sup></a>.</p></section><section class="subsection" id="subsection-158"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.3.2</span> <span class="title">How Electoral Votes are Determined</span>
 </h3>
-<p id="p-5809">While each state has a set number of electoral votes based on the formula above, the federal government gave states the control of how they distribute and cast their electoral votes (Paiva, 2011). In 48 states, the candidate with the most votes wins all of that state’s electoral votes, often called <em class="alert">winner-takes-all</em>. In essence, a candidate could win with barely a majority of the popular vote in that state and the entire state’s votes goes to that individual (Clayton, 2015). In 2 states, Maine and Nebraska, however, they use a district plan where instead of winner-takes-all, they use <em class="alert">proportionality</em>. This means that they award electoral votes by how individual districts vote. Each district gives their electoral vote to the winner of their district and the remaining two votes go to the candidate that won statewide.</p>
-<p id="p-5810">There is a movement to change from the Electoral College to the popular vote. One way this is happening is through the <em class="alert">National Popular Vote Interstate Compact</em><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-82" id="fn-82"><sup> 82 </sup></a>. States who adopt this compact agree to award their electoral votes to the winner of the national popular vote. If states and/or D.C. with at least 270 electoral votes adopt this compact, then the winner of the popular vote would win the electoral college and the presidency. At this time there are 196 electoral votes in states and D.C. who have enacted the bill and the bill has passed one or two legislative houses in additional states with 88 electoral votes.</p>
-<p id="p-5811">After citizens cast their votes by mail or on election day on the first Tuesday in November, electors gather in December and are responsible for casting the votes for their state. Electors cannot be elected officials and are chosen by their parties. Electors are expected to vote in alignment with the state they represent, but there have been faithless electors in the past. The U.S. Supreme Court ruled in July of 2020 that states can penalize electors who do not vote according to the law of the state.</p>
-<p id="p-5812">To see how the electoral college and popular votes work, we will look at a made-up country with a smaller number of states.</p>
-<article class="example example-like" id="example-152"><h4 class="heading">
+<p id="p-5636">While each state has a set number of electoral votes based on the formula above, the federal government gave states the control of how they distribute and cast their electoral votes (Paiva, 2011). In 48 states, the candidate with the most votes wins all of that state’s electoral votes, often called <em class="alert">winner-takes-all</em>. In essence, a candidate could win with barely a majority of the popular vote in that state and the entire state’s votes goes to that individual (Clayton, 2015). In 2 states, Maine and Nebraska, however, they use a district plan where instead of winner-takes-all, they use <em class="alert">proportionality</em>. This means that they award electoral votes by how individual districts vote. Each district gives their electoral vote to the winner of their district and the remaining two votes go to the candidate that won statewide.</p>
+<p id="p-5637">There is a movement to change from the Electoral College to the popular vote. One way this is happening is through the <em class="alert">National Popular Vote Interstate Compact</em><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-81" id="fn-81"><sup> 81 </sup></a>. States who adopt this compact agree to award their electoral votes to the winner of the national popular vote. If states and/or D.C. with at least 270 electoral votes adopt this compact, then the winner of the popular vote would win the electoral college and the presidency. At this time there are 196 electoral votes in states and D.C. who have enacted the bill and the bill has passed one or two legislative houses in additional states with 88 electoral votes.</p>
+<p id="p-5638">After citizens cast their votes by mail or on election day on the first Tuesday in November, electors gather in December and are responsible for casting the votes for their state. Electors cannot be elected officials and are chosen by their parties. Electors are expected to vote in alignment with the state they represent, but there have been faithless electors in the past. The U.S. Supreme Court ruled in July of 2020 that states can penalize electors who do not vote according to the law of the state.</p>
+<p id="p-5639">To see how the electoral college and popular votes work, we will look at a made-up country with a smaller number of states.</p>
+<article class="example example-like" id="example-151"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.5</span><span class="period">.</span>
 </h4>
-<p id="p-5813">Consider this country with 4 states. The rules for the number of senators and electors are the same as the U.S. government. Each state will get 1 representative for every 40,000 residents. For simplicity we will ignore any remainders.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5640">Consider this country with 4 states. The rules for the number of senators and electors are the same as the U.S. government. Each state will get 1 representative for every 40,000 residents. For simplicity we will ignore any remainders.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -315,18 +345,18 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div> <ol id="p-5814" class="lower-alpha">
-<li id="li-2589"><p id="p-5815">Determine the number of electors for each state and the total for the country.</p></li>
-<li id="li-2590"><p id="p-5816">How many electoral votes are needed to win the presidential election?</p></li>
-<li id="li-2591"><p id="p-5817">Determine which candidate wins the popular vote and the electoral college vote.</p></li>
-<li id="li-2592"><p id="p-5818">Write down all the possible combinations of states that would win the election based on the electoral college.</p></li>
-<li id="li-2593"><p id="p-5819">What is the fewest number of individual votes needed to win the Electoral College?</p></li>
-<li id="li-2594"><p id="p-5820">What is the smallest percentage of the population that you can win the Electoral College with?</p></li>
+</table></div></div></div> <ol id="p-5641" class="lower-alpha">
+<li id="li-2473"><p id="p-5642">Determine the number of electors for each state and the total for the country.</p></li>
+<li id="li-2474"><p id="p-5643">How many electoral votes are needed to win the presidential election?</p></li>
+<li id="li-2475"><p id="p-5644">Determine which candidate wins the popular vote and the electoral college vote.</p></li>
+<li id="li-2476"><p id="p-5645">Write down all the possible combinations of states that would win the election based on the electoral college.</p></li>
+<li id="li-2477"><p id="p-5646">What is the fewest number of individual votes needed to win the Electoral College?</p></li>
+<li id="li-2478"><p id="p-5647">What is the smallest percentage of the population that you can win the Electoral College with?</p></li>
 </ol>
 <div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-512" id="solution-512"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-512"><div class="solution solution-like"><ol id="p-5821" class="lower-alpha">
-<li id="li-2595">
-<p id="p-5822">To find the number of electors for each state, we first divide each state population by 40,000 to determine the number of representatives they will have. We will drop the decimal remainders, similar to Hamilton’s method.</p>
+<a href="" data-knowl="" class="id-ref solution-knowl original has-tabular" data-refid="hk-solution-500" id="solution-500"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-500"><div class="solution solution-like"><ol id="p-5648" class="lower-alpha">
+<li id="li-2479">
+<p id="p-5649">To find the number of electors for each state, we first divide each state population by 40,000 to determine the number of representatives they will have. We will drop the decimal remainders, similar to Hamilton’s method.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -364,7 +394,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div>
-<p id="p-5823"></p>
+<p id="p-5650"></p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -402,7 +432,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div>
-<p id="p-5824">Then we will add the number of representatives and the senators for each state.</p>
+<p id="p-5651">Then we will add the number of representatives and the senators for each state.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -447,16 +477,16 @@ true);
 <td class="c m b1 r1 l0 t0 lines">52</td>
 </tr>
 </table></div></div></div>
-<p id="p-5825">Now we can add up the total of all the electors from each state and we have:</p>
-<p id="p-5826"><span class="process-math">\(5 + 8 + 16 + 23 = 52\)</span> electors.</p>
+<p id="p-5652">Now we can add up the total of all the electors from each state and we have:</p>
+<p id="p-5653"><span class="process-math">\(5 + 8 + 16 + 23 = 52\)</span> electors.</p>
 </li>
-<li id="li-2596">
-<p id="p-5827">To find out how many electoral votes are needed to win the presidential election, we calculate a majority of 52 electors.</p>
-<p id="p-5828"><span class="process-math">\(52 \div 2 = 26\text{,}\)</span> round up to 27</p>
-<p id="p-5829">27 electoral votes are needed to win the presidential election in this state</p>
+<li id="li-2480">
+<p id="p-5654">To find out how many electoral votes are needed to win the presidential election, we calculate a majority of 52 electors.</p>
+<p id="p-5655"><span class="process-math">\(52 \div 2 = 26\text{,}\)</span> round up to 27</p>
+<p id="p-5656">27 electoral votes are needed to win the presidential election in this state</p>
 </li>
-<li id="li-2597">
-<p id="p-5830">To find the winner for each method, we need the results of an election. In our example, there are 2 candidates for the president, Candidate A and Candidate B. When a candidate wins in a state, they get all the electoral votes for that state. Given the votes for each candidate below, determine who wins the popular vote and who wins the electoral college vote.</p>
+<li id="li-2481">
+<p id="p-5657">To find the winner for each method, we need the results of an election. In our example, there are 2 candidates for the president, Candidate A and Candidate B. When a candidate wins in a state, they get all the electoral votes for that state. Given the votes for each candidate below, determine who wins the popular vote and who wins the electoral college vote.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -501,7 +531,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
 </table></div></div></div>
-<p id="p-5831">First, we will add up all the votes for each candidate in their columns. Next, we will look at each state individually to determine which candidate wins each state. Candidate B has more votes in Small, Medium and Large, so Candidate B gets all of the electoral votes in those states. Candidate A won Huge, so they get all of those electoral votes. We enter zero for the candidate who does not win in each state. Then we add up the electoral vote columns. Here is the completed table.</p>
+<p id="p-5658">First, we will add up all the votes for each candidate in their columns. Next, we will look at each state individually to determine which candidate wins each state. Candidate B has more votes in Small, Medium and Large, so Candidate B gets all of the electoral votes in those states. Candidate A won Huge, so they get all of those electoral votes. We enter zero for the candidate who does not win in each state. Then we add up the electoral vote columns. Here is the completed table.</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -546,9 +576,9 @@ true);
 <td class="c m b1 r1 l0 t0 lines">29</td>
 </tr>
 </table></div></div></div>
-<p id="p-5832">Now we can see that Candidate A wins the popular vote with 1,011,073 votes compared to 849,072 for Candidate B. But Candidate B wins the Electoral College with 29 electoral votes. So, Candidate B becomes the President of the United States.</p>
-<p id="p-5833">There have been 5 U.S. presidential elections where the winner of the popular vote was not the winner of the electoral college. In all the other elections, the two methods agreed and would have elected the same candidate.</p>
-<p id="p-5834">Try calculating the results if these were the votes instead:</p>
+<p id="p-5659">Now we can see that Candidate A wins the popular vote with 1,011,073 votes compared to 849,072 for Candidate B. But Candidate B wins the Electoral College with 29 electoral votes. So, Candidate B becomes the President of the United States.</p>
+<p id="p-5660">There have been 5 U.S. presidential elections where the winner of the popular vote was not the winner of the electoral college. In all the other elections, the two methods agreed and would have elected the same candidate.</p>
+<p id="p-5661">Try calculating the results if these were the votes instead:</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
@@ -637,12 +667,12 @@ true);
 <td class="c m b1 r1 l0 t0 lines">21</td>
 </tr>
 </table></div></div></div>
-<p id="p-5835">This time Candidate A won Medium and Huge. That gave them the electoral vote victory. Note that the race in Medium was very close, and we only changed 1,118 votes or 0.06% of the votes to Candidate A which gave them the Electoral College.</p>
-<p id="p-5836">Opponents of the Electoral College system say that it causes candidates to focus on a few swing states, rather than campaigning equally in all states.</p>
+<p id="p-5662">This time Candidate A won Medium and Huge. That gave them the electoral vote victory. Note that the race in Medium was very close, and we only changed 1,118 votes or 0.06% of the votes to Candidate A which gave them the Electoral College.</p>
+<p id="p-5663">Opponents of the Electoral College system say that it causes candidates to focus on a few swing states, rather than campaigning equally in all states.</p>
 </li>
-<li id="li-2598">
-<p id="p-5837">Let’s look at which combinations of states the candidates could seek to win with.</p>
-<p id="p-5838">Since 27 electoral votes are needed, we will list all the winning combinations starting with the smallest number of states to win. We see that a candidate must win either Huge or Large, because Small and Medium together are not enough votes to win</p>
+<li id="li-2482">
+<p id="p-5664">Let’s look at which combinations of states the candidates could seek to win with.</p>
+<p id="p-5665">Since 27 electoral votes are needed, we will list all the winning combinations starting with the smallest number of states to win. We see that a candidate must win either Huge or Large, because Small and Medium together are not enough votes to win</p>
 <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">Combination</th>
@@ -717,31 +747,31 @@ true);
 <td class="c m b1 r1 l0 t0 lines">52</td>
 </tr>
 </table></div></div></div>
-<p id="p-5839">From the table we find there are 8 different ways to win the electoral college and candidates should definitely campaign in Large and Huge.</p>
+<p id="p-5666">From the table we find there are 8 different ways to win the electoral college and candidates should definitely campaign in Large and Huge.</p>
 </li>
-<li id="li-2599">
-<p id="p-5840">To find the fewest number of individual votes a candidate could win with; let’s look at the table above. The combination of states with the fewest electoral votes is Huge and Small. Let’s see how many votes would be needed to win those two states.</p>
-<p id="p-5841">For Huge:</p>
-<p id="p-5842"><span class="process-math">\(862,070 \div 2 = 431,035\text{,}\)</span> then round up to 431,036</p>
-<p id="p-5843">For Small:</p>
-<p id="p-5844"><span class="process-math">\(154,600 \div 2 = 77,300\text{,}\)</span> then round up to 77,301</p>
-<p id="p-5845"><span class="process-math">\(431,036+77,301 \text{ votes } = 508,337 \text{ votes}\)</span></p>
+<li id="li-2483">
+<p id="p-5667">To find the fewest number of individual votes a candidate could win with; let’s look at the table above. The combination of states with the fewest electoral votes is Huge and Small. Let’s see how many votes would be needed to win those two states.</p>
+<p id="p-5668">For Huge:</p>
+<p id="p-5669"><span class="process-math">\(862,070 \div 2 = 431,035\text{,}\)</span> then round up to 431,036</p>
+<p id="p-5670">For Small:</p>
+<p id="p-5671"><span class="process-math">\(154,600 \div 2 = 77,300\text{,}\)</span> then round up to 77,301</p>
+<p id="p-5672"><span class="process-math">\(431,036+77,301 \text{ votes } = 508,337 \text{ votes}\)</span></p>
 </li>
-<li id="li-2600">
-<p id="p-5846">The smallest number of votes to win the electoral college is 508,337. What percentage of the population is that? We will divide by the total population to get</p>
-<p id="p-5847"><span class="process-math">\(508,337 \div 1,860,145 = 0.2733\)</span></p>
-<p id="p-5848">If a candidate had the right combination of states, they could win the Electoral College with only 27.3% of the vote.</p>
-<p id="p-5849">People who support the Electoral College often say it protects small states. People who oppose the Electoral College often say that each person’s vote should count equally as in the popular vote. Next we will look at electoral power to understand the effect on small states.</p>
+<li id="li-2484">
+<p id="p-5673">The smallest number of votes to win the electoral college is 508,337. What percentage of the population is that? We will divide by the total population to get</p>
+<p id="p-5674"><span class="process-math">\(508,337 \div 1,860,145 = 0.2733\)</span></p>
+<p id="p-5675">If a candidate had the right combination of states, they could win the Electoral College with only 27.3% of the vote.</p>
+<p id="p-5676">People who support the Electoral College often say it protects small states. People who oppose the Electoral College often say that each person’s vote should count equally as in the popular vote. Next we will look at electoral power to understand the effect on small states.</p>
 </li>
 </ol></div></div>
-</div></article><p id="p-5850">People who support the Electoral College often say it protects small states. People who oppose the Electoral College often say that each person’s vote should count equally as in the popular vote. Next we will look at electoral power to understand the effect on small states.</p></section><section class="subsection" id="subsection-166"><h3 class="heading hide-type">
+</div></article><p id="p-5677">People who support the Electoral College often say it protects small states. People who oppose the Electoral College often say that each person’s vote should count equally as in the popular vote. Next we will look at electoral power to understand the effect on small states.</p></section><section class="subsection" id="subsection-159"><h3 class="heading hide-type">
 <span class="type">Subsection</span> <span class="codenumber">6.3.3</span> <span class="title">Electoral Power</span>
 </h3>
-<p id="p-5851"><em class="alert">Electoral power</em> is the value of a person’s vote in one state compared to another state. A related topic is voting power, which is the probability of any one person influencing an election. If you are interested in voting power, you can look up the Banzhaf Power Index. To calculate the electoral power, we will calculate a ratio of electoral votes for a given number of people. We could use any number, so we will choose the number of people that each representative represents, which is our divisor of 40,000 people.</p>
-<article class="example example-like" id="example-153"><h4 class="heading">
+<p id="p-5678"><em class="alert">Electoral power</em> is the value of a person’s vote in one state compared to another state. A related topic is voting power, which is the probability of any one person influencing an election. If you are interested in voting power, you can look up the Banzhaf Power Index. To calculate the electoral power, we will calculate a ratio of electoral votes for a given number of people. We could use any number, so we will choose the number of people that each representative represents, which is our divisor of 40,000 people.</p>
+<article class="example example-like" id="example-152"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.6</span><span class="period">.</span>
 </h4>
-<p id="p-5852">Using the same fictional country, use the table below to calculate the electoral power of each state.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<p id="p-5679">Using the same fictional country, use the table below to calculate the electoral power of each state.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -782,7 +812,7 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div> <p id="p-5853">First, we fill in the number of representatives, senators and electoral votes for each state that we found earlier. Then we will calculate the number of electoral votes per 40,000 people.</p> <p id="p-5854">To do that, divide the number of electors by the number of representatives, since they each represent approximately 40,000 people. The results are shown in the table below. Note this is approximate because we cut off the decimal remainders when calculating the number of representatives.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div> <p id="p-5680">First, we fill in the number of representatives, senators and electoral votes for each state that we found earlier. Then we will calculate the number of electoral votes per 40,000 people.</p> <p id="p-5681">To do that, divide the number of electors by the number of representatives, since they each represent approximately 40,000 people. The results are shown in the table below. Note this is approximate because we cut off the decimal remainders when calculating the number of representatives.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -823,26 +853,26 @@ true);
 <td class="c m b1 r1 l0 t0 lines">23</td>
 <td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(23\div21 \approx 1.10\)</span></td>
 </tr>
-</table></div></div></div> <p id="p-5855">Are you surprised to see that the smallest states have the highest electoral power? That is part of the design of the electoral college. The founders from small states were concerned that their votes would not matter, so every state gets 2 senators added to the number of representatives. For a state with few representatives, those 2 extra electoral votes make a big difference. For a large states, the extra 2 electoral votes don’t make a very big difference.</p> <p id="p-5856">You may have noticed a pattern when dividing to find the electoral power. Each time we divided the number of electoral votes by that number minus two. We can write that pattern as <span class="process-math">\(\frac{n}{n-2}\text{.}\)</span> Using GeoGebra to graph that pattern this is what we see.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral1.png" class="contained" alt="A cartesian coordinate graph with number of electors on the x-axis and electoral power on the y-axis. The graph shows the maximum electoral power of 3 when there are 3 electors and an exponential decay as the number of electors goes up. With 4 electors the electoral power is 2, with 5 electors the electoral power is about 1.67 and the pattern levels off at an electoral power just over 1.0 as the number of electors increases."></div></div></div> <p id="p-5857">The minimum number of electors is three, since each state gets at least one representative in the apportionment process. The smallest states and Washington, D.C. have 3 electors and the greatest electoral power on the left side of the graph. The largest states like California, Florida and Texas have the least electoral power on the right side of the graph.</p> <p id="p-5858">Let’s say instead each state had equal electoral power by removing the 2 extra electoral votes or by using the popular vote. Then the graph would look like this.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral2.png" class="contained" alt="A cartesian coordinate graph with the same axes as the previous graph. This time the electoral power is constant with an electoral power of 1 for every number of electors."></div></div></div> <p id="p-5859">Now that we have studied the popular vote, the Electoral College and electoral power, we leave it up to you to choose which method you think is best.</p></article></section><section class="exercises" id="exercises-19"><h3 class="heading hide-type">
+</table></div></div></div> <p id="p-5682">Are you surprised to see that the smallest states have the highest electoral power? That is part of the design of the electoral college. The founders from small states were concerned that their votes would not matter, so every state gets 2 senators added to the number of representatives. For a state with few representatives, those 2 extra electoral votes make a big difference. For a large states, the extra 2 electoral votes don’t make a very big difference.</p> <p id="p-5683">You may have noticed a pattern when dividing to find the electoral power. Each time we divided the number of electoral votes by that number minus two. We can write that pattern as <span class="process-math">\(\frac{n}{n-2}\text{.}\)</span> Using GeoGebra to graph that pattern this is what we see.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral1.png" class="contained" alt="A cartesian coordinate graph with number of electors on the x-axis and electoral power on the y-axis. The graph shows the maximum electoral power of 3 when there are 3 electors and an exponential decay as the number of electors goes up. With 4 electors the electoral power is 2, with 5 electors the electoral power is about 1.67 and the pattern levels off at an electoral power just over 1.0 as the number of electors increases."></div></div></div> <p id="p-5684">The minimum number of electors is three, since each state gets at least one representative in the apportionment process. The smallest states and Washington, D.C. have 3 electors and the greatest electoral power on the left side of the graph. The largest states like California, Florida and Texas have the least electoral power on the right side of the graph.</p> <p id="p-5685">Let’s say instead each state had equal electoral power by removing the 2 extra electoral votes or by using the popular vote. Then the graph would look like this.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel top" style="width:100%;"><img src="external/democracy/5_3/electoral2.png" class="contained" alt="A cartesian coordinate graph with the same axes as the previous graph. This time the electoral power is constant with an electoral power of 1 for every number of electors."></div></div></div> <p id="p-5686">Now that we have studied the popular vote, the Electoral College and electoral power, we leave it up to you to choose which method you think is best.</p></article></section><section class="exercises" id="exercises-18"><h3 class="heading hide-type">
 <span class="type">Exercises</span> <span class="codenumber">6.3.4</span> <span class="title">Exercises</span>
 </h3>
-<article class="exercise exercise-like" id="exercise-832"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
-<p id="p-5860">How is the U.S. President selected?</p></article><article class="exercise exercise-like" id="exercise-833"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
-<p id="p-5862">How many electors are there in the U.S. Electoral College?</p></article><article class="exercise exercise-like" id="exercise-834"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
-<p id="p-5864">How many U.S. Senators represent each state?</p></article><article class="exercise exercise-like" id="exercise-835"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
-<p id="p-5866">What is the length of a term of a U.S. Senator?</p></article><article class="exercise exercise-like" id="exercise-836"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
-<p id="p-5868">How many Representatives serve in the U.S. House of Representatives?</p></article><article class="exercise exercise-like" id="exercise-837"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
-<p id="p-5870">What is the length of a term of a U.S. Representative?</p></article><div class="exercisegroup" id="exercisegroup-88">
+<article class="exercise exercise-like" id="exercise-801"><h4 class="heading"><span class="codenumber">1<span class="period">.</span></span></h4>
+<p id="p-5687">How is the U.S. President selected?</p></article><article class="exercise exercise-like" id="exercise-802"><h4 class="heading"><span class="codenumber">2<span class="period">.</span></span></h4>
+<p id="p-5689">How many electors are there in the U.S. Electoral College?</p></article><article class="exercise exercise-like" id="exercise-803"><h4 class="heading"><span class="codenumber">3<span class="period">.</span></span></h4>
+<p id="p-5691">How many U.S. Senators represent each state?</p></article><article class="exercise exercise-like" id="exercise-804"><h4 class="heading"><span class="codenumber">4<span class="period">.</span></span></h4>
+<p id="p-5693">What is the length of a term of a U.S. Senator?</p></article><article class="exercise exercise-like" id="exercise-805"><h4 class="heading"><span class="codenumber">5<span class="period">.</span></span></h4>
+<p id="p-5695">How many Representatives serve in the U.S. House of Representatives?</p></article><article class="exercise exercise-like" id="exercise-806"><h4 class="heading"><span class="codenumber">6<span class="period">.</span></span></h4>
+<p id="p-5697">What is the length of a term of a U.S. Representative?</p></article><div class="exercisegroup" id="exercisegroup-87">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-136">
-<p id="p-5872">In each fictional country in problems 7-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5873" class="lower-alpha">
-<li id="li-2601"><p id="p-5874">The total number of electors in the state.</p></li>
-<li id="li-2602"><p id="p-5875">The number of electoral votes needed for a majority and win a presidential election.</p></li>
+<div class="introduction" id="introduction-130">
+<p id="p-5699">In each fictional country in problems 7-10, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5700" class="lower-alpha">
+<li id="li-2485"><p id="p-5701">The total number of electors in the state.</p></li>
+<li id="li-2486"><p id="p-5702">The number of electoral votes needed for a majority and win a presidential election.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-838"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
-<p id="p-5876">In this country there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-807"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
+<p id="p-5703">In this country there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -878,8 +908,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-839"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
-<p id="p-5880">In this country there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-808"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
+<p id="p-5707">In this country there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -915,8 +945,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-840"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
-<p id="p-5884">In this country there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-809"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
+<p id="p-5711">In this country there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -959,8 +989,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-841"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
-<p id="p-5888">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-810"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
+<p id="p-5715">In this country there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1006,17 +1036,17 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-89">
+<div class="exercisegroup" id="exercisegroup-88">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-137">
-<p id="p-5892">In each fictional country in problems 11-14, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-5893" class="lower-alpha">
-<li id="li-2611"><p id="p-5894">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
-<li id="li-2612"><p id="p-5895">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
+<div class="introduction" id="introduction-131">
+<p id="p-5719">In each fictional country in problems 11-14, use the rules of the U.S. government (assume that all of a state’s electoral votes go to the candidate who received the majority of the votes in that state) to complete the table and determine the following:</p> <ol id="p-5720" class="lower-alpha">
+<li id="li-2495"><p id="p-5721">The winner of the popular vote in the country and the percentage of votes they won.</p></li>
+<li id="li-2496"><p id="p-5722">The winner of the electoral college who becomes the president and the percentage of electoral votes they won.</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-842"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
-<p id="p-5896">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-811"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<p id="p-5723">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1052,8 +1082,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-843"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
-<p id="p-5900">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-812"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<p id="p-5727">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1089,8 +1119,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-844"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
-<p id="p-5904">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-813"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<p id="p-5731">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1133,8 +1163,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-845"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
-<p id="p-5908">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-814"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<p id="p-5735">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Votes for<br>Candidate A</th>
@@ -1180,17 +1210,17 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<div class="exercisegroup" id="exercisegroup-90">
+<div class="exercisegroup" id="exercisegroup-89">
 <h4 class="heading"><span class="title">Exercise Group.</span></h4>
-<div class="introduction" id="introduction-138">
-<p id="p-5912">In each fictional country in problems 15-18, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5913" class="lower-alpha">
-<li id="li-2621"><p id="p-5914">The state that has the most electoral power</p></li>
-<li id="li-2622"><p id="p-5915">The state that has the least electoral power</p></li>
+<div class="introduction" id="introduction-132">
+<p id="p-5739">In each fictional country in problems 15-18, use the rules of the U.S. government to complete the table and determine the following:</p> <ol id="p-5740" class="lower-alpha">
+<li id="li-2505"><p id="p-5741">The state that has the most electoral power</p></li>
+<li id="li-2506"><p id="p-5742">The state that has the least electoral power</p></li>
 </ol>
 </div>
 <div class="exercisegroup-exercises">
-<article class="exercise exercise-like" id="exercise-846"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
-<p id="p-5916">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<article class="exercise exercise-like" id="exercise-815"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
+<p id="p-5743">In this country from problem 7, there is one representative for every 50,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1223,8 +1253,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-847"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
-<p id="p-5920">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-816"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
+<p id="p-5747">In this country from problem 8, there is one representative for every 75,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1257,8 +1287,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-848"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
-<p id="p-5924">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-817"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
+<p id="p-5751">In this country from problem 9, there is one representative for every 40,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1299,8 +1329,8 @@ true);
 <td class="c m b1 r1 l0 t0 lines"></td>
 <td class="c m b1 r1 l0 t0 lines"></td>
 </tr>
-</table></div></div></div></article><article class="exercise exercise-like" id="exercise-849"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
-<p id="p-5928">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+</table></div></div></div></article><article class="exercise exercise-like" id="exercise-818"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
+<p id="p-5755">In this country from problem 10, there is one representative for every 60,000 residents.</p> <div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="c m b1 r1 l1 t1 lines">State</th>
 <th scope="col" class="c m b1 r1 l0 t1 lines">Population</th>
@@ -1344,13 +1374,13 @@ true);
 </table></div></div></div></article>
 </div>
 </div>
-<article class="exercise exercise-like" id="exercise-850"><h4 class="heading"><span class="codenumber">19<span class="period">.</span></span></h4>
-<p id="p-5932">For the country in problem 7, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-851"><h4 class="heading"><span class="codenumber">20<span class="period">.</span></span></h4>
-<p id="p-5934">For the country in problem 8, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-852"><h4 class="heading"><span class="codenumber">21<span class="period">.</span></span></h4>
-<p id="p-5936">For the country in problem 9, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-853"><h4 class="heading"><span class="codenumber">22<span class="period">.</span></span></h4>
-<p id="p-5938">For the country in problem 10, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-80"><div class="fn"><a class="external" href="https://www.census.gov/prod/2011pubs/12statab/outlying.pdf" target="_blank"><code class="code-inline tex2jax_ignore">https://www.census.gov/prod/2011pubs/12statab/outlying.pdf</code></a></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-81"><div class="fn"><a class="external" href="https://www.census.gov/newsroom/blogs/random-samplings/2017/05/voting_in_america.html" target="_blank"><code class="code-inline tex2jax_ignore">https://www.census.gov/newsroom/blogs/random-samplings/2017/05/voting_in_america.html</code></a></div></div>
-<div class="hidden-content tex2jax_ignore" id="hk-fn-82"><div class="fn"><a class="external" href="https://www.nationalpopularvote.com/" target="_blank"><code class="code-inline tex2jax_ignore">https://www.nationalpopularvote.com/</code></a></div></div>
+<article class="exercise exercise-like" id="exercise-819"><h4 class="heading"><span class="codenumber">19<span class="period">.</span></span></h4>
+<p id="p-5759">For the country in problem 7, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-820"><h4 class="heading"><span class="codenumber">20<span class="period">.</span></span></h4>
+<p id="p-5761">For the country in problem 8, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-821"><h4 class="heading"><span class="codenumber">21<span class="period">.</span></span></h4>
+<p id="p-5763">For the country in problem 9, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article><article class="exercise exercise-like" id="exercise-822"><h4 class="heading"><span class="codenumber">22<span class="period">.</span></span></h4>
+<p id="p-5765">For the country in problem 10, determine all the possible combinations of states that would win the electoral college. What is the minimum number of votes needed to win the electoral college?</p></article></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-79"><div class="fn"><a class="external" href="https://www.census.gov/prod/2011pubs/12statab/outlying.pdf" target="_blank"><code class="code-inline tex2jax_ignore">https://www.census.gov/prod/2011pubs/12statab/outlying.pdf</code></a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-80"><div class="fn"><a class="external" href="https://www.census.gov/newsroom/blogs/random-samplings/2017/05/voting_in_america.html" target="_blank"><code class="code-inline tex2jax_ignore">https://www.census.gov/newsroom/blogs/random-samplings/2017/05/voting_in_america.html</code></a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-81"><div class="fn"><a class="external" href="https://www.nationalpopularvote.com/" target="_blank"><code class="code-inline tex2jax_ignore">https://www.nationalpopularvote.com/</code></a></div></div>
 </div></main>
 </div>
 </body>

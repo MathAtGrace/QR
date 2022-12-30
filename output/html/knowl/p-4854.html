@@ -12,41 +12,20 @@
 </head>
 <body class="ignore-math">
 <h5 class="heading"><span class="type">Paragraph</span></h5>
+<p>Let <span class="process-math">\(y = g(t) = ab^t\)</span> be an exponential decay function, with <span class="process-math">\(a \gt 0\)</span> and <span class="process-math">\(0\lt b\lt 1\text{.}\)</span></p>
 <ol class="lower-alpha">
 <li>
-<p>The population of Egypt is growing according to the formula <span class="process-math">\(P(t) = 74(1.02)^t\text{,}\)</span> where <span class="process-math">\(t\)</span> is in years and <span class="process-math">\(P(t)\)</span> is in millions. We would like to know when the population will reach <span class="process-math">\(148\)</span> million (twice <span class="process-math">\(74\)</span> million), so we solve the equation</p>
+<p>Suppose that the value of <span class="process-math">\(y\)</span> is halved from <span class="process-math">\(t = 0\)</span> to <span class="process-math">\(t = H\text{,}\)</span> so that</p>
 <div class="displaymath process-math" data-contains-math-knowls="">
 \begin{equation*}
-\begin{aligned}[t]
-74(1.02)^t \amp= 148\amp\amp \blert{\text{Divide both sides by }74.}\\
-1.02^t \amp= 2\amp\amp \blert{\text{Take the log of both sides.}}\\
-t \log 1.02 \amp= \log 2\amp\amp \blert{\text{Divide both sides by log 1.02.}}\\
-t \amp= \frac{\log 2}{\log 1.02}\\
-\amp\approx 35 \text{ years}
-\end{aligned}
+g(H) = \dfrac{1}{2}\cdot g(0)
 \end{equation*}
 </div>
-<p class="continuation">It will take the population about <span class="process-math">\(35\)</span> years to double.</p>
+<p class="continuation">Rewrite this fact as an equation in terms of <span class="process-math">\(a\text{,}\)</span> <span class="process-math">\(b\text{,}\)</span> and <span class="process-math">\(H\text{.}\)</span></p>
 </li>
-<li>
-<p>Twice 148 million is 296 million, so we solve the equation</p>
-<div class="displaymath process-math" data-contains-math-knowls="">
-\begin{equation*}
-\begin{aligned}[t]
-148(1.02)^t \amp= 296\amp\amp \blert{\text{Divide both sides by }148.}\\
-1.02^t \amp= 2\amp\amp \blert{\text{Take the log of both sides.}}\\
-t \log 1.02 \amp= \log 2\amp\amp \blert{\text{Divide both sides by log 1.02.}}\\
-t \amp= \frac{\log 2}{\log 1.02}\\
-\amp\approx 35 \text{ years}
-\end{aligned}
-\end{equation*}
-</div>
-<p class="continuation">It will take the population about <span class="process-math">\(35\)</span> years to double again.</p>
-</li>
-<li>
-<p>A graph of <span class="process-math">\(P(t) = 74(1.02)^t\)</span> is shown below. Note that the population doubles every 35 years.</p>
-<div class="sidebyside"><div class="sbsrow" style="margin-left:30%;margin-right:30%;"><div class="sbspanel top" style="width:100%;"><img src="external/models/fig-doubling-time.svg" role="img" class="contained" alt="graph showing doubling time"></div></div></div>
-</li>
+<li><p>What does your answer to (a) tell you about the value of <span class="process-math">\(b^H\text{?}\)</span></p></li>
+<li><p>Use the first law of exponents and your result from (b) to rewrite <span class="process-math">\(g(t + H)\)</span> in terms of <span class="process-math">\(g(t)\text{.}\)</span></p></li>
+<li><p>Explain why your result from (c) shows that the half-life is constant.</p></li>
 </ol>
 <span class="incontext"><a href="sec-models-exponential-2.html#p-4854" class="internal">in-context</a></span>
 </body>

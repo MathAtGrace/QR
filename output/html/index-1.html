@@ -58,7 +58,7 @@ window.MathJax = {
 },
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://webwork-ptx.aimath.org/webwork2_files/js/apps/MathView/mathview.css" rel="stylesheet">
-<script src="https://pretextbook.org/js/0.13/pretext-webwork/2./pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="https://pretextbook.org/js/0.13/pretext-webwork/2.17/pretext-webwork.js"></script><script src="https://webwork-ptx.aimath.org/webwork2_files/node_modules/iframe-resizer/js/iframeResizer.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.13/pretext_search.js"></script><link href="https://pretextbook.org/css/0.4/pretext_search.css" rel="stylesheet" type="text/css">
 <script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.13/pretext.js"></script><script>miniversion=0.674</script><script src="https://pretextbook.org/js/0.13/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -70,6 +70,37 @@ window.MathJax = {
 <link href="https://pretextbook.org/css/0.4/style_default.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/colors_blue_red.css" rel="stylesheet" type="text/css">
 <link href="https://pretextbook.org/css/0.4/setcolors.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '5.0.1';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runtime.13cbde9fc055c1d2.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/637.d54be67956c5c660.bundle.js"></script><script type="text/javascript" src="https://runestone.academy/cdn/runestone/6.3.25/runestone.69ee59b4f155095b.bundle.js"></script><link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/637.0fa6cababf056764.css">
+<link rel="stylesheet" type="text/css" href="https://runestone.academy/cdn/runestone/6.3.25/runestone.93e720e6c6581fb5.css">
 </head>
 <body class="pretext-book ignore-math has-toc has-sidebar-left">
 <a class="assistive" href="#content">Skip to main content</a><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
@@ -186,7 +217,6 @@ true);
 <a href="ch-models.html" data-scroll="ch-models" class="internal"><span class="codenumber">5</span> <span class="title">Math Models</span></a><ul>
 <li><a href="sec-models-slope.html" data-scroll="sec-models-slope" class="internal">Slope and Rate of Change</a></li>
 <li><a href="sec-models-lin-fun.html" data-scroll="sec-models-lin-fun" class="internal">Linear Functions</a></li>
-<li><a href="sec-models-linear.html" data-scroll="sec-models-linear" class="internal">Function Notation and Linear Functions</a></li>
 <li><a href="sec-models-exponential.html" data-scroll="sec-models-exponential" class="internal">Exponential Growth and Decay</a></li>
 <li><a href="sec-models-exponential-2.html" data-scroll="sec-models-exponential-2" class="internal">Exponential Models</a></li>
 <li><a href="sec-models-periodic.html" data-scroll="sec-models-periodic" class="internal">Periodic Functions</a></li>
@@ -213,57 +243,40 @@ true);
 <main class="main"><div id="content" class="pretext-content"><section class="index" id="index-1"><h2 class="heading hide-type">
 <span class="type">Index</span> <span class="codenumber"></span> <span class="title">Index</span>
 </h2>
-<div class="indexletter" id="indexletter-a"><div class="indexitem">average rate of change<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4296.html" title="Paragraph">Paragraph</a></span>
-</div></div>
 <div class="indexletter" id="indexletter-c"><div class="indexitem">compound interest<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/assemblage-39.html" title="Summary: Compound Interest">Summary</a></span>
 </div></div>
 <div class="indexletter" id="indexletter-d">
-<div class="indexitem">decay factor<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4539.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/li-1968.html" title="Item">Item</a></span>
+<div class="indexitem">decay factor<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4337.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/li-1845.html" title="Item">Item</a></span>
 </div>
-<div class="indexitem">doubling time<span class="indexknowl">, <a href="sec-models-exponential-2.html#subsection-141" class="internal" title="Subsection 5.5.2: Doubling Time">Subsection</a> <a href="" class="xref" data-knowl="./knowl/assemblage-42.html" title="Summary: Doubling Time">Summary</a></span>
+<div class="indexitem">doubling time<span class="indexknowl">, <a href="sec-models-exponential-2.html#subsection-134" class="internal" title="Subsection 5.4.2: Doubling Time">Subsection</a> <a href="" class="xref" data-knowl="./knowl/assemblage-42.html" title="Summary: Doubling Time">Summary</a></span>
 </div>
 </div>
 <div class="indexletter" id="indexletter-e">
-<div class="indexitem">exponential growth<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4596.html" title="Paragraph">Paragraph</a></span>
+<div class="indexitem">exponential growth<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4385.html" title="Paragraph">Paragraph</a></span>
 </div>
 <div class="indexitem">exponential growth and decay<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/assemblage-40.html" title="Summary: Exponential Growth and Decay">Summary</a></span>
 </div>
 </div>
-<div class="indexletter" id="indexletter-f">
-<div class="indexitem">function<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4231.html" title="Paragraph">Paragraph</a></span>
-</div>
-<div class="subindexitem">notation<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4260.html" title="Paragraph">Paragraph</a></span>
-</div>
-</div>
-<div class="indexletter" id="indexletter-g"><div class="indexitem">growth factor<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4443.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/assemblage-38.html" title="Summary: Exponential Growth">Summary</a> <a href="" class="xref" data-knowl="./knowl/li-1968.html" title="Item">Item</a></span>
+<div class="indexletter" id="indexletter-g"><div class="indexitem">growth factor<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4241.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/assemblage-38.html" title="Summary: Exponential Growth">Summary</a> <a href="" class="xref" data-knowl="./knowl/li-1845.html" title="Item">Item</a></span>
 </div></div>
-<div class="indexletter" id="indexletter-h"><div class="indexitem">half-life<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4910.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/assemblage-43.html" title="Summary: Half-Life">Summary</a></span>
+<div class="indexletter" id="indexletter-h"><div class="indexitem">half-life<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4695.html" title="Paragraph">Paragraph</a> <a href="" class="xref" data-knowl="./knowl/assemblage-43.html" title="Summary: Half-Life">Summary</a></span>
 </div></div>
-<div class="indexletter" id="indexletter-i"><div class="indexitem">initial value<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/assemblage-38.html" title="Summary: Exponential Growth">Summary</a> <a href="" class="xref" data-knowl="./knowl/li-1967.html" title="Item">Item</a></span>
+<div class="indexletter" id="indexletter-i"><div class="indexitem">initial value<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/assemblage-38.html" title="Summary: Exponential Growth">Summary</a> <a href="" class="xref" data-knowl="./knowl/li-1844.html" title="Item">Item</a></span>
 </div></div>
-<div class="indexletter" id="indexletter-l"><div class="indexitem">linear growth<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4596.html" title="Paragraph">Paragraph</a></span>
-</div></div>
-<div class="indexletter" id="indexletter-n">
-<div class="indexitem">notation</div>
-<div class="subindexitem">for functions<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4260.html" title="Paragraph">Paragraph</a></span>
-</div>
-</div>
-<div class="indexletter" id="indexletter-o"><div class="indexitem">ordered pair<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4283.html" title="Paragraph">Paragraph</a></span>
+<div class="indexletter" id="indexletter-l"><div class="indexitem">linear growth<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4385.html" title="Paragraph">Paragraph</a></span>
 </div></div>
 <div class="indexletter" id="indexletter-p">
 <div class="indexitem">parameters<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/note-3.html" title="Note 5.2.4">Note</a></span>
 </div>
-<div class="indexitem">percent increase<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/note-6.html" title="Note 5.4.9">Note</a></span>
+<div class="indexitem">percent increase<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/note-5.html" title="Note 5.3.9">Note</a></span>
 </div>
-<div class="indexitem">point<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4283.html" title="Paragraph">Paragraph</a></span>
-</div>
-<div class="indexitem">point-slope form<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-3957.html" title="Paragraph">Paragraph</a></span>
+<div class="indexitem">point-slope form<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-3959.html" title="Paragraph">Paragraph</a></span>
 </div>
 </div>
 <div class="indexletter" id="indexletter-r">
 <div class="indexitem">rate of change<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/assemblage-31.html" title="Summary: Rate of Change">Summary</a></span>
 </div>
-<div class="indexitem">ratio method<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4817.html" title="Paragraph">Paragraph</a></span>
+<div class="indexitem">ratio method<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4615.html" title="Paragraph">Paragraph</a></span>
 </div>
 </div>
 <div class="indexletter" id="indexletter-s">
@@ -275,10 +288,6 @@ true);
 </div>
 </div>
 <div class="indexletter" id="indexletter-t"><div class="indexitem">two-parameter<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/note-3.html" title="Note 5.2.4">Note</a></span>
-</div></div>
-<div class="indexletter" id="indexletter-u"><div class="indexitem">units<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/paragraphs-1.html" title="Paragraphs: Variables have units">Paragraphs</a></span>
-</div></div>
-<div class="indexletter" id="indexletter-v"><div class="indexitem">variable<span class="indexknowl">, <a href="" class="xref" data-knowl="./knowl/p-4262.html" title="Paragraph">Paragraph</a></span>
 </div></div></section></div></main>
 </div>
 </body>

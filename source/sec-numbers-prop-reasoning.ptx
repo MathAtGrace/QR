@@ -41,10 +41,10 @@
           <statement>
             Circle the statement that describes your result from the exercise above.
             <ul>
-              <li>The world population is <fillin characters="7"/>% larger than the U.S. population</li>
-              <li>The U.S. population is <fillin characters="7"/>% of the world population</li>
-              <li>The U.S. population is <fillin characters="7"/>% smaller than the world population</li>
-              <li>The world population is <fillin characters="7"/>% of the U.S. population</li>
+              <li>The world population is <fillin characters="7"/>% larger than the U.S. population.</li>
+              <li>The U.S. population is <fillin characters="7"/>% of the world population.</li>
+              <li>The U.S. population is <fillin characters="7"/>% smaller than the world population.</li>
+              <li>The world population is <fillin characters="7"/>% of the U.S. population.</li>
             </ul>
           </statement>
         </exercise>
@@ -137,7 +137,7 @@
         </exercise>
         <exercise xml:id="water-footprint-1" workspace="1in">
           <statement>
-            We are interested in the amount of water used on average by each person in the country.  This is the “Water footprint per person”  (which is the same as “water footprint per capita”) for each country. Compute this for each countrying, rounding using your best judgement, and give your answer as a complete sentence.
+            We are interested in the amount of water used on average by each person in the country.  This is the “Water footprint per person”  (which is the same as “water footprint per capita”) for each country. Compute this for each country, rounding using your best judgment, and give your answer as a complete sentence.
           </statement>
         </exercise>
         <exercise xml:id="water-footprint-2" workspace="1in">
